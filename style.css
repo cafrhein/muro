@@ -91,15 +91,28 @@ body {
     color: #050505;
 }
 
-/* Aplicamos la justificación a los párrafos y a las listas */
-.post-content p, .post-content li {
-    text-align: justify; /* Alineación perfecta a ambos lados */
-    text-justify: inter-word; /* Distribuye limpiamente los espacios en celulares */
+/* Párrafos justificados */
+.post-content p {
+    text-align: justify; 
+    text-justify: inter-word; 
     margin-bottom: 24px;
     line-height: 1.6;
 }
 
-/* Los subtítulos siempre se ven mejor alineados a la izquierda */
+/* Corrección para que las listas (viñetas y números) no se salgan del margen */
+.post-content ul, .post-content ol {
+    padding-left: 30px; /* Esto empuja los números hacia adentro de la caja */
+    margin-bottom: 24px;
+}
+
+.post-content li {
+    text-align: justify;
+    text-justify: inter-word;
+    margin-bottom: 12px; /* Un poco de aire entre cada paso */
+    line-height: 1.6;
+}
+
+/* Los subtítulos alineados a la izquierda */
 .post-content h3 {
     margin-top: 32px;
     margin-bottom: 12px;
@@ -109,7 +122,7 @@ body {
     text-align: left; 
 }
 
-/* La caja de citas/dilemas también justificada */
+/* La caja de citas/dilemas justificada */
 .post-content blockquote {
     background: #f0f2f5;
     border-left: 4px solid var(--fb-blue);
