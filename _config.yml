@@ -1,0 +1,12 @@
+title: Carlos Hernández | Adestrat
+email: cafrhein@outlook.com
+description: >-
+  Estratega en Sistemas Humanos e Ingeniería de la Reciprocidad. 
+  Crónicas de Antracita y Gestión de AC.
+baseurl: "" # Mantener vacío para adestrat.com
+url: "https://adestrat.com"
+
+# Configuración de Markdown
+markdown: kramdown
+theme: minima # Puedes dejarlo o quitarlo, usaremos nuestro propio CSS
+exclude: [Gemfile, Gemfile.lock, node_modules, vendor]
