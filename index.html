@@ -3,10 +3,10 @@ layout: default
 title: Inicio
 ---
 
-<div class="fb-card profile-header-card" style="background: white; border-radius: 8px; padding: 0; overflow: hidden; margin-bottom: 16px; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">
+<div class="fb-card profile-header-card" style="background: var(--fb-white); border-radius: 8px; padding: 0; overflow: hidden; margin-bottom: 16px; box-shadow: 0 1px 2px var(--card-shadow);">
     
     <div class="cover-photo" style="height: 200px; background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); background-size: cover; background-position: center; position: relative;">
-        <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.8); padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">
+        <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.8); padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; font-weight: 600; cursor: pointer; color: #050505;">
             <i class="fas fa-camera"></i> Editar portada
         </div>
     </div>
@@ -14,38 +14,38 @@ title: Inicio
     <div class="profile-info-container" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 16px 16px 16px; position: relative; margin-top: -60px;">
         
         <div class="avatar-large-container" style="position: relative; z-index: 10;">
-            <img src="{{ '/perfil.png.jpg' | relative_url }}" alt="Carlos Hernández" style="width: 130px; height: 130px; border-radius: 50%; border: 4px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2); object-fit: cover; background-color: white;">
+            <img src="{{ '/perfil.png.jpg' | relative_url }}" alt="Carlos Hernández" style="width: 130px; height: 130px; border-radius: 50%; border: 4px solid var(--fb-white); box-shadow: 0 2px 4px rgba(0,0,0,0.2); object-fit: cover; background-color: var(--fb-white);">
             
-            <div style="position: absolute; bottom: 5px; right: 5px; background: #e4e6eb; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid white; color: #050505; font-size: 1rem; cursor: pointer;">
+            <div style="position: absolute; bottom: 5px; right: 5px; background: var(--fb-hover); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--fb-white); color: var(--fb-text); font-size: 1rem; cursor: pointer;">
                 <i class="fas fa-camera"></i>
             </div>
         </div>
 
         <div style="margin-top: 10px; padding: 0 10px;">
-            <h1 style="font-size: 1.8rem; color: #050505; margin: 0; font-weight: 800;">Carlos Hernández</h1>
-            <p style="color: #65676b; margin: 5px 0; font-size: 1rem; font-weight: 400; max-width: 500px;">Quien se deja cuidar, dota de sentido a su cuidador.</p>
+            <h1 style="font-size: 1.8rem; color: var(--fb-text); margin: 0; font-weight: 800;">Carlos Hernández</h1>
+            <p style="color: var(--fb-text-sec); margin: 5px 0; font-size: 1rem; font-weight: 400; max-width: 500px;">Quien se deja cuidar, dota de sentido a su cuidador.</p>
         </div>
 
-        <div class="profile-buttons" style="display: flex; gap: 10px; margin-top: 15px; width: 100%; justify-content: center; border-top: 1px solid #dddfe2; padding-top: 15px;">
+        <div class="profile-buttons" style="display: flex; gap: 10px; margin-top: 15px; width: 100%; justify-content: center; border-top: 1px solid var(--fb-border); padding-top: 15px;">
             
             {% assign lectura_reciente = site.posts | first %}
-            <a href="{{ lectura_reciente.url | relative_url }}" style="text-decoration: none; background: #1877f2; color: white; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
+            <a href="{{ lectura_reciente.url | relative_url }}" style="text-decoration: none; background: var(--fb-blue); color: white; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
                 <i class="fas fa-book-open"></i> Leer Crónicas
             </a>
             
-            <a href="mailto:cafrhein@outlook.com" style="text-decoration: none; background: #e4e6eb; color: #050505; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
+            <a href="mailto:cafrhein@outlook.com" style="text-decoration: none; background: var(--fb-hover); color: var(--fb-text); padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
                 <i class="fas fa-envelope"></i> Contactar
             </a>
         </div>
     </div>
 </div>
 
-<div class="fb-card post-composer" style="background: white; border-radius: 8px; padding: 15px; margin-bottom: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">
-    <div style="display: flex; gap: 10px; align-items: center; border-bottom: 1px solid #dddfe2; padding-bottom: 10px; margin-bottom: 10px;">
+<div class="fb-card post-composer" style="background: var(--fb-white); border-radius: 8px; padding: 15px; margin-bottom: 20px; box-shadow: 0 1px 2px var(--card-shadow);">
+    <div style="display: flex; gap: 10px; align-items: center; border-bottom: 1px solid var(--fb-border); padding-bottom: 10px; margin-bottom: 10px;">
         <img src="{{ '/perfil.png.jpg' | relative_url }}" alt="Carlos" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-        <input type="text" placeholder="¿Qué hay en tu mente, Carlos?" style="flex-grow: 1; border: none; background: #f0f2f5; padding: 10px 15px; border-radius: 20px; outline: none; font-size: 1rem;" readonly>
+        <input type="text" placeholder="¿Qué hay en tu mente, Carlos?" style="flex-grow: 1; border: none; background: var(--fb-bg); padding: 10px 15px; border-radius: 20px; outline: none; font-size: 1rem; color: var(--fb-text);" readonly>
     </div>
-    <div style="display: flex; justify-content: space-around; color: #65676b; font-weight: 600; font-size: 0.85rem; flex-wrap: wrap;">
+    <div style="display: flex; justify-content: space-around; color: var(--fb-text-sec); font-weight: 600; font-size: 0.85rem; flex-wrap: wrap;">
         <span style="cursor: pointer; display: flex; align-items: center; gap: 5px; padding: 5px;"><i class="fas fa-video" style="color: #f02849;"></i> Video</span>
         <span style="cursor: pointer; display: flex; align-items: center; gap: 5px; padding: 5px;"><i class="fas fa-images" style="color: #45bd62;"></i> Foto</span>
         <span style="cursor: pointer; display: flex; align-items: center; gap: 5px; padding: 5px;"><i class="fas fa-smile" style="color: #f7b928;"></i> Sentimiento</span>
@@ -53,26 +53,27 @@ title: Inicio
 </div>
 
 {% for post in site.posts %}
-<article class="fb-card post" style="background: white; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); padding: 0; overflow: hidden;">
+<article class="fb-card post" style="background: var(--fb-white); border-radius: 8px; margin-bottom: 20px; box-shadow: 0 1px 2px var(--card-shadow); padding: 0; overflow: hidden;">
+    
     <div style="padding: 15px; display: flex; gap: 10px; align-items: center;">
         <img src="{{ '/perfil.png.jpg' | relative_url }}" alt="Carlos Hernández" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
         <div>
-            <strong style="display: block; color: #050505; font-size: 0.95rem;">Carlos Hernández</strong>
-            <span style="font-size: 0.8rem; color: #65676b;">{{ post.date | date: "%e de %b, %Y" }} · <i class="fas fa-globe-americas"></i></span>
+            <strong style="display: block; color: var(--fb-text); font-size: 0.95rem;">Carlos Hernández</strong>
+            <span style="font-size: 0.8rem; color: var(--fb-text-sec);">{{ post.date | date: "%e de %b, %Y" }} · <i class="fas fa-globe-americas"></i></span>
         </div>
     </div>
     
     <div style="padding: 0 15px 15px 15px;">
-        <h3 style="margin-top: 0; color: #1877f2; font-size: 1.25rem; font-weight: 700;">{{ post.title }}</h3>
-        <p style="color: #050505; text-align: justify; line-height: 1.5; font-size: 0.95rem;">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+        <h3 style="margin-top: 0; color: var(--fb-blue); font-size: 1.25rem; font-weight: 700;">{{ post.title }}</h3>
+        <p style="color: var(--fb-text); text-align: justify; line-height: 1.5; font-size: 0.95rem;">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
     </div>
     
-    <div style="border-top: 1px solid #dddfe2; padding: 10px 15px; background: #f8f9fa; display: flex; justify-content: space-between; align-items: center;">
-        <a href="{{ post.url | relative_url }}" style="color: #1877f2; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+    <div style="border-top: 1px solid var(--fb-border); padding: 10px 15px; background: var(--fb-hover); display: flex; justify-content: space-between; align-items: center;">
+        <a href="{{ post.url | relative_url }}" style="color: var(--fb-blue); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
             <i class="fas fa-external-link-alt"></i> Leer publicación completa
         </a>
         
-        <div onclick="if(navigator.share){ navigator.share({title: '{{ post.title | escape }}', url: window.location.origin + '{{ post.url | relative_url }}'}); } else { navigator.clipboard.writeText(window.location.origin + '{{ post.url | relative_url }}'); alert('¡Enlace copiado al portapapeles!'); }" style="color: #65676b; font-weight: 600; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+        <div onclick="if(navigator.share){ navigator.share({title: '{{ post.title | escape }}', url: window.location.origin + '{{ post.url | relative_url }}'}); } else { navigator.clipboard.writeText(window.location.origin + '{{ post.url | relative_url }}'); alert('¡Enlace copiado al portapapeles!'); }" style="color: var(--fb-text-sec); font-weight: 600; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 8px;">
             <i class="fas fa-share"></i> Compartir
         </div>
     </div>
