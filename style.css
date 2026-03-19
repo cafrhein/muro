@@ -22,7 +22,7 @@ body {
     font-family: Segoe UI, Helvetica, Arial, sans-serif;
     color: var(--fb-text);
     line-height: 1.5;
-    overflow-x: hidden; /* Evita el descuadre horizontal */
+    overflow-x: hidden;
 }
 
 /* Barra Superior (Header) */
@@ -84,43 +84,66 @@ body {
 }
 
 /* =========================================
-   ADAPTACIÓN PARA CELULARES (MÓVIL)
+   ESTILOS PARA LA LECTURA DEL POST (MARKDOWN)
+   ========================================= */
+.post-content {
+    text-align: left; /* FB no justifica, alinea a la izquierda para una lectura natural */
+    font-size: 1.05rem;
+    color: #050505;
+}
+
+.post-content p {
+    margin-bottom: 24px; /* Mayor separación entre párrafos (el "aire" necesario) */
+    line-height: 1.6;
+}
+
+.post-content h3 {
+    margin-top: 32px;
+    margin-bottom: 12px;
+    font-size: 1.25rem;
+    color: #050505;
+    font-weight: 700;
+}
+
+.post-content blockquote {
+    background: #f0f2f5;
+    border-left: 4px solid var(--fb-blue);
+    padding: 16px 20px;
+    margin: 28px 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #1c1e21;
+}
+
+.post-content hr {
+    border: none;
+    border-top: 1px solid var(--fb-border);
+    margin: 32px 0;
+}
+
+/* =========================================
+   ADAPTACIÓN PARA CELULARES
    ========================================= */
 @media (max-width: 900px) {
     .fb-container {
-        grid-template-columns: 1fr; /* Una sola columna */
-        padding: 0; /* Quita el margen lateral */
+        grid-template-columns: 1fr;
+        padding: 0;
         margin-top: 0;
     }
     .fb-left, .fb-right {
-        display: none; /* Oculta barras laterales */
+        display: none;
     }
-    
-    /* Ajustes del Header para que no se desborde */
     .fb-header { padding: 0 10px; }
     .search-text, .header-center-nav { display: none !important; }
-    
-    /* Ajustes de las tarjetas para que parezcan app nativa */
     .fb-card {
-        border-radius: 0; /* Bordes cuadrados en celular */
+        border-radius: 0;
         border-left: none;
         border-right: none;
         margin-bottom: 10px;
     }
-    
-    /* Ajustes de foto y perfil */
     .cover-photo { height: 150px !important; }
     .profile-info-container { margin-top: -50px !important; }
     .avatar-large-container img { width: 100px !important; height: 100px !important; }
-    
-    /* Botones de acción apilados */
-    .profile-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-    .profile-buttons a {
-        width: 100%;
-        justify-content: center;
-        margin-bottom: 8px;
-    }
+    .profile-buttons { flex-direction: column; width: 100%; }
+    .profile-buttons a { width: 100%; justify-content: center; margin-bottom: 8px; }
 }
