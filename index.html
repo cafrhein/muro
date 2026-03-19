@@ -27,9 +27,12 @@ title: Inicio
         </div>
 
         <div class="profile-buttons" style="display: flex; gap: 10px; margin-top: 15px; width: 100%; justify-content: center; border-top: 1px solid #dddfe2; padding-top: 15px;">
-            <a href="{{ '/2026/03/19/capitulo-1-sol-rac.html' | relative_url }}" style="text-decoration: none; background: #1877f2; color: white; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
+            
+            {% assign lectura_reciente = site.posts | first %}
+            <a href="{{ lectura_reciente.url | relative_url }}" style="text-decoration: none; background: #1877f2; color: white; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
                 <i class="fas fa-book-open"></i> Leer Crónicas
             </a>
+            
             <a href="mailto:cafrhein@outlook.com" style="text-decoration: none; background: #e4e6eb; color: #050505; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
                 <i class="fas fa-envelope"></i> Contactar
             </a>
