@@ -1,4 +1,6 @@
-/* Interfaz Red Humana / Facebook - Carlos Hernández */
+---
+---
+/* INTERFAZ RED HUMANA - DISEÑO CARLOS HERNÁNDEZ */
 :root {
     --fb-bg: #f0f2f5;
     --fb-blue: #1877f2;
@@ -6,16 +8,23 @@
     --fb-border: #dddfe2;
     --fb-text: #050505;
     --fb-text-sec: #65676b;
+    --fb-hover: #e4e6eb;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     background-color: var(--fb-bg);
     font-family: Segoe UI, Helvetica, Arial, sans-serif;
-    margin: 0;
     color: var(--fb-text);
+    line-height: 1.5;
 }
 
-/* Barra Superior */
+/* Barra Superior (Header) */
 .fb-header {
     background: var(--fb-white);
     height: 56px;
@@ -26,7 +35,7 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
 }
 
 .logo-ch {
@@ -40,9 +49,10 @@ body {
     justify-content: center;
     font-weight: bold;
     font-size: 1.2rem;
+    text-decoration: none;
 }
 
-/* Contenedor de 3 Columnas */
+/* Contenedor Principal (3 Columnas) */
 .fb-container {
     display: grid;
     grid-template-columns: 280px 1fr 280px;
@@ -52,7 +62,7 @@ body {
     padding: 0 16px;
 }
 
-/* Tarjetas */
+/* Tarjetas (Cards) */
 .fb-card {
     background: var(--fb-white);
     border-radius: 8px;
@@ -61,26 +71,30 @@ body {
     padding: 16px;
 }
 
-.avatar-circle {
-    width: 40px;
-    height: 40px;
-    background: #e4e6eb;
+/* Barra Lateral Derecha (Contactos) */
+.dot {
+    height: 10px;
+    width: 10px;
+    background-color: #45bd62;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
+    display: inline-block;
+    margin-right: 8px;
 }
 
-.post-header { display: flex; gap: 12px; margin-bottom: 12px; }
-.post-info strong { display: block; font-size: 0.95rem; }
-.post-info span { font-size: 0.8rem; color: var(--fb-text-sec); }
+.contact-row {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
 
-h3 { color: var(--fb-blue); margin: 10px 0; }
-p { line-height: 1.5; text-align: justify; }
-
-/* Responsivo */
+/* Adaptación para Celulares */
 @media (max-width: 900px) {
-    .fb-container { grid-template-columns: 1fr; }
-    .fb-left, .fb-right { display: none; }
+    .fb-container {
+        grid-template-columns: 1fr;
+    }
+    .fb-left, .fb-right {
+        display: none;
+    }
 }
