@@ -1,33 +1,24 @@
-# Configuración del Muro de Adestrat
 title: "Adestrat | Red Humana"
-description: "Estrategia e Ingeniería de la Reciprocidad por Carlos Hernández"
+description: "Estrategia e Ingeniería de la Reciprocidad"
+remote_theme: pages-themes/minimal
 
-# CONFIGURACIÓN DE RUTAS (CRÍTICO PARA GITHUB PAGES)
-# baseurl debe ser el nombre de tu repositorio con una diagonal inicial
-baseurl: "/muro" 
+# CONFIGURACIÓN DE RUTAS
+baseurl: "/muro"
 url: "https://cafrhein.github.io"
 
-# Configuración de Contenido
+# Configuración de Jekyll
 markdown: kramdown
 highlighter: rouge
-plugins:
-  - jekyll-feed
-  - jekyll-sitemap
+lsi: false
 
-# Excluir archivos innecesarios del build
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - node_modules
-  - vendor
-  - .bundle
-  - .git
-  - .sass-cache
+# Forzar la lectura de carpetas
+include: [_posts, _layouts]
+exclude: [Gemfile, Gemfile.lock, node_modules, vendor]
 
-# Ajustes de Lectura
+# Configuración de Posts
 defaults:
   - scope:
       path: ""
       type: "posts"
     values:
-      layout: "default" # Esto asegura que tus posts usen el diseño de Facebook automáticamente
+      layout: "default"
