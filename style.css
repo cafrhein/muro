@@ -87,24 +87,29 @@ body {
    ESTILOS PARA LA LECTURA DEL POST (MARKDOWN)
    ========================================= */
 .post-content {
-    text-align: left; /* FB no justifica, alinea a la izquierda para una lectura natural */
     font-size: 1.05rem;
     color: #050505;
 }
 
-.post-content p {
-    margin-bottom: 24px; /* Mayor separación entre párrafos (el "aire" necesario) */
+/* Aplicamos la justificación a los párrafos y a las listas */
+.post-content p, .post-content li {
+    text-align: justify; /* Alineación perfecta a ambos lados */
+    text-justify: inter-word; /* Distribuye limpiamente los espacios en celulares */
+    margin-bottom: 24px;
     line-height: 1.6;
 }
 
+/* Los subtítulos siempre se ven mejor alineados a la izquierda */
 .post-content h3 {
     margin-top: 32px;
     margin-bottom: 12px;
     font-size: 1.25rem;
     color: #050505;
     font-weight: 700;
+    text-align: left; 
 }
 
+/* La caja de citas/dilemas también justificada */
 .post-content blockquote {
     background: #f0f2f5;
     border-left: 4px solid var(--fb-blue);
@@ -113,6 +118,7 @@ body {
     border-radius: 0 8px 8px 0;
     font-style: italic;
     color: #1c1e21;
+    text-align: justify;
 }
 
 .post-content hr {
