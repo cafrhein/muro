@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }} | Adestrat</title>
+    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %} | Adestrat</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -20,27 +20,28 @@
             </div>
         </div>
         
-        <nav style="display: flex; gap: 30px; font-size: 1.5rem;">
+        <nav style="display: flex; gap: 40px; font-size: 1.5rem;">
             <a href="{{ '/' | relative_url }}" style="color: var(--fb-blue);"><i class="fas fa-home"></i></a>
             <a href="{{ '/blog.html' | relative_url }}" style="color: #65676b;"><i class="fas fa-play-circle"></i></a>
             <a href="{{ '/contacto.html' | relative_url }}" style="color: #65676b;"><i class="fas fa-store"></i></a>
         </nav>
 
         <div style="display: flex; gap: 8px;">
-            <div style="width: 40px; height: 40px; background: #e4e6eb; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-bars"></i></div>
-            <div style="width: 40px; height: 40px; background: #e4e6eb; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fab fa-facebook-messenger"></i></div>
-            <div style="width: 40px; height: 40px; background: #e4e6eb; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-bell"></i></div>
+            <div style="width: 40px; height: 40px; background: #e4e6eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #050505;"><i class="fas fa-bars"></i></div>
+            <div style="width: 40px; height: 40px; background: #e4e6eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #050505;"><i class="fab fa-facebook-messenger"></i></div>
+            <div style="width: 40px; height: 40px; background: #e4e6eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #050505;"><i class="fas fa-bell"></i></div>
         </div>
     </header>
 
     <div class="fb-container">
         
         <aside class="fb-left">
-            <a href="{{ '/' | relative_url }}"><i class="fas fa-user-circle"></i> <strong>Carlos Hernández</strong></a>
-            <a href="{{ '/' | relative_url }}"><i class="fas fa-user-friends"></i> Amigos (Red Humana)</a>
-            <a href="{{ '/blog.html' | relative_url }}"><i class="fas fa-history"></i> Publicaciones</a>
-            <a href="{{ '/2026/03/19/manifiesto-reciprocidad-cuidado.html' | relative_url }}"><i class="fas fa-bookmark"></i> Manifiesto</a>
-        </nav>
+            <div class="fb-menu-list">
+                <a href="{{ '/' | relative_url }}"><i class="fas fa-user-circle"></i> <strong>Carlos Hernández</strong></a>
+                <a href="{{ '/' | relative_url }}"><i class="fas fa-user-friends"></i> Amigos (Red Humana)</a>
+                <a href="{{ '/blog.html' | relative_url }}"><i class="fas fa-history"></i> Publicaciones</a>
+                <a href="{{ '/2026/03/19/manifiesto-reciprocidad-cuidado.html' | relative_url }}"><i class="fas fa-bookmark"></i> Manifiesto</a>
+            </div>
         </aside>
 
         <main class="fb-feed">
@@ -49,7 +50,7 @@
 
         <aside class="fb-right">
             <div class="fb-card">
-                <h4 style="color: #65676b; margin-bottom: 15px;">Contactos</h4>
+                <h4 style="color: #65676b; margin-bottom: 15px; font-size: 0.9rem; text-transform: uppercase;">Contactos</h4>
                 <div class="contact-row"><span class="dot"></span> Alein Ad</div>
                 <div class="contact-row"><span class="dot"></span> Isaac</div>
                 <div class="contact-row"><span class="dot"></span> Alexandro</div>
