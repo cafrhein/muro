@@ -1,0 +1,51 @@
+---
+layout: default
+title: Adestrat | Muro de Carlos Hernández
+---
+
+<main class="fb-container">
+    <aside class="fb-left">
+        <div class="fb-card-nav">
+            <a href="/"><i class="fas fa-user-circle"></i> <strong>Carlos Hernández</strong></a>
+            <a href="/2026/03/19/manifiesto-reciprocidad-cuidado.html"><i class="fas fa-book-open"></i> Manifiesto</a>
+            <a href="/blog.html"><i class="fas fa-history"></i> Archivo de Posts</a>
+        </div>
+    </aside>
+
+    <section class="fb-feed">
+        <div class="fb-card post-composer">
+            <div class="composer-top">
+                <div class="avatar-circle">CH</div>
+                <div class="fake-input">¿Qué hay en tu mente, Carlos?</div>
+            </div>
+        </div>
+
+        {% for post in site.posts %}
+        <article class="fb-card post">
+            <div class="post-header">
+                <div class="avatar-circle">CH</div>
+                <div class="post-info">
+                    <strong>Carlos Hernández</strong>
+                    <span>{{ post.date | date: "%e de %b" }} · <i class="fas fa-globe-americas"></i></span>
+                </div>
+            </div>
+            <div class="post-body">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.excerpt | strip_html | truncatewords: 40 }}</p>
+            </div>
+            <div class="post-footer">
+                <a href="{{ post.url | relative_url }}" class="btn-action">Leer más</a>
+            </div>
+        </article>
+        {% endfor %}
+    </section>
+
+    <aside class="fb-right">
+        <div class="fb-card">
+            <h4>Red Humana (Contactos)</h4>
+            <div class="contact-row"><span class="dot online"></span> Alein Ad</div>
+            <div class="contact-row"><span class="dot online"></span> Isaac</div>
+            <div class="contact-row"><span class="dot online"></span> Alexandro</div>
+        </div>
+    </aside>
+</main>
