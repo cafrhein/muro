@@ -2,28 +2,28 @@
 layout: default
 ---
 
-<article class="fb-card post-view" style="background: white; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); padding: 0; overflow: hidden;">
+<article class="fb-card post-view" style="background: var(--fb-white); border-radius: 8px; margin-bottom: 20px; box-shadow: 0 1px 2px var(--card-shadow); padding: 0; overflow: hidden;">
     
     <div style="padding: 15px; display: flex; gap: 10px; align-items: center;">
         <img src="{{ '/perfil.png.jpg' | relative_url }}" alt="Carlos Hernández" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
         <div>
-            <strong style="display: block; color: #050505; font-size: 0.95rem;">Carlos Hernández</strong>
-            <span style="font-size: 0.8rem; color: #65676b;">{{ page.date | date: "%e de %b, %Y" }} · <i class="fas fa-globe-americas"></i></span>
+            <strong style="display: block; color: var(--fb-text); font-size: 0.95rem;">Carlos Hernández</strong>
+            <span style="font-size: 0.8rem; color: var(--fb-text-sec);">{{ page.date | date: "%e de %b, %Y" }} · <i class="fas fa-globe-americas"></i></span>
         </div>
-        <div style="margin-left: auto; color: #65676b; cursor: pointer;">
+        <div style="margin-left: auto; color: var(--fb-text-sec); cursor: pointer;">
             <i class="fas fa-ellipsis-h"></i>
         </div>
     </div>
 
     <div class="post-content" style="padding: 0 15px 15px 15px;">
-        <h1 style="margin-top: 0; color: #050505; font-size: 1.5rem; font-weight: 800; margin-bottom: 25px;">{{ page.title }}</h1>
+        <h1 style="margin-top: 0; color: var(--fb-text); font-size: 1.5rem; font-weight: 800; margin-bottom: 25px;">{{ page.title }}</h1>
         
         {{ content }}
         
     </div>
 
-    <div style="border-top: 1px solid #dddfe2; display: flex; justify-content: flex-end; padding: 10px 15px; background: #f8f9fa;">
-        <div onclick="if(navigator.share){ navigator.share({title: '{{ page.title | escape }}', url: window.location.href}); } else { navigator.clipboard.writeText(window.location.href); alert('¡Enlace copiado al portapapeles!'); }" style="color: #65676b; font-weight: 600; font-size: 0.9rem; padding: 8px 16px; cursor: pointer; border-radius: 5px; transition: background 0.2s; display: flex; align-items: center; gap: 8px;">
+    <div style="border-top: 1px solid var(--fb-border); display: flex; justify-content: flex-end; padding: 10px 15px; background: var(--fb-hover);">
+        <div onclick="if(navigator.share){ navigator.share({title: '{{ page.title | escape }}', url: window.location.href}); } else { navigator.clipboard.writeText(window.location.href); alert('¡Enlace copiado al portapapeles!'); }" style="color: var(--fb-text-sec); font-weight: 600; font-size: 0.9rem; padding: 8px 16px; cursor: pointer; border-radius: 5px; transition: background 0.2s; display: flex; align-items: center; gap: 8px;">
             <i class="fas fa-share"></i> Compartir artículo
         </div>
     </div>
