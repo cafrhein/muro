@@ -7,7 +7,7 @@ title: Inicio
     
     <div class="cover-photo" style="height: 200px; background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); background-size: cover; background-position: center; position: relative;">
         <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.8); padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">
-            <i class="fas fa-camera"></i> Editar foto de portada
+            <i class="fas fa-camera"></i> Editar portada
         </div>
     </div>
 
@@ -21,12 +21,12 @@ title: Inicio
             </div>
         </div>
 
-        <div style="margin-top: 10px;">
+        <div style="margin-top: 10px; padding: 0 10px;">
             <h1 style="font-size: 1.8rem; color: #050505; margin: 0; font-weight: 800;">Carlos Hernández</h1>
-            <p style="color: #65676b; margin: 5px 0; font-size: 1rem; font-weight: 400; max-width: 500px;">[Quien se deja cuidar, dota de sentido a su cuidador]</p>
+            <p style="color: #65676b; margin: 5px 0; font-size: 1rem; font-weight: 400; max-width: 500px;">Quien se deja cuidar, dota de sentido a su cuidador.</p>
         </div>
 
-        <div style="display: flex; gap: 10px; margin-top: 15px; width: 100%; justify-content: center; border-top: 1px solid #dddfe2; padding-top: 15px;">
+        <div class="profile-buttons" style="display: flex; gap: 10px; margin-top: 15px; width: 100%; justify-content: center; border-top: 1px solid #dddfe2; padding-top: 15px;">
             <a href="{{ '/2026/03/19/capitulo-1-sol-rac.html' | relative_url }}" style="text-decoration: none; background: #1877f2; color: white; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
                 <i class="fas fa-book-open"></i> Leer Crónicas
             </a>
@@ -42,10 +42,10 @@ title: Inicio
         <img src="{{ '/perfil.png.jpg' | relative_url }}" alt="Carlos" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
         <input type="text" placeholder="¿Qué hay en tu mente, Carlos?" style="flex-grow: 1; border: none; background: #f0f2f5; padding: 10px 15px; border-radius: 20px; outline: none; font-size: 1rem;" readonly>
     </div>
-    <div style="display: flex; justify-content: space-around; color: #65676b; font-weight: 600; font-size: 0.9rem;">
-        <span style="cursor: pointer; display: flex; align-items: center; gap: 8px;"><i class="fas fa-video" style="color: #f02849;"></i> Video</span>
-        <span style="cursor: pointer; display: flex; align-items: center; gap: 8px;"><i class="fas fa-images" style="color: #45bd62;"></i> Foto</span>
-        <span style="cursor: pointer; display: flex; align-items: center; gap: 8px;"><i class="fas fa-smile" style="color: #f7b928;"></i> Sentimiento</span>
+    <div style="display: flex; justify-content: space-around; color: #65676b; font-weight: 600; font-size: 0.85rem; flex-wrap: wrap;">
+        <span style="cursor: pointer; display: flex; align-items: center; gap: 5px; padding: 5px;"><i class="fas fa-video" style="color: #f02849;"></i> Video</span>
+        <span style="cursor: pointer; display: flex; align-items: center; gap: 5px; padding: 5px;"><i class="fas fa-images" style="color: #45bd62;"></i> Foto</span>
+        <span style="cursor: pointer; display: flex; align-items: center; gap: 5px; padding: 5px;"><i class="fas fa-smile" style="color: #f7b928;"></i> Sentimiento</span>
     </div>
 </div>
 
@@ -61,13 +61,13 @@ title: Inicio
     
     <div style="padding: 0 15px 15px 15px;">
         <h3 style="margin-top: 0; color: #1877f2; font-size: 1.25rem; font-weight: 700;">{{ post.title }}</h3>
-        <p style="color: #050505; text-align: justify; line-height: 1.5; font-size: 0.95rem;">{{ post.excerpt | strip_html | truncatewords: 50 }}</p>
+        <p style="color: #050505; text-align: justify; line-height: 1.5; font-size: 0.95rem;">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
     </div>
     
     <div style="border-top: 1px solid #dddfe2; display: flex; padding: 5px 0; color: #65676b; font-weight: 600; font-size: 0.9rem;">
-        <div style="flex: 1; text-align: center; padding: 8px; cursor: pointer; border-radius: 5px; transition: background 0.2s;"><i class="far fa-thumbs-up"></i> Me gusta</div>
-        <div style="flex: 1; text-align: center; padding: 8px; cursor: pointer; border-radius: 5px; transition: background 0.2s;"><i class="far fa-comment"></i> Comentar</div>
-        <div style="flex: 1; text-align: center; padding: 8px; cursor: pointer; border-radius: 5px; transition: background 0.2s;"><i class="fas fa-share"></i> Compartir</div>
+        <div style="flex: 1; text-align: center; padding: 8px; cursor: pointer;"><i class="far fa-thumbs-up"></i> Me gusta</div>
+        <div style="flex: 1; text-align: center; padding: 8px; cursor: pointer;"><i class="far fa-comment"></i> Comentar</div>
+        <div style="flex: 1; text-align: center; padding: 8px; cursor: pointer;"><i class="fas fa-share"></i> Compartir</div>
     </div>
 
     <div style="border-top: 1px solid #dddfe2; padding: 10px 15px; background: #f8f9fa;">
