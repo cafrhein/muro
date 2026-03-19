@@ -2,34 +2,33 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }} | Carlos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{{ page.title }} | Adestrat</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="https://cafrhein.github.io/muro/style.css">
+    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
 </head>
 <body>
 
     <header class="fb-header">
         <div style="display: flex; align-items: center; gap: 10px;">
-            <a href="https://cafrhein.github.io/muro/" class="logo-ch">CH</a>
+            <a href="{{ '/' | relative_url }}" class="logo-ch">CH</a>
             <div style="background: #f0f2f5; padding: 8px 12px; border-radius: 20px; color: #65676b; display: flex; align-items: center; gap: 8px;">
                 <i class="fas fa-search"></i>
-                <span style="font-size: 0.9rem;">Buscar</span>
+                <span class="search-text" style="font-size: 0.9rem;">Buscar</span>
             </div>
         </div>
         
-        <nav style="display: flex; gap: 40px; font-size: 1.5rem;">
-            <a href="https://cafrhein.github.io/muro/" style="color: #1877f2;"><i class="fas fa-home"></i></a>
+        <nav class="header-center-nav" style="display: flex; gap: 40px; font-size: 1.5rem;">
+            <a href="{{ '/' | relative_url }}" style="color: #1877f2;"><i class="fas fa-home"></i></a>
             <a href="#" style="color: #65676b;"><i class="fas fa-play-circle"></i></a>
             <a href="#" style="color: #65676b;"><i class="fas fa-store"></i></a>
         </nav>
 
         <div style="display: flex; gap: 8px;">
-            <div style="width: 40px; height: 40px; background: #e4e6eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #050505;"><i class="fas fa-bars"></i></div>
-            <div style="width: 40px; height: 40px; background: #e4e6eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #050505;"><i class="fab fa-facebook-messenger"></i></div>
-            <div style="width: 40px; height: 40px; background: #e4e6eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #050505;"><i class="fas fa-bell"></i></div>
+            <div style="width: 40px; height: 40px; background: #e4e6eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #050505; cursor: pointer;"><i class="fas fa-bars"></i></div>
+            <div style="width: 40px; height: 40px; background: #e4e6eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #050505; cursor: pointer;"><i class="fas fa-bell"></i></div>
         </div>
     </header>
 
@@ -37,9 +36,10 @@
         
         <aside class="fb-left">
             <div style="display: flex; flex-direction: column; gap: 5px;">
-                <a href="https://cafrhein.github.io/muro/" style="text-decoration:none; color:black; padding:10px; display:flex; align-items:center; gap:10px;"><i class="fas fa-user-circle" style="color:#1877f2; font-size:1.5rem;"></i> <strong>Carlos Hernández</strong></a>
-                <a href="#" style="text-decoration:none; color:black; padding:10px; display:flex; align-items:center; gap:10px;"><i class="fas fa-user-friends" style="color:#1877f2; font-size:1.5rem;"></i> Amigos</a>
-                <a href="#" style="text-decoration:none; color:black; padding:10px; display:flex; align-items:center; gap:10px;"><i class="fas fa-history" style="color:#1877f2; font-size:1.5rem;"></i> Publicaciones</a>
+                <a href="{{ '/' | relative_url }}" style="text-decoration:none; color:black; padding:10px; display:flex; align-items:center; gap:10px; border-radius: 8px; transition: background 0.2s;"><i class="fas fa-user-circle" style="color:#1877f2; font-size:1.5rem;"></i> <strong>Carlos Hernández</strong></a>
+                <a href="#" style="text-decoration:none; color:black; padding:10px; display:flex; align-items:center; gap:10px; border-radius: 8px; transition: background 0.2s;"><i class="fas fa-user-friends" style="color:#1877f2; font-size:1.5rem;"></i> Amigos</a>
+                <a href="#" style="text-decoration:none; color:black; padding:10px; display:flex; align-items:center; gap:10px; border-radius: 8px; transition: background 0.2s;"><i class="fas fa-history" style="color:#1877f2; font-size:1.5rem;"></i> Publicaciones</a>
+                <a href="#" style="text-decoration:none; color:black; padding:10px; display:flex; align-items:center; gap:10px; border-radius: 8px; transition: background 0.2s;"><i class="fas fa-bookmark" style="color:#1877f2; font-size:1.5rem;"></i> Guardado</a>
             </div>
         </aside>
 
@@ -50,10 +50,10 @@
         <aside class="fb-right">
             <div class="fb-card">
                 <h4 style="color: #65676b; margin-bottom: 15px; font-size: 0.9rem; text-transform: uppercase;">Contactos</h4>
-                <div class="contact-row"><span class="dot"></span> Lila</div>
-                <div class="contact-row"><span class="dot"></span> Daniela</div>
-                <div class="contact-row"><span class="dot"></span> Isaac</div>
-                <div class="contact-row"><span class="dot"></span> Alexandro</div>
+                <div class="contact-row" style="cursor: pointer; padding: 5px 0;"><span class="dot"></span> Lila</div>
+                <div class="contact-row" style="cursor: pointer; padding: 5px 0;"><span class="dot"></span> Daniela</div>
+                <div class="contact-row" style="cursor: pointer; padding: 5px 0;"><span class="dot"></span> Isaac</div>
+                <div class="contact-row" style="cursor: pointer; padding: 5px 0;"><span class="dot"></span> Alexandro</div>
             </div>
         </aside>
 
