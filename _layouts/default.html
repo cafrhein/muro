@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+</head>
+<body>
+
+    <header class="fb-header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="logo-ch">CH</div>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar en Adestrat...">
+                </div>
+            </div>
+            <nav class="header-middle">
+                <a href="/" title="Inicio" class="active"><i class="fas fa-home"></i></a>
+                <a href="/2026/03/19/manifiesto-reciprocidad-cuidado.html" title="Manifiesto"><i class="fas fa-landmark"></i></a>
+                <a href="/blog.html" title="Noticias"><i class="fas fa-newspaper"></i></a>
+            </nav>
+            <div class="header-right">
+                <div class="user-pill">
+                    <span>Carlos</span>
+                </div>
+                <div class="icon-circle"><i class="fas fa-bell"></i></div>
+                <div class="icon-circle"><i class="fas fa-caret-down"></i></div>
+            </div>
+        </div>
+    </header>
+
+    {{ content }}
+
+</body>
+</html>
