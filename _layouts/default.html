@@ -3,37 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }}</title>
+    <title>{{ page.title }} | Adestrat</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
 </head>
 <body>
 
     <header class="fb-header">
-        <div class="header-content">
-            <div class="header-left">
-                <div class="logo-ch">CH</div>
-                <div class="search-bar">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Buscar en Adestrat...">
-                </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <a href="{{ '/' | relative_url }}" class="logo-ch">CH</a>
+            <div style="background: #f0f2f5; padding: 8px 12px; border-radius: 20px; color: #65676b; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-search"></i>
+                <span style="font-size: 0.9rem;">Buscar en Adestrat</span>
             </div>
-            <nav class="header-middle">
-                <a href="/" title="Inicio" class="active"><i class="fas fa-home"></i></a>
-                <a href="/2026/03/19/manifiesto-reciprocidad-cuidado.html" title="Manifiesto"><i class="fas fa-landmark"></i></a>
-                <a href="/blog.html" title="Noticias"><i class="fas fa-newspaper"></i></a>
-            </nav>
-            <div class="header-right">
-                <div class="user-pill">
-                    <span>Carlos</span>
-                </div>
-                <div class="icon-circle"><i class="fas fa-bell"></i></div>
-                <div class="icon-circle"><i class="fas fa-caret-down"></i></div>
-            </div>
+        </div>
+        
+        <nav style="display: flex; gap: 30px; font-size: 1.5rem;">
+            <a href="{{ '/' | relative_url }}" style="color: var(--fb-blue);"><i class="fas fa-home"></i></a>
+            <a href="{{ '/blog.html' | relative_url }}" style="color: #65676b;"><i class="fas fa-play-circle"></i></a>
+            <a href="{{ '/contacto.html' | relative_url }}" style="color: #65676b;"><i class="fas fa-store"></i></a>
+        </nav>
+
+        <div style="display: flex; gap: 8px;">
+            <div style="width: 40px; height: 40px; background: #e4e6eb; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-bars"></i></div>
+            <div style="width: 40px; height: 40px; background: #e4e6eb; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fab fa-facebook-messenger"></i></div>
+            <div style="width: 40px; height: 40px; background: #e4e6eb; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-bell"></i></div>
         </div>
     </header>
 
-    {{ content }}
+    <div class="fb-container">
+        
+        <aside class="fb-left">
+            <a href="{{ '/' | relative_url }}"><i class="fas fa-user-circle"></i> <strong>Carlos Hernández</strong></a>
+            <a href="{{ '/' | relative_url }}"><i class="fas fa-user-friends"></i> Amigos (Red Humana)</a>
+            <a href="{{ '/blog.html' | relative_url }}"><i class="fas fa-history"></i> Publicaciones</a>
+            <a href="{{ '/2026/03/19/manifiesto-reciprocidad-cuidado.html' | relative_url }}"><i class="fas fa-bookmark"></i> Manifiesto</a>
+        </nav>
+        </aside>
+
+        <main class="fb-feed">
+            {{ content }}
+        </main>
+
+        <aside class="fb-right">
+            <div class="fb-card">
+                <h4 style="color: #65676b; margin-bottom: 15px;">Contactos</h4>
+                <div class="contact-row"><span class="dot"></span> Alein Ad</div>
+                <div class="contact-row"><span class="dot"></span> Isaac</div>
+                <div class="contact-row"><span class="dot"></span> Alexandro</div>
+            </div>
+        </aside>
+
+    </div>
 
 </body>
 </html>
