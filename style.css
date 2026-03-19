@@ -1,0 +1,86 @@
+/* Interfaz Red Humana / Facebook - Carlos Hernández */
+:root {
+    --fb-bg: #f0f2f5;
+    --fb-blue: #1877f2;
+    --fb-white: #ffffff;
+    --fb-border: #dddfe2;
+    --fb-text: #050505;
+    --fb-text-sec: #65676b;
+}
+
+body {
+    background-color: var(--fb-bg);
+    font-family: Segoe UI, Helvetica, Arial, sans-serif;
+    margin: 0;
+    color: var(--fb-text);
+}
+
+/* Barra Superior */
+.fb-header {
+    background: var(--fb-white);
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-ch {
+    background: var(--fb-blue);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Contenedor de 3 Columnas */
+.fb-container {
+    display: grid;
+    grid-template-columns: 280px 1fr 280px;
+    gap: 32px;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 16px;
+}
+
+/* Tarjetas */
+.fb-card {
+    background: var(--fb-white);
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    margin-bottom: 16px;
+    padding: 16px;
+}
+
+.avatar-circle {
+    width: 40px;
+    height: 40px;
+    background: #e4e6eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.post-header { display: flex; gap: 12px; margin-bottom: 12px; }
+.post-info strong { display: block; font-size: 0.95rem; }
+.post-info span { font-size: 0.8rem; color: var(--fb-text-sec); }
+
+h3 { color: var(--fb-blue); margin: 10px 0; }
+p { line-height: 1.5; text-align: justify; }
+
+/* Responsivo */
+@media (max-width: 900px) {
+    .fb-container { grid-template-columns: 1fr; }
+    .fb-left, .fb-right { display: none; }
+}
