@@ -9,12 +9,25 @@
     --fb-text: #050505;
     --fb-text-sec: #65676b;
     --fb-hover: #e4e6eb;
+    --card-shadow: rgba(0,0,0,0.1);
+}
+
+/* VARIABLES MODO OSCURO */
+[data-theme="dark"] {
+    --fb-bg: #18191a;
+    --fb-white: #242526;
+    --fb-border: #3e4042;
+    --fb-text: #e4e6eb;
+    --fb-text-sec: #b0b3b8;
+    --fb-hover: #3a3b3c;
+    --card-shadow: rgba(0,0,0,0.3);
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s, color 0.3s; /* Animación suave al cambiar */
 }
 
 body {
@@ -25,7 +38,27 @@ body {
     overflow-x: hidden;
 }
 
-/* Barra Superior (Header) */
+/* Botón Flotante Modo Oscuro */
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--fb-blue);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 2000;
+    border: none;
+    font-size: 1.2rem;
+}
+
+/* Header */
 .fb-header {
     background: var(--fb-white);
     height: 56px;
@@ -33,7 +66,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px var(--card-shadow);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -51,10 +84,9 @@ body {
     font-weight: bold;
     font-size: 1.2rem;
     text-decoration: none;
-    flex-shrink: 0;
 }
 
-/* Contenedor Principal (3 Columnas) */
+/* Contenedor */
 .fb-container {
     display: grid;
     grid-template-columns: 280px 1fr 280px;
@@ -64,105 +96,48 @@ body {
     padding: 0 16px;
 }
 
-/* Tarjetas (Cards) */
 .fb-card {
     background: var(--fb-white);
     border-radius: 8px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px var(--card-shadow);
     margin-bottom: 16px;
     padding: 16px;
 }
 
-/* Contactos */
-.dot {
-    height: 10px;
-    width: 10px;
-    background-color: #45bd62;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 8px;
-}
-
-/* =========================================
-   ESTILOS PARA LA LECTURA DEL POST (MARKDOWN)
-   ========================================= */
+/* Ajustes de Lectura */
 .post-content {
     font-size: 1.05rem;
-    color: #050505;
+    color: var(--fb-text);
 }
 
-/* Párrafos justificados */
-.post-content p {
-    text-align: justify; 
-    text-justify: inter-word; 
-    margin-bottom: 24px;
-    line-height: 1.6;
-}
-
-/* Corrección para que las listas (viñetas y números) no se salgan del margen */
-.post-content ul, .post-content ol {
-    padding-left: 30px; /* Esto empuja los números hacia adentro de la caja */
-    margin-bottom: 24px;
-}
-
-.post-content li {
+.post-content p, .post-content li {
     text-align: justify;
     text-justify: inter-word;
-    margin-bottom: 12px; /* Un poco de aire entre cada paso */
+    margin-bottom: 24px;
     line-height: 1.6;
 }
 
-/* Los subtítulos alineados a la izquierda */
-.post-content h3 {
-    margin-top: 32px;
-    margin-bottom: 12px;
-    font-size: 1.25rem;
-    color: #050505;
-    font-weight: 700;
-    text-align: left; 
+.post-content ul, .post-content ol {
+    padding-left: 30px;
+    margin-bottom: 24px;
 }
 
-/* La caja de citas/dilemas justificada */
+.post-content h1, .post-content h3 {
+    color: var(--fb-text);
+}
+
 .post-content blockquote {
-    background: #f0f2f5;
+    background: var(--fb-bg);
     border-left: 4px solid var(--fb-blue);
     padding: 16px 20px;
     margin: 28px 0;
-    border-radius: 0 8px 8px 0;
-    font-style: italic;
-    color: #1c1e21;
+    color: var(--fb-text);
     text-align: justify;
 }
 
-.post-content hr {
-    border: none;
-    border-top: 1px solid var(--fb-border);
-    margin: 32px 0;
-}
-
-/* =========================================
-   ADAPTACIÓN PARA CELULARES
-   ========================================= */
+/* Responsivo */
 @media (max-width: 900px) {
-    .fb-container {
-        grid-template-columns: 1fr;
-        padding: 0;
-        margin-top: 0;
-    }
-    .fb-left, .fb-right {
-        display: none;
-    }
-    .fb-header { padding: 0 10px; }
-    .search-text, .header-center-nav { display: none !important; }
-    .fb-card {
-        border-radius: 0;
-        border-left: none;
-        border-right: none;
-        margin-bottom: 10px;
-    }
-    .cover-photo { height: 150px !important; }
-    .profile-info-container { margin-top: -50px !important; }
-    .avatar-large-container img { width: 100px !important; height: 100px !important; }
-    .profile-buttons { flex-direction: column; width: 100%; }
-    .profile-buttons a { width: 100%; justify-content: center; margin-bottom: 8px; }
+    .fb-container { grid-template-columns: 1fr; padding: 0; }
+    .fb-left, .fb-right { display: none; }
+    .fb-card { border-radius: 0; border-left: none; border-right: none; }
 }
