@@ -1,12 +1,33 @@
-title: Carlos Hernández | Adestrat
-email: cafrhein@outlook.com
-description: >-
-  Estratega en Sistemas Humanos e Ingeniería de la Reciprocidad. 
-  Crónicas de Antracita y Gestión de AC.
-baseurl: "" # Mantener vacío para adestrat.com
-url: "https://adestrat.com"
+# Configuración del Muro de Adestrat
+title: "Adestrat | Red Humana"
+description: "Estrategia e Ingeniería de la Reciprocidad por Carlos Hernández"
 
-# Configuración de Markdown
+# CONFIGURACIÓN DE RUTAS (CRÍTICO PARA GITHUB PAGES)
+# baseurl debe ser el nombre de tu repositorio con una diagonal inicial
+baseurl: "/muro" 
+url: "https://cafrhein.github.io"
+
+# Configuración de Contenido
 markdown: kramdown
-theme: minima # Puedes dejarlo o quitarlo, usaremos nuestro propio CSS
-exclude: [Gemfile, Gemfile.lock, node_modules, vendor]
+highlighter: rouge
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Excluir archivos innecesarios del build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .bundle
+  - .git
+  - .sass-cache
+
+# Ajustes de Lectura
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "default" # Esto asegura que tus posts usen el diseño de Facebook automáticamente
