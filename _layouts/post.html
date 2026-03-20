@@ -7,13 +7,13 @@ layout: default
     <div style="padding: 15px; display: flex; gap: 10px; align-items: center;">
         <img src="{{ '/perfil.png.jpg' | relative_url }}" alt="Carlos Hernández" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
         <div>
-            <strong style="display: block; color: var(--fb-text); font-size: 0.95rem;">Carlos Hernández</strong>
+            <strong style="color: var(--fb-text); font-size: 0.95rem; display: block;">Carlos Hernández</strong>
             <span style="font-size: 0.8rem; color: var(--fb-text-sec);">{{ page.date | date: "%e de %b, %Y" }} · <i class="fas fa-globe-americas"></i></span>
         </div>
     </div>
 
     <div class="post-content" style="padding: 0 20px 20px 20px;">
-        <h1 style="margin-top: 0; color: var(--fb-text); font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; line-height: 1.2;">{{ page.title }}</h1>
+        <h1 style="color: var(--fb-text); font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; line-height: 1.2;">{{ page.title }}</h1>
         
         <div style="color: var(--fb-text);">
             {{ content }}
@@ -22,7 +22,7 @@ layout: default
 
     <div style="border-top: 1px solid var(--fb-border); display: flex; justify-content: flex-end; padding: 10px 15px; background: var(--fb-hover);">
         <div onclick="if(navigator.share){ navigator.share({title: '{{ page.title | escape }}', url: window.location.href}); } else { navigator.clipboard.writeText(window.location.href); alert('¡Enlace copiado!'); }" style="color: var(--fb-text-sec); font-weight: 600; font-size: 0.9rem; padding: 8px 16px; cursor: pointer; border-radius: 5px; display: flex; align-items: center; gap: 8px;">
-            <i class="fas fa-share"></i> Compartir artículo
+            <i class="fas fa-share"></i> Compartir
         </div>
     </div>
 
