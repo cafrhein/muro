@@ -6,19 +6,12 @@ title: Inicio
 <div class="fb-card profile-header-card" style="background: var(--fb-white); border-radius: 8px; padding: 0; overflow: hidden; margin-bottom: 16px; box-shadow: 0 1px 2px var(--card-shadow);">
     
     <div class="cover-photo" style="height: 200px; background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); background-size: cover; background-position: center; position: relative;">
-        <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.8); padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; font-weight: 600; cursor: pointer; color: #050505;">
-            <i class="fas fa-camera"></i> Editar portada
-        </div>
     </div>
 
     <div class="profile-info-container" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 16px 16px 16px; position: relative; margin-top: -60px;">
         
         <div class="avatar-large-container" style="position: relative; z-index: 10;">
             <img src="{{ '/perfil.png.jpg' | relative_url }}" alt="Carlos Hernández" style="width: 130px; height: 130px; border-radius: 50%; border: 4px solid var(--fb-white); box-shadow: 0 2px 4px rgba(0,0,0,0.2); object-fit: cover; background-color: var(--fb-white);">
-            
-            <div style="position: absolute; bottom: 5px; right: 5px; background: var(--fb-hover); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--fb-white); color: var(--fb-text); font-size: 1rem; cursor: pointer;">
-                <i class="fas fa-camera"></i>
-            </div>
         </div>
 
         <div style="margin-top: 10px; padding: 0 10px;">
@@ -94,6 +87,6 @@ title: Inicio
         setTimeout(function() {
             document.getElementById('skeleton-feed').style.display = 'none';
             document.getElementById('real-feed').style.display = 'block';
-        }, 800); // Retraso visual para apreciar la carga
+        }, 800);
     });
 </script>
