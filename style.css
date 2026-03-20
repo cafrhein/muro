@@ -1,21 +1,28 @@
 ---
 ---
 /* ============================================================
-   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL
+   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V2.1
    DISEÑO, UX Y SEGURIDAD: CARLOS HERNÁNDEZ
+   SISTEMA: JEKYLL + GITHUB PAGES
    ============================================================ */
 
+/* 1. IMPORTACIÓN DE TIPOGRAFÍA DE AUTOR */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800&display=swap');
+
+/* 2. VARIABLES DE ENTORNO (SISTEMA DE COLOR) */
 :root {
     --fb-bg: #f0f2f5;
     --fb-blue: #1877f2;
     --fb-blue-hover: #166fe5;
     --fb-white: #ffffff;
     --fb-border: #dddfe2;
-    --fb-text: #050505;
+    --fb-text: #1c1e21;
     --fb-text-sec: #65676b;
-    --fb-hover: #e4e6eb;
+    --fb-hover: #f2f3f5;
     --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --radius: 12px;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 [data-theme="dark"] {
@@ -25,11 +32,11 @@
     --fb-text: #e4e6eb;
     --fb-text-sec: #b0b3b8;
     --fb-hover: #3a3b3c;
-    --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --card-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.45);
 }
 
-/* --- BASES Y RESET --- */
+/* 3. RESET Y BASES DE NAVEGACIÓN */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -39,7 +46,7 @@
 
 body {
     background-color: var(--fb-bg);
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     color: var(--fb-text);
     line-height: 1.6;
     overflow-x: hidden;
@@ -48,147 +55,152 @@ body {
     min-height: 100vh;
 }
 
-/* --- SCROLLBAR PERSONALIZADA --- */
+/* 4. SCROLLBAR PERSONALIZADA (ESTÉTICA TÉCNICA) */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--fb-bg); }
 ::-webkit-scrollbar-thumb { background: var(--fb-border); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--fb-text-sec); }
 
-/* --- NAVEGACIÓN SUPERIOR (HEADER) --- */
+/* 5. NAVEGACIÓN (HEADER) CON GLASSMORPHISM */
 .fb-header {
     background: var(--fb-white);
-    height: 56px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 16px;
+    padding: 0 20px;
     box-shadow: var(--card-shadow);
     position: sticky;
     top: 0;
     z-index: 2000;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--fb-border);
 }
 
-/* --- BARRA DE PROGRESO (UX LECTURA) --- */
+/* 6. BARRA DE PROGRESO DE PRECISIÓN (SOLO EN POSTS) */
 #progress-container {
     position: fixed;
-    top: 56px;
+    top: 60px;
     left: 0;
     width: 100%;
-    height: 4px;
+    height: 3px;
     background: transparent;
     z-index: 2100;
 }
 #progress-bar {
     height: 100%;
     width: 0%;
-    background: var(--fb-blue);
-    box-shadow: 0 0 10px rgba(24, 119, 242, 0.5);
+    background: linear-gradient(to right, var(--fb-blue), #00d2ff);
+    box-shadow: 0 0 8px rgba(24, 119, 242, 0.4);
     transition: width 0.1s ease-out;
 }
 
-/* --- ESTRUCTURA DE COLUMNAS --- */
+/* 7. ESTRUCTURA DE GRID (LAYOUT MAESTRO) */
 .fb-container {
     display: grid;
-    grid-template-columns: 320px 1fr 280px;
-    gap: 16px;
-    max-width: 1250px;
-    margin: 16px auto;
-    padding: 0 16px;
+    grid-template-columns: 340px 1fr 300px;
+    gap: 20px;
+    max-width: 1300px;
+    margin: 20px auto;
+    padding: 0 20px;
     flex: 1;
 }
 
-/* --- TARJETAS Y ELEVACIONES --- */
+/* 8. COMPONENTES DE TARJETA (NODOS) */
 .fb-card {
     background: var(--fb-white);
-    border-radius: 10px;
+    border-radius: var(--radius);
     box-shadow: var(--card-shadow);
-    margin-bottom: 16px;
-    padding: 16px;
+    margin-bottom: 20px;
+    padding: 20px;
     border: 1px solid var(--fb-border);
     position: relative;
+    overflow: hidden;
 }
 
 .post-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: var(--transition);
+    cursor: pointer;
 }
 
 .post-card:hover {
+    transform: translateY(-4px);
     box-shadow: var(--card-shadow-hover);
-    transform: translateY(-2px);
+    border-color: var(--fb-blue);
 }
 
-/* --- PESTAÑAS (TABS) --- */
+/* 9. PESTAÑAS Y NAVEGACIÓN DE PERFIL */
 .profile-tabs {
     display: flex;
     list-style: none;
     background: var(--fb-white);
     border-top: 1px solid var(--fb-border);
+    margin-top: 10px;
 }
 
 .tab-item {
     flex: 1;
     text-align: center;
-    padding: 14px 10px;
+    padding: 16px 10px;
     color: var(--fb-text-sec);
     font-weight: 600;
     cursor: pointer;
     border-bottom: 3px solid transparent;
-    transition: all 0.2s;
+    font-size: 0.95rem;
+    transition: var(--transition);
 }
 
 .tab-item:hover { background: var(--fb-hover); color: var(--fb-blue); }
 .tab-item.active { color: var(--fb-blue); border-bottom: 3px solid var(--fb-blue); }
 .tab-item i { margin-right: 8px; }
 
-/* --- UX DE LECTURA PROFUNDA --- */
+/* 10. TIPOGRAFÍA Y JERARQUÍA VISUAL */
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--fb-text);
+    letter-spacing: -0.5px;
+}
+
+/* 11. UX DE LECTURA PROFUNDA (POST CONTENT) */
 .post-content {
     font-size: 1.15rem;
     color: var(--fb-text);
+    letter-spacing: -0.01em;
 }
 
 .post-content p {
-    margin-bottom: 1.6rem;
+    margin-bottom: 1.8rem;
     text-align: justify;
     hyphens: auto;
 }
 
-.post-content h1, .post-content h2, .post-content h3 {
-    margin: 2.5rem 0 1.2rem 0;
-    font-weight: 800;
-    line-height: 1.2;
-}
-
 .post-content blockquote {
-    margin: 2.5rem 0;
-    padding: 1.8rem 2rem;
+    margin: 3rem 0;
+    padding: 2rem;
     background: var(--fb-bg);
     border-left: 6px solid var(--fb-blue);
-    border-radius: 0 12px 12px 0;
+    border-radius: 4px 16px 16px 4px;
     font-style: italic;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: var(--fb-text-sec);
+    position: relative;
 }
 
 .post-content img {
     max-width: 100%;
     height: auto;
-    border-radius: 12px;
-    margin: 2rem 0;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    border-radius: var(--radius);
+    margin: 2.5rem 0;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
 }
 
 .post-content ul, .post-content ol {
-    margin-bottom: 1.5rem;
-    padding-left: 1.8rem;
+    margin-bottom: 1.8rem;
+    padding-left: 2rem;
 }
 
-.post-content li {
-    margin-bottom: 0.8rem;
-}
-
-/* --- VÍNCULOS DE INTERDEPENDENCIA (RELATED) --- */
+/* 12. VÍNCULOS DE INTERDEPENDENCIA (RELATED) */
 .related-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -198,61 +210,22 @@ body {
 
 .related-card {
     background: var(--fb-bg);
-    padding: 16px;
-    border-radius: 10px;
+    padding: 18px;
+    border-radius: var(--radius);
     text-decoration: none;
     color: inherit;
     border: 1px solid var(--fb-border);
-    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: var(--transition);
 }
 
 .related-card:hover {
     border-color: var(--fb-blue);
     background: var(--fb-white);
     box-shadow: var(--card-shadow-hover);
-    transform: scale(1.02);
+    transform: scale(1.03);
 }
 
-.related-card strong {
-    display: block;
-    font-size: 1rem;
-    margin-bottom: 6px;
-    line-height: 1.4;
-}
-
-/* --- SIDEBAR INFO --- */
-.intro-list { list-style: none; margin-top: 10px; }
-.intro-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 15px;
-    font-size: 0.95rem;
-}
-.intro-item i { width: 22px; text-align: center; color: var(--fb-text-sec); font-size: 1.15rem; }
-
-/* --- PIE DE PÁGINA (FOOTER) --- */
-.site-footer {
-    background: var(--fb-white);
-    border-top: 1px solid var(--fb-border);
-    padding: 50px 20px;
-    margin-top: 60px;
-    text-align: center;
-}
-
-.footer-nav {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin-bottom: 20px;
-    list-style: none;
-    font-weight: 600;
-}
-
-.footer-nav a { color: var(--fb-text-sec); text-decoration: none; transition: 0.2s; }
-.footer-nav a:hover { color: var(--fb-blue); }
-
-/* --- ANIMACIONES Y SKELETON --- */
+/* 13. ANIMACIONES DE CARGA (SKELETON) */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
@@ -262,6 +235,7 @@ body {
     background: linear-gradient(90deg, var(--fb-hover) 25%, var(--fb-bg) 50%, var(--fb-hover) 75%);
     background-size: 200% 100%;
     animation: loading 1.5s infinite linear;
+    border-radius: 4px;
 }
 
 @keyframes loading {
@@ -269,18 +243,56 @@ body {
     to { background-position: -200% 0; }
 }
 
-/* --- BOTÓN FLOTANTE --- */
+/* 14. SIDEBAR E INFO PERSONAL */
+.intro-list { list-style: none; margin-top: 10px; }
+.intro-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    font-size: 0.95rem;
+}
+.intro-item i { width: 24px; text-align: center; color: var(--fb-text-sec); font-size: 1.2rem; }
+
+/* 15. PIE DE PÁGINA (FOOTER) */
+.site-footer {
+    background: var(--fb-white);
+    border-top: 1px solid var(--fb-border);
+    padding: 60px 20px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 25px;
+    list-style: none;
+    font-weight: 600;
+}
+
+.footer-nav a { color: var(--fb-text-sec); text-decoration: none; transition: 0.2s; }
+.footer-nav a:hover { color: var(--fb-blue); }
+
+/* 16. BOTÓN FLOTANTE DARK MODE */
 .dark-mode-toggle {
     position: fixed; bottom: 30px; right: 30px;
-    width: 55px; height: 55px; border-radius: 50%;
+    width: 60px; height: 60px; border-radius: 50%;
     background: var(--fb-blue); color: white;
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; z-index: 3000; border: none;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 20px rgba(24, 119, 242, 0.4);
 }
 
-/* --- RESPONSIVE MÓVIL --- */
-@media (max-width: 900px) {
+/* 17. OPTIMIZACIÓN MÓVIL Y OVERLAYS */
+.menu-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); z-index: 2400; display: none;
+}
+.menu-overlay.active { display: block; }
+
+@media (max-width: 950px) {
     .fb-container { grid-template-columns: 1fr; padding: 0; margin-top: 0; gap: 0; }
     
     .fb-left {
@@ -288,8 +300,8 @@ body {
         width: 85%; max-width: 320px; height: 100vh;
         background: var(--fb-white); z-index: 2500;
         transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        padding: 60px 24px 24px 24px;
-        box-shadow: 10px 0 30px rgba(0,0,0,0.3);
+        padding: 60px 25px;
+        box-shadow: 15px 0 35px rgba(0,0,0,0.3);
     }
     .fb-left.active { left: 0; }
 
@@ -297,11 +309,11 @@ body {
     .profile-img { width: 120px !important; height: 120px !important; margin-top: -60px !important; }
     
     .fb-right { display: none; }
-    .fb-card { border-radius: 0; border-left: none; border-right: none; margin-bottom: 8px; }
+    .fb-card { border-radius: 0; border-left: none; border-right: none; margin-bottom: 10px; }
     
     .tab-item i { display: none; }
-    .tab-item { font-size: 0.85rem; padding: 12px 4px; }
+    .tab-item { font-size: 0.85rem; padding: 14px 5px; }
     
     .related-grid { grid-template-columns: 1fr; }
-    .footer-nav { flex-direction: column; gap: 12px; }
+    .footer-nav { flex-direction: column; gap: 15px; }
 }
