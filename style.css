@@ -1,6 +1,6 @@
 ---
 ---
-/* INTERFAZ RED HUMANA - DISEÑO CARLOS HERNÁNDEZ */
+/* ECOSISTEMA RED HUMANA - DISEÑO CARLOS HERNÁNDEZ */
 :root {
     --fb-bg: #f0f2f5;
     --fb-blue: #1877f2;
@@ -37,6 +37,7 @@ body {
     overflow-x: hidden;
 }
 
+/* NAVEGACIÓN SUPERIOR */
 .fb-header {
     background: var(--fb-white);
     height: 56px;
@@ -59,6 +60,7 @@ body {
     font-weight: bold; font-size: 1.2rem; text-decoration: none;
 }
 
+/* ESTRUCTURA GRID (3 COLUMNAS PC) */
 .fb-container {
     display: grid;
     grid-template-columns: 320px 1fr 280px;
@@ -76,7 +78,7 @@ body {
     padding: 16px;
 }
 
-/* TABS UX */
+/* PESTAÑAS (UX TABS) */
 .profile-tabs {
     display: flex;
     list-style: none;
@@ -95,7 +97,7 @@ body {
 .tab-item:hover { background: var(--fb-hover); border-radius: 8px 8px 0 0; }
 .tab-item.active { color: var(--fb-blue); border-bottom: 3px solid var(--fb-blue); }
 
-/* INTRO LIST */
+/* LISTADO DE INFORMACIÓN (INTRO) */
 .intro-list { list-style: none; margin-top: 10px; }
 .intro-item {
     display: flex;
@@ -106,7 +108,14 @@ body {
 }
 .intro-item i { width: 20px; text-align: center; color: var(--fb-text-sec); font-size: 1.1rem; }
 
-/* SKELETON */
+/* AJUSTES DE LECTURA */
+.post-content p, .post-content li {
+    text-align: justify;
+    text-justify: inter-word;
+    margin-bottom: 20px;
+}
+
+/* SKELETON LOADING ANIMATION */
 .skeleton-item { background: var(--fb-hover); border-radius: 4px; position: relative; overflow: hidden; }
 .skeleton-item::after {
     content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0;
@@ -116,6 +125,7 @@ body {
 }
 @keyframes shimmer { 100% { transform: translateX(100%); } }
 
+/* BOTÓN FLOTANTE MODO OSCURO */
 .dark-mode-toggle {
     position: fixed; bottom: 20px; right: 20px;
     width: 45px; height: 45px; border-radius: 50%;
@@ -124,6 +134,8 @@ body {
     cursor: pointer; z-index: 3000; border: none;
 }
 
+/* RESPONSIVE DESIGN (MOBILE) */
+.menu-overlay { display: none; }
 @media (max-width: 900px) {
     .fb-container { grid-template-columns: 1fr; padding: 0; margin-top: 0; }
     .fb-left {
@@ -133,7 +145,12 @@ body {
         transition: left 0.3s ease; padding: 20px;
     }
     .fb-left.active { left: 0; }
-    .menu-overlay { position: fixed; top: 56px; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2400; }
+    .menu-overlay { 
+        position: fixed; top: 56px; left: 0; 
+        width: 100%; height: 100%; 
+        background: rgba(0,0,0,0.5); z-index: 2400; 
+    }
     .menu-overlay.active { display: block; }
     .fb-right { display: none; }
+    .fb-card { border-radius: 0; }
 }
