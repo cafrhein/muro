@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }} | Carlos Hernández</title>
+    <title>{{ page.title }} | [Nombre del Sitio]</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
     <script>
-        // Pre-carga del tema oscuro para evitar parpadeo blanco
+        // Carga el tema guardado (claro u oscuro) antes de mostrar el contenido
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) { document.documentElement.setAttribute('data-theme', currentTheme); }
     </script>
@@ -22,14 +22,10 @@
 
     <header class="fb-header">
         <div style="display: flex; align-items: center; gap: 10px;">
-            <a href="{{ '/' | relative_url }}" class="logo-ch">CH</a>
-            <div style="background: var(--fb-bg); padding: 8px 12px; border-radius: 20px; color: var(--fb-text-sec); display: flex; align-items: center; gap: 8px;">
-                <i class="fas fa-search"></i>
-                <span style="font-size: 0.9rem;">Buscar en Red Humana</span>
+            <a href="{{ '/' | relative_url }}" class="logo-ch">[LOGO]</a>
             </div>
-        </div>
-        
-        <nav style="display: flex; gap: 40px; font-size: 1.5rem;">
+
+        <nav class="header-center-nav" style="display: flex; gap: 40px; font-size: 1.5rem;">
             <a href="{{ '/' | relative_url }}" style="color: var(--fb-blue);"><i class="fas fa-home"></i></a>
         </nav>
 
@@ -37,10 +33,7 @@
             <div id="menu-toggle" style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer;">
                 <i class="fas fa-bars"></i>
             </div>
-            <div style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer;">
-                <i class="fas fa-bell"></i>
             </div>
-        </div>
     </header>
 
     <div class="fb-container">
@@ -48,11 +41,10 @@
             <div class="fb-card">
                 <h3 style="font-size: 1.2rem; margin-bottom: 15px;">Información</h3>
                 <ul class="intro-list">
-                    <li class="intro-item"><i class="fas fa-briefcase"></i> <span>Especialista en <strong>Planeación Estratégica</strong></span></li>
-                    <li class="intro-item"><i class="fas fa-graduation-cap"></i> <span>Estudia <strong>Seguridad Pública</strong></span></li>
-                    <li class="intro-item"><i class="fas fa-home"></i> <span>Vive en <strong>Ciudad de México</strong></span></li>
-                    <li class="intro-item"><i class="fas fa-heart"></i> <span>En una relación con <strong>Daniela</strong></span></li>
-                    <li class="intro-item"><i class="fas fa-rss"></i> <span>Seguido por <strong>Ingeniería Humana</strong></span></li>
+                    <li class="intro-item"><i class="fas fa-briefcase"></i> <span>[Profesión u Ocupación]</span></li>
+                    <li class="intro-item"><i class="fas fa-graduation-cap"></i> <span>[Estudios]</span></li>
+                    <li class="intro-item"><i class="fas fa-home"></i> <span>[Ubicación]</span></li>
+                    <li class="intro-item"><i class="fas fa-heart"></i> <span>[Estado Civil o Relación]</span></li>
                 </ul>
             </div>
 
@@ -90,14 +82,14 @@
                     </svg>
                 </div>
                 <p style="font-size: 0.85rem; color: var(--fb-text-sec); text-align: center; font-style: italic;">
-                    "La estabilidad depende de los vínculos."
+                    "[Frase o lema personal]"
                 </p>
             </div>
         </aside>
     </div>
 
     <script>
-        // LÓGICA DE MODO OSCURO
+        // Lógica para alternar el Modo Oscuro
         const themeBtn = document.getElementById("theme-button");
         themeBtn.addEventListener("click", () => {
             let isDark = document.documentElement.getAttribute("data-theme") === "dark";
@@ -110,7 +102,7 @@
             }
         });
 
-        // LÓGICA DE MENÚ MÓVIL
+        // Lógica para el menú lateral en dispositivos móviles
         const menuToggle = document.getElementById("menu-toggle");
         const sidebar = document.getElementById("fb-left");
         const overlay = document.getElementById("menu-overlay");
