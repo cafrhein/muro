@@ -7,12 +7,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
     <script>
-        // Aplicar el tema guardado de inmediato
+        // Carga inmediata del tema para evitar parpadeo
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) { document.documentElement.setAttribute('data-theme', currentTheme); }
     </script>
 </head>
 <body>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
 
     <div class="menu-overlay" id="menu-overlay"></div>
 
@@ -93,6 +97,14 @@
     </div>
 
     <script>
+        // SCRIPT BARRA DE PROGRESO (UX LECTURA)
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+
         // MODO OSCURO
         const themeBtn = document.getElementById("theme-button");
         const themeIcon = themeBtn.querySelector("i");
