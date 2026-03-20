@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
     <script>
-        // Aplicar el tema guardado antes de que cargue la página
+        // Carga el tema antes de mostrar nada
         const currentTheme = localStorage.getItem('theme');
-        if (currentTheme) {
-            document.documentElement.setAttribute('data-theme', currentTheme);
-        }
+        if (currentTheme) { document.documentElement.setAttribute('data-theme', currentTheme); }
     </script>
 </head>
 <body>
+
+    <div class="menu-overlay" id="menu-overlay"></div>
 
     <button class="dark-mode-toggle" id="theme-button" title="Cambiar modo">
         <i class="fas fa-moon"></i>
@@ -34,13 +34,17 @@
         </nav>
 
         <div style="display: flex; gap: 8px;">
-            <div style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer;"><i class="fas fa-bars"></i></div>
-            <div style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer;"><i class="fas fa-bell"></i></div>
+            <div id="menu-toggle" style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer;">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer;">
+                <i class="fas fa-bell"></i>
+            </div>
         </div>
     </header>
 
     <div class="fb-container">
-        <aside class="fb-left">
+        <aside class="fb-left" id="fb-left">
             <div style="display: flex; flex-direction: column; gap: 5px;">
                 <a href="{{ '/' | relative_url }}" style="text-decoration:none; color:var(--fb-text); padding:10px; display:flex; align-items:center; gap:10px; border-radius: 8px;"><i class="fas fa-user-circle" style="color:var(--fb-blue); font-size:1.5rem;"></i> <strong>Carlos Hernández</strong></a>
                 <a href="#" style="text-decoration:none; color:var(--fb-text); padding:10px; display:flex; align-items:center; gap:10px; border-radius: 8px;"><i class="fas fa-user-friends" style="color:var(--fb-blue); font-size:1.5rem;"></i> Amigos</a>
@@ -61,42 +65,47 @@
                         <line x1="100" y1="80" x2="30" y2="110" stroke="var(--fb-border)" stroke-width="2"/>
                         <line x1="100" y1="80" x2="170" y2="110" stroke="var(--fb-border)" stroke-width="2"/>
                         <line x1="100" y1="80" x2="100" y2="145" stroke="var(--fb-border)" stroke-width="2"/>
-                        <circle cx="40" cy="40" r="6" fill="#45bd62"/>
-                        <circle cx="160" cy="40" r="6" fill="#45bd62"/>
-                        <circle cx="30" cy="110" r="6" fill="#45bd62"/>
-                        <circle cx="170" cy="110" r="6" fill="#45bd62"/>
+                        <circle cx="40" cy="40" r="6" fill="#45bd62"/><circle cx="160" cy="40" r="6" fill="#45bd62"/>
+                        <circle cx="30" cy="110" r="6" fill="#45bd62"/><circle cx="170" cy="110" r="6" fill="#45bd62"/>
                         <circle cx="100" cy="145" r="6" fill="#45bd62"/>
-                        <circle cx="100" cy="80" r="12" fill="var(--fb-blue)"/>
-                        <circle cx="100" cy="80" r="4" fill="white"/>
+                        <circle cx="100" cy="80" r="12" fill="var(--fb-blue)"/><circle cx="100" cy="80" r="4" fill="white"/>
                     </svg>
                 </div>
-                <p style="font-size: 0.85rem; color: var(--fb-text-sec); text-align: center; font-style: italic;">
-                    "La estabilidad depende de los vínculos."
-                </p>
+                <p style="font-size: 0.85rem; color: var(--fb-text-sec); text-align: center; font-style: italic;">"La estabilidad depende de los vínculos."</p>
             </div>
         </aside>
     </div>
 
     <script>
-        const btn = document.getElementById("theme-button");
-        const icon = btn.querySelector("i");
-
-        btn.addEventListener("click", function() {
+        // SCRIPT MODO OSCURO
+        const themeBtn = document.getElementById("theme-button");
+        const themeIcon = themeBtn.querySelector("i");
+        themeBtn.addEventListener("click", () => {
             let theme = document.documentElement.getAttribute("data-theme");
             if (theme === "dark") {
                 document.documentElement.removeAttribute("data-theme");
-                icon.classList.replace("fa-sun", "fa-moon");
+                themeIcon.classList.replace("fa-sun", "fa-moon");
                 localStorage.setItem("theme", "");
             } else {
                 document.documentElement.setAttribute("data-theme", "dark");
-                icon.classList.replace("fa-moon", "fa-sun");
+                themeIcon.classList.replace("fa-moon", "fa-sun");
                 localStorage.setItem("theme", "dark");
             }
         });
+        if (localStorage.getItem('theme') === 'dark') { themeIcon.classList.replace("fa-moon", "fa-sun"); }
 
-        if (localStorage.getItem('theme') === 'dark') {
-            icon.classList.replace("fa-moon", "fa-sun");
+        // SCRIPT MENÚ LATERAL
+        const menuToggle = document.getElementById("menu-toggle");
+        const sidebar = document.getElementById("fb-left");
+        const overlay = document.getElementById("menu-overlay");
+
+        function toggleMenu() {
+            sidebar.classList.toggle("active");
+            overlay.classList.toggle("active");
         }
+
+        menuToggle.addEventListener("click", toggleMenu);
+        overlay.addEventListener("click", toggleMenu);
     </script>
 </body>
 </html>
