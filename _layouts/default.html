@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
     <script>
-        // Carga el tema guardado antes de mostrar el contenido
+        // Aplicación inmediata del tema para evitar destellos
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) { document.documentElement.setAttribute('data-theme', currentTheme); }
     </script>
@@ -16,20 +16,22 @@
 
     <div class="menu-overlay" id="menu-overlay"></div>
 
-    <button class="dark-mode-toggle" id="theme-button" title="Cambiar modo">
+    <button class="dark-mode-toggle" id="theme-button" title="Alternar tema">
         <i class="fas fa-moon"></i>
     </button>
 
     <header class="fb-header">
-        <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="display: flex; align-items: center; min-width: 40px;">
             </div>
 
-        <nav style="display: flex; gap: 40px; font-size: 1.5rem;">
-            <a href="{{ '/' | relative_url }}" style="color: var(--fb-blue);"><i class="fas fa-home"></i></a>
+        <nav style="display: flex; justify-content: center; flex: 1;">
+            <a href="{{ '/' | relative_url }}" style="color: var(--fb-blue); font-size: 1.6rem; padding: 10px 30px; border-bottom: 3px solid var(--fb-blue); display: flex; align-items: center;" title="Inicio">
+                <i class="fas fa-home"></i>
+            </a>
         </nav>
 
-        <div style="display: flex; gap: 8px;">
-            <div id="menu-toggle" style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer;">
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <div id="menu-toggle" class="header-icon-btn" style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer; transition: 0.2s;">
                 <i class="fas fa-bars"></i>
             </div>
         </div>
@@ -38,25 +40,25 @@
     <div class="fb-container">
         <aside class="fb-left" id="fb-left">
             <div class="fb-card">
-                <h3 style="font-size: 1.2rem; margin-bottom: 15px;">Información</h3>
+                <h3 style="font-size: 1.2rem; margin-bottom: 18px; font-weight: 800;">Información</h3>
                 <ul class="intro-list">
-                    <li class="intro-item"><i class="fas fa-briefcase"></i> <span>Especialista en <strong>Planeación Estratégica</strong></span></li>
-                    <li class="intro-item"><i class="fas fa-graduation-cap"></i> <span>Estudia <strong>Seguridad Pública</strong></span></li>
-                    <li class="intro-item"><i class="fas fa-home"></i> <span>Vive en <strong>CDMX</strong></span></li>
-                    <li class="intro-item"><i class="fas fa-heart"></i> <span>En una relación con <strong>Daniela</strong></span></li>
-                    <li class="intro-item"><i class="fas fa-rss"></i> <span>Seguido por <strong>Ingeniería Humana</strong></span></li>
+                    <li class="intro-item"><i class="fas fa-briefcase" style="color: #65676b;"></i> <span>Especialista en <strong>Planeación Estratégica</strong></span></li>
+                    <li class="intro-item"><i class="fas fa-user-shield" style="color: #65676b;"></i> <span>Estudia <strong>Seguridad Pública</strong></span></li>
+                    <li class="intro-item"><i class="fas fa-map-marker-alt" style="color: #65676b;"></i> <span>Desde <strong>Ciudad de México</strong></span></li>
+                    <li class="intro-item"><i class="fas fa-heart" style="color: #fb7185;"></i> <span>En una relación con <strong>Daniela</strong></span></li>
+                    <li class="intro-item"><i class="fas fa-project-diagram" style="color: #1877f2;"></i> <span>Impulsor de <strong>Ingeniería Humana</strong></span></li>
                 </ul>
             </div>
 
-            <div class="fb-card" style="padding: 12px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <h3 style="font-size: 1.1rem;">Fotos</h3>
-                    <a href="#" style="color: var(--fb-blue); text-decoration: none; font-size: 0.9rem;">Ver todas</a>
+            <div class="fb-card" style="padding: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="font-size: 1.1rem; font-weight: 800;">Galería</h3>
+                    <a href="#" style="color: var(--fb-blue); text-decoration: none; font-size: 0.9rem; font-weight: 600;">Ver más</a>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; border-radius: 8px; overflow: hidden;">
-                    <div style="aspect-ratio: 1; background: #ddd;"></div>
-                    <div style="aspect-ratio: 1; background: #ccc;"></div>
-                    <div style="aspect-ratio: 1; background: #bbb;"></div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; border-radius: 8px; overflow: hidden;">
+                    <div style="aspect-ratio: 1; background: var(--fb-hover); border-radius: 4px;"></div>
+                    <div style="aspect-ratio: 1; background: var(--fb-hover); border-radius: 4px;"></div>
+                    <div style="aspect-ratio: 1; background: var(--fb-hover); border-radius: 4px;"></div>
                 </div>
             </div>
         </aside>
@@ -66,22 +68,25 @@
         </main>
 
         <aside class="fb-right">
-            <div class="fb-card">
-                <h4 style="color: var(--fb-text-sec); margin-bottom: 10px; font-size: 0.85rem; text-transform: uppercase; text-align: center; letter-spacing: 1px;">Red de Apoyo</h4>
-                <div style="display: flex; justify-content: center; padding: 10px 0;">
+            <div class="fb-card" style="border-top: 4px solid var(--fb-blue);">
+                <h4 style="color: var(--fb-text-sec); margin-bottom: 15px; font-size: 0.85rem; text-transform: uppercase; text-align: center; letter-spacing: 1.5px; font-weight: 800;">Red Humana</h4>
+                <div style="display: flex; justify-content: center; padding: 15px 0;">
                     <svg viewBox="0 0 200 160" width="100%" height="160">
                         <line x1="100" y1="80" x2="40" y2="40" stroke="var(--fb-border)" stroke-width="2"/>
                         <line x1="100" y1="80" x2="160" y2="40" stroke="var(--fb-border)" stroke-width="2"/>
                         <line x1="100" y1="80" x2="30" y2="110" stroke="var(--fb-border)" stroke-width="2"/>
                         <line x1="100" y1="80" x2="170" y2="110" stroke="var(--fb-border)" stroke-width="2"/>
                         <line x1="100" y1="80" x2="100" y2="145" stroke="var(--fb-border)" stroke-width="2"/>
-                        <circle cx="40" cy="40" r="6" fill="#45bd62"/><circle cx="160" cy="40" r="6" fill="#45bd62"/>
-                        <circle cx="30" cy="110" r="6" fill="#45bd62"/><circle cx="170" cy="110" r="6" fill="#45bd62"/>
-                        <circle cx="100" cy="145" r="6" fill="#45bd62"/>
-                        <circle cx="100" cy="80" r="12" fill="var(--fb-blue)"/><circle cx="100" cy="80" r="4" fill="white"/>
+                        <circle cx="40" cy="40" r="7" fill="#45bd62" style="filter: drop-shadow(0 0 2px rgba(0,0,0,0.1));"/>
+                        <circle cx="160" cy="40" r="7" fill="#45bd62"/>
+                        <circle cx="30" cy="110" r="7" fill="#45bd62"/>
+                        <circle cx="170" cy="110" r="7" fill="#45bd62"/>
+                        <circle cx="100" cy="145" r="7" fill="#45bd62"/>
+                        <circle cx="100" cy="80" r="14" fill="var(--fb-blue)" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));"/>
+                        <circle cx="100" cy="80" r="5" fill="white"/>
                     </svg>
                 </div>
-                <p style="font-size: 0.85rem; color: var(--fb-text-sec); text-align: center; font-style: italic;">
+                <p style="font-size: 0.9rem; color: var(--fb-text); text-align: center; font-style: italic; line-height: 1.4; opacity: 0.8;">
                     "Quien se deja cuidar, dota de sentido a su cuidador."
                 </p>
             </div>
@@ -89,20 +94,31 @@
     </div>
 
     <script>
-        // Lógica Modo Oscuro
+        // Manejo del Tema Oscuro
         const themeBtn = document.getElementById("theme-button");
+        const themeIcon = themeBtn.querySelector("i");
+        
+        function updateIcon(isDark) {
+            themeIcon.className = isDark ? "fas fa-sun" : "fas fa-moon";
+        }
+
         themeBtn.addEventListener("click", () => {
             let isDark = document.documentElement.getAttribute("data-theme") === "dark";
             if (isDark) {
                 document.documentElement.removeAttribute("data-theme");
                 localStorage.setItem("theme", "");
+                updateIcon(false);
             } else {
                 document.documentElement.setAttribute("data-theme", "dark");
                 localStorage.setItem("theme", "dark");
+                updateIcon(true);
             }
         });
 
-        // Lógica Menú Móvil
+        // Inicializar icono
+        updateIcon(document.documentElement.getAttribute("data-theme") === "dark");
+
+        // Menú Lateral Móvil
         const menuToggle = document.getElementById("menu-toggle");
         const sidebar = document.getElementById("fb-left");
         const overlay = document.getElementById("menu-overlay");
