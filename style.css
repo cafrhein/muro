@@ -11,7 +11,6 @@
     --fb-text-sec: #65676b;
     --fb-hover: #e4e6eb;
     --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="dark"] {
@@ -21,21 +20,16 @@
     --fb-text: #e4e6eb;
     --fb-text-sec: #b0b3b8;
     --fb-hover: #3a3b3c;
-    --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* SCROLLBAR PERSONALIZADA */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--fb-bg); }
+::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-thumb { background: var(--fb-border); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--fb-text-sec); }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 body {
@@ -46,22 +40,19 @@ body {
     overflow-x: hidden;
 }
 
-/* HEADER REFINADO */
 .fb-header {
     background: var(--fb-white);
     height: 56px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 16px;
     box-shadow: var(--card-shadow);
     position: sticky;
     top: 0;
     z-index: 2000;
-    backdrop-filter: blur(10px); /* Efecto cristal si hay transparencia */
 }
 
-/* GRID DINÁMICO */
 .fb-container {
     display: grid;
     grid-template-columns: 320px 1fr 280px;
@@ -71,7 +62,6 @@ body {
     padding: 0 16px;
 }
 
-/* TARJETAS CON ELEVACIÓN */
 .fb-card {
     background: var(--fb-white);
     border-radius: 10px;
@@ -81,71 +71,64 @@ body {
     border: 1px solid var(--fb-border);
 }
 
-.post-card:hover {
-    box-shadow: var(--card-shadow-hover);
-    transform: translateY(-2px);
-}
-
 /* TABS DE NAVEGACIÓN */
 .profile-tabs {
     display: flex;
     list-style: none;
-    padding: 0 10px;
-    border-top: 1px solid var(--fb-border);
     background: var(--fb-white);
+    justify-content: space-around;
+    border-top: 1px solid var(--fb-border);
 }
 
 .tab-item {
-    padding: 16px 20px;
+    flex: 1;
+    text-align: center;
+    padding: 14px 10px;
     color: var(--fb-text-sec);
     font-weight: 600;
     cursor: pointer;
     border-bottom: 3px solid transparent;
-    position: relative;
 }
 
-.tab-item:hover { color: var(--fb-blue); background: var(--fb-hover); }
 .tab-item.active { color: var(--fb-blue); border-bottom: 3px solid var(--fb-blue); }
+.tab-item i { margin-right: 8px; }
 
-/* INTRO LIST */
-.intro-list { list-style: none; margin-top: 10px; }
-.intro-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 14px;
-    font-size: 0.95rem;
-}
-.intro-item i { width: 20px; text-align: center; color: var(--fb-text-sec); font-size: 1.1rem; }
-
-/* POST CONTENT */
-.post-content h1, .post-content h2 { margin-bottom: 15px; font-weight: 800; }
-.post-content p { text-align: justify; margin-bottom: 1.5rem; }
-
-/* BOTÓN FLOTANTE */
 .dark-mode-toggle {
-    position: fixed; bottom: 25px; right: 25px;
-    width: 50px; height: 50px; border-radius: 50%;
+    position: fixed; bottom: 20px; right: 20px;
+    width: 48px; height: 48px; border-radius: 50%;
     background: var(--fb-blue); color: white;
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; z-index: 3000; border: none;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
-.dark-mode-toggle:hover { background: var(--fb-blue-hover); transform: scale(1.1); }
 
-/* MOBILE RESPONSIVE */
+/* --- OPTIMIZACIÓN PARA MÓVIL --- */
 @media (max-width: 900px) {
-    .fb-container { grid-template-columns: 1fr; padding: 0; margin-top: 0; }
+    .fb-container { grid-template-columns: 1fr; padding: 0; margin-top: 0; gap: 0; }
+    
     .fb-left {
-        position: fixed; top: 56px; left: -330px;
-        width: 320px; height: calc(100vh - 56px);
+        position: fixed; top: 0; left: -100%;
+        width: 85%; max-width: 300px; height: 100vh;
         background: var(--fb-white); z-index: 2500;
-        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        padding: 20px; box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+        transition: left 0.3s ease;
+        padding: 60px 20px 20px 20px;
+        box-shadow: 10px 0 20px rgba(0,0,0,0.2);
     }
     .fb-left.active { left: 0; }
-    .menu-overlay { position: fixed; top: 56px; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2400; }
-    .menu-overlay.active { display: block; }
+
+    /* Reducción de elementos en móvil para ganar espacio */
+    .header-cover { height: 150px !important; }
+    .profile-img { width: 110px !important; height: 110px !important; margin-top: -55px !important; }
+    
     .fb-right { display: none; }
-    .fb-card { border-radius: 0; border-left: none; border-right: none; }
+    .fb-card { border-radius: 0; border-left: none; border-right: none; margin-bottom: 8px; }
+    
+    /* Pestañas compactas */
+    .tab-item i { display: none; } /* Quitamos iconos para evitar amontonamiento */
+    .tab-item { font-size: 0.85rem; padding: 12px 2px; }
 }
+
+/* INTRO LIST */
+.intro-list { list-style: none; margin-top: 10px; }
+.intro-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 0.95rem; }
+.intro-item i { width: 20px; text-align: center; color: var(--fb-text-sec); font-size: 1.1rem; }
