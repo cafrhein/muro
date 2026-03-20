@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
     <script>
-        // Carga el tema antes de mostrar nada
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) { document.documentElement.setAttribute('data-theme', currentTheme); }
     </script>
@@ -77,7 +76,7 @@
     </div>
 
     <script>
-        // SCRIPT MODO OSCURO
+        // MODO OSCURO
         const themeBtn = document.getElementById("theme-button");
         const themeIcon = themeBtn.querySelector("i");
         themeBtn.addEventListener("click", () => {
@@ -94,18 +93,22 @@
         });
         if (localStorage.getItem('theme') === 'dark') { themeIcon.classList.replace("fa-moon", "fa-sun"); }
 
-        // SCRIPT MENÚ LATERAL
+        // MENÚ LATERAL (SOLO PARA MOBILE)
         const menuToggle = document.getElementById("menu-toggle");
         const sidebar = document.getElementById("fb-left");
         const overlay = document.getElementById("menu-overlay");
 
-        function toggleMenu() {
-            sidebar.classList.toggle("active");
-            overlay.classList.toggle("active");
-        }
+        menuToggle.addEventListener("click", () => {
+            if (window.innerWidth <= 900) {
+                sidebar.classList.toggle("active");
+                overlay.classList.toggle("active");
+            }
+        });
 
-        menuToggle.addEventListener("click", toggleMenu);
-        overlay.addEventListener("click", toggleMenu);
+        overlay.addEventListener("click", () => {
+            sidebar.classList.remove("active");
+            overlay.classList.remove("active");
+        });
     </script>
 </body>
 </html>
