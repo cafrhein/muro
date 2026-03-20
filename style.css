@@ -1,15 +1,18 @@
 ---
 ---
-/* ECOSISTEMA RED HUMANA - DISEÑO CARLOS HERNÁNDEZ */
+/* ECOSISTEMA RED HUMANA - DISEÑO INTEGRAL CARLOS HERNÁNDEZ */
+
 :root {
     --fb-bg: #f0f2f5;
     --fb-blue: #1877f2;
+    --fb-blue-hover: #166fe5;
     --fb-white: #ffffff;
     --fb-border: #dddfe2;
     --fb-text: #050505;
     --fb-text-sec: #65676b;
     --fb-hover: #e4e6eb;
     --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="dark"] {
@@ -19,8 +22,28 @@
     --fb-text: #e4e6eb;
     --fb-text-sec: #b0b3b8;
     --fb-hover: #3a3b3c;
+    --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+/* BARRA DE PROGRESO DE LECTURA (UX) */
+#progress-container {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: transparent;
+    z-index: 2100;
+}
+#progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--fb-blue);
+    box-shadow: 0 0 10px rgba(24, 119, 242, 0.5);
+    transition: width 0.1s ease-out;
+}
+
+/* RESET Y BASES */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -33,8 +56,10 @@ body {
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: var(--fb-text);
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
+/* NAVEGACIÓN SUPERIOR */
 .fb-header {
     background: var(--fb-white);
     height: 56px;
@@ -48,6 +73,7 @@ body {
     z-index: 2000;
 }
 
+/* CONTENEDOR PRINCIPAL */
 .fb-container {
     display: grid;
     grid-template-columns: 320px 1fr 280px;
@@ -57,6 +83,7 @@ body {
     padding: 0 16px;
 }
 
+/* TARJETAS */
 .fb-card {
     background: var(--fb-white);
     border-radius: 10px;
@@ -66,25 +93,41 @@ body {
     border: 1px solid var(--fb-border);
 }
 
-/* --- MEJORAS DE UX EN EL CONTENIDO DEL POST --- */
+.post-card:hover {
+    box-shadow: var(--card-shadow-hover);
+}
+
+/* PESTAÑAS (TABS) */
+.profile-tabs {
+    display: flex;
+    list-style: none;
+    background: var(--fb-white);
+    justify-content: space-around;
+    border-top: 1px solid var(--fb-border);
+}
+.tab-item {
+    flex: 1;
+    text-align: center;
+    padding: 14px 10px;
+    color: var(--fb-text-sec);
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+}
+.tab-item.active {
+    color: var(--fb-blue);
+    border-bottom: 3px solid var(--fb-blue);
+}
+
+/* UX DE LECTURA (POST CONTENT) */
 .post-content {
     font-size: 1.1rem;
     color: var(--fb-text);
 }
-
 .post-content p {
     margin-bottom: 1.5rem;
     text-align: justify;
-    hyphens: auto;
 }
-
-.post-content h1, .post-content h2, .post-content h3 {
-    margin: 2rem 0 1rem 0;
-    line-height: 1.2;
-    font-weight: 800;
-}
-
-/* Estilo para tus frases de Ingeniería Humana */
 .post-content blockquote {
     margin: 2rem 0;
     padding: 1.5rem;
@@ -93,9 +136,7 @@ body {
     border-radius: 0 8px 8px 0;
     font-style: italic;
     font-size: 1.2rem;
-    color: var(--fb-text-sec);
 }
-
 .post-content img {
     max-width: 100%;
     height: auto;
@@ -104,46 +145,45 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.post-content ul, .post-content ol {
-    margin-bottom: 1.5rem;
-    padding-left: 1.5rem;
+/* INTRO LIST (SIDEBAR) */
+.intro-list { list-style: none; margin-top: 10px; }
+.intro-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
 }
+.intro-item i { width: 20px; text-align: center; color: var(--fb-text-sec); font-size: 1.1rem; }
 
-.post-content li {
-    margin-bottom: 0.5rem;
-}
-
-/* --- TABS & MÓVIL --- */
-.profile-tabs { display: flex; list-style: none; border-top: 1px solid var(--fb-border); }
-.tab-item { flex: 1; text-align: center; padding: 14px 10px; color: var(--fb-text-sec); font-weight: 600; cursor: pointer; border-bottom: 3px solid transparent; }
-.tab-item.active { color: var(--fb-blue); border-bottom: 3px solid var(--fb-blue); }
-
+/* BOTÓN FLOTANTE */
 .dark-mode-toggle {
     position: fixed; bottom: 20px; right: 20px;
     width: 48px; height: 48px; border-radius: 50%;
     background: var(--fb-blue); color: white;
     display: flex; align-items: center; justify-content: center;
-    z-index: 3000; border: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 3000; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
 }
 
+/* OPTIMIZACIÓN MÓVIL (MEDIA QUERIES) */
 @media (max-width: 900px) {
-    .fb-container { grid-template-columns: 1fr; padding: 0; margin-top: 0; }
+    .fb-container { grid-template-columns: 1fr; padding: 0; margin-top: 0; gap: 0; }
+    
     .fb-left {
         position: fixed; top: 0; left: -100%; width: 85%; max-width: 300px; height: 100vh;
         background: var(--fb-white); z-index: 2500; transition: left 0.3s ease;
         padding: 60px 20px 20px 20px; box-shadow: 10px 0 20px rgba(0,0,0,0.2);
     }
     .fb-left.active { left: 0; }
-    .menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2400; display: none; }
-    .menu-overlay.active { display: block; }
+
+    .header-cover { height: 150px !important; }
+    .profile-img { width: 110px !important; height: 110px !important; margin-top: -55px !important; }
+    
     .fb-right { display: none; }
     .fb-card { border-radius: 0; border-left: none; border-right: none; margin-bottom: 8px; }
-    .tab-item { font-size: 0.85rem; }
-    .post-content { font-size: 1rem; } /* Texto un poco más pequeño en móvil */
+    
+    .tab-item i { display: none; }
+    .tab-item { font-size: 0.85rem; padding: 12px 2px; }
+    .post-content { font-size: 1rem; }
 }
-
-/* INTRO LIST */
-.intro-list { list-style: none; margin-top: 10px; }
-.intro-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 0.95rem; }
-.intro-item i { width: 20px; text-align: center; color: var(--fb-text-sec); }
