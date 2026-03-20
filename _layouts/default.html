@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
     <script>
-        // Aplicar el tema guardado antes de que cargue la página para evitar parpadeo blanco
+        // Aplicar el tema guardado antes de que cargue la página
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) {
             document.documentElement.setAttribute('data-theme', currentTheme);
@@ -28,11 +28,11 @@
                 <span class="search-text" style="font-size: 0.9rem;">Buscar</span>
             </div>
         </div>
+
         <nav class="header-center-nav" style="display: flex; gap: 40px; font-size: 1.5rem;">
             <a href="{{ '/' | relative_url }}" style="color: var(--fb-blue);"><i class="fas fa-home"></i></a>
-            <a href="#" style="color: var(--fb-text-sec);"><i class="fas fa-play-circle"></i></a>
-            <a href="#" style="color: var(--fb-text-sec);"><i class="fas fa-store"></i></a>
         </nav>
+
         <div style="display: flex; gap: 8px;">
             <div style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer;"><i class="fas fa-bars"></i></div>
             <div style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer;"><i class="fas fa-bell"></i></div>
@@ -94,7 +94,6 @@
             }
         });
 
-        // Ajustar icono al cargar
         if (localStorage.getItem('theme') === 'dark') {
             icon.classList.replace("fa-moon", "fa-sun");
         }
