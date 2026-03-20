@@ -1,6 +1,10 @@
 ---
 layout: default
 ---
+<div id="progress-container">
+    <div id="progress-bar"></div>
+</div>
+
 {% assign words = content | number_of_words %}
 {% if words < 360 %}
   {% assign read_time = "2 min" %}
@@ -70,3 +74,15 @@ layout: default
         </div>
     </div>
 </article>
+
+<script>
+    window.onscroll = function() {
+        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let scrolled = (winScroll / height) * 100;
+        let pBar = document.getElementById("progress-bar");
+        if(pBar) {
+            pBar.style.width = scrolled + "%";
+        }
+    };
+</script>
