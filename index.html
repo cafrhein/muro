@@ -3,63 +3,87 @@ layout: default
 title: Inicio
 ---
 
-<div class="fb-card" style="background: var(--fb-white); border-radius: 8px; padding: 0; overflow: hidden; margin-bottom: 16px;">
-    <div style="height: 200px; background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); position: relative;"></div>
-    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 16px 16px; margin-top: -60px;">
-        <img src="{{ '/perfil.png.jpg' | relative_url }}" style="width: 130px; height: 130px; border-radius: 50%; border: 4px solid var(--fb-white); background: var(--fb-white); object-fit: cover;">
-        <h1 style="font-size: 1.8rem; color: var(--fb-text); margin-top: 10px;">Carlos Hernández</h1>
-        <p style="color: var(--fb-text-sec);">Quien se deja cuidar, dota de sentido a su cuidador.</p>
+<div class="fb-card profile-header-card" style="background: var(--fb-white); border-radius: 8px; padding: 0; overflow: hidden; margin-bottom: 16px; box-shadow: 0 1px 2px var(--card-shadow);">
+    
+    <div class="cover-photo" style="height: 200px; background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); background-size: cover; background-position: center; position: relative;">
+        <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.8); padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; font-weight: 600; cursor: pointer; color: #050505;">
+            <i class="fas fa-camera"></i> Editar portada
+        </div>
+    </div>
+
+    <div class="profile-info-container" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 16px 16px 16px; position: relative; margin-top: -60px;">
         
-        <div style="display: flex; gap: 10px; margin-top: 15px; border-top: 1px solid var(--fb-border); padding-top: 15px; width: 100%; justify-content: center;">
+        <div class="avatar-large-container" style="position: relative; z-index: 10;">
+            <img src="{{ '/perfil.png.jpg' | relative_url }}" alt="Carlos Hernández" style="width: 130px; height: 130px; border-radius: 50%; border: 4px solid var(--fb-white); box-shadow: 0 2px 4px rgba(0,0,0,0.2); object-fit: cover; background-color: var(--fb-white);">
+            
+            <div style="position: absolute; bottom: 5px; right: 5px; background: var(--fb-hover); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--fb-white); color: var(--fb-text); font-size: 1rem; cursor: pointer;">
+                <i class="fas fa-camera"></i>
+            </div>
+        </div>
+
+        <div style="margin-top: 10px; padding: 0 10px;">
+            <h1 style="font-size: 1.8rem; color: var(--fb-text); margin: 0; font-weight: 800;">Carlos Hernández</h1>
+            <p style="color: var(--fb-text-sec); margin: 5px 0; font-size: 1rem; font-weight: 400; max-width: 500px;">Quien se deja cuidar, dota de sentido a su cuidador.</p>
+        </div>
+
+        <div class="profile-buttons" style="display: flex; gap: 10px; margin-top: 15px; width: 100%; justify-content: center; border-top: 1px solid var(--fb-border); padding-top: 15px;">
             {% assign lectura_reciente = site.posts | first %}
-            <a href="{{ lectura_reciente.url | relative_url }}" style="text-decoration: none; background: var(--fb-blue); color: white; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem;">Leer Crónicas</a>
-            <a href="mailto:cafrhein@outlook.com" style="text-decoration: none; background: var(--fb-hover); color: var(--fb-text); padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem;">Contactar</a>
+            <a href="{{ lectura_reciente.url | relative_url }}" style="text-decoration: none; background: var(--fb-blue); color: white; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-book-open"></i> Leer Crónicas
+            </a>
+            <a href="mailto:cafrhein@outlook.com" style="text-decoration: none; background: var(--fb-hover); color: var(--fb-text); padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-envelope"></i> Contactar
+            </a>
         </div>
     </div>
 </div>
 
-<div class="fb-card" style="background: var(--fb-white); border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+<div class="fb-card post-composer" style="background: var(--fb-white); border-radius: 8px; padding: 15px; margin-bottom: 20px; box-shadow: 0 1px 2px var(--card-shadow);">
     <div style="display: flex; gap: 10px; align-items: center;">
-        <img src="{{ '/perfil.png.jpg' | relative_url }}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-        <input type="text" placeholder="¿Qué hay en tu mente, Carlos?" style="flex-grow: 1; border: none; background: var(--fb-bg); padding: 10px 15px; border-radius: 20px; color: var(--fb-text);" readonly>
+        <img src="{{ '/perfil.png.jpg' | relative_url }}" alt="Carlos" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+        <input type="text" placeholder="¿Qué hay en tu mente, Carlos?" style="flex-grow: 1; border: none; background: var(--fb-bg); padding: 10px 15px; border-radius: 20px; outline: none; font-size: 1rem; color: var(--fb-text);" readonly>
     </div>
 </div>
 
 <div id="skeleton-feed">
     {% for i in (1..3) %}
-    <div class="fb-card" style="padding: 16px; margin-bottom: 16px;">
-        <div class="sk-header">
-            <div class="skeleton-item sk-avatar"></div>
+    <div class="fb-card skeleton-card" style="padding: 16px; margin-bottom: 16px; background: var(--fb-white); border-radius: 8px; box-shadow: 0 1px 2px var(--card-shadow);">
+        <div class="sk-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <div class="skeleton-item sk-avatar" style="width: 40px; height: 40px; border-radius: 50%; background: var(--fb-hover); position: relative; overflow: hidden;"></div>
             <div>
-                <div class="skeleton-item sk-name"></div>
-                <div class="skeleton-item" style="width: 60px; height: 8px; margin-top: 5px;"></div>
+                <div class="skeleton-item sk-name" style="width: 100px; height: 12px; background: var(--fb-hover); border-radius: 4px; position: relative; overflow: hidden;"></div>
+                <div class="skeleton-item" style="width: 60px; height: 8px; margin-top: 5px; background: var(--fb-hover); border-radius: 4px; position: relative; overflow: hidden;"></div>
             </div>
         </div>
-        <div class="skeleton-item sk-title"></div>
-        <div class="skeleton-item sk-line"></div>
-        <div class="skeleton-item sk-line"></div>
-        <div class="skeleton-item sk-line" style="width: 60%;"></div>
+        <div class="skeleton-item sk-title" style="width: 70%; height: 18px; margin-bottom: 12px; background: var(--fb-hover); border-radius: 4px; position: relative; overflow: hidden;"></div>
+        <div class="skeleton-item sk-line" style="width: 100%; height: 10px; margin-bottom: 8px; background: var(--fb-hover); border-radius: 4px; position: relative; overflow: hidden;"></div>
+        <div class="skeleton-item sk-line" style="width: 100%; height: 10px; margin-bottom: 8px; background: var(--fb-hover); border-radius: 4px; position: relative; overflow: hidden;"></div>
+        <div class="skeleton-item sk-line" style="width: 60%; height: 10px; background: var(--fb-hover); border-radius: 4px; position: relative; overflow: hidden;"></div>
     </div>
     {% endfor %}
 </div>
 
 <div id="real-feed" style="display: none;">
     {% for post in site.posts %}
-    <article class="fb-card post" style="padding: 0; overflow: hidden; margin-bottom: 20px;">
+    <article class="fb-card post" style="padding: 0; overflow: hidden; margin-bottom: 20px; background: var(--fb-white); border-radius: 8px; box-shadow: 0 1px 2px var(--card-shadow);">
         <div style="padding: 15px; display: flex; gap: 10px; align-items: center;">
-            <img src="{{ '/perfil.png.jpg' | relative_url }}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+            <img src="{{ '/perfil.png.jpg' | relative_url }}" alt="Carlos Hernández" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
             <div>
-                <strong style="display: block; color: var(--fb-text);">Carlos Hernández</strong>
-                <span style="font-size: 0.8rem; color: var(--fb-text-sec);">{{ post.date | date: "%e de %b, %Y" }}</span>
+                <strong style="display: block; color: var(--fb-text); font-size: 0.95rem;">Carlos Hernández</strong>
+                <span style="font-size: 0.8rem; color: var(--fb-text-sec);">{{ post.date | date: "%e de %b, %Y" }} · <i class="fas fa-globe-americas"></i></span>
             </div>
         </div>
         <div style="padding: 0 15px 15px;">
-            <h3 style="color: var(--fb-blue); margin-bottom: 10px;">{{ post.title }}</h3>
-            <p style="color: var(--fb-text); font-size: 0.95rem; text-align: justify;">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+            <h3 style="color: var(--fb-blue); margin-bottom: 10px; font-size: 1.25rem; font-weight: 700; margin-top: 0;">{{ post.title }}</h3>
+            <p style="color: var(--fb-text); font-size: 0.95rem; text-align: justify; line-height: 1.5; margin-bottom: 0;">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
         </div>
-        <div style="border-top: 1px solid var(--fb-border); padding: 10px 15px; background: var(--fb-hover); display: flex; justify-content: space-between;">
-            <a href="{{ post.url | relative_url }}" style="color: var(--fb-blue); text-decoration: none; font-weight: 600; font-size: 0.9rem;">Leer completo</a>
-            <div onclick="if(navigator.share){ navigator.share({title: '{{ post.title | escape }}', url: window.location.origin + '{{ post.url | relative_url }}'}); }" style="color: var(--fb-text-sec); font-weight: 600; font-size: 0.9rem; cursor: pointer;">Compartir</div>
+        <div style="border-top: 1px solid var(--fb-border); padding: 10px 15px; background: var(--fb-hover); display: flex; justify-content: space-between; align-items: center;">
+            <a href="{{ post.url | relative_url }}" style="color: var(--fb-blue); text-decoration: none; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-external-link-alt"></i> Leer publicación completa
+            </a>
+            <div onclick="if(navigator.share){ navigator.share({title: '{{ post.title | escape }}', url: window.location.origin + '{{ post.url | relative_url }}'}); }" style="color: var(--fb-text-sec); font-weight: 600; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-share"></i> Compartir
+            </div>
         </div>
     </article>
     {% endfor %}
