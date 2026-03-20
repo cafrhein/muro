@@ -7,16 +7,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
     <script>
-        // Carga inmediata del tema para evitar parpadeo
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) { document.documentElement.setAttribute('data-theme', currentTheme); }
     </script>
 </head>
 <body>
-
-    <div id="progress-container">
-        <div id="progress-bar"></div>
-    </div>
 
     <div class="menu-overlay" id="menu-overlay"></div>
 
@@ -26,13 +21,11 @@
 
     <header class="fb-header">
         <div style="min-width: 40px;"></div>
-
         <nav style="display: flex; justify-content: center; flex: 1;">
             <a href="{{ '/' | relative_url }}" style="color: var(--fb-blue); font-size: 1.6rem; display: flex; align-items: center;" title="Inicio">
                 <i class="fas fa-home"></i>
             </a>
         </nav>
-
         <div style="display: flex; align-items: center;">
             <div id="menu-toggle" style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer;">
                 <i class="fas fa-bars"></i>
@@ -52,7 +45,6 @@
                     <li class="intro-item"><i class="fas fa-project-diagram"></i> <span>Impulsor de <strong>Ingeniería Humana</strong></span></li>
                 </ul>
             </div>
-
             <div class="fb-card" style="padding: 12px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <h3 style="font-size: 1.1rem; font-weight: 800;">Galería</h3>
@@ -97,21 +89,9 @@
     </div>
 
     <script>
-        // SCRIPT BARRA DE PROGRESO (UX LECTURA)
-        window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            document.getElementById("progress-bar").style.width = scrolled + "%";
-        };
-
-        // MODO OSCURO
         const themeBtn = document.getElementById("theme-button");
         const themeIcon = themeBtn.querySelector("i");
-        
-        function updateIcon(isDark) {
-            themeIcon.className = isDark ? "fas fa-sun" : "fas fa-moon";
-        }
+        function updateIcon(isDark) { themeIcon.className = isDark ? "fas fa-sun" : "fas fa-moon"; }
 
         themeBtn.addEventListener("click", () => {
             let isDark = document.documentElement.getAttribute("data-theme") === "dark";
@@ -127,7 +107,6 @@
         });
         updateIcon(document.documentElement.getAttribute("data-theme") === "dark");
 
-        // MENÚ MÓVIL
         const menuToggle = document.getElementById("menu-toggle");
         const sidebar = document.getElementById("fb-left");
         const overlay = document.getElementById("menu-overlay");
@@ -138,7 +117,6 @@
                 overlay.classList.toggle("active");
             }
         });
-
         overlay.addEventListener("click", () => {
             sidebar.classList.remove("active");
             overlay.classList.remove("active");
