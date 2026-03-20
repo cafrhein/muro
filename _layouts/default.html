@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
     <script>
+        // Aplicación inmediata del tema para evitar destellos blancos
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) { document.documentElement.setAttribute('data-theme', currentTheme); }
     </script>
@@ -21,11 +22,13 @@
 
     <header class="fb-header">
         <div style="min-width: 40px;"></div>
+
         <nav style="display: flex; justify-content: center; flex: 1;">
             <a href="{{ '/' | relative_url }}" style="color: var(--fb-blue); font-size: 1.6rem; display: flex; align-items: center;" title="Inicio">
                 <i class="fas fa-home"></i>
             </a>
         </nav>
+
         <div style="display: flex; align-items: center;">
             <div id="menu-toggle" style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer;">
                 <i class="fas fa-bars"></i>
@@ -36,19 +39,20 @@
     <div class="fb-container">
         <aside class="fb-left" id="fb-left">
             <div class="fb-card">
-                <h3 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: 800;">Información</h3>
+                <h3 style="font-size: 1.2rem; margin-bottom: 18px; font-weight: 800;">Información</h3>
                 <ul class="intro-list">
                     <li class="intro-item"><i class="fas fa-briefcase"></i> <span>Especialista en <strong>Planeación Estratégica</strong></span></li>
                     <li class="intro-item"><i class="fas fa-user-shield"></i> <span>Estudia <strong>Seguridad Pública</strong></span></li>
-                    <li class="intro-item"><i class="fas fa-map-marker-alt"></i> <span>Desde <strong>CDMX</strong></span></li>
+                    <li class="intro-item"><i class="fas fa-map-marker-alt"></i> <span>Reside en <strong>CDMX</strong></span></li>
                     <li class="intro-item"><i class="fas fa-heart" style="color: #fb7185;"></i> <span>En una relación con <strong>Daniela</strong></span></li>
                     <li class="intro-item"><i class="fas fa-project-diagram"></i> <span>Impulsor de <strong>Ingeniería Humana</strong></span></li>
                 </ul>
             </div>
+
             <div class="fb-card" style="padding: 12px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <h3 style="font-size: 1.1rem; font-weight: 800;">Galería</h3>
-                    <a href="#" style="color: var(--fb-blue); text-decoration: none; font-size: 0.9rem;">Ver más</a>
+                    <a href="#" style="color: var(--fb-blue); text-decoration: none; font-size: 0.9rem; font-weight: 600;">Ver más</a>
                 </div>
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; border-radius: 8px; overflow: hidden;">
                     <div style="aspect-ratio: 1; background: var(--fb-hover);"></div>
@@ -63,8 +67,8 @@
         </main>
 
         <aside class="fb-right">
-            <div class="fb-card">
-                <h4 style="color: var(--fb-text-sec); margin-bottom: 10px; font-size: 0.85rem; text-transform: uppercase; text-align: center; letter-spacing: 1px; font-weight: 800;">Red Humana</h4>
+            <div class="fb-card" style="border-top: 4px solid var(--fb-blue);">
+                <h4 style="color: var(--fb-text-sec); margin-bottom: 15px; font-size: 0.85rem; text-transform: uppercase; text-align: center; letter-spacing: 1.5px; font-weight: 800;">Red Humana</h4>
                 <div style="display: flex; justify-content: center; padding: 15px 0;">
                     <svg viewBox="0 0 200 160" width="100%" height="160">
                         <line x1="100" y1="80" x2="40" y2="40" stroke="var(--fb-border)" stroke-width="2"/>
@@ -81,17 +85,36 @@
                         <circle cx="100" cy="80" r="5" fill="white"/>
                     </svg>
                 </div>
-                <p style="font-size: 0.85rem; color: var(--fb-text-sec); text-align: center; font-style: italic;">
+                <p style="font-size: 0.9rem; color: var(--fb-text-sec); text-align: center; font-style: italic; line-height: 1.4;">
                     "Quien se deja cuidar, dota de sentido a su cuidador."
                 </p>
             </div>
         </aside>
     </div>
 
+    <footer class="site-footer">
+        <div class="footer-content">
+            <ul class="footer-nav">
+                <li><a href="{{ '/' | relative_url }}">Inicio</a></li>
+                <li><a href="mailto:tu-correo@ejemplo.com">Contacto</a></li>
+                <li><a href="https://github.com/tu-usuario" target="_blank">Repositorio</a></li>
+            </ul>
+            <p style="margin-bottom: 10px; font-weight: 700; color: var(--fb-text);">Carlos Hernández</p>
+            <p style="font-size: 0.8rem; opacity: 0.7;">
+                &copy; 2026 · Ingeniería Humana & Seguridad Pública <br>
+                Desarrollado bajo principios de Interdependencia y Redes de Apoyo.
+            </p>
+        </div>
+    </footer>
+
     <script>
+        // Lógica de Modo Oscuro
         const themeBtn = document.getElementById("theme-button");
         const themeIcon = themeBtn.querySelector("i");
-        function updateIcon(isDark) { themeIcon.className = isDark ? "fas fa-sun" : "fas fa-moon"; }
+        
+        function updateIcon(isDark) {
+            themeIcon.className = isDark ? "fas fa-sun" : "fas fa-moon";
+        }
 
         themeBtn.addEventListener("click", () => {
             let isDark = document.documentElement.getAttribute("data-theme") === "dark";
@@ -107,6 +130,7 @@
         });
         updateIcon(document.documentElement.getAttribute("data-theme") === "dark");
 
+        // Lógica de Menú Lateral Móvil
         const menuToggle = document.getElementById("menu-toggle");
         const sidebar = document.getElementById("fb-left");
         const overlay = document.getElementById("menu-overlay");
@@ -117,6 +141,7 @@
                 overlay.classList.toggle("active");
             }
         });
+
         overlay.addEventListener("click", () => {
             sidebar.classList.remove("active");
             overlay.classList.remove("active");
