@@ -27,26 +27,20 @@
                 <span class="search-text" style="font-size: 0.9rem;">Buscar</span>
             </div>
         </div>
-
         <nav class="header-center-nav" style="display: flex; gap: 40px; font-size: 1.5rem;">
             <a href="{{ '/' | relative_url }}" style="color: var(--fb-blue);"><i class="fas fa-home"></i></a>
         </nav>
-
         <div style="display: flex; gap: 8px;">
-            <div id="menu-toggle" style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer;">
-                <i class="fas fa-bars"></i>
-            </div>
-            <div style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer;">
-                <i class="fas fa-bell"></i>
-            </div>
+            <div id="menu-toggle" style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer;"><i class="fas fa-bars"></i></div>
+            <div style="width: 40px; height: 40px; background: var(--fb-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--fb-text); cursor: pointer;"><i class="fas fa-bell"></i></div>
         </div>
     </header>
 
     <div class="fb-container">
         <aside class="fb-left" id="fb-left">
             <div style="display: flex; flex-direction: column; gap: 5px;">
-                <a href="{{ '/' | relative_url }}" style="text-decoration:none; color:var(--fb-text); padding:10px; display:flex; align-items:center; gap:10px; border-radius: 8px;"><i class="fas fa-user-circle" style="color:var(--fb-blue); font-size:1.5rem;"></i> <strong>Carlos Hernández</strong></a>
-                <a href="#" style="text-decoration:none; color:var(--fb-text); padding:10px; display:flex; align-items:center; gap:10px; border-radius: 8px;"><i class="fas fa-user-friends" style="color:var(--fb-blue); font-size:1.5rem;"></i> Amigos</a>
+                <a href="{{ '/' | relative_url }}" style="text-decoration:none; color:var(--fb-text); padding:10px; display:flex; align-items:center; gap:10px; border-radius: 8px; transition: background 0.2s;" onmouseover="this.style.background='var(--fb-hover)'" onmouseout="this.style.background='transparent'"><i class="fas fa-user-circle" style="color:var(--fb-blue); font-size:1.5rem;"></i> <strong>Carlos Hernández</strong></a>
+                <a href="#" style="text-decoration:none; color:var(--fb-text); padding:10px; display:flex; align-items:center; gap:10px; border-radius: 8px; transition: background 0.2s;" onmouseover="this.style.background='var(--fb-hover)'" onmouseout="this.style.background='transparent'"><i class="fas fa-user-friends" style="color:var(--fb-blue); font-size:1.5rem;"></i> Amigos</a>
             </div>
         </aside>
 
@@ -59,15 +53,7 @@
                 <h4 style="color: var(--fb-text-sec); margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; text-align: center;">Redes de Apoyo</h4>
                 <div id="network-graph" style="display: flex; justify-content: center; padding: 10px 0;">
                     <svg viewBox="0 0 200 160" width="100%" height="160">
-                        <line x1="100" y1="80" x2="40" y2="40" stroke="var(--fb-border)" stroke-width="2"/>
-                        <line x1="100" y1="80" x2="160" y2="40" stroke="var(--fb-border)" stroke-width="2"/>
-                        <line x1="100" y1="80" x2="30" y2="110" stroke="var(--fb-border)" stroke-width="2"/>
-                        <line x1="100" y1="80" x2="170" y2="110" stroke="var(--fb-border)" stroke-width="2"/>
-                        <line x1="100" y1="80" x2="100" y2="145" stroke="var(--fb-border)" stroke-width="2"/>
-                        <circle cx="40" cy="40" r="6" fill="#45bd62"/><circle cx="160" cy="40" r="6" fill="#45bd62"/>
-                        <circle cx="30" cy="110" r="6" fill="#45bd62"/><circle cx="170" cy="110" r="6" fill="#45bd62"/>
-                        <circle cx="100" cy="145" r="6" fill="#45bd62"/>
-                        <circle cx="100" cy="80" r="12" fill="var(--fb-blue)"/><circle cx="100" cy="80" r="4" fill="white"/>
+                        <line x1="100" y1="80" x2="40" y2="40" stroke="var(--fb-border)" stroke-width="2"/><line x1="100" y1="80" x2="160" y2="40" stroke="var(--fb-border)" stroke-width="2"/><line x1="100" y1="80" x2="30" y2="110" stroke="var(--fb-border)" stroke-width="2"/><line x1="100" y1="80" x2="170" y2="110" stroke="var(--fb-border)" stroke-width="2"/><line x1="100" y1="80" x2="100" y2="145" stroke="var(--fb-border)" stroke-width="2"/><circle cx="40" cy="40" r="6" fill="#45bd62"/><circle cx="160" cy="40" r="6" fill="#45bd62"/><circle cx="30" cy="110" r="6" fill="#45bd62"/><circle cx="170" cy="110" r="6" fill="#45bd62"/><circle cx="100" cy="145" r="6" fill="#45bd62"/><circle cx="100" cy="80" r="12" fill="var(--fb-blue)"/><circle cx="100" cy="80" r="4" fill="white"/>
                     </svg>
                 </div>
                 <p style="font-size: 0.85rem; color: var(--fb-text-sec); text-align: center; font-style: italic;">"La estabilidad depende de los vínculos."</p>
@@ -76,39 +62,21 @@
     </div>
 
     <script>
-        // MODO OSCURO
         const themeBtn = document.getElementById("theme-button");
-        const themeIcon = themeBtn.querySelector("i");
         themeBtn.addEventListener("click", () => {
-            let theme = document.documentElement.getAttribute("data-theme");
-            if (theme === "dark") {
-                document.documentElement.removeAttribute("data-theme");
-                themeIcon.classList.replace("fa-sun", "fa-moon");
-                localStorage.setItem("theme", "");
-            } else {
-                document.documentElement.setAttribute("data-theme", "dark");
-                themeIcon.classList.replace("fa-moon", "fa-sun");
-                localStorage.setItem("theme", "dark");
-            }
+            let isDark = document.documentElement.getAttribute("data-theme") === "dark";
+            if (isDark) { document.documentElement.removeAttribute("data-theme"); localStorage.setItem("theme", ""); }
+            else { document.documentElement.setAttribute("data-theme", "dark"); localStorage.setItem("theme", "dark"); }
         });
-        if (localStorage.getItem('theme') === 'dark') { themeIcon.classList.replace("fa-moon", "fa-sun"); }
 
-        // MENÚ LATERAL (SOLO PARA MOBILE)
         const menuToggle = document.getElementById("menu-toggle");
         const sidebar = document.getElementById("fb-left");
         const overlay = document.getElementById("menu-overlay");
 
         menuToggle.addEventListener("click", () => {
-            if (window.innerWidth <= 900) {
-                sidebar.classList.toggle("active");
-                overlay.classList.toggle("active");
-            }
+            if (window.innerWidth <= 900) { sidebar.classList.toggle("active"); overlay.classList.toggle("active"); }
         });
-
-        overlay.addEventListener("click", () => {
-            sidebar.classList.remove("active");
-            overlay.classList.remove("active");
-        });
+        overlay.addEventListener("click", () => { sidebar.classList.remove("active"); overlay.classList.remove("active"); });
     </script>
 </body>
 </html>
