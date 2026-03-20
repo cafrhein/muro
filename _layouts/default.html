@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }} | [Nombre del Sitio]</title>
+    <title>{{ page.title }} | Carlos Hernández</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
     <script>
-        // Carga el tema guardado (claro u oscuro) antes de mostrar el contenido
+        // Carga el tema guardado antes de mostrar el contenido
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) { document.documentElement.setAttribute('data-theme', currentTheme); }
     </script>
@@ -22,10 +22,10 @@
 
     <header class="fb-header">
         <div style="display: flex; align-items: center; gap: 10px;">
-            <a href="{{ '/' | relative_url }}" class="logo-ch">[LOGO]</a>
+            <a href="{{ '/' | relative_url }}" class="logo-ch">CH</a>
             </div>
 
-        <nav class="header-center-nav" style="display: flex; gap: 40px; font-size: 1.5rem;">
+        <nav style="display: flex; gap: 40px; font-size: 1.5rem;">
             <a href="{{ '/' | relative_url }}" style="color: var(--fb-blue);"><i class="fas fa-home"></i></a>
         </nav>
 
@@ -41,10 +41,11 @@
             <div class="fb-card">
                 <h3 style="font-size: 1.2rem; margin-bottom: 15px;">Información</h3>
                 <ul class="intro-list">
-                    <li class="intro-item"><i class="fas fa-briefcase"></i> <span>[Profesión u Ocupación]</span></li>
-                    <li class="intro-item"><i class="fas fa-graduation-cap"></i> <span>[Estudios]</span></li>
-                    <li class="intro-item"><i class="fas fa-home"></i> <span>[Ubicación]</span></li>
-                    <li class="intro-item"><i class="fas fa-heart"></i> <span>[Estado Civil o Relación]</span></li>
+                    <li class="intro-item"><i class="fas fa-briefcase"></i> <span>Especialista en <strong>Planeación Estratégica</strong></span></li>
+                    <li class="intro-item"><i class="fas fa-graduation-cap"></i> <span>Estudia <strong>Seguridad Pública</strong></span></li>
+                    <li class="intro-item"><i class="fas fa-home"></i> <span>Vive en <strong>CDMX</strong></span></li>
+                    <li class="intro-item"><i class="fas fa-heart"></i> <span>En una relación con <strong>Daniela</strong></span></li>
+                    <li class="intro-item"><i class="fas fa-rss"></i> <span>Seguido por <strong>Ingeniería Humana</strong></span></li>
                 </ul>
             </div>
 
@@ -82,14 +83,14 @@
                     </svg>
                 </div>
                 <p style="font-size: 0.85rem; color: var(--fb-text-sec); text-align: center; font-style: italic;">
-                    "[Frase o lema personal]"
+                    "Quien se deja cuidar, dota de sentido a su cuidador."
                 </p>
             </div>
         </aside>
     </div>
 
     <script>
-        // Lógica para alternar el Modo Oscuro
+        // Lógica Modo Oscuro
         const themeBtn = document.getElementById("theme-button");
         themeBtn.addEventListener("click", () => {
             let isDark = document.documentElement.getAttribute("data-theme") === "dark";
@@ -102,7 +103,7 @@
             }
         });
 
-        // Lógica para el menú lateral en dispositivos móviles
+        // Lógica Menú Móvil
         const menuToggle = document.getElementById("menu-toggle");
         const sidebar = document.getElementById("fb-left");
         const overlay = document.getElementById("menu-overlay");
