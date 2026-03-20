@@ -1,6 +1,9 @@
 ---
 ---
-/* ECOSISTEMA RED HUMANA - DISEÑO INTEGRAL CARLOS HERNÁNDEZ */
+/* ============================================================
+   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL
+   DISEÑO Y UX: CARLOS HERNÁNDEZ
+   ============================================================ */
 
 :root {
     --fb-bg: #f0f2f5;
@@ -23,9 +26,46 @@
     --fb-text-sec: #b0b3b8;
     --fb-hover: #3a3b3c;
     --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* BARRA DE PROGRESO DE LECTURA (UX) */
+/* --- BASES Y SCROLLBAR --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+body {
+    background-color: var(--fb-bg);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--fb-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--fb-bg); }
+::-webkit-scrollbar-thumb { background: var(--fb-border); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--fb-text-sec); }
+
+/* --- NAVEGACIÓN (HEADER) --- */
+.fb-header {
+    background: var(--fb-white);
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    box-shadow: var(--card-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    backdrop-filter: blur(10px);
+}
+
+/* --- BARRA DE PROGRESO DE LECTURA --- */
 #progress-container {
     position: fixed;
     top: 56px;
@@ -43,37 +83,7 @@
     transition: width 0.1s ease-out;
 }
 
-/* RESET Y BASES */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-body {
-    background-color: var(--fb-bg);
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    color: var(--fb-text);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
-/* NAVEGACIÓN SUPERIOR */
-.fb-header {
-    background: var(--fb-white);
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;
-    box-shadow: var(--card-shadow);
-    position: sticky;
-    top: 0;
-    z-index: 2000;
-}
-
-/* CONTENEDOR PRINCIPAL */
+/* --- ESTRUCTURA (GRID) --- */
 .fb-container {
     display: grid;
     grid-template-columns: 320px 1fr 280px;
@@ -83,7 +93,7 @@ body {
     padding: 0 16px;
 }
 
-/* TARJETAS */
+/* --- COMPONENTES (CARDS) --- */
 .fb-card {
     background: var(--fb-white);
     border-radius: 10px;
@@ -95,16 +105,18 @@ body {
 
 .post-card:hover {
     box-shadow: var(--card-shadow-hover);
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
 }
 
-/* PESTAÑAS (TABS) */
+/* --- PESTAÑAS (TABS) --- */
 .profile-tabs {
     display: flex;
     list-style: none;
     background: var(--fb-white);
-    justify-content: space-around;
     border-top: 1px solid var(--fb-border);
 }
+
 .tab-item {
     flex: 1;
     text-align: center;
@@ -113,77 +125,140 @@ body {
     font-weight: 600;
     cursor: pointer;
     border-bottom: 3px solid transparent;
-}
-.tab-item.active {
-    color: var(--fb-blue);
-    border-bottom: 3px solid var(--fb-blue);
+    transition: 0.2s;
 }
 
-/* UX DE LECTURA (POST CONTENT) */
+.tab-item:hover { background: var(--fb-hover); color: var(--fb-blue); }
+.tab-item.active { color: var(--fb-blue); border-bottom: 3px solid var(--fb-blue); }
+.tab-item i { margin-right: 8px; }
+
+/* --- UX DE LECTURA (POST CONTENT) --- */
 .post-content {
     font-size: 1.1rem;
     color: var(--fb-text);
 }
+
 .post-content p {
     margin-bottom: 1.5rem;
     text-align: justify;
+    hyphens: auto;
 }
+
+.post-content h1, .post-content h2, .post-content h3 {
+    margin: 2rem 0 1rem 0;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
 .post-content blockquote {
-    margin: 2rem 0;
-    padding: 1.5rem;
+    margin: 2.5rem 0;
+    padding: 1.5rem 2rem;
     background: var(--fb-bg);
-    border-left: 5px solid var(--fb-blue);
-    border-radius: 0 8px 8px 0;
+    border-left: 6px solid var(--fb-blue);
+    border-radius: 0 12px 12px 0;
     font-style: italic;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
+    color: var(--fb-text-sec);
+    position: relative;
 }
+
 .post-content img {
     max-width: 100%;
     height: auto;
     border-radius: 12px;
-    margin: 1.5rem 0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin: 2rem 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
 
-/* INTRO LIST (SIDEBAR) */
+/* --- VÍNCULOS DE INTERDEPENDENCIA (RELATED) --- */
+.related-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 25px;
+}
+
+.related-card {
+    background: var(--fb-bg);
+    padding: 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--fb-border);
+    transition: 0.2s;
+}
+
+.related-card:hover {
+    border-color: var(--fb-blue);
+    background: var(--fb-white);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.related-card strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.related-card span {
+    font-size: 0.8rem;
+    color: var(--fb-text-sec);
+}
+
+/* --- SIDEBAR INFO --- */
 .intro-list { list-style: none; margin-top: 10px; }
 .intro-item {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     font-size: 0.95rem;
 }
-.intro-item i { width: 20px; text-align: center; color: var(--fb-text-sec); font-size: 1.1rem; }
+.intro-item i { width: 22px; text-align: center; color: var(--fb-text-sec); font-size: 1.1rem; }
 
-/* BOTÓN FLOTANTE */
+/* --- BOTONES Y MENÚ MÓVIL --- */
 .dark-mode-toggle {
-    position: fixed; bottom: 20px; right: 20px;
-    width: 48px; height: 48px; border-radius: 50%;
+    position: fixed; bottom: 25px; right: 25px;
+    width: 50px; height: 50px; border-radius: 50%;
     background: var(--fb-blue); color: white;
     display: flex; align-items: center; justify-content: center;
-    z-index: 3000; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    cursor: pointer;
+    cursor: pointer; z-index: 3000; border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-/* OPTIMIZACIÓN MÓVIL (MEDIA QUERIES) */
+.menu-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); z-index: 2400; display: none;
+}
+.menu-overlay.active { display: block; }
+
+/* --- MEDIA QUERIES (OPTIMIZACIÓN MÓVIL) --- */
 @media (max-width: 900px) {
     .fb-container { grid-template-columns: 1fr; padding: 0; margin-top: 0; gap: 0; }
     
     .fb-left {
-        position: fixed; top: 0; left: -100%; width: 85%; max-width: 300px; height: 100vh;
-        background: var(--fb-white); z-index: 2500; transition: left 0.3s ease;
-        padding: 60px 20px 20px 20px; box-shadow: 10px 0 20px rgba(0,0,0,0.2);
+        position: fixed; top: 0; left: -100%;
+        width: 85%; max-width: 320px; height: 100vh;
+        background: var(--fb-white); z-index: 2500;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 60px 20px 20px 20px;
+        box-shadow: 10px 0 25px rgba(0,0,0,0.2);
     }
     .fb-left.active { left: 0; }
 
-    .header-cover { height: 150px !important; }
-    .profile-img { width: 110px !important; height: 110px !important; margin-top: -55px !important; }
+    .header-cover { height: 160px !important; }
+    .profile-img { 
+        width: 120px !important; 
+        height: 120px !important; 
+        margin-top: -60px !important; 
+    }
     
     .fb-right { display: none; }
     .fb-card { border-radius: 0; border-left: none; border-right: none; margin-bottom: 8px; }
     
     .tab-item i { display: none; }
-    .tab-item { font-size: 0.85rem; padding: 12px 2px; }
-    .post-content { font-size: 1rem; }
+    .tab-item { font-size: 0.85rem; padding: 12px 4px; }
+    
+    .related-grid { grid-template-columns: 1fr; }
 }
