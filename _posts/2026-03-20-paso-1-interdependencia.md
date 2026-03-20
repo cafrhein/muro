@@ -1,11 +1,10 @@
 ---
 layout: post
-title: "Paso 1: Estabilidad y Vínculos"
+title: "Paso 1: Reconozco que mi estabilidad y bienestar dependen de qué tan fuertes son mis vínculos con los demás."
 date: 2026-03-20
 category: Filosofía
 ---
 
-# **Paso 1: Reconozco que mi estabilidad y bienestar dependen de qué tan fuertes son mis vínculos con los demás.**
 
 Durante mucho tiempo viví bajo la mentira de que la madurez era sinónimo de autosuficiencia, creyendo que ser un hombre fuerte significaba no necesitar a nadie para resolver mis problemas. Qué equivocado estaba. Este paso es el reconocimiento de una realidad humana fundamental: no somos islas. Mi estabilidad no es algo que yo fabrico solo en mi cabeza o con mi voluntad; es el resultado de los hilos que me tejen con los demás. Si esos hilos se cortan, me caigo. En el día a día, esto significa aceptar que si hoy me siento firme es porque tengo a quién llamar, con quién compartir mi mesa y en quién confiar mis miedos.
 
