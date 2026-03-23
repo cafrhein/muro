@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ site.lang | default: 'es' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} | Carlos Hernández</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ 'style.css' | relative_url }}">
     <script>
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) { document.documentElement.setAttribute('data-theme', currentTheme); }
@@ -137,4 +137,3 @@
     </script>
 </body>
 </html>
-
