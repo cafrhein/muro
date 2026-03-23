@@ -106,26 +106,25 @@
     </footer>
 
     <script>
-        // MEJORA UX: LÓGICA DE SCROLL (PROGRESS BAR & FOCUS MODE)
+        // LÓGICA DE INTERFAZ (SCROLL, DARK MODE, MENÚ)
         let isScrolling;
         window.onscroll = function() {
-            // 1. Calcular progreso de lectura
+            // Barra de progreso
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             let scrolled = (winScroll / height) * 100;
-            document.getElementById("progress-bar").style.width = scrolled + "%";
+            const pb = document.getElementById("progress-bar");
+            if(pb) pb.style.width = scrolled + "%";
 
-            // 2. Activar Focus Mode (Opacidad)
+            // Focus Mode (Opacidad)
             document.body.classList.add('scrolling');
-            
-            // 3. Limpiar timer y esperar a que el usuario deje de scrollear para devolver opacidad
             window.clearTimeout(isScrolling);
             isScrolling = setTimeout(function() {
                 document.body.classList.remove('scrolling');
             }, 800); 
         };
 
-        // Lógica de Dark Mode
+        // Dark Mode
         const themeBtn = document.getElementById("theme-button");
         const themeIcon = themeBtn.querySelector("i");
         function updateIcon(isDark) { themeIcon.className = isDark ? "fas fa-sun" : "fas fa-moon"; }
@@ -156,6 +155,27 @@
         overlay.addEventListener("click", () => {
             sidebar.classList.remove("active");
             overlay.classList.remove("active");
+        });
+
+        // --- ESCÁNER AUTOMÁTICO DE GLOSARIO ---
+        const glosario = {
+            "Idoneidad Relacional": "Capacidad de identificar si un vínculo suma estabilidad o genera aislamiento.",
+            "Reciprocidad": "Dejarse cuidar para dotar de sentido al cuidador y fortalecer el vínculo.",
+            "Red Humana": "El conjunto de vínculos que sostienen nuestra estabilidad emocional.",
+            "Vínculos": "Fuentes de apoyo y sostén emocional que reemplazan la autosuficiencia.",
+            "Autosuficiencia": "El error de creer que podemos sostenernos solos, lo cual rompe la red."
+        };
+
+        window.addEventListener('load', function() {
+            const postBody = document.querySelector('.post-content');
+            if (!postBody) return;
+            let contenido = postBody.innerHTML;
+            Object.keys(glosario).forEach(termino => {
+                const definicion = glosario[termino];
+                const regex = new RegExp(`\\b${termino}\\b`, 'gi');
+                contenido = contenido.replace(regex, `<span class="tooltip-vinc">${termino}<span class="tooltip-text">${definicion}</span></span>`);
+            });
+            postBody.innerHTML = contenido;
         });
     </script>
 </body>
