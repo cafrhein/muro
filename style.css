@@ -1,7 +1,7 @@
 ---
 ---
 /* ============================================================
-   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V3.6 (Mobile Fix + Letra Ajustada)
+   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V3.6
    DISEÑO, UX Y SEGURIDAD: CARLOS HERNÁNDEZ
    SISTEMA: JEKYLL + GITHUB PAGES (ADESTRAT.COM)
    ============================================================ */
@@ -114,10 +114,11 @@ body {
 /* 7. ESTRUCTURA DE GRID (LAYOUT MAESTRO EN ESCRITORIO) */
 .fb-container {
     display: grid;
-    grid-template-columns: 340px 700px 300px;
+    /* Contenedor central más ancho (800px) para que no se vea delgado */
+    grid-template-columns: 320px 800px 280px; 
     justify-content: center;
     gap: 20px;
-    max-width: 1400px;
+    max-width: 1460px; 
     margin: 20px auto;
     padding: 0 20px;
     flex: 1;
@@ -223,7 +224,7 @@ h1, h2, h3 {
 
 /* 13. UX DE LECTURA (CONTENIDO DEL POST) */
 .post-content {
-    font-size: 1.05rem; /* Ajustado: Ligeramente más pequeño */
+    font-size: 1rem; /* Cuerpo de texto reducido para contraste con el título */
     color: var(--fb-text);
     line-height: 1.85;
     position: relative;
@@ -241,7 +242,7 @@ h1, h2, h3 {
     border-left: 6px solid var(--fb-blue);
     border-radius: 4px 18px 18px 4px;
     font-style: italic;
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     color: var(--fb-text-sec);
 }
 
@@ -529,14 +530,14 @@ h1, h2, h3 {
         background: transparent !important;
     }
     
-    /* 3. LECTURA FLUIDA EN MÓVIL: Letra ligeramente más pequeña y a la izquierda */
+    /* 3. LECTURA FLUIDA EN MÓVIL: Contenedor más abierto y letra reducida */
     .post-content {
-        padding: 10px 20px 30px 20px !important;
+        padding: 10px 12px 30px 12px !important; /* Márgenes laterales más delgados (12px) para expandir la zona de lectura */
     }
 
     .post-content p {
         text-align: left !important;
-        font-size: 1rem !important; /* Ajustado: Ligeramente más pequeño */
+        font-size: 0.95rem !important; /* Cuerpo reducido únicamente */
         line-height: 1.6 !important;
     }
 
@@ -545,9 +546,9 @@ h1, h2, h3 {
         border-radius: 4px !important;
     }
 
-    /* Ajuste de títulos para celular */
+    /* El título se mantiene con buen peso visual */
     h1 {
-        font-size: 1.6rem !important; /* Ajustado */
+        font-size: 1.6rem !important; 
     }
     
     /* 4. Protegemos los tooltips en móviles */
@@ -569,7 +570,7 @@ h1, h2, h3 {
     
     /* 5. Vínculos de interdependencia limpios */
     .related-grid { 
-        padding: 20px; 
+        padding: 20px 12px; 
         grid-template-columns: 1fr; 
         border-top: 1px solid var(--fb-border) !important;
     }
