@@ -1,5 +1,5 @@
 /* ============================================================
-   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V2.8
+   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V3.0
    DISEÑO, UX Y SEGURIDAD: CARLOS HERNÁNDEZ
    SISTEMA: JEKYLL + GITHUB PAGES (ADESTRAT.COM)
    ============================================================ */
@@ -121,7 +121,7 @@ body {
     flex: 1;
 }
 
-/* 8. SIDEBARS PEGAJOSOS (FOCUS MODE) */
+/* 8. SIDEBARS PEGAJOSOS (SIN DIFUMINADO DE FOCUS MODE) */
 .fb-left, 
 .fb-right {
     position: sticky;
@@ -129,12 +129,6 @@ body {
     align-self: start;
     height: fit-content;
     z-index: 100;
-    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.scrolling .fb-left, 
-.scrolling .fb-right {
-    opacity: 0.25;
 }
 
 /* 9. COMPONENTES DE TARJETA PRINCIPALES */
@@ -266,7 +260,8 @@ h1, h2, h3 {
 
 .tooltip-vinc .tooltip-text {
     visibility: hidden;
-    width: 260px;
+    width: max-content;
+    max-width: 250px;
     background-color: var(--fb-white);
     color: var(--fb-text);
     text-align: center;
@@ -385,25 +380,25 @@ h1, h2, h3 {
     }
 }
 
-/* 17. LISTAS DEL SIDEBAR PERSONAL */
+/* 17. LISTAS DEL SIDEBAR PERSONAL (MÁRGENES COMPACTOS) */
 .intro-list { 
     list-style: none; 
-    margin-top: 10px; 
+    margin-top: 5px; 
 }
 
 .intro-item {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 18px;
-    font-size: 0.95rem;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
 }
 
 .intro-item i { 
     width: 24px; 
     text-align: center; 
     color: var(--fb-text-sec); 
-    font-size: 1.2rem; 
+    font-size: 1.15rem; 
 }
 
 /* 18. FOOTER */
@@ -530,14 +525,10 @@ h1, h2, h3 {
         left: 80%;
     }
 }
+
 /* ============================================================
    CORRECCIÓN: PREVENCIÓN DE BURBUJAS CORTADAS
    ============================================================ */
 .fb-card.post-content {
     overflow: visible !important; /* Permite que el globo se salga de la tarjeta sin cortarse */
-}
-
-.tooltip-vinc .tooltip-text {
-    width: max-content; /* Se adapta al texto */
-    max-width: 250px; /* Pero no crece más de 250px */
 }
