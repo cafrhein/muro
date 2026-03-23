@@ -43,11 +43,11 @@
         <aside class="fb-left" id="fb-left">
             <div id="identity-box">
                 <div class="fb-card" style="padding: 0; overflow: hidden;">
-                    <div style="padding: 25px 20px; text-align: center; border-bottom: 1px solid var(--fb-border); background: var(--fb-bg);">
-                        <img src="{{ 'perfil.png.jpg' | relative_url }}" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--fb-white); object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-                        <h2 style="font-size: 1.4rem; font-weight: 800; margin-top: 15px; color: var(--fb-text); letter-spacing: -0.5px;">Carlos Hernández</h2>
+                    <div style="padding: 15px; text-align: center; border-bottom: 1px solid var(--fb-border); background: var(--fb-bg);">
+                        <img src="{{ 'perfil.png.jpg' | relative_url }}" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--fb-white); object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                        <h2 style="font-size: 1.25rem; font-weight: 800; margin-top: 10px; color: var(--fb-text); letter-spacing: -0.5px;">Carlos Hernández</h2>
                     </div>
-                    <div style="padding: 20px;">
+                    <div style="padding: 15px;">
                         <ul class="intro-list">
                             <li class="intro-item"><i class="fas fa-briefcase"></i> <span>Especialista en <strong>Planeación Estratégica</strong></span></li>
                             <li class="intro-item"><i class="fas fa-user-shield"></i> <span>Estudia <strong>Seguridad Pública</strong></span></li>
@@ -55,7 +55,7 @@
                             <li class="intro-item"><i class="fas fa-heart" style="color: #fb7185;"></i> <span>En una relación con <strong>Daniela</strong></span></li>
                             <li class="intro-item"><i class="fas fa-project-diagram"></i> <span>Impulsor de <strong>Ingeniería Humana</strong></span></li>
                         </ul>
-                        <a href="{{ '/radar' | relative_url }}" style="display: block; width: 100%; padding: 10px; background: var(--fb-blue); color: white; text-align: center; border-radius: 8px; text-decoration: none; font-weight: 700; margin-top: 10px; font-size: 0.9rem;">
+                        <a href="{{ '/radar' | relative_url }}" style="display: block; width: 100%; padding: 10px; background: var(--fb-blue); color: white; text-align: center; border-radius: 8px; text-decoration: none; font-weight: 700; margin-top: 5px; font-size: 0.9rem;">
                             <i class="fas fa-microscope" style="margin-right: 8px;"></i>Diagnóstico de Red
                         </a>
                     </div>
@@ -113,20 +113,13 @@
     </footer>
 
     <script>
-        // LÓGICA DE INTERFAZ (SCROLL, DARK MODE, MENÚ)
-        let isScrolling;
+        // LÓGICA DE INTERFAZ (SIN DIFUMINADO MOLESTO)
         window.onscroll = function() {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             let scrolled = (winScroll / height) * 100;
             const pb = document.getElementById("progress-bar");
             if(pb) pb.style.width = scrolled + "%";
-
-            document.body.classList.add('scrolling');
-            window.clearTimeout(isScrolling);
-            isScrolling = setTimeout(function() {
-                document.body.classList.remove('scrolling');
-            }, 800); 
         };
 
         const themeBtn = document.getElementById("theme-button");
@@ -160,7 +153,7 @@
             overlay.classList.remove("active");
         });
 
-        // --- ESCÁNER AUTOMÁTICO DE GLOSARIO (CORREGIDO Y BLINDADO) ---
+        // --- ESCÁNER AUTOMÁTICO DE GLOSARIO ---
         const glosario = {
             "Idoneidad Relacional": "Capacidad de identificar si un vínculo suma estabilidad o genera aislamiento.",
             "Reciprocidad": "Dejarse cuidar para dotar de sentido al cuidador y fortalecer el vínculo.",
@@ -173,12 +166,10 @@
             const postBody = document.querySelector('.post-content');
             if (!postBody) return;
 
-            // Ordenamos de mayor a menor longitud para evitar que palabras cortas rompan palabras largas
             const terminos = Object.keys(glosario).sort((a, b) => b.length - a.length);
             const regex = new RegExp(`\\b(${terminos.join('|')})\\b`, 'gi');
 
             function procesarNodos(nodo) {
-                // Si es texto puro, aplicamos el reemplazo
                 if (nodo.nodeType === 3) {
                     if (nodo.nodeValue.match(regex)) {
                         const tempDiv = document.createElement('div');
@@ -192,13 +183,10 @@
                         nodo.parentNode.removeChild(nodo);
                     }
                 } 
-                // Si es un contenedor, pero NO es un tooltip, entramos a escanearlo (evita la recursión infinita)
                 else if (nodo.nodeType === 1 && !nodo.classList.contains('tooltip-vinc') && !nodo.classList.contains('tooltip-text')) {
                     Array.from(nodo.childNodes).forEach(procesarNodos);
                 }
             }
-
-            // Iniciamos el escaneo inteligente en el contenido del post
             Array.from(postBody.childNodes).forEach(procesarNodos);
         });
     </script>
