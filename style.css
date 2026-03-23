@@ -557,3 +557,98 @@ h1, h2, h3 {
         grid-template-columns: 1fr; 
     }
 }
+/* ============================================================
+   21. RESPONSIVO MÓVIL Y TABLET (HASTA 1150px) - UX LECTURA
+   ============================================================ */
+@media (max-width: 1150px) {
+    /* 1. Fondo limpio tipo App: Eliminamos el fondo gris para que no haya contraste de caja */
+    body { 
+        background-color: var(--fb-white); 
+    }
+
+    .fb-container { 
+        grid-template-columns: 1fr; 
+        max-width: 100%; 
+        padding: 0; 
+        margin-top: 0;
+        gap: 0;
+    }
+    
+    .fb-left {
+        position: fixed; 
+        top: 0; 
+        left: -100%; 
+        width: 85%; 
+        max-width: 320px; 
+        height: 100vh; 
+        background: var(--fb-white); 
+        z-index: 2500;
+        transition: var(--spring); 
+        padding: 60px 25px; 
+        box-shadow: 15px 0 45px rgba(0,0,0,0.3); 
+        overflow-y: auto; 
+    }
+    
+    .fb-left.active { 
+        left: 0; 
+    }
+    
+    .fb-right { 
+        display: none; 
+    }
+    
+    /* 2. ANIQUILAR LA CAJA: Forzamos con !important para vencer al HTML */
+    article.fb-card {
+        border: none !important; 
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        margin-bottom: 0 !important;
+        background: transparent !important;
+    }
+
+    /* Limpiamos las líneas grises internas (como la que separa el autor del título) */
+    article.fb-card > div {
+        border: none !important;
+        background: transparent !important;
+    }
+    
+    /* 3. DESTRUIR EL EFECTO SALCHICHA: Texto libre y alineado a la izquierda */
+    .post-content {
+        padding: 10px 20px 30px 20px !important;
+    }
+
+    .post-content p {
+        text-align: left !important;
+        font-size: 1.15rem !important;
+        line-height: 1.65 !important;
+    }
+
+    .post-content img {
+        margin: 1.5rem 0 !important;
+        border-radius: 4px !important;
+    }
+    
+    /* 4. Protegemos los tooltips en móviles para que no se salgan de la pantalla */
+    .tooltip-vinc .tooltip-text {
+        width: max-content; 
+        max-width: 85vw; 
+        left: auto; 
+        right: 0; 
+        transform: translateY(10px);
+    }
+    
+    .tooltip-vinc:hover .tooltip-text { 
+        transform: translateY(0); 
+    }
+    
+    .tooltip-vinc .tooltip-text::after { 
+        left: 85%; 
+    }
+    
+    /* 5. Vínculos de interdependencia limpios */
+    .related-grid { 
+        padding: 20px; 
+        grid-template-columns: 1fr; 
+        border-top: 1px solid var(--fb-border) !important;
+    }
+}
