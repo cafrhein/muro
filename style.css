@@ -1,9 +1,7 @@
----
----
 /* ============================================================
    ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V2.1
    DISEÑO, UX Y SEGURIDAD: CARLOS HERNÁNDEZ
-   SISTEMA: JEKYLL + GITHUB PAGES
+   SISTEMA: JEKYLL + GITHUB PAGES (ADESTRAT.COM)
    ============================================================ */
 
 /* 1. IMPORTACIÓN DE TIPOGRAFÍA DE AUTOR */
@@ -78,7 +76,7 @@ body {
     border-bottom: 1px solid var(--fb-border);
 }
 
-/* 6. BARRA DE PROGRESO DE PRECISIÓN (SOLO EN POSTS) */
+/* 6. BARRA DE PROGRESO DE PRECISIÓN */
 #progress-container {
     position: fixed;
     top: 60px;
@@ -195,11 +193,6 @@ h1, h2, h3 {
     box-shadow: 0 12px 40px rgba(0,0,0,0.15);
 }
 
-.post-content ul, .post-content ol {
-    margin-bottom: 1.8rem;
-    padding-left: 2rem;
-}
-
 /* 12. VÍNCULOS DE INTERDEPENDENCIA (RELATED) */
 .related-grid {
     display: grid;
@@ -244,7 +237,6 @@ h1, h2, h3 {
 }
 
 /* 14. SIDEBAR E INFO PERSONAL */
-.intro-list { list-style: none; margin-top: 10px; }
 .intro-item {
     display: flex;
     align-items: center;
@@ -285,7 +277,7 @@ h1, h2, h3 {
     box-shadow: 0 8px 20px rgba(24, 119, 242, 0.4);
 }
 
-/* 17. OPTIMIZACIÓN MÓVIL Y OVERLAYS */
+/* 17. OPTIMIZACIÓN MÓVIL */
 .menu-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.5); z-index: 2400; display: none;
@@ -304,9 +296,6 @@ h1, h2, h3 {
         box-shadow: 15px 0 35px rgba(0,0,0,0.3);
     }
     .fb-left.active { left: 0; }
-
-    .header-cover { height: 160px !important; }
-    .profile-img { width: 120px !important; height: 120px !important; margin-top: -60px !important; }
     
     .fb-right { display: none; }
     .fb-card { border-radius: 0; border-left: none; border-right: none; margin-bottom: 10px; }
@@ -315,5 +304,4 @@ h1, h2, h3 {
     .tab-item { font-size: 0.85rem; padding: 14px 5px; }
     
     .related-grid { grid-template-columns: 1fr; }
-    .footer-nav { flex-direction: column; gap: 15px; }
 }
