@@ -342,3 +342,62 @@ h1, h2, h3 {
     .fb-card { border-radius: 0; border-left: none; border-right: none; margin-bottom: 10px; }
     .related-grid { grid-template-columns: 1fr; padding: 20px; }
 }
+/* ============================================================
+   FUNCIONALIDAD: TOOLTIPS DE INGENIERÍA HUMANA
+   ============================================================ */
+
+.tooltip-vinc {
+    position: relative;
+    display: inline-block;
+    color: var(--fb-blue);
+    font-weight: 700;
+    border-bottom: 2px dotted var(--fb-blue);
+    cursor: help;
+}
+
+.tooltip-vinc .tooltip-text {
+    visibility: hidden;
+    width: 220px;
+    background-color: var(--fb-white);
+    color: var(--fb-text);
+    text-align: center;
+    border-radius: 8px;
+    padding: 12px;
+    position: absolute;
+    z-index: 3000;
+    bottom: 125%; /* Aparece arriba de la palabra */
+    left: 50%;
+    margin-left: -110px;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translateY(10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border: 1px solid var(--fb-border);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    font-weight: 400;
+}
+
+/* Triángulo del globo */
+.tooltip-vinc .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--fb-white) transparent transparent transparent;
+}
+
+.tooltip-vinc:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+[data-theme="dark"] .tooltip-text {
+    background-color: #242526;
+    color: #e4e6eb;
+    border-color: #3e4042;
+}
