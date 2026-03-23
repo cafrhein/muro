@@ -3,8 +3,8 @@ description: "Estrategia e Ingeniería de la Reciprocidad"
 remote_theme: pages-themes/minimal
 
 # CONFIGURACIÓN DE RUTAS
-baseurl: "/muro"
-url: "https://cafrhein.github.io"
+baseurl: ""
+url: "https://adestrat.com"
 
 # Configuración de Jekyll
 markdown: kramdown
