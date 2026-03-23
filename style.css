@@ -1,5 +1,5 @@
 /* ============================================================
-   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V2.5
+   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V2.8
    DISEÑO, UX Y SEGURIDAD: CARLOS HERNÁNDEZ
    SISTEMA: JEKYLL + GITHUB PAGES (ADESTRAT.COM)
    ============================================================ */
@@ -24,6 +24,7 @@
     --spring: all 0.55s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+/* VARIABLES PARA MODO OSCURO */
 [data-theme="dark"] {
     --fb-bg: #18191a;
     --fb-white: #242526;
@@ -55,10 +56,22 @@ body {
 }
 
 /* 4. SCROLLBAR PERSONALIZADA */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--fb-bg); }
-::-webkit-scrollbar-thumb { background: var(--fb-border); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--fb-text-sec); }
+::-webkit-scrollbar { 
+    width: 8px; 
+}
+
+::-webkit-scrollbar-track { 
+    background: var(--fb-bg); 
+}
+
+::-webkit-scrollbar-thumb { 
+    background: var(--fb-border); 
+    border-radius: 10px; 
+}
+
+::-webkit-scrollbar-thumb:hover { 
+    background: var(--fb-text-sec); 
+}
 
 /* 5. NAVEGACIÓN (HEADER) */
 .fb-header {
@@ -77,7 +90,7 @@ body {
     border-bottom: 1px solid var(--fb-border);
 }
 
-/* 6. BARRA DE PROGRESO LIMPIA */
+/* 6. BARRA DE PROGRESO DE LECTURA */
 #progress-container {
     position: fixed;
     top: 60px;
@@ -87,6 +100,7 @@ body {
     background: transparent;
     z-index: 2100;
 }
+
 #progress-bar {
     height: 100%;
     width: 0%;
@@ -95,7 +109,7 @@ body {
     transition: width 0.1s ease-out;
 }
 
-/* 7. ESTRUCTURA DE GRID */
+/* 7. ESTRUCTURA DE GRID (LAYOUT MAESTRO) */
 .fb-container {
     display: grid;
     grid-template-columns: 340px 700px 300px;
@@ -108,7 +122,8 @@ body {
 }
 
 /* 8. SIDEBARS PEGAJOSOS (FOCUS MODE) */
-.fb-left, .fb-right {
+.fb-left, 
+.fb-right {
     position: sticky;
     top: 80px;
     align-self: start;
@@ -122,7 +137,7 @@ body {
     opacity: 0.25;
 }
 
-/* 9. COMPONENTES DE TARJETA */
+/* 9. COMPONENTES DE TARJETA PRINCIPALES */
 .fb-card {
     background: var(--fb-white);
     border-radius: var(--radius);
@@ -145,7 +160,7 @@ body {
     border-color: var(--fb-blue);
 }
 
-/* 10. EFECTO DE RED VIVA */
+/* 10. EFECTO DE RED VIVA (SVG ANIMATION) */
 .fb-right circle {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -160,7 +175,7 @@ body {
     filter: drop-shadow(0 0 12px var(--fb-blue));
 }
 
-/* 11. PESTAÑAS */
+/* 11. PESTAÑAS Y NAVEGACIÓN DEL PERFIL */
 .profile-tabs {
     display: flex;
     list-style: none;
@@ -181,28 +196,38 @@ body {
     transition: var(--transition);
 }
 
-.tab-item:hover { background: var(--fb-hover); color: var(--fb-blue); }
-.tab-item.active { color: var(--fb-blue); border-bottom: 3px solid var(--fb-blue); }
+.tab-item:hover { 
+    background: var(--fb-hover); 
+    color: var(--fb-blue); 
+}
 
-/* 12. TIPOGRAFÍA */
+.tab-item.active { 
+    color: var(--fb-blue); 
+    border-bottom: 3px solid var(--fb-blue); 
+}
+
+.tab-item i { 
+    margin-right: 8px; 
+}
+
+/* 12. TIPOGRAFÍA Y JERARQUÍA */
 h1, h2, h3 {
     font-family: 'Montserrat', sans-serif;
     color: var(--fb-text);
     letter-spacing: -0.5px;
 }
 
-/* 13. UX DE LECTURA (POST CONTENT) */
+/* 13. UX DE LECTURA (CONTENIDO DEL POST) */
 .post-content {
     font-size: 1.15rem;
     color: var(--fb-text);
-    letter-spacing: -0.01em;
     line-height: 1.85;
+    position: relative;
 }
 
 .post-content p {
     margin-bottom: 1.8rem;
     text-align: justify;
-    hyphens: auto;
 }
 
 .post-content blockquote {
@@ -224,7 +249,74 @@ h1, h2, h3 {
     box-shadow: 0 12px 35px rgba(0,0,0,0.15);
 }
 
-/* 14. TARJETAS RELACIONADAS (RESTAURADO) */
+/* 14. TOOLTIPS INTELIGENTES DE INGENIERÍA HUMANA */
+.tooltip-vinc {
+    position: relative;
+    display: inline;
+    color: var(--fb-blue);
+    font-weight: 700;
+    border-bottom: 2px dotted var(--fb-blue);
+    cursor: help;
+    z-index: 10;
+}
+
+.tooltip-vinc:hover {
+    z-index: 5000;
+}
+
+.tooltip-vinc .tooltip-text {
+    visibility: hidden;
+    width: 260px;
+    background-color: var(--fb-white);
+    color: var(--fb-text);
+    text-align: center;
+    border-radius: 10px;
+    padding: 14px;
+    position: absolute;
+    z-index: 5001;
+    bottom: 145%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    border: 1px solid var(--fb-border);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    font-weight: 400;
+    pointer-events: none;
+}
+
+.tooltip-vinc .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: var(--fb-white) transparent transparent transparent;
+}
+
+.tooltip-vinc:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Tooltips en modo oscuro */
+[data-theme="dark"] .tooltip-text {
+    background-color: #242526;
+    color: #e4e6eb;
+    border-color: #3e4042;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+[data-theme="dark"] .tooltip-text::after {
+    border-color: #242526 transparent transparent transparent;
+}
+
+/* 15. TARJETAS RELACIONADAS */
 .related-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -249,7 +341,6 @@ h1, h2, h3 {
 
 .related-card:hover {
     border-color: var(--fb-blue);
-    background: var(--fb-white);
     box-shadow: var(--card-shadow-hover);
     transform: translateY(-5px);
 }
@@ -266,10 +357,16 @@ h1, h2, h3 {
     color: var(--fb-text-sec);
 }
 
-/* 15. ANIMACIONES SKELETON */
+/* 16. ANIMACIONES SKELETON (CARGA INICIAL) */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+        opacity: 0; 
+        transform: translateY(15px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
 }
 
 .skeleton-item {
@@ -280,12 +377,20 @@ h1, h2, h3 {
 }
 
 @keyframes loading {
-    from { background-position: 200% 0; }
-    to { background-position: -200% 0; }
+    from { 
+        background-position: 200% 0; 
+    }
+    to { 
+        background-position: -200% 0; 
+    }
 }
 
-/* 16. INFO PERSONAL SIDEBAR */
-.intro-list { list-style: none; margin-top: 10px; }
+/* 17. LISTAS DEL SIDEBAR PERSONAL */
+.intro-list { 
+    list-style: none; 
+    margin-top: 10px; 
+}
+
 .intro-item {
     display: flex;
     align-items: center;
@@ -293,9 +398,15 @@ h1, h2, h3 {
     margin-bottom: 18px;
     font-size: 0.95rem;
 }
-.intro-item i { width: 24px; text-align: center; color: var(--fb-text-sec); font-size: 1.2rem; }
 
-/* 17. FOOTER */
+.intro-item i { 
+    width: 24px; 
+    text-align: center; 
+    color: var(--fb-text-sec); 
+    font-size: 1.2rem; 
+}
+
+/* 18. FOOTER */
 .site-footer {
     background: var(--fb-white);
     border-top: 1px solid var(--fb-border);
@@ -313,91 +424,109 @@ h1, h2, h3 {
     font-weight: 600;
 }
 
-.footer-nav a { color: var(--fb-text-sec); text-decoration: none; transition: 0.2s; }
-.footer-nav a:hover { color: var(--fb-blue); }
+.footer-nav a { 
+    color: var(--fb-text-sec); 
+    text-decoration: none; 
+    transition: 0.2s; 
+}
 
-/* 18. DARK MODE TOGGLE */
+.footer-nav a:hover { 
+    color: var(--fb-blue); 
+}
+
+/* 19. BOTÓN FLOTANTE MODO OSCURO */
 .dark-mode-toggle {
-    position: fixed; bottom: 30px; right: 30px;
-    width: 60px; height: 60px; border-radius: 50%;
-    background: var(--fb-blue); color: white;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; z-index: 3000; border: none;
+    position: fixed; 
+    bottom: 30px; 
+    right: 30px;
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%;
+    background: var(--fb-blue); 
+    color: white;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    cursor: pointer; 
+    z-index: 3000; 
+    border: none;
     box-shadow: 0 8px 20px rgba(24, 119, 242, 0.4);
 }
 
-/* 19. RESPONSIVO Y SPRING PHYSICS */
+/* 20. OVERLAY DEL MENÚ MÓVIL */
+.menu-overlay {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: rgba(0,0,0,0.5); 
+    z-index: 2400; 
+    display: none;
+    backdrop-filter: blur(4px);
+}
+
+.menu-overlay.active { 
+    display: block; 
+}
+
+/* 21. RESPONSIVO Y SPRING PHYSICS (MÓVIL) */
 @media (max-width: 1150px) {
-    .fb-container { grid-template-columns: 1fr; max-width: 700px; padding: 0; margin-top: 0; gap: 0; }
+    .fb-container { 
+        grid-template-columns: 1fr; 
+        max-width: 700px; 
+        padding: 0; 
+        margin-top: 0; 
+        gap: 0; 
+    }
+    
     .fb-left {
-        position: fixed; top: 0; left: -100%;
-        width: 85%; max-width: 320px; height: 100vh;
-        background: var(--fb-white); z-index: 2500;
+        position: fixed; 
+        top: 0; 
+        left: -100%;
+        width: 85%; 
+        max-width: 320px; 
+        height: 100vh;
+        background: var(--fb-white); 
+        z-index: 2500;
         transition: var(--spring);
         padding: 60px 25px;
         box-shadow: 15px 0 45px rgba(0,0,0,0.3);
     }
-    .fb-left.active { left: 0; }
-    .fb-right { display: none; }
-    .fb-card { border-radius: 0; border-left: none; border-right: none; margin-bottom: 10px; }
-    .related-grid { grid-template-columns: 1fr; padding: 20px; }
-}
-/* ============================================================
-   FUNCIONALIDAD: TOOLTIPS DE INGENIERÍA HUMANA
-   ============================================================ */
-
-.tooltip-vinc {
-    position: relative;
-    display: inline-block;
-    color: var(--fb-blue);
-    font-weight: 700;
-    border-bottom: 2px dotted var(--fb-blue);
-    cursor: help;
-}
-
-.tooltip-vinc .tooltip-text {
-    visibility: hidden;
-    width: 220px;
-    background-color: var(--fb-white);
-    color: var(--fb-text);
-    text-align: center;
-    border-radius: 8px;
-    padding: 12px;
-    position: absolute;
-    z-index: 3000;
-    bottom: 125%; /* Aparece arriba de la palabra */
-    left: 50%;
-    margin-left: -110px;
-    opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
-    transform: translateY(10px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    border: 1px solid var(--fb-border);
-    font-size: 0.9rem;
-    line-height: 1.4;
-    font-weight: 400;
-}
-
-/* Triángulo del globo */
-.tooltip-vinc .tooltip-text::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: var(--fb-white) transparent transparent transparent;
-}
-
-.tooltip-vinc:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-[data-theme="dark"] .tooltip-text {
-    background-color: #242526;
-    color: #e4e6eb;
-    border-color: #3e4042;
+    
+    .fb-left.active { 
+        left: 0; 
+    }
+    
+    .fb-right { 
+        display: none; 
+    }
+    
+    .fb-card { 
+        border-radius: 0; 
+        border-left: none; 
+        border-right: none; 
+        margin-bottom: 10px; 
+    }
+    
+    .related-grid { 
+        grid-template-columns: 1fr; 
+        padding: 20px; 
+    }
+    
+    /* Prevenir que se corten los tooltips en pantallas pequeñas */
+    .tooltip-vinc .tooltip-text {
+        width: 220px;
+        left: auto;
+        right: -10px;
+        transform: translateY(10px);
+    }
+    
+    .tooltip-vinc:hover .tooltip-text {
+        transform: translateY(0);
+    }
+    
+    .tooltip-vinc .tooltip-text::after {
+        left: 80%;
+    }
 }
