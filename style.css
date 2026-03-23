@@ -1,5 +1,7 @@
+---
+---
 /* ============================================================
-   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V3.6
+   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V3.6 (Mobile Fix)
    DISEÑO, UX Y SEGURIDAD: CARLOS HERNÁNDEZ
    SISTEMA: JEKYLL + GITHUB PAGES (ADESTRAT.COM)
    ============================================================ */
@@ -473,14 +475,16 @@ h1, h2, h3 {
 }
 
 /* ============================================================
-   21. RESPONSIVO MÓVIL Y TABLET (HASTA 1150px)
+   21. RESPONSIVO MÓVIL Y TABLET (CORRECCIÓN UX LECTURA)
    ============================================================ */
 @media (max-width: 1150px) {
+    /* 1. Contenedor Maestro: Ocupa el 100% sin márgenes laterales grises */
     .fb-container { 
         grid-template-columns: 1fr; 
-        max-width: 700px; 
-        padding: 10px; 
-        margin-top: 0; 
+        max-width: 100%; 
+        padding: 0; 
+        margin-top: 0;
+        gap: 0;
     }
     
     .fb-left {
@@ -506,12 +510,32 @@ h1, h2, h3 {
         display: none; 
     }
     
-    /* EN MÓVIL: MANTENEMOS LA TARJETA PERO CON MENOS PADDING INTERNO */
+    /* 2. Tarjetas y Posts: Sin bordes asfixiantes, fondo limpio */
+    .fb-card {
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
+        margin-bottom: 10px;
+        box-shadow: none;
+    }
+
     .fb-card.post-content {
-        padding: 20px;
+        padding: 25px 20px; /* Respiración superior e inferior, lados ajustados al celular */
     }
     
-    /* Protegemos los tooltips en móviles */
+    /* 3. Corrección del Efecto "Salchicha Flaca": Alinear a la izquierda */
+    .post-content p {
+        text-align: left !important;
+        font-size: 1.05rem;
+        line-height: 1.6;
+    }
+
+    /* 4. Títulos más proporcionados para pantallas estrechas */
+    h1 {
+        font-size: 1.8rem !important;
+    }
+
+    /* 5. Tooltips adaptados al ancho de pantalla */
     .tooltip-vinc .tooltip-text {
         width: max-content; 
         max-width: 85vw; 
@@ -529,7 +553,7 @@ h1, h2, h3 {
     }
     
     .related-grid { 
-        padding: 0; 
+        padding: 20px; 
         grid-template-columns: 1fr; 
     }
 }
