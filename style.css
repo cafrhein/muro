@@ -475,89 +475,6 @@ h1, h2, h3 {
 }
 
 /* ============================================================
-   21. RESPONSIVO MÓVIL Y TABLET (CORRECCIÓN UX LECTURA)
-   ============================================================ */
-@media (max-width: 1150px) {
-    /* 1. Contenedor Maestro: Ocupa el 100% sin márgenes laterales grises */
-    .fb-container { 
-        grid-template-columns: 1fr; 
-        max-width: 100%; 
-        padding: 0; 
-        margin-top: 0;
-        gap: 0;
-    }
-    
-    .fb-left {
-        position: fixed; 
-        top: 0; 
-        left: -100%; 
-        width: 85%; 
-        max-width: 320px; 
-        height: 100vh; 
-        background: var(--fb-white); 
-        z-index: 2500;
-        transition: var(--spring); 
-        padding: 60px 25px; 
-        box-shadow: 15px 0 45px rgba(0,0,0,0.3); 
-        overflow-y: auto; 
-    }
-    
-    .fb-left.active { 
-        left: 0; 
-    }
-    
-    .fb-right { 
-        display: none; 
-    }
-    
-    /* 2. Tarjetas y Posts: Sin bordes asfixiantes, fondo limpio */
-    .fb-card {
-        border-left: none;
-        border-right: none;
-        border-radius: 0;
-        margin-bottom: 10px;
-        box-shadow: none;
-    }
-
-    .fb-card.post-content {
-        padding: 25px 20px; /* Respiración superior e inferior, lados ajustados al celular */
-    }
-    
-    /* 3. Corrección del Efecto "Salchicha Flaca": Alinear a la izquierda */
-    .post-content p {
-        text-align: left !important;
-        font-size: 1.05rem;
-        line-height: 1.6;
-    }
-
-    /* 4. Títulos más proporcionados para pantallas estrechas */
-    h1 {
-        font-size: 1.8rem !important;
-    }
-
-    /* 5. Tooltips adaptados al ancho de pantalla */
-    .tooltip-vinc .tooltip-text {
-        width: max-content; 
-        max-width: 85vw; 
-        left: auto; 
-        right: 0; 
-        transform: translateY(10px);
-    }
-    
-    .tooltip-vinc:hover .tooltip-text { 
-        transform: translateY(0); 
-    }
-    
-    .tooltip-vinc .tooltip-text::after { 
-        left: 85%; 
-    }
-    
-    .related-grid { 
-        padding: 20px; 
-        grid-template-columns: 1fr; 
-    }
-}
-/* ============================================================
    21. RESPONSIVO MÓVIL Y TABLET (HASTA 1150px) - UX LECTURA
    ============================================================ */
 @media (max-width: 1150px) {
@@ -626,6 +543,11 @@ h1, h2, h3 {
     .post-content img {
         margin: 1.5rem 0 !important;
         border-radius: 4px !important;
+    }
+
+    /* Ajuste de títulos para celular */
+    h1 {
+        font-size: 1.8rem !important;
     }
     
     /* 4. Protegemos los tooltips en móviles para que no se salgan de la pantalla */
