@@ -160,7 +160,7 @@
             overlay.classList.remove("active");
         });
 
-        // --- ESCÁNER AUTOMÁTICO DE GLOSARIO ---
+        // --- ESCÁNER AUTOMÁTICO DE GLOSARIO (CORREGIDO Y BLINDADO) ---
         const glosario = {
             "Idoneidad Relacional": "Capacidad de identificar si un vínculo suma estabilidad o genera aislamiento.",
             "Reciprocidad": "Dejarse cuidar para dotar de sentido al cuidador y fortalecer el vínculo.",
@@ -172,13 +172,34 @@
         window.addEventListener('load', function() {
             const postBody = document.querySelector('.post-content');
             if (!postBody) return;
-            let contenido = postBody.innerHTML;
-            Object.keys(glosario).forEach(termino => {
-                const definicion = glosario[termino];
-                const regex = new RegExp(`\\b${termino}\\b`, 'gi');
-                contenido = contenido.replace(regex, `<span class="tooltip-vinc">${termino}<span class="tooltip-text">${definicion}</span></span>`);
-            });
-            postBody.innerHTML = contenido;
+
+            // Ordenamos de mayor a menor longitud para evitar que palabras cortas rompan palabras largas
+            const terminos = Object.keys(glosario).sort((a, b) => b.length - a.length);
+            const regex = new RegExp(`\\b(${terminos.join('|')})\\b`, 'gi');
+
+            function procesarNodos(nodo) {
+                // Si es texto puro, aplicamos el reemplazo
+                if (nodo.nodeType === 3) {
+                    if (nodo.nodeValue.match(regex)) {
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = nodo.nodeValue.replace(regex, (match) => {
+                            const terminoOriginal = terminos.find(t => t.toLowerCase() === match.toLowerCase());
+                            return `<span class="tooltip-vinc">${match}<span class="tooltip-text">${glosario[terminoOriginal]}</span></span>`;
+                        });
+                        while (tempDiv.firstChild) {
+                            nodo.parentNode.insertBefore(tempDiv.firstChild, nodo);
+                        }
+                        nodo.parentNode.removeChild(nodo);
+                    }
+                } 
+                // Si es un contenedor, pero NO es un tooltip, entramos a escanearlo (evita la recursión infinita)
+                else if (nodo.nodeType === 1 && !nodo.classList.contains('tooltip-vinc') && !nodo.classList.contains('tooltip-text')) {
+                    Array.from(nodo.childNodes).forEach(procesarNodos);
+                }
+            }
+
+            // Iniciamos el escaneo inteligente en el contenido del post
+            Array.from(postBody.childNodes).forEach(procesarNodos);
         });
     </script>
 </body>
