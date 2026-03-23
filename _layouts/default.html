@@ -22,7 +22,11 @@
     </button>
 
     <header class="fb-header">
-        <div style="min-width: 40px;"></div>
+        <div style="min-width: 40px; display: flex; align-items: center;">
+             <a href="{{ '/radar' | relative_url }}" style="color: var(--fb-text-sec); font-size: 1.2rem; text-decoration: none;" title="Mide tu Red">
+                <i class="fas fa-chart-pie"></i>
+            </a>
+        </div>
         <nav style="display: flex; justify-content: center; flex: 1;">
             <a href="{{ '/' | relative_url }}" style="color: var(--fb-blue); font-size: 1.6rem; display: flex; align-items: center;" title="Inicio">
                 <i class="fas fa-home"></i>
@@ -51,6 +55,9 @@
                             <li class="intro-item"><i class="fas fa-heart" style="color: #fb7185;"></i> <span>En una relación con <strong>Daniela</strong></span></li>
                             <li class="intro-item"><i class="fas fa-project-diagram"></i> <span>Impulsor de <strong>Ingeniería Humana</strong></span></li>
                         </ul>
+                        <a href="{{ '/radar' | relative_url }}" style="display: block; width: 100%; padding: 10px; background: var(--fb-blue); color: white; text-align: center; border-radius: 8px; text-decoration: none; font-weight: 700; margin-top: 10px; font-size: 0.9rem;">
+                            <i class="fas fa-microscope" style="margin-right: 8px;"></i>Diagnóstico de Red
+                        </a>
                     </div>
                 </div>
             </div>
@@ -109,14 +116,12 @@
         // LÓGICA DE INTERFAZ (SCROLL, DARK MODE, MENÚ)
         let isScrolling;
         window.onscroll = function() {
-            // Barra de progreso
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             let scrolled = (winScroll / height) * 100;
             const pb = document.getElementById("progress-bar");
             if(pb) pb.style.width = scrolled + "%";
 
-            // Focus Mode (Opacidad)
             document.body.classList.add('scrolling');
             window.clearTimeout(isScrolling);
             isScrolling = setTimeout(function() {
@@ -124,7 +129,6 @@
             }, 800); 
         };
 
-        // Dark Mode
         const themeBtn = document.getElementById("theme-button");
         const themeIcon = themeBtn.querySelector("i");
         function updateIcon(isDark) { themeIcon.className = isDark ? "fas fa-sun" : "fas fa-moon"; }
@@ -142,7 +146,6 @@
         });
         updateIcon(document.documentElement.getAttribute("data-theme") === "dark");
 
-        // Menú Móvil
         const menuToggle = document.getElementById("menu-toggle");
         const sidebar = document.getElementById("fb-left");
         const overlay = document.getElementById("menu-overlay");
