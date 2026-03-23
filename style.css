@@ -1,5 +1,5 @@
 /* ============================================================
-   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V3.1
+   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V3.2
    DISEÑO, UX Y SEGURIDAD: CARLOS HERNÁNDEZ
    SISTEMA: JEKYLL + GITHUB PAGES (ADESTRAT.COM)
    ============================================================ */
@@ -132,6 +132,7 @@ body {
 }
 
 /* 9. COMPONENTES DE TARJETA PRINCIPALES */
+/* ELIMINADO el overflow: hidden para evitar que corte los tooltips en los bordes */
 .fb-card {
     background: var(--fb-white);
     border-radius: var(--radius);
@@ -140,7 +141,12 @@ body {
     padding: 20px;
     border: 1px solid var(--fb-border);
     position: relative;
-    overflow: hidden;
+    overflow: visible; 
+}
+
+/* Para que las imágenes dentro de las tarjetas sí respeten los bordes redondos */
+.fb-card > img {
+    border-radius: var(--radius) var(--radius) 0 0;
 }
 
 .post-card {
@@ -217,10 +223,6 @@ h1, h2, h3 {
     color: var(--fb-text);
     line-height: 1.85;
     position: relative;
-}
-
-.fb-card.post-content {
-    overflow: visible !important;
 }
 
 .post-content p {
@@ -303,6 +305,7 @@ h1, h2, h3 {
     transform: translateX(-50%) translateY(0);
 }
 
+/* Tooltips en modo oscuro */
 [data-theme="dark"] .tooltip-text {
     background-color: #242526;
     color: #e4e6eb;
@@ -357,14 +360,8 @@ h1, h2, h3 {
 
 /* 16. ANIMACIONES SKELETON (CARGA INICIAL) */
 @keyframes fadeIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(15px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .skeleton-item {
@@ -375,15 +372,11 @@ h1, h2, h3 {
 }
 
 @keyframes loading {
-    from { 
-        background-position: 200% 0; 
-    }
-    to { 
-        background-position: -200% 0; 
-    }
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
 }
 
-/* 17. LISTAS DEL SIDEBAR PERSONAL */
+/* 17. LISTAS DEL SIDEBAR PERSONAL (MÁRGENES COMPACTOS) */
 .intro-list { 
     list-style: none; 
     margin-top: 5px; 
@@ -468,14 +461,66 @@ h1, h2, h3 {
     display: block; 
 }
 
-/* 21. RESPONSIVO GLOBAL (TABLETS Y MÓVILES) */
-@media (max-width: 1150px) {
+/* ============================================================
+   21. EXPERIENCIA DE LECTURA MÓVIL (TIPO PERIÓDICO DIGITAL)
+   ¡CONTENEDOR DESTRUIDO EN CELULARES!
+   ============================================================ */
+@media (max-width: 768px) {
+    /* Forzamos que el fondo del body sea blanco para que se fusione con la lectura */
+    body {
+        background-color: var(--fb-white);
+    }
+    
+    /* Quitamos el margen lateral del contenedor principal */
     .fb-container { 
-        grid-template-columns: 1fr; 
-        max-width: 700px; 
-        padding: 0; 
+        padding: 0 !important; 
         margin-top: 0; 
         gap: 0; 
+    }
+    
+    /* DESTRUCCIÓN DEL CONTENEDOR EN MÓVIL */
+    .fb-card {
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        margin-bottom: 0 !important;
+        background: transparent !important;
+    }
+    
+    /* El texto respira libremente con una sangría tipo periódico (20px) */
+    .fb-card.post-content {
+        padding: 20px 20px 40px 20px !important;
+    }
+    
+    .post-content {
+        font-size: 1.15rem; 
+        line-height: 1.7;
+    }
+    
+    .post-content p {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Salvaguarda para Tooltips en pantallas estrechas (evita desborde lateral) */
+    .tooltip-vinc .tooltip-text {
+        width: max-content;
+        max-width: 85vw; /* Nunca será más ancho que el 85% de la pantalla */
+        left: auto;
+        right: 0;
+        transform: translateY(10px);
+    }
+    
+    .tooltip-vinc:hover .tooltip-text {
+        transform: translateY(0);
+    }
+    
+    .tooltip-vinc .tooltip-text::after {
+        left: 85%;
+    }
+
+    /* Ocultamos paneles que no van en la vista principal móvil */
+    .fb-right { 
+        display: none; 
     }
     
     .fb-left {
@@ -495,72 +540,29 @@ h1, h2, h3 {
     .fb-left.active { 
         left: 0; 
     }
-    
+}
+
+@media (min-width: 769px) and (max-width: 1150px) {
+    .fb-container { 
+        grid-template-columns: 1fr; 
+        max-width: 700px; 
+    }
     .fb-right { 
         display: none; 
     }
-    
-    .fb-card { 
-        border-radius: 0; 
-        border-left: none; 
-        border-right: none; 
-        margin-bottom: 10px; 
+    .fb-left {
+        position: fixed; 
+        top: 0; 
+        left: -100%;
+        width: 320px; 
+        height: 100vh;
+        background: var(--fb-white); 
+        z-index: 2500;
+        transition: var(--spring);
+        padding: 60px 25px;
+        box-shadow: 15px 0 45px rgba(0,0,0,0.3);
     }
-    
-    .related-grid { 
-        grid-template-columns: 1fr; 
-        padding: 20px; 
-    }
-    
-    /* Prevenir que se corten los tooltips en pantallas medianas */
-    .tooltip-vinc .tooltip-text {
-        width: 220px;
-        left: auto;
-        right: -10px;
-        transform: translateY(10px);
-    }
-    
-    .tooltip-vinc:hover .tooltip-text {
-        transform: translateY(0);
-    }
-    
-    .tooltip-vinc .tooltip-text::after {
-        left: 80%;
-    }
-}
-
-/* ============================================================
-   22. EXPERIENCIA DE LECTURA MÓVIL (TIPO PERIÓDICO DIGITAL)
-   ============================================================ */
-@media (max-width: 768px) {
-    /* Destruye el padding de 40px del HTML e impone una sangría de 18px */
-    .fb-card.post-content {
-        padding: 25px 18px !important; 
-    }
-    
-    /* Tamaño ideal para no cansar la vista en pantallas pequeñas */
-    .post-content {
-        font-size: 1.1rem; 
-        line-height: 1.7;
-    }
-    
-    /* Títulos ajustados para no abarcar toda la pantalla */
-    .post-content h1 {
-        font-size: 1.9rem !important; 
-        line-height: 1.25;
-        margin-bottom: 15px !important;
-    }
-    
-    /* Párrafos compactos */
-    .post-content p {
-        margin-bottom: 1.4rem;
-    }
-    
-    /* Citas destacadas ajustadas al ancho móvil */
-    .post-content blockquote {
-        padding: 1.5rem;
-        font-size: 1.25rem;
-        margin: 2rem 0;
-        border-left: 4px solid var(--fb-blue);
+    .fb-left.active { 
+        left: 0; 
     }
 }
