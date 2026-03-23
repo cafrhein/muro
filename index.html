@@ -5,14 +5,20 @@ title: Muro
 
 <div class="fb-card" style="padding: 0; overflow: hidden; margin-bottom: 16px; border: none;">
     <ul class="profile-tabs" style="border-top: none;">
-        <li class="tab-item active" onclick="filterPosts('all', this)"><i class="fas fa-stream"></i> Publicaciones</li>
-        <li class="tab-item" onclick="filterPosts('Crónicas', this)"><i class="fas fa-feather-alt"></i> Crónicas</li>
-        <li class="tab-item" onclick="filterPosts('Filosofía', this)"><i class="fas fa-brain"></i> Filosofía</li>
+        <li class="tab-item active" onclick="filterPosts('all', this)">
+            <i class="fas fa-stream"></i> Publicaciones
+        </li>
+        <li class="tab-item" onclick="filterPosts('Crónicas', this)">
+            <i class="fas fa-feather-alt"></i> Crónicas
+        </li>
+        <li class="tab-item" onclick="filterPosts('Filosofía', this)">
+            <i class="fas fa-brain"></i> Filosofía
+        </li>
     </ul>
 </div>
 
 <div id="skeleton-feed">
-    {% for i in (1..2) %}
+    {% for i in (1..3) %}
     <div class="fb-card" style="padding: 20px; margin-bottom: 16px;">
         <div style="display: flex; gap: 12px; margin-bottom: 20px;">
             <div class="skeleton-item" style="width: 45px; height: 45px; border-radius: 50%;"></div>
@@ -21,7 +27,7 @@ title: Muro
                 <div class="skeleton-item" style="width: 80px; height: 8px;"></div>
             </div>
         </div>
-        <div class="skeleton-item" style="width: 100%; height: 150px; border-radius: 8px;"></div>
+        <div class="skeleton-item" style="width: 100%; height: 180px; border-radius: 8px;"></div>
     </div>
     {% endfor %}
 </div>
@@ -39,8 +45,8 @@ title: Muro
     <article class="fb-card post-card" data-category="{{ post.category }}" style="padding: 0; overflow: hidden; margin-bottom: 20px;">
         
         {% if post.image %}
-        <div style="width: 100%; height: 220px; overflow: hidden;">
-            <img src="{{ post.image | relative_url }}" style="width: 100%; height: 100%; object-fit: cover;">
+        <div style="width: 100%; height: 250px; overflow: hidden; background: var(--fb-bg);">
+            <img src="{{ post.image | relative_url }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
         </div>
         {% endif %}
 
@@ -55,19 +61,19 @@ title: Muro
         </div>
 
         <div style="padding: 0 20px 20px 20px;">
-            <h3 style="color: var(--fb-blue); margin-bottom: 10px; font-size: 1.3rem; font-weight: 800; line-height: 1.3;">
+            <h3 style="color: var(--fb-blue); margin-bottom: 12px; font-size: 1.4rem; font-weight: 800; line-height: 1.3;">
                 <a href="{{ post.url | relative_url }}" style="color: inherit; text-decoration: none;">{{ post.title }}</a>
             </h3>
-            <div style="color: var(--fb-text); font-size: 1rem; line-height: 1.5; text-align: justify; opacity: 0.9;">
-                {{ post.excerpt | strip_html | truncatewords: 35 }}
+            <div style="color: var(--fb-text); font-size: 1.05rem; line-height: 1.6; text-align: justify; opacity: 0.9;">
+                {{ post.excerpt | strip_html | truncatewords: 40 }}
             </div>
         </div>
 
         <div style="border-top: 1px solid var(--fb-border); padding: 12px 20px; background: var(--fb-bg); display: flex; justify-content: space-between; align-items: center;">
-            <a href="{{ post.url | relative_url }}" style="color: var(--fb-blue); text-decoration: none; font-weight: 700; font-size: 0.9rem;">
-                Seguir leyendo <i class="fas fa-chevron-right" style="font-size: 0.7rem; margin-left: 5px;"></i>
+            <a href="{{ post.url | relative_url }}" style="color: var(--fb-blue); text-decoration: none; font-weight: 700; font-size: 0.95rem;">
+                Seguir leyendo <i class="fas fa-chevron-right" style="font-size: 0.75rem; margin-left: 5px;"></i>
             </a>
-            <div style="color: var(--fb-text-sec); font-size: 0.9rem; font-weight: 600;">
+            <div style="color: var(--fb-text-sec); font-size: 1rem; cursor: pointer;">
                 <i class="fas fa-share-alt"></i>
             </div>
         </div>
@@ -77,67 +83,47 @@ title: Muro
 
 <script>
     window.addEventListener('load', function() {
-        const leftColumn = document.querySelector('.fb-left');
-        if (leftColumn) {
-            leftColumn.innerHTML = `
-                <div class="fb-card" style="padding: 0; overflow: hidden;">
-                    <div style="padding: 25px 20px; text-align: center; border-bottom: 1px solid var(--fb-border); background: var(--fb-bg);">
-                        <img src="{{ 'perfil.png.jpg' | relative_url }}" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--fb-white); object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-                        <h2 style="font-size: 1.4rem; font-weight: 800; margin-top: 15px; color: var(--fb-text); letter-spacing: -0.5px;">Carlos Hernández</h2>
-                    </div>
-                    
-                    <div style="padding: 20px;">
-                        <ul class="intro-list">
-                            <li class="intro-item"><i class="fas fa-briefcase"></i> <span>Especialista en <strong>Planeación Estratégica</strong></span></li>
-                            <li class="intro-item"><i class="fas fa-user-shield"></i> <span>Estudia <strong>Seguridad Pública</strong></span></li>
-                            <li class="intro-item"><i class="fas fa-map-marker-alt"></i> <span>Reside en <strong>CDMX</strong></span></li>
-                            <li class="intro-item"><i class="fas fa-heart" style="color: #fb7185;"></i> <span>En una relación con <strong>Daniela</strong></span></li>
-                            <li class="intro-item"><i class="fas fa-project-diagram"></i> <span>Impulsor de <strong>Ingeniería Humana</strong></span></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="fb-card" style="padding: 12px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <h3 style="font-size: 1.1rem; font-weight: 800;">Galería</h3>
-                        <a href="#" style="color: var(--fb-blue); text-decoration: none; font-size: 0.9rem; font-weight: 600;">Ver más</a>
-                    </div>
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; border-radius: 8px; overflow: hidden;">
-                        <div style="aspect-ratio: 1; background: var(--fb-hover);"></div>
-                        <div style="aspect-ratio: 1; background: var(--fb-hover);"></div>
-                        <div style="aspect-ratio: 1; background: var(--fb-hover);"></div>
-                    </div>
-                </div>
-            `;
-        }
-    });
-</script>
-
-<script>
-    window.addEventListener('load', function() {
+        // Control de la animación de carga
         setTimeout(() => {
             const skeleton = document.getElementById('skeleton-feed');
             const real = document.getElementById('real-feed');
             if(skeleton) skeleton.style.display = 'none';
             if(real) {
                 real.style.display = 'block';
-                real.style.animation = 'fadeIn 0.4s ease-in';
+                real.style.animation = 'fadeIn 0.5s ease-out';
             }
-        }, 700);
+        }, 500);
     });
 
+    // Función de filtrado dinámico
     function filterPosts(category, element) {
         document.querySelectorAll('.tab-item').forEach(tab => tab.classList.remove('active'));
         element.classList.add('active');
         const posts = document.querySelectorAll('.post-card');
         posts.forEach(post => {
-            post.style.display = (category === 'all' || post.getAttribute('data-category') === category) ? 'block' : 'none';
+            if (category === 'all' || post.getAttribute('data-category') === category) {
+                post.style.display = 'block';
+                post.style.animation = 'fadeIn 0.3s ease-in';
+            } else {
+                post.style.display = 'none';
+            }
         });
     }
 </script>
 
 <style>
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.skeleton-item { background: linear-gradient(90deg, var(--fb-hover) 25%, var(--fb-bg) 50%, var(--fb-hover) 75%); background-size: 200% 100%; animation: loading 1.5s infinite; }
-@keyframes loading { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+.skeleton-item { 
+    background: linear-gradient(90deg, var(--fb-hover) 25%, var(--fb-bg) 50%, var(--fb-hover) 75%); 
+    background-size: 200% 100%; 
+    animation: loading 1.5s infinite linear; 
+}
+@keyframes loading { 
+    from { background-position: 200% 0; } 
+    to { background-position: -200% 0; } 
+}
+.post-card:hover img { transform: scale(1.02); }
 </style>
