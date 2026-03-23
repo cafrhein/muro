@@ -65,11 +65,7 @@
 
         <main class="fb-feed">
             {% if page.layout == "post" %}
-                <article class="fb-card post-content" style="padding: 40px;">
-                    <h1 style="font-size: 2.2rem; margin-bottom: 20px; line-height: 1.2;">{{ page.title }}</h1>
-                    <p style="color: var(--fb-text-sec); font-size: 0.9rem; margin-bottom: 30px;">
-                        {{ page.date | date: "%e de %b, %Y" }} · Por Carlos Hernández
-                    </p>
+                <article class="fb-card post-content">
                     {{ content }}
                 </article>
             {% else %}
@@ -113,7 +109,6 @@
     </footer>
 
     <script>
-        // LÓGICA DE INTERFAZ (SIN DIFUMINADO MOLESTO)
         window.onscroll = function() {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -153,7 +148,7 @@
             overlay.classList.remove("active");
         });
 
-        // --- ESCÁNER AUTOMÁTICO DE GLOSARIO ---
+        // GLOSARIO BLINDADO
         const glosario = {
             "Idoneidad Relacional": "Capacidad de identificar si un vínculo suma estabilidad o genera aislamiento.",
             "Reciprocidad": "Dejarse cuidar para dotar de sentido al cuidador y fortalecer el vínculo.",
