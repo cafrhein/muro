@@ -35,32 +35,37 @@
 
     <div class="fb-container">
         <aside class="fb-left" id="fb-left">
-            <div class="fb-card">
-                <h3 style="font-size: 1.2rem; margin-bottom: 18px; font-weight: 800;">Información</h3>
-                <ul class="intro-list">
-                    <li class="intro-item"><i class="fas fa-briefcase"></i> <span>Especialista en <strong>Planeación Estratégica</strong></span></li>
-                    <li class="intro-item"><i class="fas fa-user-shield"></i> <span>Estudia <strong>Seguridad Pública</strong></span></li>
-                    <li class="intro-item"><i class="fas fa-map-marker-alt"></i> <span>Reside en <strong>CDMX</strong></span></li>
-                    <li class="intro-item"><i class="fas fa-heart" style="color: #fb7185;"></i> <span>En una relación con <strong>Daniela</strong></span></li>
-                    <li class="intro-item"><i class="fas fa-project-diagram"></i> <span>Impulsor de <strong>Ingeniería Humana</strong></span></li>
-                </ul>
-            </div>
-
-            <div class="fb-card" style="padding: 12px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <h3 style="font-size: 1.1rem; font-weight: 800;">Galería</h3>
-                    <a href="#" style="color: var(--fb-blue); text-decoration: none; font-size: 0.9rem; font-weight: 600;">Ver más</a>
-                </div>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; border-radius: 8px; overflow: hidden;">
-                    <div style="aspect-ratio: 1; background: var(--fb-hover);"></div>
-                    <div style="aspect-ratio: 1; background: var(--fb-hover);"></div>
-                    <div style="aspect-ratio: 1; background: var(--fb-hover);"></div>
+            <div id="identity-box">
+                <div class="fb-card" style="padding: 0; overflow: hidden;">
+                    <div style="padding: 25px 20px; text-align: center; border-bottom: 1px solid var(--fb-border); background: var(--fb-bg);">
+                        <img src="{{ 'perfil.png.jpg' | relative_url }}" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--fb-white); object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                        <h2 style="font-size: 1.4rem; font-weight: 800; margin-top: 15px; color: var(--fb-text); letter-spacing: -0.5px;">Carlos Hernández</h2>
+                    </div>
+                    <div style="padding: 20px;">
+                        <ul class="intro-list">
+                            <li class="intro-item"><i class="fas fa-briefcase"></i> <span>Especialista en <strong>Planeación Estratégica</strong></span></li>
+                            <li class="intro-item"><i class="fas fa-user-shield"></i> <span>Estudia <strong>Seguridad Pública</strong></span></li>
+                            <li class="intro-item"><i class="fas fa-map-marker-alt"></i> <span>Reside en <strong>CDMX</strong></span></li>
+                            <li class="intro-item"><i class="fas fa-heart" style="color: #fb7185;"></i> <span>En una relación con <strong>Daniela</strong></span></li>
+                            <li class="intro-item"><i class="fas fa-project-diagram"></i> <span>Impulsor de <strong>Ingeniería Humana</strong></span></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </aside>
 
         <main class="fb-feed">
-            {{ content }}
+            {% if page.layout == "post" %}
+                <article class="fb-card post-content" style="padding: 40px;">
+                    <h1 style="font-size: 2.2rem; margin-bottom: 20px; line-height: 1.2;">{{ page.title }}</h1>
+                    <p style="color: var(--fb-text-sec); font-size: 0.9rem; margin-bottom: 30px;">
+                        {{ page.date | date: "%e de %b, %Y" }} · Por Carlos Hernández
+                    </p>
+                    {{ content }}
+                </article>
+            {% else %}
+                {{ content }}
+            {% endif %}
         </main>
 
         <aside class="fb-right">
@@ -91,15 +96,7 @@
 
     <footer class="site-footer">
         <div class="footer-content">
-            <ul class="footer-nav">
-                <li><a href="{{ '/' | relative_url }}">Inicio</a></li>
-                <li><a href="mailto:tu-correo@ejemplo.com">Contacto</a></li>
-            </ul>
-            
-            <p style="font-size: 1.1rem; font-weight: 800; color: var(--fb-text); margin-top: 20px;">
-                Carlos Hernández
-            </p>
-            
+            <p style="font-size: 1.1rem; font-weight: 800; color: var(--fb-text); margin-top: 20px;">Carlos Hernández</p>
             <p style="font-size: 0.85rem; color: var(--fb-text-sec); opacity: 0.7; margin-top: 5px;">
                 &copy; {{ "now" | date: "%Y" }} · Adestrat.com
             </p>
@@ -107,6 +104,7 @@
     </footer>
 
     <script>
+        // Lógica de Dark Mode y Menú Móvil
         const themeBtn = document.getElementById("theme-button");
         const themeIcon = themeBtn.querySelector("i");
         function updateIcon(isDark) { themeIcon.className = isDark ? "fas fa-sun" : "fas fa-moon"; }
@@ -128,7 +126,7 @@
         const sidebar = document.getElementById("fb-left");
         const overlay = document.getElementById("menu-overlay");
         menuToggle.addEventListener("click", () => {
-            if (window.innerWidth <= 900) {
+            if (window.innerWidth <= 1150) {
                 sidebar.classList.toggle("active");
                 overlay.classList.toggle("active");
             }
