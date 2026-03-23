@@ -1,5 +1,5 @@
 /* ============================================================
-   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V3.4
+   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V3.6
    DISEÑO, UX Y SEGURIDAD: CARLOS HERNÁNDEZ
    SISTEMA: JEKYLL + GITHUB PAGES (ADESTRAT.COM)
    ============================================================ */
@@ -141,6 +141,10 @@ body {
     border: 1px solid var(--fb-border);
     position: relative;
     overflow: visible; 
+}
+
+.fb-card.post-content {
+    padding: 40px; 
 }
 
 .fb-card > img {
@@ -357,8 +361,14 @@ h1, h2, h3 {
 
 /* 16. ANIMACIONES SKELETON */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+        opacity: 0; 
+        transform: translateY(15px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
 }
 
 .skeleton-item {
@@ -369,11 +379,15 @@ h1, h2, h3 {
 }
 
 @keyframes loading {
-    from { background-position: 200% 0; }
-    to { background-position: -200% 0; }
+    from { 
+        background-position: 200% 0; 
+    }
+    to { 
+        background-position: -200% 0; 
+    }
 }
 
-/* 17. LISTAS DEL SIDEBAR PERSONAL */
+/* 17. LISTAS DEL SIDEBAR PERSONAL (MÁRGENES COMPACTOS) */
 .intro-list { 
     list-style: none; 
     margin-top: 5px; 
@@ -412,25 +426,51 @@ h1, h2, h3 {
     font-weight: 600;
 }
 
-.footer-nav a { color: var(--fb-text-sec); text-decoration: none; transition: 0.2s; }
-.footer-nav a:hover { color: var(--fb-blue); }
+.footer-nav a { 
+    color: var(--fb-text-sec); 
+    text-decoration: none; 
+    transition: 0.2s; 
+}
+
+.footer-nav a:hover { 
+    color: var(--fb-blue); 
+}
 
 /* 19. BOTÓN FLOTANTE MODO OSCURO */
 .dark-mode-toggle {
-    position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; 
-    border-radius: 50%; background: var(--fb-blue); color: white;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; z-index: 3000; border: none;
+    position: fixed; 
+    bottom: 30px; 
+    right: 30px; 
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%; 
+    background: var(--fb-blue); 
+    color: white;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    cursor: pointer; 
+    z-index: 3000; 
+    border: none;
     box-shadow: 0 8px 20px rgba(24, 119, 242, 0.4);
 }
 
 /* 20. OVERLAY DEL MENÚ MÓVIL */
 .menu-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); z-index: 2400; display: none;
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: rgba(0,0,0,0.5); 
+    z-index: 2400; 
+    display: none;
     backdrop-filter: blur(4px);
 }
-.menu-overlay.active { display: block; }
+
+.menu-overlay.active { 
+    display: block; 
+}
 
 /* ============================================================
    21. RESPONSIVO MÓVIL Y TABLET (HASTA 1150px)
@@ -438,67 +478,58 @@ h1, h2, h3 {
 @media (max-width: 1150px) {
     .fb-container { 
         grid-template-columns: 1fr; 
-        max-width: 100%; 
-        padding: 0 !important; 
+        max-width: 700px; 
+        padding: 10px; 
         margin-top: 0; 
-        gap: 0; 
     }
     
     .fb-left {
         position: fixed; 
         top: 0; 
-        left: -100%;
+        left: -100%; 
         width: 85%; 
         max-width: 320px; 
-        height: 100vh;
+        height: 100vh; 
         background: var(--fb-white); 
         z-index: 2500;
-        transition: var(--spring);
-        padding: 60px 25px;
-        box-shadow: 15px 0 45px rgba(0,0,0,0.3);
+        transition: var(--spring); 
+        padding: 60px 25px; 
+        box-shadow: 15px 0 45px rgba(0,0,0,0.3); 
         overflow-y: auto; 
     }
-    .fb-left.active { left: 0; }
     
-    .fb-right { display: none; }
+    .fb-left.active { 
+        left: 0; 
+    }
     
-    /* ELIMINAMOS EL ESTILO DE CAJA ÚNICAMENTE EN LA LECTURA DEL POST */
+    .fb-right { 
+        display: none; 
+    }
+    
+    /* EN MÓVIL: MANTENEMOS LA TARJETA PERO CON MENOS PADDING INTERNO */
     .fb-card.post-content {
-        box-shadow: none !important;
-        border: none !important;
-        border-radius: 0 !important;
-        margin-bottom: 0 !important;
-        padding: 30px 20px !important;
+        padding: 20px;
     }
     
-    .post-content {
-        font-size: 1.15rem; 
-        line-height: 1.7;
-    }
-    
-    .post-content p {
-        margin-bottom: 1.5rem;
-    }
-
     /* Protegemos los tooltips en móviles */
     .tooltip-vinc .tooltip-text {
-        width: max-content;
+        width: max-content; 
         max-width: 85vw; 
-        left: auto;
-        right: 0;
+        left: auto; 
+        right: 0; 
         transform: translateY(10px);
     }
-    .tooltip-vinc:hover .tooltip-text { transform: translateY(0); }
-    .tooltip-vinc .tooltip-text::after { left: 85%; }
     
-    .related-grid { 
-        padding: 0 20px 30px 20px; 
-        grid-template-columns: 1fr;
+    .tooltip-vinc:hover .tooltip-text { 
+        transform: translateY(0); 
     }
     
-    #identity-box .fb-card {
-        border: none;
-        box-shadow: none;
-        padding: 0;
+    .tooltip-vinc .tooltip-text::after { 
+        left: 85%; 
+    }
+    
+    .related-grid { 
+        padding: 0; 
+        grid-template-columns: 1fr; 
     }
 }
