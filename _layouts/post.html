@@ -1,88 +1,55 @@
 ---
 layout: default
 ---
-<div id="progress-container">
-    <div id="progress-bar"></div>
-</div>
-
-{% assign words = content | number_of_words %}
-{% if words < 360 %}
-  {% assign read_time = "2 min" %}
-{% else %}
-  {% assign read_time = words | divided_by: 180 | append: " min" %}
-{% endif %}
-
-<article class="fb-card" style="padding: 0; overflow: hidden; border: 1px solid var(--fb-border); margin-bottom: 20px;">
+<article class="fb-card post-content">
     
-    <div style="padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--fb-border); background: var(--fb-white);">
-        <div style="display: flex; align-items: center; gap: 12px;">
-            <img src="{{ '/perfil.png.jpg' | relative_url }}" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1px solid var(--fb-border);">
-            <div>
-                <strong style="display: block; color: var(--fb-text); font-size: 1rem; font-weight: 700;">Carlos Hernández</strong>
-                <span style="font-size: 0.8rem; color: var(--fb-text-sec);">
-                    {{ page.date | date: "%e de %b, %Y" }} · <i class="fas fa-clock" style="font-size: 0.7rem;"></i> Lectura de {{ read_time }}
-                </span>
-            </div>
-        </div>
-        <div style="color: var(--fb-text-sec); font-size: 1.1rem;">
-            <i class="fas fa-ellipsis-h"></i>
-        </div>
-    </div>
+    <header style="margin-bottom: 25px; border-bottom: 1px solid var(--fb-border); padding-bottom: 15px;">
+        
+        <h1 style="margin-bottom: 10px; font-size: 2rem;">{{ page.title }}</h1>
+        
+        <div style="color: var(--fb-text-sec); font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; flex-wrap: wrap; gap: 12px;">
+            
+            <span><i class="fas fa-calendar-alt" style="margin-right: 5px;"></i> {{ page.date | date: "%d/%m/%Y" }}</span>
+            
+            <span style="color: var(--fb-border);">|</span>
+            
+            <span>
+                <i class="fas fa-clock" style="margin-right: 5px;"></i> 
+                {% assign words = content | number_of_words %}
+                {% if words < 360 %}
+                  1 min de lectura
+                {% else %}
+                  {{ words | divided_by: 180 }} min de lectura
+                {% endif %}
+            </span>
 
-    <div style="padding: 25px 25px 5px 25px;">
-        {% if page.category %}
-        <span style="background: var(--fb-blue); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; display: inline-block; letter-spacing: 0.5px;">
-            {{ page.category }}
-        </span>
-        {% endif %}
-        <h1 style="font-size: 2.2rem; color: var(--fb-text); line-height: 1.2; font-weight: 800; letter-spacing: -0.5px;">
-            {{ page.title }}
-        </h1>
-    </div>
+            <span style="color: var(--fb-border);">|</span>
 
-    <div class="post-content" style="padding: 10px 25px 30px 25px;">
+            <span><i class="fas fa-folder-open" style="margin-right: 5px;"></i> {{ page.category | default: "Filosofía" }}</span>
+
+        </div>
+    </header>
+
+    <div class="post-body">
         {{ content }}
     </div>
 
-    <div style="padding: 25px; background: var(--fb-bg); border-top: 1px solid var(--fb-border);">
-        <h4 style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--fb-text-sec); margin-bottom: 15px; font-weight: 800;">Vínculos de Interdependencia</h4>
+    <footer style="margin-top: 45px; padding-top: 25px; border-top: 1px solid var(--fb-border);">
+        <h3 style="font-size: 1.2rem; color: var(--fb-text); margin-bottom: 15px;">Vínculos de Interdependencia</h3>
+        <p style="font-size: 0.9rem; color: var(--fb-text-sec); margin-bottom: 15px;">Continúa explorando la red de apoyo:</p>
+        
         <div class="related-grid">
             {% assign count = 0 %}
             {% for post in site.posts %}
                 {% if post.url != page.url and count < 2 %}
-                    {% if post.category == page.category or page.category == nil %}
-                    <a href="{{ post.url | relative_url }}" class="related-card">
-                        <strong>{{ post.title }}</strong>
-                        <span>{{ post.date | date: "%e de %b, %Y" }} · {{ post.category }}</span>
-                    </a>
-                    {% assign count = count | plus: 1 %}
-                    {% endif %}
+                <a href="{{ post.url | relative_url }}" class="related-card">
+                    <strong>{{ post.title }}</strong>
+                    <span>{{ post.date | date: "%d/%m/%Y" }}</span>
+                </a>
+                {% assign count = count | plus: 1 %}
                 {% endif %}
             {% endfor %}
         </div>
-    </div>
+    </footer>
 
-    <div style="border-top: 1px solid var(--fb-border); padding: 15px 25px; background: var(--fb-white); display: flex; justify-content: space-between; align-items: center;">
-        <a href="{{ '/' | relative_url }}" style="color: var(--fb-blue); text-decoration: none; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
-            <i class="fas fa-arrow-left"></i> Volver al muro
-        </a>
-        
-        <div onclick="if(navigator.share){ navigator.share({title: '{{ page.title | escape }}', url: window.location.href}); }" 
-             style="color: var(--fb-text-sec); font-weight: 600; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 8px 15px; border-radius: 6px; transition: 0.2s;"
-             onmouseover="this.style.background='var(--fb-hover)'" onmouseout="this.style.background='transparent'">
-            <i class="fas fa-share-alt"></i> Compartir
-        </div>
-    </div>
 </article>
-
-<script>
-    window.onscroll = function() {
-        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        let scrolled = (winScroll / height) * 100;
-        let pBar = document.getElementById("progress-bar");
-        if(pBar) {
-            pBar.style.width = scrolled + "%";
-        }
-    };
-</script>
