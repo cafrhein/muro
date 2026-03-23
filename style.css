@@ -1,5 +1,5 @@
 /* ============================================================
-   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V3.0
+   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V3.1
    DISEÑO, UX Y SEGURIDAD: CARLOS HERNÁNDEZ
    SISTEMA: JEKYLL + GITHUB PAGES (ADESTRAT.COM)
    ============================================================ */
@@ -121,7 +121,7 @@ body {
     flex: 1;
 }
 
-/* 8. SIDEBARS PEGAJOSOS (SIN DIFUMINADO DE FOCUS MODE) */
+/* 8. SIDEBARS PEGAJOSOS */
 .fb-left, 
 .fb-right {
     position: sticky;
@@ -211,12 +211,16 @@ h1, h2, h3 {
     letter-spacing: -0.5px;
 }
 
-/* 13. UX DE LECTURA (CONTENIDO DEL POST) */
+/* 13. UX DE LECTURA (CONTENIDO DEL POST EN ESCRITORIO) */
 .post-content {
     font-size: 1.15rem;
     color: var(--fb-text);
     line-height: 1.85;
     position: relative;
+}
+
+.fb-card.post-content {
+    overflow: visible !important;
 }
 
 .post-content p {
@@ -299,7 +303,6 @@ h1, h2, h3 {
     transform: translateX(-50%) translateY(0);
 }
 
-/* Tooltips en modo oscuro */
 [data-theme="dark"] .tooltip-text {
     background-color: #242526;
     color: #e4e6eb;
@@ -380,7 +383,7 @@ h1, h2, h3 {
     }
 }
 
-/* 17. LISTAS DEL SIDEBAR PERSONAL (MÁRGENES COMPACTOS) */
+/* 17. LISTAS DEL SIDEBAR PERSONAL */
 .intro-list { 
     list-style: none; 
     margin-top: 5px; 
@@ -465,7 +468,7 @@ h1, h2, h3 {
     display: block; 
 }
 
-/* 21. RESPONSIVO Y SPRING PHYSICS (MÓVIL) */
+/* 21. RESPONSIVO GLOBAL (TABLETS Y MÓVILES) */
 @media (max-width: 1150px) {
     .fb-container { 
         grid-template-columns: 1fr; 
@@ -509,7 +512,7 @@ h1, h2, h3 {
         padding: 20px; 
     }
     
-    /* Prevenir que se corten los tooltips en pantallas pequeñas */
+    /* Prevenir que se corten los tooltips en pantallas medianas */
     .tooltip-vinc .tooltip-text {
         width: 220px;
         left: auto;
@@ -527,8 +530,37 @@ h1, h2, h3 {
 }
 
 /* ============================================================
-   CORRECCIÓN: PREVENCIÓN DE BURBUJAS CORTADAS
+   22. EXPERIENCIA DE LECTURA MÓVIL (TIPO PERIÓDICO DIGITAL)
    ============================================================ */
-.fb-card.post-content {
-    overflow: visible !important; /* Permite que el globo se salga de la tarjeta sin cortarse */
+@media (max-width: 768px) {
+    /* Destruye el padding de 40px del HTML e impone una sangría de 18px */
+    .fb-card.post-content {
+        padding: 25px 18px !important; 
+    }
+    
+    /* Tamaño ideal para no cansar la vista en pantallas pequeñas */
+    .post-content {
+        font-size: 1.1rem; 
+        line-height: 1.7;
+    }
+    
+    /* Títulos ajustados para no abarcar toda la pantalla */
+    .post-content h1 {
+        font-size: 1.9rem !important; 
+        line-height: 1.25;
+        margin-bottom: 15px !important;
+    }
+    
+    /* Párrafos compactos */
+    .post-content p {
+        margin-bottom: 1.4rem;
+    }
+    
+    /* Citas destacadas ajustadas al ancho móvil */
+    .post-content blockquote {
+        padding: 1.5rem;
+        font-size: 1.25rem;
+        margin: 2rem 0;
+        border-left: 4px solid var(--fb-blue);
+    }
 }
