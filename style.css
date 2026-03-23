@@ -530,3 +530,14 @@ h1, h2, h3 {
         left: 80%;
     }
 }
+/* ============================================================
+   CORRECCIÓN: PREVENCIÓN DE BURBUJAS CORTADAS
+   ============================================================ */
+.fb-card.post-content {
+    overflow: visible !important; /* Permite que el globo se salga de la tarjeta sin cortarse */
+}
+
+.tooltip-vinc .tooltip-text {
+    width: max-content; /* Se adapta al texto */
+    max-width: 250px; /* Pero no crece más de 250px */
+}
