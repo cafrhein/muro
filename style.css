@@ -233,13 +233,13 @@ blockquote p {
     blockquote {
         background-color: #f4f4f4 !important; 
         border-left: 5px solid var(--rt-red) !important; 
-        padding: 15px !important; 
-        margin: 20px 0 !important; 
+        padding: 10px !important; 
+        margin: 15px 0 !important; 
     }
     
     .about-social a, .author-social a { font-size: 1.5rem; }
 
     .fb-container {
-        padding: 15px 1%; /* AJUSTE AUTORIZADO: Reducción de márgenes en móvil */
+        padding: 10px 1% !important; /* AJUSTE AUTORIZADO: Reducción drástica de márgenes en móvil */
     }
 }
