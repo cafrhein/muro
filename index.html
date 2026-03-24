@@ -3,35 +3,37 @@ layout: default
 title: Portada
 ---
 
-<div class="rt-home-wrapper">
+<div class="rt-home-wrapper" style="margin-top: 20px;">
     
-    <div style="border-bottom: 4px solid var(--rt-black); margin-bottom: 30px; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: flex-end;">
-        <h2 style="font-family: var(--font-heading); font-weight: 900; text-transform: uppercase; font-size: 1.5rem; margin: 0; letter-spacing: -1px;">
-            Últimas Entradas <span style="color: var(--rt-red);">/ Red Humana</span>
+    <div style="border-bottom: 4px solid var(--rt-black); margin-bottom: 40px; padding-bottom: 15px; display: flex; align-items: flex-end;">
+        <h2 style="font-family: var(--font-heading); font-weight: 900; text-transform: uppercase; font-size: 1.8rem; margin: 0; letter-spacing: -1px; color: var(--rt-black);">
+            Lo Último <span style="color: var(--rt-red);">/ Red Humana</span>
         </h2>
     </div>
 
-    <div class="news-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 30px;">
+    <div class="news-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px;">
         
         {% for post in site.posts %}
-        <article class="news-item" style="border-bottom: 1px solid var(--rt-border); padding-bottom: 20px; transition: transform 0.2s ease;">
+        <article class="news-item" style="border-bottom: 1px solid var(--rt-border); padding-bottom: 30px; position: relative; background: transparent;">
             
-            <div style="color: var(--rt-red); font-family: var(--font-heading); font-weight: 800; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 10px; letter-spacing: 1px;">
-                {{ post.category | default: "Filosofía" }}
+            <div style="color: var(--rt-red); font-family: var(--font-heading); font-weight: 800; text-transform: uppercase; font-size: 0.75rem; margin-bottom: 12px; letter-spacing: 1.5px;">
+                {{ post.category | default: "Ensayo" }}
             </div>
 
-            <a href="{{ post.url | relative_url }}" style="text-decoration: none; color: var(--rt-black);">
-                <h3 style="font-family: var(--font-heading); font-weight: 900; font-size: 1.6rem; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.5px;">
+            <a href="{{ post.url | relative_url }}" style="text-decoration: none; color: var(--rt-black); display: block;">
+                <h3 style="font-family: var(--font-heading); font-weight: 900; font-size: 1.7rem; line-height: 1.15; margin: 0 0 15px 0; letter-spacing: -0.8px; transition: color 0.2s;">
                     {{ post.title }}
                 </h3>
             </a>
 
-            <p style="font-size: 1rem; color: var(--rt-text-sec); line-height: 1.5; margin-bottom: 15px;">
-                {{ post.excerpt | strip_html | truncatewords: 25 }}
+            <p style="font-size: 1.05rem; color: var(--rt-text-sec); line-height: 1.5; margin-bottom: 20px; font-weight: 400;">
+                {{ post.content | strip_html | truncatewords: 20 }}
             </p>
 
-            <div style="font-size: 0.85rem; color: #999; font-weight: 600; text-transform: uppercase;">
-                {{ post.date | date: "%d %b %Y" }}
+            <div style="font-family: var(--font-main); font-size: 0.85rem; color: #999; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; gap: 10px;">
+                <span>{{ post.date | date: "%d %b %Y" }}</span>
+                <span style="color: var(--rt-red);">•</span>
+                <span>Carlos Hernández</span>
             </div>
 
         </article>
@@ -41,21 +43,25 @@ title: Portada
 </div>
 
 <style>
-    /* Efecto de titulares al pasar el mouse */
+    /* Estilos específicos para eliminar cualquier residuo visual */
     .news-item:hover h3 {
-        color: var(--rt-red);
+        color: var(--rt-red) !important;
     }
-    .news-item:hover {
-        transform: translateY(-3px);
+    
+    /* Asegurar que no haya texto flotante del layout anterior */
+    .rt-home-wrapper {
+        color: var(--rt-text);
+        z-index: 1;
+        position: relative;
     }
 
-    /* Ajuste para móviles */
     @media (max-width: 768px) {
         .news-grid {
             grid-template-columns: 1fr;
+            gap: 30px;
         }
         h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem !important;
         }
     }
 </style>
