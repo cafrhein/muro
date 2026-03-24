@@ -1,0 +1,132 @@
+---
+layout: default
+title: Central de Herramientas | Red Humana
+---
+
+<section class="rt-hero">
+    <h1>Ingeniería de Vínculos</h1>
+    <p class="rt-subtitle">Sistemas interactivos para la medición y fortalecimiento de la interdependencia.</p>
+</section>
+
+<div class="tools-grid">
+    
+    <article class="tool-card">
+        <div class="tool-icon"><i class="fas fa-satellite-dish"></i></div>
+        <h3 class="tool-title">Radar de Vínculos</h3>
+        <p class="tool-desc">Mide la solidez de tu red basada en 5 pilares de reciprocidad.</p>
+        <a href="/radar" class="tool-btn">INICIAR TEST</a>
+    </article>
+
+    <article class="tool-card">
+        <div class="tool-icon"><i class="fas fa-Exclamation-triangle"></i></div>
+        <h3 class="tool-title">Calculador de Crisis</h3>
+        <p class="tool-desc">Identifica el protocolo de apoyo idóneo para tu situación actual.</p>
+        <a href="/crisis" class="tool-btn">GESTIONAR CARGA</a>
+    </article>
+
+    <article class="tool-card locked">
+        <div class="tool-icon"><i class="fas fa-clipboard-list"></i></div>
+        <h3 class="tool-title">Inventario Relacional</h3>
+        <p class="tool-desc">Identifica patrones que bloquean tu capacidad de dar y recibir cuidado.</p>
+        <span class="tool-btn disabled">PRÓXIMAMENTE</span>
+    </article>
+
+    <article class="tool-card locked">
+        <div class="tool-icon"><i class="fas fa-network-wired"></i></div>
+        <h3 class="tool-title">Mapa de Red</h3>
+        <p class="tool-desc">Visualiza gráficamente quién te sostiene y a quién dotas de sentido.</p>
+        <span class="tool-btn disabled">PRÓXIMAMENTE</span>
+    </article>
+
+</div>
+
+<style>
+/* --- ESTILOS DEL HUB DE HERRAMIENTAS --- */
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Tu estándar de 4 columnas */
+    gap: 25px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 2% 80px 2%;
+}
+
+.tool-card {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tool-card:hover {
+    border-color: var(--rt-red);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.tool-icon {
+    font-size: 2.5rem;
+    color: var(--rt-red);
+    margin-bottom: 20px;
+}
+
+.tool-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    color: var(--rt-black);
+}
+
+.tool-desc {
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.tool-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background: var(--rt-black);
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.2s;
+}
+
+.tool-btn:hover {
+    background: var(--rt-red);
+}
+
+/* Estado bloqueado para lo que aún no construyes */
+.tool-card.locked {
+    opacity: 0.6;
+    background: #fdfdfd;
+}
+
+.tool-btn.disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Responsivo */
+@media (max-width: 1100px) {
+    .tools-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 650px) {
+    .tools-grid { grid-template-columns: 1fr; }
+}
+</style>
