@@ -1,0 +1,100 @@
+---
+layout: default
+title: Mapa de Red Humana
+---
+
+<div class="map-container" style="max-width: 1000px; margin: 40px auto; padding: 20px;">
+    <header style="text-align: center; margin-bottom: 30px;">
+        <h1 style="font-family: var(--font-heading); text-transform: uppercase;">Mapa de Interdependencia</h1>
+        <p style="font-family: var(--font-main); color: #666;">Visualiza gráficamente quién te sostiene y el alcance de tu red primaria.</p>
+    </header>
+
+    <div class="map-controls" style="background: #f9f9f9; padding: 20px; border: 1px solid #eee; margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; align-items: flex-end;">
+        <div style="flex: 1; min-width: 200px;">
+            <label style="font-family: var(--font-heading); font-size: 0.8rem; font-weight: 700;">NOMBRE DEL VÍNCULO:</label>
+            <input type="text" id="node-name" placeholder="Ej. Isaac o Daniela" style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc;">
+        </div>
+        <div style="flex: 1; min-width: 200px;">
+            <label style="font-family: var(--font-heading); font-size: 0.8rem; font-weight: 700;">CERCANÍA (IDONEIDAD):</label>
+            <select id="node-distance" style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc;">
+                <option value="80">Primaria (Sostén Vital)</option>
+                <option value="160">Secundaria (Apoyo Recíproco)</option>
+                <option value="240">Periférica (Conexión Funcional)</option>
+            </select>
+        </div>
+        <button onclick="addNode()" style="padding: 10px 25px; background: var(--rt-red); color: white; border: none; font-family: var(--font-heading); font-weight: 700; cursor: pointer; text-transform: uppercase;">Agregar</button>
+    </div>
+
+    <div id="canvas-wrapper" style="position: relative; width: 100%; height: 500px; background: #fff; border: 2px solid #000; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+        <div id="core-node" style="position: absolute; width: 60px; height: 60px; background: var(--rt-black); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-weight: 700; z-index: 10; font-size: 0.7rem; text-align: center; border: 3px solid var(--rt-red);">YO</div>
+        
+        <div class="ring" style="position: absolute; width: 160px; height: 160px; border: 1px dashed #ddd; border-radius: 50%;"></div>
+        <div class="ring" style="position: absolute; width: 320px; height: 320px; border: 1px dashed #ddd; border-radius: 50%;"></div>
+        <div class="ring" style="position: absolute; width: 480px; height: 480px; border: 1px dashed #ddd; border-radius: 50%;"></div>
+        
+        <div id="nodes-layer" style="position: absolute; width: 100%; height: 100%;"></div>
+    </div>
+
+    <button onclick="clearMap()" style="margin-top: 20px; background: none; border: 1px solid #ccc; padding: 10px; font-family: var(--font-heading); cursor: pointer; font-size: 0.8rem; text-transform: uppercase;">Reiniciar Mapa</button>
+</div>
+
+<script>
+function addNode() {
+    const name = document.getElementById('node-name').value;
+    const distance = document.getElementById('node-distance').value;
+    
+    if(!name) return alert("Asigna un nombre al vínculo");
+
+    const layer = document.getElementById('nodes-layer');
+    const angle = Math.random() * Math.PI * 2;
+    
+    // Centrar relativo al wrapper
+    const centerX = layer.offsetWidth / 2;
+    const centerY = layer.offsetHeight / 2;
+    
+    const x = centerX + (distance / 2) * Math.cos(angle) - 25;
+    const y = centerY + (distance / 2) * Math.sin(angle) - 25;
+
+    const node = document.createElement('div');
+    node.className = 'v-node';
+    node.style.position = 'absolute';
+    node.style.left = x + 'px';
+    node.style.top = y + 'px';
+    node.style.width = '50px';
+    node.style.height = '50px';
+    node.style.background = 'var(--rt-red)';
+    node.style.color = '#fff';
+    node.style.borderRadius = '50%';
+    node.style.display = 'flex';
+    node.style.align-items = 'center';
+    node.style.justify-content = 'center';
+    node.style.fontFamily = 'var(--font-heading)';
+    node.style.fontSize = '0.65rem';
+    node.style.fontWeight = '700';
+    node.style.textAlign = 'center';
+    node.style.padding = '5px';
+    node.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+    node.style.cursor = 'move';
+    node.innerText = name.toUpperCase();
+
+    layer.appendChild(node);
+    document.getElementById('node-name').value = '';
+}
+
+function clearMap() {
+    document.getElementById('nodes-layer').innerHTML = '';
+}
+</script>
+
+<style>
+#canvas-wrapper {
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.02);
+}
+.v-node {
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes popIn {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+</style>
