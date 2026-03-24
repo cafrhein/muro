@@ -2,7 +2,7 @@
 ---
 /* ============================================================
    REDISEÑO CARLOS - PORTAL DE AUTOR
-   ARQUITECTURA V11.1 | CIERRE DE SISTEMA Y OPTIMIZACIÓN UX
+   ARQUITECTURA V11.3 | COHERENCIA SEMÁNTICA Y CONTRASTE AFINADO
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;500;700&display=swap');
@@ -13,6 +13,7 @@
     --rt-white: #ffffff;
     --rt-text: #1a1a1a;
     --rt-grey: #444444;
+    --rt-ui-grey: #b3b3b3; /* Contraste mejorado para legibilidad en negro */
     --font-main: 'Roboto', sans-serif;
     --font-heading: 'Oswald', sans-serif;
     --header-height: 75px;
@@ -23,6 +24,7 @@
     --rt-black: #ffffff;
     --rt-text: #e4e4e4;
     --rt-grey: #bbbbbb;
+    --rt-ui-grey: #888888;
 }
 
 /* 1. BASE */
@@ -33,10 +35,9 @@ body {
     color: var(--rt-text);
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
 }
 
-/* 2. HEADER & NAV (UI) */
+/* 2. HEADER (DEFINICIÓN DE ROLES) */
 .fb-header {
     background-color: #000 !important;
     height: var(--header-height);
@@ -51,6 +52,7 @@ body {
     display: flex; justify-content: space-between; align-items: center;
 }
 
+/* UI: ACCIÓN E IDENTIDAD (OSWALD) */
 #menu-toggle {
     background: transparent; border: none; color: #fff;
     font-family: var(--font-heading); font-weight: 500;
@@ -65,13 +67,19 @@ body {
     text-transform: uppercase; letter-spacing: -1px;
 }
 
-/* 3. COLUMNA DE LECTURA (PRECISIÓN EDITORIAL) */
-.post-content { 
-    max-width: 740px; /* Sweet spot: ~75 caracteres por línea */
-    margin: 0 auto; 
+/* INFO: DATO PURO (ROBOTO - SIN RUIDO DE UI) */
+.header-date { 
+    color: var(--rt-ui-grey); 
+    font-family: var(--font-main); 
+    font-weight: 400; 
+    font-size: 0.9rem; 
+    text-transform: none; /* Eliminado el grito de UI */
+    letter-spacing: normal;
 }
 
-/* H1 Fluido con clamp() */
+/* 3. ESTRUCTURA DE CONTENIDO */
+.post-content { max-width: 740px; margin: 0 auto; }
+
 .post-content h1 {
     font-family: var(--font-heading);
     font-size: clamp(2.2rem, 5vw, 3.8rem); 
@@ -83,30 +91,17 @@ body {
     color: var(--rt-black);
 }
 
-/* H2 y H3 con Tono Diferenciado */
 h2, h3 { font-family: var(--font-main); font-weight: 700; margin: 3rem 0 1.2rem; }
+h2 { font-size: 1.8rem; border-left: 4px solid var(--rt-red); padding-left: 20px; color: var(--rt-black); }
+h3 { font-size: 1.4rem; color: var(--rt-grey); }
 
-h2 { 
-    font-size: 1.8rem; 
-    border-left: 4px solid var(--rt-red); 
-    padding-left: 20px; 
-    color: var(--rt-black);
-}
-
-h3 { 
-    font-size: 1.4rem; 
-    color: var(--rt-grey); /* Tono suavizado para reducir fatiga */
-}
-
-.post-body p { font-size: 1.25rem; margin-bottom: 2rem; }
-
-/* 4. PORTADA */
+/* 4. EXCEPCIÓN DELIBERADA: PORTADA (OSWALD PARA IMPACTO EDITORIAL) */
 .news-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
 .news-item h3 { 
     font-family: var(--font-heading); 
+    font-weight: 700; 
     font-size: 1.5rem; 
     text-transform: uppercase; 
-    line-height: 1.1;
     color: var(--rt-black);
 }
 
@@ -119,4 +114,4 @@ h3 {
 
 /* 6. RESPONSIVO */
 @media (max-width: 1050px) { .news-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .news-grid { grid-template-columns: 1fr; } .fb-container { padding: 0 20px; } }
+@media (max-width: 600px) { .news-grid { grid-template-columns: 1fr; } .header-date { display: none; } }
