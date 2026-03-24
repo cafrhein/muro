@@ -1,24 +1,35 @@
+# ==========================================
+# CONFIGURACIÓN GLOBAL - RED HUMANA (RT STYLE)
+# ==========================================
 title: "Adestrat | Red Humana"
 description: "Estrategia e Ingeniería de la Reciprocidad"
-remote_theme: pages-themes/minimal
-
-# CONFIGURACIÓN DE RUTAS
-baseurl: ""
 url: "https://adestrat.com"
+baseurl: ""
 
-# Configuración de Jekyll
+# IMPORTANTE: Eliminamos remote_theme para que use nuestro diseño propio
+theme: null
+
+# CONFIGURACIÓN DE MOTOR
 markdown: kramdown
 highlighter: rouge
 lsi: false
 
-# Forzar la lectura de carpetas
-include: [_posts, _layouts]
-exclude: [Gemfile, Gemfile.lock, node_modules, vendor]
+# ESTRUCTURA DE ARCHIVOS
+include: [_posts, _layouts, assets]
+exclude: [Gemfile, Gemfile.lock, node_modules, vendor, .github]
 
-# Configuración de Posts
+# CONFIGURACIÓN DE PERMALINKS (Estilo Noticias)
+permalink: /:categories/:title/
+
+# VALORES POR DEFECTO
 defaults:
   - scope:
       path: ""
       type: "posts"
+    values:
+      layout: "post"
+      category: "Actualidad"
+  - scope:
+      path: ""
     values:
       layout: "default"
