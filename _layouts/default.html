@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,15 +16,18 @@
 
     <header class="fb-header">
         <div class="header-content">
+            
             <div class="header-left">
-                <button id="menu-toggle">
+                <button id="menu-toggle" type="button">
                     <i class="fas fa-bars"></i> 
                     <span class="menu-text">Menú</span>
                 </button>
-                <a href="/">
+                
+                <a href="/" class="logo-link">
                     <div class="rt-logo">CARLOS</div>
                 </a>
             </div>
+
             <div class="header-date">
                 {{ "now" | date: "%d %b %Y" }}
             </div>
@@ -38,7 +41,10 @@
     {% endif %}
 
     <nav id="side-menu">
-        <button id="menu-close"><i class="fas fa-times"></i></button>
+        <button id="menu-close" type="button">
+            <i class="fas fa-times"></i>
+        </button>
+
         <div class="menu-items">
             <h3>NAVEGACIÓN</h3>
             <ul>
@@ -58,15 +64,21 @@
 
     <footer class="fb-footer">
         <div class="footer-content">
-            <blockquote>
+            <blockquote class="footer-quote">
                 <p>"Finis Origine Pendent | Non Sibi"</p>
             </blockquote>
+            
             <div class="footer-divider"></div>
-            <p class="copyright">&copy; {{ 'now' | date: "%Y" }} Carlos Hernández</p>
+            
+            <p class="copyright">
+                &copy; {{ 'now' | date: "%Y" }} Carlos Hernández
+            </p>
         </div>
     </footer>
 
-    <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+    <button id="theme-toggle" type="button">
+        <i class="fas fa-moon"></i>
+    </button>
 
     <script>
         const btnOpen = document.getElementById('menu-toggle');
@@ -74,10 +86,21 @@
         const sideNav = document.getElementById('side-menu');
         const overlayBg = document.getElementById('menu-overlay');
 
-        btnOpen.onclick = () => { sideNav.style.left = '0'; overlayBg.style.display = 'block'; }
-        const hideMenu = () => { sideNav.style.left = '-350px'; overlayBg.style.display = 'none'; }
-        btnClose.onclick = hideMenu; overlayBg.onclick = hideMenu;
+        // Abrir y Cerrar Menú
+        btnOpen.onclick = () => { 
+            sideNav.style.left = '0'; 
+            overlayBg.style.display = 'block'; 
+        }
+        
+        const hideMenu = () => { 
+            sideNav.style.left = '-350px'; 
+            overlayBg.style.display = 'none'; 
+        }
+        
+        btnClose.onclick = hideMenu; 
+        overlayBg.onclick = hideMenu;
 
+        // Lógica de Scroll para la Barra de Progreso
         window.onscroll = () => {
             const pb = document.getElementById("progress-bar");
             if (pb) {
@@ -88,6 +111,7 @@
             }
         };
 
+        // Control de Modo Oscuro
         const themeBtn = document.getElementById('theme-toggle');
         const rootDoc = document.documentElement;
         
@@ -102,6 +126,7 @@
             }
         };
 
+        // Persistencia del tema al recargar
         if (localStorage.getItem('theme') === 'dark') {
             rootDoc.setAttribute('data-theme', 'dark');
         }
