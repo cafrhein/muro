@@ -3,6 +3,10 @@ layout: default
 title: Mapa de Red MBTI | Protocolos de Auxilio
 ---
 
+<div id="rt-toast" style="position: fixed; top: 80px; right: -300px; background: var(--rt-red); color: white; padding: 15px 25px; font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; z-index: 9999; transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 12px rgba(0,0,0,0.3); font-size: 0.85rem;">
+    Vínculo diagnosticado e insertado
+</div>
+
 <div class="map-container" style="max-width: 1100px; margin: 40px auto; padding: 20px;">
     <header style="text-align: center; margin-bottom: 30px; border-bottom: 3px solid var(--rt-red); padding-bottom: 20px;">
         <h1 style="font-family: var(--font-heading); text-transform: uppercase;">Mapeo de Idoneidad MBTI</h1>
@@ -46,7 +50,7 @@ title: Mapa de Red MBTI | Protocolos de Auxilio
             </div>
         </div>
 
-        <button onclick="calculateMBTI()" style="width: 100%; margin-top: 25px; padding: 18px; background: var(--rt-black); color: white; border: none; font-family: var(--font-heading); font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 1.1rem; letter-spacing: 1px; transition: background 0.3s;">
+        <button id="btn-diag" onclick="calculateMBTI()" style="width: 100%; margin-top: 25px; padding: 18px; background: var(--rt-black); color: white; border: none; font-family: var(--font-heading); font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 1.1rem; letter-spacing: 1px; transition: all 0.3s;">
             Diagnosticar e Insertar en Red
         </button>
     </div>
@@ -109,7 +113,11 @@ title: Mapa de Red MBTI | Protocolos de Auxilio
 
 <script>
 function calculateMBTI() {
-    const name = document.getElementById('v-name').value;
+    const nameInput = document.getElementById('v-name');
+    const btn = document.getElementById('btn-diag');
+    const toast = document.getElementById('rt-toast');
+    
+    const name = nameInput.value;
     const ei = document.getElementById('v-ei').value;
     const sn = document.getElementById('v-sn').value;
     const tf = document.getElementById('v-tf').value;
@@ -117,6 +125,10 @@ function calculateMBTI() {
     const type = ei + sn + tf + jp;
     
     if(!name) return alert("Ingresa el nombre del vínculo");
+
+    // ANIMACIÓN DEL BOTÓN
+    btn.style.background = "var(--rt-red)";
+    btn.innerText = "Insertando...";
 
     let distance = 270; 
     const coreTypes = ['ENFJ', 'INFJ', 'ESTJ', 'ISTJ', 'ISFJ', 'ESFJ'];
@@ -153,6 +165,15 @@ function calculateMBTI() {
     node.innerHTML = `<span style="font-size: 0.7rem; font-weight: 700;">${name.toUpperCase()}</span><span style="font-size: 0.55rem; opacity: 0.9;">${type}</span>`;
 
     layer.appendChild(node);
-    document.getElementById('v-name').value = '';
+
+    // ACTIVAR NOTIFICACIÓN
+    toast.style.right = "20px";
+    
+    setTimeout(() => {
+        toast.style.right = "-300px";
+        btn.style.background = "var(--rt-black)";
+        btn.innerText = "Diagnosticar e Insertar en Red";
+        nameInput.value = '';
+    }, 2000);
 }
 </script>
