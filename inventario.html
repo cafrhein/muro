@@ -1,0 +1,132 @@
+---
+layout: default
+title: Inventario Relacional | Red Humana
+---
+
+<div class="inventory-container" style="max-width: 850px; margin: 40px auto; padding: 20px;">
+    <header style="text-align: center; margin-bottom: 40px; border-bottom: 3px solid var(--rt-red); padding-bottom: 20px;">
+        <h1 style="font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 10px;">Inventario de Idoneidad Relacional</h1>
+        <p style="font-family: var(--font-main); color: #666;">Identifica los patrones que bloquean tu capacidad de dar y recibir cuidado.</p>
+    </header>
+
+    <div id="inventory-ui">
+        <form id="inventory-form">
+            <div class="inventory-section" style="margin-bottom: 35px;">
+                <h3 style="font-family: var(--font-heading); color: var(--rt-red); border-bottom: 1px solid #eee; padding-bottom: 5px; margin-bottom: 20px;">I. OBSTÁCULOS DE AUTOSUFICIENCIA</h3>
+                
+                <label class="check-item">
+                    <input type="checkbox" name="attr" value="1"> Suelo ocultar mis problemas para no "cargar" a los demás.
+                </label>
+                <label class="check-item">
+                    <input type="checkbox" name="attr" value="1"> Me genera ansiedad sentir que dependo de la decisión de otra persona.
+                </label>
+                <label class="check-item">
+                    <input type="checkbox" name="attr" value="1"> Considero que pedir ayuda es una señal de falta de carácter.
+                </label>
+            </div>
+
+            <div class="inventory-section" style="margin-bottom: 35px;">
+                <h3 style="font-family: var(--font-heading); color: var(--rt-red); border-bottom: 1px solid #eee; padding-bottom: 5px; margin-bottom: 20px;">II. BLOQUEOS DE TRANSPARENCIA</h3>
+                
+                <label class="check-item">
+                    <input type="checkbox" name="attr" value="1"> Prefiero omitir información antes que generar un conflicto.
+                </label>
+                <label class="check-item">
+                    <input type="checkbox" name="attr" value="1"> Me cuesta trabajo expresar mis necesidades de forma clara y directa.
+                </label>
+                <label class="check-item">
+                    <input type="checkbox" name="attr" value="1"> Mis vínculos se enteran de mis crisis cuando ya han estallado.
+                </label>
+            </div>
+
+            <div class="inventory-section" style="margin-bottom: 40px;">
+                <h3 style="font-family: var(--font-heading); color: var(--rt-red); border-bottom: 1px solid #eee; padding-bottom: 5px; margin-bottom: 20px;">III. DESEQUILIBRIO DE VÍNCULO</h3>
+                
+                <label class="check-item">
+                    <input type="checkbox" name="attr" value="1"> Siento que yo siempre cuido, pero nadie sabe cómo cuidarme a mí.
+                </label>
+                <label class="check-item">
+                    <input type="checkbox" name="attr" value="1"> Evito pedir favores para no quedar "en deuda" con nadie.
+                </label>
+                <label class="check-item">
+                    <input type="checkbox" name="attr" value="1"> Me cuesta trabajo poner límites cuando el cuidado de otro me asfixia.
+                </label>
+            </div>
+
+            <button type="button" onclick="processInventory()" style="width: 100%; padding: 20px; background: var(--rt-black); color: white; border: none; font-family: var(--font-heading); font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 1.2rem; transition: background 0.3s;">
+                Ejecutar Diagnóstico de Patrones
+            </button>
+        </form>
+    </div>
+
+    <div id="inventory-result" style="display: none; margin-top: 40px;">
+        <div style="background: #f9f9f9; border-left: 6px solid var(--rt-red); padding: 30px;">
+            <h2 style="font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 15px;">Informe de Auditoría Relacional</h2>
+            <div id="diagnosis-text" style="font-family: var(--font-main); font-size: 1.15rem; line-height: 1.6;"></div>
+            
+            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #ddd;">
+                <h4 style="font-family: var(--font-heading); margin-bottom: 10px;">ACCIÓN DE INGENIERÍA:</h4>
+                <p id="action-plan" style="font-style: italic; color: #444;"></p>
+            </div>
+        </div>
+        <button onclick="window.location.reload()" style="margin-top: 20px; background: transparent; border: 2px solid #000; padding: 10px; width: 100%; font-family: var(--font-heading); font-weight: 700; cursor: pointer;">REINICIAR INVENTARIO</button>
+    </div>
+</div>
+
+<style>
+.check-item {
+    display: block;
+    position: relative;
+    padding: 15px 15px 15px 45px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #eee;
+    font-family: var(--font-main);
+    transition: all 0.2s ease;
+}
+
+.check-item:hover { background: #fcfcfc; border-color: #ddd; }
+
+.check-item input {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    accent-color: var(--rt-red);
+}
+
+button:hover { background: var(--rt-red) !important; }
+</style>
+
+<script>
+function processInventory() {
+    const checks = document.querySelectorAll('input[name="attr"]:checked').length;
+    const total = document.querySelectorAll('input[name="attr"]').length;
+    
+    document.getElementById('inventory-ui').style.display = 'none';
+    document.getElementById('inventory-result').style.display = 'block';
+
+    let diagnosis = "";
+    let action = "";
+
+    if (checks === 0) {
+        diagnosis = "Tu flujo relacional parece estar libre de obstrucciones conscientes. Estás en una posición óptima para fortalecer la reciprocidad.";
+        action = "Mantén el seguimiento personal constante para evitar que la autosuficiencia se filtre silenciosamente.";
+    } else if (checks <= 3) {
+        diagnosis = "Se detectan patrones aislados de resistencia. Tienes una estructura sólida, pero hay fugas de transparencia que podrían comprometer tu estabilidad en una crisis.";
+        action = "Elige un vínculo de confianza y practica la 'Disposición a Recibir Ayuda' en un asunto menor esta semana.";
+    } else if (checks <= 6) {
+        diagnosis = "ALERTA DE SISTEMA: Existen bloqueos significativos. Estás operando bajo un esquema de autosuficiencia que drena tus recursos emocionales y debilita tus vínculos.";
+        action = "Protocolo de Reparación Responsable: Identifica qué información has estado omitiendo y abre un canal de comunicación transparente hoy mismo.";
+    } else {
+        diagnosis = "FALLO CRÍTICO DE INTERDEPENDENCIA: Tus patrones actuales te aíslan. La red humana no puede sostenerte si no permites que el apoyo te dé firmeza.";
+        action = "Acción Inmediata: Detén el intento de 'poder solo'. Declara tu necesidad de acompañamiento ante tu red primaria. Quien se deja cuidar, dota de sentido a su cuidador.";
+    }
+
+    document.getElementById('diagnosis-text').innerText = diagnosis;
+    document.getElementById('action-plan').innerText = action;
+}
+</script>
