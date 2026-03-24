@@ -206,20 +206,23 @@ p { font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--rt-text); }
     h3 { font-size: 1.15rem; line-height: 1.2; margin: 1.2rem 0 0.6rem; }
     p { font-size: 1rem; line-height: 1.45; margin-bottom: 1rem; }
     
-    /* CAMBIO AUTORIZADO: DISEÑO DE CITA MÓVIL */
-    blockquote { 
+    /* CAMBIO REFORZADO: DISEÑO DE CITA MÓVIL */
+    blockquote, blockquote p { 
         font-size: 1rem !important; 
         font-style: italic !important; 
+        line-height: 1.45 !important;
+    }
+    
+    blockquote {
         background-color: #f4f4f4 !important; 
         border-left: 5px solid var(--rt-red) !important; 
         padding: 15px !important; 
         margin: 20px 0 !important; 
-        line-height: 1.45 !important;
     }
     
     .about-social a, .author-social a { font-size: 1.5rem; }
 
     .fb-container {
-        padding: 15px 1%; /* AJUSTE AUTORIZADO: Reducción de márgenes laterales en móvil */
+        padding: 15px 1%; /* AJUSTE AUTORIZADO: Reducción de márgenes en móvil */
     }
 }
