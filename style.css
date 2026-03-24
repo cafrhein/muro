@@ -13,7 +13,7 @@
     --font-main: 'Roboto', sans-serif;
     --font-heading: 'Roboto Condensed', sans-serif;
     --header-height: 64px;
-    --content-width: 740px;      /* Estándar editorial de lectura */
+    --content-width: 1400px;     /* EDITADO: De 740px a 1400px para reducir márgenes */
 }
 
 [data-theme="dark"] {
@@ -137,7 +137,7 @@ body {
 
 /* 5. CONTENIDO EDITORIAL */
 .fb-container {
-    padding: 40px 20px;
+    padding: 20px 2%; /* EDITADO: De 40px 20px a 20px 2% para estirar a los lados */
 }
 
 main {
