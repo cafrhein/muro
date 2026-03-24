@@ -1,50 +1,46 @@
 ---
 layout: default
 ---
-<article class="fb-card post-content">
+<article class="post-content">
     
-    <header style="margin-bottom: 25px; border-bottom: 1px solid var(--fb-border); padding-bottom: 15px;">
+    <header style="margin-bottom: 40px;">
         
-        <h1 style="margin-bottom: 10px; font-size: 2rem;">{{ page.title }}</h1>
-        
-        <div style="color: var(--fb-text-sec); font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; flex-wrap: wrap; gap: 12px;">
-            
-            <span><i class="fas fa-calendar-alt" style="margin-right: 5px;"></i> {{ page.date | date: "%d/%m/%Y" }}</span>
-            
-            <span style="color: var(--fb-border);">|</span>
-            
-            <span>
-                <i class="fas fa-clock" style="margin-right: 5px;"></i> 
-                {% assign words = content | number_of_words %}
-                {% if words < 360 %}
-                  1 min de lectura
-                {% else %}
-                  {{ words | divided_by: 180 }} min de lectura
-                {% endif %}
-            </span>
-
-            <span style="color: var(--fb-border);">|</span>
-
-            <span><i class="fas fa-folder-open" style="margin-right: 5px;"></i> {{ page.category | default: "Filosofía" }}</span>
-
+        <div style="color: var(--rt-red); font-family: var(--font-heading); font-weight: 900; text-transform: uppercase; font-size: 1.1rem; margin-bottom: 10px; letter-spacing: 1px;">
+            {{ page.category | default: "Filosofía" }}
         </div>
+
+        <h1 style="margin-bottom: 15px; font-size: 3.2rem; line-height: 1.05;">{{ page.title }}</h1>
+        
+        <div style="font-family: var(--font-main); font-size: 0.95rem; color: var(--rt-text-sec); font-weight: 400;">
+            <span style="font-weight: 700; color: var(--rt-black);">Publicado:</span> 
+            {{ page.date | date: "%e %b %Y %H:%M" }} GMT
+        </div>
+
     </header>
 
-    <div class="post-body">
+    <div class="post-body" style="border-top: 1px solid var(--rt-border); padding-top: 30px;">
         {{ content }}
     </div>
 
-    <footer style="margin-top: 45px; padding-top: 25px; border-top: 1px solid var(--fb-border);">
-        <h3 style="font-size: 1.2rem; color: var(--fb-text); margin-bottom: 15px;">Vínculos de Interdependencia</h3>
-        <p style="font-size: 0.9rem; color: var(--fb-text-sec); margin-bottom: 15px;">Continúa explorando la red de apoyo:</p>
-        
-        <div class="related-grid">
+    <div class="author-signature" style="margin-top: 60px; padding: 30px; background: var(--rt-grey); border-left: 8px solid var(--rt-red); display: flex; align-items: center; gap: 25px;">
+        <div style="width: 100px; height: 100px; border-radius: 50%; background-color: var(--rt-border); overflow: hidden; border: 4px solid var(--rt-white); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <img src="{{ '/assets/img/profile.jpg' | relative_url }}" alt="Carlos Hernández" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://via.placeholder.com/100?text=CH'">
+        </div>
+        <div style="flex: 1;">
+            <strong style="display: block; font-family: var(--font-heading); font-size: 1.4rem; color: var(--rt-black); margin-bottom: 5px;">Carlos Hernández</strong>
+            <p style="font-size: 0.95rem; color: var(--rt-text-sec); font-style: italic; margin: 0;">Director de Administración y Finanzas. Planeación Estratégica & Ingeniería Humana.</p>
+        </div>
+    </div>
+
+    <footer style="margin-top: 60px; padding-top: 30px; border-top: 4px solid var(--rt-black);">
+        <h2 class="sidebar-title" style="border: none; margin-bottom: 25px;">Siguientes Vínculos</h2>
+        <div class="related-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
             {% assign count = 0 %}
             {% for post in site.posts %}
                 {% if post.url != page.url and count < 2 %}
-                <a href="{{ post.url | relative_url }}" class="related-card">
-                    <strong>{{ post.title }}</strong>
-                    <span>{{ post.date | date: "%d/%m/%Y" }}</span>
+                <a href="{{ post.url | relative_url }}" style="text-decoration: none; color: var(--rt-black); display: block; padding: 20px; background: var(--rt-grey); border-left: 5px solid var(--rt-red); transition: transform 0.2s;">
+                    <strong style="display: block; font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 10px;">{{ post.title }}</strong>
+                    <span style="font-size: 0.85rem; color: var(--rt-text-sec); font-weight: 700;">{{ post.date | date: "%d/%m/%Y" }}</span>
                 </a>
                 {% assign count = count | plus: 1 %}
                 {% endif %}
@@ -53,3 +49,7 @@ layout: default
     </footer>
 
 </article>
+
+<style>
+    .related-grid a:hover { transform: scale(1.02); background: #eee; }
+</style>
