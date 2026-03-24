@@ -47,7 +47,7 @@
                 </button>
                 
                 <a href="/" style="text-decoration: none; color: #fff;">
-                    <div class="rt-logo" style="font-size: 1.8rem; letter-spacing: -1.5px;">RED HUMANA</div>
+                    <div class="rt-logo" style="font-size: 1.8rem; letter-spacing: -1.5px;">CARLOS HERNÁNDEZ</div>
                 </a>
             </div>
 
@@ -94,7 +94,7 @@
             <div style="height: 1px; background: #333; width: 100px; margin: 0 auto 30px auto;"></div>
             
             <p style="font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 2px;">
-                &copy; {{ 'now' | date: "%Y" }} Carlos Hernández 
+                &copy; {{ 'now' | date: "%Y" }} Carlos Hernández | Ingeniería de la Reciprocidad
             </p>
         </div>
     </footer>
@@ -104,7 +104,6 @@
     </button>
 
     <script>
-        // Lógica del Menú Lateral
         const btnOpen = document.getElementById('menu-toggle');
         const btnClose = document.getElementById('menu-close');
         const sideNav = document.getElementById('side-menu');
@@ -114,7 +113,6 @@
         const hideMenu = () => { sideNav.style.left = '-350px'; overlayBg.style.display = 'none'; }
         btnClose.onclick = hideMenu; overlayBg.onclick = hideMenu;
 
-        // Lógica de Scroll (Barra Roja)
         window.onscroll = () => {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -123,7 +121,6 @@
             if (pb) pb.style.width = scrolled + "%";
         };
 
-        // Lógica de Modo Oscuro
         const themeBtn = document.getElementById('theme-toggle');
         const rootDoc = document.documentElement;
         
@@ -138,7 +135,6 @@
             }
         };
 
-        // Mantener tema al recargar
         if (localStorage.getItem('theme') === 'dark') {
             rootDoc.setAttribute('data-theme', 'dark');
         }
