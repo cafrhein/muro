@@ -1,0 +1,60 @@
+---
+layout: default
+title: Calculador de Reciprocidad
+---
+
+<div class="crisis-container" style="max-width: 800px; margin: 40px auto; padding: 20px;">
+    <h1 style="text-align: center; font-family: var(--font-heading); text-transform: uppercase;">Calculador de Reciprocidad</h1>
+    <p style="text-align: center; color: #666; margin-bottom: 40px;">Identifica el vínculo idóneo para sostener tu crisis actual.</p>
+
+    <div id="calculator-ui">
+        <div style="margin-bottom: 30px;">
+            <label style="font-family: var(--font-heading); font-weight: 700;">TIPO DE CARGA:</label>
+            <select id="crisis-type" style="width: 100%; padding: 12px; margin-top: 10px; border: 2px solid #eee; font-family: var(--font-main);">
+                <option value="emocional">Quiebre Emocional (Duelo, Ansiedad)</option>
+                <option value="economica">Inestabilidad Económica (Deuda, Empleo)</option>
+                <option value="salud">Crisis de Salud (Enfermedad, Incapacidad)</option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <label style="font-family: var(--font-heading); font-weight: 700;">URGENCIA (1-5):</label>
+            <input type="range" min="1" max="5" value="3" id="urgency" style="width: 100%; margin-top: 15px; accent-color: var(--rt-red);">
+        </div>
+
+        <button onclick="calculatePath()" style="width: 100%; padding: 20px; background: var(--rt-red); color: white; border: none; font-family: var(--font-heading); font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 1.2rem;">
+            Calcular Ruta de Apoyo
+        </button>
+    </div>
+
+    <div id="crisis-result" style="display: none; margin-top: 40px; padding: 30px; border: 3px solid var(--rt-red); background: #fff;">
+        <h2 id="result-title" style="font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 15px;"></h2>
+        <p id="result-text" style="font-family: var(--font-main); font-size: 1.2rem; line-height: 1.6;"></p>
+        <button onclick="window.location.reload()" style="margin-top: 25px; background: #000; color: #fff; border: none; padding: 10px 20px; cursor: pointer; font-family: var(--font-heading);">NUEVO CÁLCULO</button>
+    </div>
+</div>
+
+<script>
+function calculatePath() {
+    const type = document.getElementById('crisis-type').value;
+    const urgency = document.getElementById('urgency').value;
+    
+    document.getElementById('calculator-ui').style.display = 'none';
+    const resultBox = document.getElementById('crisis-result');
+    resultBox.style.display = 'block';
+    
+    let title = "Protocolo de Interdependencia";
+    let message = "";
+
+    if(type === 'emocional') {
+        message = "La autosuficiencia es tu mayor riesgo ahora. Identifica al vínculo que más te haya escuchado en el pasado y dótalo de sentido contándole tu vulnerabilidad. No busques soluciones, busca sostén.";
+    } else if(type === 'economica') {
+        message = "Esta carga requiere transparencia técnica. Habla con tus vínculos de confianza sobre la cifra real. Permitir que te orienten no es debilidad, es ingeniería de supervivencia.";
+    } else {
+        message = "La crisis de salud anula tu voluntad física. Es el momento máximo de reciprocidad: déjate cuidar totalmente para que tu red fortalezca su capacidad de servicio.";
+    }
+
+    document.getElementById('result-title').innerText = title;
+    document.getElementById('result-text').innerText = message;
+}
+</script>
