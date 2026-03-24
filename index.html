@@ -9,7 +9,7 @@ title: Portada | Carlos
 </section>
 
 <div class="news-grid">
-    {% for post in site.posts limit: 4 %}
+    {% for post in site.posts %}
     <article class="news-item">
         <a href="{{ post.url | relative_url }}">
             <div class="news-category">{{ post.category | default: "Actualidad" }}</div>
@@ -23,7 +23,7 @@ title: Portada | Carlos
 
 <style>
 /* ============================================================
-   ESTILOS DE PORTADA - MÁXIMA ANCHURA
+   ESTILOS DE PORTADA - MÁXIMA ANCHURA Y 4 COLUMNAS
    ============================================================ */
 
 .rt-hero {
@@ -51,16 +51,15 @@ title: Portada | Carlos
     line-height: 1.4;
 }
 
-/* REJILLA DINÁMICA - MÁRGENES REDUCIDOS */
+/* REJILLA CONFIGURADA A 4 COLUMNAS */
 .news-grid {
     display: grid;
-    /* Ajustamos el mínimo a 250px para que quepan mejor los 4 en pantallas grandes */
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    /* EDITADO: Forzamos 4 columnas iguales en escritorio */
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
-    /* Aumentamos de 1200px a 1400px para reducir el espacio lateral */
-    max-width: 1400px; 
+    max-width: 1600px; 
     margin: 0 auto;
-    padding: 0 20px 60px 20px;
+    padding: 0 2% 60px 2%;
 }
 
 .news-item {
@@ -117,6 +116,10 @@ title: Portada | Carlos
 }
 
 /* RESPONSIVO */
+@media (max-width: 1100px) {
+    .news-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 600px) {
     .rt-hero { padding: 30px 15px 10px 15px; }
     .rt-hero h1 { font-size: 1.8rem; }
