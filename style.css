@@ -182,6 +182,8 @@ p { font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--rt-text); }
 /* 7. RESPONSIVO */
 @media (max-width: 600px) {
     .header-date { display: none; }
-    .rt-logo { font-size: 1.6rem; }
-    h1 { font-size: 2rem; }
+    .rt-logo { font-size: 1.4rem; }
+    h1 { font-size: 1.7rem; }
+    h2 { font-size: 1.4rem; }
+    p { font-size: 1.05rem; }
 }
