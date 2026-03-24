@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<article class="post-content editorial-flow">
+<article class="post-content">
     
     <header class="post-header">
         <div class="news-category">{{ page.category | default: "Actualidad" }}</div>
@@ -12,8 +12,7 @@ layout: default
             {% if site.author.avatar %}
                 <img src="{{ site.author.avatar | relative_url }}" 
                      alt="{{ site.author.name }}" 
-                     class="author-avatar"
-                     onerror="this.style.opacity='0'">
+                     class="author-avatar">
             {% endif %}
             <div class="author-details">
                 <span class="author-name">{{ site.author.name }}</span>
@@ -31,21 +30,61 @@ layout: default
 </article>
 
 <style>
-/* --- ESTILOS DE POST Y AUTOR --- */
-.post-content { max-width: 740px; margin: 40px auto; padding: 0 20px; }
-.post-header { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 30px; }
-.post-title { font-family: var(--font-heading); font-weight: 700; font-size: 3rem; line-height: 1.1; text-transform: uppercase; color: var(--rt-black); }
-
-.post-meta-author { display: flex; align-items: center; gap: 15px; margin-top: 25px; }
-.author-avatar { 
-    width: 60px; height: 60px; border-radius: 50%; 
-    object-fit: cover; border: 2px solid var(--rt-red); 
-    background-color: #eee;
+/* --- ESTILOS ORIGINALES REINSTALADOS --- */
+.post-content { 
+    max-width: 740px; 
+    margin: 40px auto; 
+    padding: 0 20px; 
 }
-.author-details { display: flex; flex-direction: column; }
-.author-name { font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; color: var(--rt-black); font-size: 1.1rem; }
-.post-date { font-family: var(--font-heading); color: #888; font-size: 0.9rem; text-transform: uppercase; }
+.post-header { 
+    margin-bottom: 40px; 
+    border-bottom: 1px solid #eee; 
+    padding-bottom: 30px; 
+}
+.post-title { 
+    font-family: var(--font-heading); 
+    font-weight: 700; 
+    font-size: 1.5rem; /* Ajustado a tu escala de portada */
+    line-height: 1.15; 
+    text-transform: uppercase; 
+    color: var(--rt-black); 
+}
 
-.post-body { font-family: var(--font-main); font-size: 1.25rem; line-height: 1.75; color: var(--rt-text); }
-.post-body h2 { border-left: 5px solid var(--rt-red); padding-left: 15px; margin: 2rem 0 1rem; }
+/* Bloque de autor funcional */
+.post-meta-author { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    margin-top: 25px; 
+}
+.author-avatar { 
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 2px solid var(--rt-red); 
+}
+.author-details { 
+    display: flex; 
+    flex-direction: column; 
+}
+.author-name { 
+    font-family: var(--font-heading); 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    color: var(--rt-black); 
+}
+.post-date { 
+    font-family: var(--font-heading); 
+    color: #888; 
+    font-size: 0.9rem; 
+    text-transform: uppercase; 
+}
+
+.post-body { 
+    font-family: var(--font-main); 
+    font-size: 1.2rem; 
+    line-height: 1.6; 
+    color: var(--rt-text); 
+}
 </style>
