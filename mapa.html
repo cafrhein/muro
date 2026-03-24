@@ -64,78 +64,52 @@ title: Mapa de Red MBTI | Protocolos de Auxilio
         <div id="nodes-layer" style="position: absolute; width: 100%; height: 100%;"></div>
     </div>
 
-    <section class="protocol-guide" style="border-top: 2px solid #eee; padding-top: 40px; margin-top: 50px;">
+    <section class="protocol-guide">
         <h2 style="font-family: var(--font-heading); text-transform: uppercase; text-align: center; margin-bottom: 35px; color: var(--rt-black);">
             Guía de Protocolos de Interdependencia
         </h2>
 
         <div class="protocol-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-            
             <div class="protocol-item" style="display: flex; gap: 15px; background: #fdfdfd; padding: 20px; border-left: 5px solid var(--rt-red);">
-                <div class="color-pillar" style="width: 5px; background: var(--rt-red);"></div>
                 <div class="protocol-content">
                     <h4 style="font-family: var(--font-heading); color: var(--rt-red); text-transform: uppercase; margin-bottom: 8px;">Protocolo A: Carga Vital</h4>
                     <p style="font-size: 0.9rem; color: #444; line-height: 1.5; font-family: var(--font-main);">
-                        Crisis emocionales críticas, duelos o salud grave. Estos vínculos (tipos **Judgments y Feelers**) tienen la estructura mental para sostener tu vulnerabilidad sin juzgar, dotándolos de sentido al dejarte cuidar.
+                        Crisis emocionales críticas o salud grave. Vínculos J/F. Tienen la estructura para sostener tu vulnerabilidad.
                     </p>
                 </div>
             </div>
 
             <div class="protocol-item" style="display: flex; gap: 15px; background: #fdfdfd; padding: 20px; border-left: 5px solid var(--rt-black);">
-                <div class="color-pillar" style="width: 5px; background: var(--rt-black);"></div>
                 <div class="protocol-content">
                     <h4 style="font-family: var(--font-heading); color: var(--rt-black); text-transform: uppercase; margin-bottom: 8px;">Protocolo B: Carga Operativa</h4>
                     <p style="font-size: 0.9rem; color: #444; line-height: 1.5; font-family: var(--font-main);">
-                        Problemas técnicos, económicos o de logística. Los vínculos en este anillo (tipos **Intuitivos y Thinkers**) son idóneos para la resolución objetiva. No busques consuelo aquí, busca soluciones y estrategia.
+                        Problemas técnicos o económicos. Vínculos T/N. Idóneos para la resolución objetiva.
                     </p>
                 </div>
             </div>
 
             <div class="protocol-item" style="display: flex; gap: 15px; background: #fdfdfd; padding: 20px; border-left: 5px solid #ccc;">
-                <div class="color-pillar" style="width: 5px; background: #ccc;"></div>
                 <div class="protocol-content">
-                    <h4 style="font-family: var(--font-heading); color: #888; text-transform: uppercase; margin-bottom: 8px;">Protocolo C: Crisis de Saturación</h4>
+                    <h4 style="font-family: var(--font-heading); color: #888; text-transform: uppercase; margin-bottom: 8px;">Protocolo C: Saturación</h4>
                     <p style="font-size: 0.9rem; color: #444; line-height: 1.5; font-family: var(--font-main);">
-                        Necesidad de desconexión o distracción. Vínculos con baja carga emocional (tipos **Perceptivos y Exploradores**). Úsalos para "bajar el volumen" de la crisis, no para tratar el problema de fondo.
+                        Necesidad de desconexión. Vínculos tipo P/Exploradores. Úsalos para bajar el volumen de la crisis.
                     </p>
                 </div>
             </div>
-
         </div>
     </section>
-
 </div>
 
 <style>
-/* --- ESTILOS VISUALES DEL MAPA --- */
 #canvas-wrapper { box-shadow: inset 0 0 50px rgba(0,0,0,0.02); }
-
-.ring-label { 
-    position: absolute; top: -12px; left: 50%; transform: translateX(-50%); 
-    background: #fff; padding: 0 10px; font-size: 0.65rem; color: #999; 
-    font-family: var(--font-heading); font-weight: 700; letter-spacing: 1px; 
-}
-
-.v-node { 
-    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-    cursor: help; 
-}
-
+.ring-label { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #fff; padding: 0 10px; font-size: 0.65rem; color: #999; font-family: var(--font-heading); font-weight: 700; letter-spacing: 1px; }
+.v-node { animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: help; }
 @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
-
-/* Ajustes Responsivos */
-@media (max-width: 768px) {
-    #mbti-test-container { padding: 15px; }
-    .mbti-questions { grid-template-columns: 1fr; }
-    #canvas-wrapper { height: 400px; }
-    .color-pillar { display: none; }
-}
 </style>
 
 <script>
 function calculateMBTI() {
     const name = document.getElementById('v-name').value;
-    // Captura las sigas MBTI
     const ei = document.getElementById('v-ei').value;
     const sn = document.getElementById('v-sn').value;
     const tf = document.getElementById('v-tf').value;
@@ -144,39 +118,29 @@ function calculateMBTI() {
     
     if(!name) return alert("Ingresa el nombre del vínculo");
 
-    // --- LÓGICA TÉCNICA DE POSICIONAMIENTO MBTI (INGENIERÍA HUMANA) ---
-    let distance = 270; // Periferia (Gris) por defecto
-    const labelEI = (ei === 'E') ? 'EX' : 'IN'; // Simplificación gráfica
-
-    // Tipos Nucleares (Cuidado y Responsabilidad: Jodos J y F o T organizadores)
+    let distance = 270; 
     const coreTypes = ['ENFJ', 'INFJ', 'ESTJ', 'ISTJ', 'ISFJ', 'ESFJ'];
-    // Tipos Colaboradores (Solución de Problemas: Mayoría T y N)
     const collabTypes = ['ENTJ', 'INTJ', 'ENFP', 'INFP', 'INTP', 'ENTP'];
 
-    if(coreTypes.includes(type)) distance = 100; // Núcleo (Rojo)
-    else if(collabTypes.includes(type)) distance = 195; // Colaboración (Negro)
+    if(coreTypes.includes(type)) distance = 100;
+    else if(collabTypes.includes(type)) distance = 195;
 
     const layer = document.getElementById('nodes-layer');
-    const angle = Math.random() * Math.PI * 2; // Posición aleatoria en el anillo
+    const angle = Math.random() * Math.PI * 2;
     const centerX = layer.offsetWidth / 2;
     const centerY = layer.offsetHeight / 2;
     
     const x = centerX + distance * Math.cos(angle) - 32.5;
     const y = centerY + distance * Math.sin(angle) - 32.5;
 
-    // --- CREACIÓN GRÁFICA DEL NODO ---
     const node = document.createElement('div');
     node.className = 'v-node';
-    node.title = `Tipo MBTI: ${type}`; // Tooltip informativo
     node.style.position = 'absolute';
     node.style.left = x + 'px';
     node.style.top = y + 'px';
     node.style.width = '65px';
     node.style.height = '65px';
-    
-    // Asignación de color según anillo (Estética Adestrat)
     node.style.background = distance === 100 ? 'var(--rt-red)' : (distance === 195 ? 'var(--rt-black)' : '#aaa');
-    
     node.style.color = '#fff';
     node.style.borderRadius = '50%';
     node.style.display = 'flex';
@@ -186,12 +150,7 @@ function calculateMBTI() {
     node.style.fontFamily = 'var(--font-heading)';
     node.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
     node.style.border = '2px solid #fff';
-    
-    // Contenido del nodo: Nombre y Siglas
-    node.innerHTML = `
-        <span style="font-size: 0.7rem; font-weight: 700; margin-bottom: 3px;">${name.toUpperCase()}</span>
-        <span style="font-size: 0.55rem; opacity: 0.9; letter-spacing: 1px;">${type}</span>
-    `;
+    node.innerHTML = `<span style="font-size: 0.7rem; font-weight: 700;">${name.toUpperCase()}</span><span style="font-size: 0.55rem; opacity: 0.9;">${type}</span>`;
 
     layer.appendChild(node);
     document.getElementById('v-name').value = '';
