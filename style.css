@@ -1,18 +1,13 @@
 ---
 ---
 /* ============================================================
-   REDISEÑO CARLOS - PORTAL DE AUTOR
-   ARQUITECTURA V7.7 | CORRECCIÓN DE STICKY Y TIPOGRAFÍA
+   REDISEÑO CARLOS - PORTAL DE AUTOR | CÓDIGO MAESTRO DEFINITIVO
    ============================================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@800;900&display=swap');
 
 :root {
     --rt-red: #e30613;
     --rt-black: #000000;
     --rt-dark: #121212;
-    --rt-grey: #f8f8f8;
-    --rt-border: #dddddd;
     --rt-white: #ffffff;
     --rt-text: #1a1a1a;
     --rt-text-sec: #555555;
@@ -20,12 +15,8 @@
     --font-heading: 'Montserrat', sans-serif;
 }
 
-/* 1. RESET Y ESTRUCTURA BASE */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* 1. RESET GENERAL */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
     background-color: var(--rt-white);
@@ -33,16 +24,24 @@ html, body {
     color: var(--rt-text);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    /* IMPORTANTE: Se eliminó overflow-x: hidden porque esto es lo que "rompía" el header sticky */
+    /* Se quitó overflow-x: hidden para que el sticky funcione */
 }
 
-/* 2. HEADER TIPO RT (AHORA SÍ TE SIGUE) */
+/* 2. TIPOGRAFÍAS DE IMPACTO */
+h1, h2, h3, .rt-logo, .menu-items h3, .menu-items a, .fb-footer p {
+    font-family: var(--font-heading) !important;
+    font-weight: 900 !important;
+    color: var(--rt-black);
+    text-transform: uppercase;
+}
+
+/* 3. HEADER PERSISTENTE (STICKY) */
 .fb-header {
     background: var(--rt-black);
     height: 75px;
     display: flex;
     align-items: center;
-    position: sticky; /* Ahora sí va a funcionar al no haber overflow oculto */
+    position: sticky;
     top: 0;
     z-index: 3000;
     border-bottom: 5px solid var(--rt-red);
@@ -58,99 +57,81 @@ html, body {
     align-items: center;
 }
 
-/* 3. BARRA DE PROGRESO (ANCLADA AL HEADER) */
+.header-left { display: flex; align-items: center; gap: 30px; }
+
+#menu-toggle {
+    background: none; border: none; color: #fff;
+    font-family: var(--font-heading); font-weight: 800;
+    text-transform: uppercase; cursor: pointer;
+    font-size: 1rem; display: flex; align-items: center; gap: 10px;
+}
+
+.rt-logo { font-size: 1.8rem; letter-spacing: -1.5px; color: #fff !important; }
+.header-date { color: #fff; font-family: var(--font-heading); font-weight: 700; font-size: 0.85rem; }
+
+/* 4. BARRA DE PROGRESO (STICKY BAJO EL HEADER) */
 #progress-container {
     position: sticky;
-    top: 75px; /* Se pega justo donde termina el header */
+    top: 75px; /* Altura exacta del header */
     left: 0;
     width: 100%;
     height: 5px;
     background: rgba(0,0,0,0.1);
     z-index: 2900;
 }
+#progress-bar { height: 100%; width: 0%; background: var(--rt-red); transition: width 0.1s ease; }
 
-#progress-bar {
-    height: 100%;
-    width: 0%;
-    background: var(--rt-red);
-    transition: width 0.1s ease-out;
-}
+/* 5. DISEÑO DE POSTS (ALINEADOS IZQUIERDA Y SIN DESBORDE) */
+.fb-container { width: 100%; max-width: 1400px; margin: 40px auto; padding: 0 25px; min-height: 70vh; }
+.fb-center { width: 100%; max-width: 100vw; }
 
-/* 4. LAYOUT DE CONTENEDOR */
-.fb-container {
-    width: 100%;
-    max-width: 1400px;
-    margin: 40px auto;
-    padding: 0 25px;
-    min-height: 70vh;
-}
-
-/* 5. DISEÑO DE POSTS (ARTÍCULOS) */
-.post-content {
-    max-width: 900px;
-    margin: 0 auto;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-/* Forzado de tipografía pesada para recuperar tu estilo */
-h1, h2, h3, .rt-logo {
-    font-family: var(--font-heading) !important;
-    font-weight: 900 !important;
-    color: var(--rt-black);
-    line-height: 1.1;
-    text-transform: uppercase;
-}
-
-.post-content h1 {
-    font-size: 3.5rem;
-    letter-spacing: -2px;
-    margin-bottom: 30px;
-    text-align: left;
-}
-
-.post-body p {
-    font-size: 1.25rem;
-    margin-bottom: 1.8rem;
-    text-align: left;
-    color: var(--rt-text);
-    max-width: 100%;
-}
+.post-content { max-width: 900px; margin: 0 auto; word-wrap: break-word; overflow-wrap: break-word; }
+.post-content h1 { font-size: 3.5rem; letter-spacing: -2px; margin-bottom: 30px; text-align: left; }
+.post-body p { font-size: 1.25rem; margin-bottom: 1.8rem; text-align: left; color: var(--rt-text); }
 
 /* 6. REJILLA DE PORTADA */
-.news-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-}
+.news-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+.news-item h3 { font-size: 1.3rem; margin: 15px 0; }
+a { text-decoration: none; color: inherit; }
 
-/* 7. MODO OSCURO */
-[data-theme="dark"] {
-    --rt-white: #0f0f0f;
-    --rt-black: #ffffff;
-    --rt-text: #e4e4e4;
-    --rt-text-sec: #aaaaaa;
-    --rt-border: #2a2a2a;
-    --rt-grey: #1a1a1a;
+/* 7. MENÚ LATERAL */
+#side-menu {
+    position: fixed; top: 0; left: -350px; width: 320px; height: 100vh;
+    background: #000; z-index: 4000; transition: 0.4s ease;
+    padding: 50px 40px; border-right: 6px solid var(--rt-red);
 }
+#menu-close { background: none; border: none; color: #fff; font-size: 2.2rem; position: absolute; top: 20px; right: 20px; cursor: pointer; }
+.menu-items { margin-top: 50px; }
+.menu-items h3 { color: var(--rt-red); font-size: 1.2rem; margin-bottom: 40px; border-bottom: 2px solid #333; padding-bottom: 10px; }
+.menu-items ul { list-style: none; }
+.menu-items li { margin-bottom: 25px; }
+.menu-items a { color: #fff !important; font-size: 1.4rem; }
+#menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3900; display: none; }
 
-[data-theme="dark"] a {
-    color: #ffffff;
-}
+/* 8. FOOTER */
+.fb-footer { background: #000; color: #fff; padding: 80px 20px; border-top: 8px solid var(--rt-red); margin-top: 120px; text-align: center; }
+.footer-content { max-width: 1000px; margin: 0 auto; }
+.fb-footer p { font-style: italic; font-size: 1.8rem; color: #fff !important; }
+.footer-divider { height: 1px; background: #333; width: 100px; margin: 0 auto 30px auto; }
+.copyright { font-family: var(--font-main) !important; font-size: 0.9rem !important; color: #666 !important; letter-spacing: 2px; font-style: normal !important; }
 
-/* 8. RESPONSIVO */
+/* 9. BOTÓN MODO OSCURO */
+#theme-toggle { position: fixed; bottom: 30px; right: 30px; background: #000; border: 2px solid var(--rt-red); color: #fff; width: 55px; height: 55px; border-radius: 4px; cursor: pointer; z-index: 2500; font-size: 1.2rem; }
+
+/* 10. MODO OSCURO REGLAS */
+[data-theme="dark"] { --rt-white: #0f0f0f; --rt-black: #ffffff; --rt-text: #e4e4e4; }
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 { color: #ffffff !important; }
+
+/* 11. RESPONSIVO Y MÓVIL (SIN DESBORDES) */
 @media (max-width: 1050px) {
-    .fb-container {
-        margin: 20px auto;
-        padding: 0 20px;
-    }
+    .fb-container { padding: 0 20px; }
     .news-grid { grid-template-columns: repeat(2, 1fr); }
     .post-content h1 { font-size: 2.2rem; }
     .post-body p { font-size: 1.15rem; }
 }
-
 @media (max-width: 600px) {
     .news-grid { grid-template-columns: 1fr; }
     .fb-container { padding: 0 15px; }
     .post-content h1 { font-size: 1.8rem; }
+    img { max-width: 100%; height: auto; } /* Evita que las imágenes rompan el celular */
 }
