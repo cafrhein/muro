@@ -1,80 +1,106 @@
 ---
 layout: default
-title: Portada
+title: Portada | Red Humana
 ---
 
-<div class="rt-home-wrapper" style="margin-top: 20px;">
-    
-    <div style="border-bottom: 4px solid var(--rt-black, #000); margin-bottom: 40px; padding-bottom: 15px; display: flex; align-items: flex-end;">
-        <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 900; text-transform: uppercase; font-size: 1.8rem; margin: 0; letter-spacing: -1px; color: var(--rt-black, #000);">
-            Lo Último <span style="color: var(--rt-red, #e30613);">/ Red Humana</span>
-        </h2>
-    </div>
+<section class="rt-hero">
+    <h1>Estrategia e Ingeniería de la Reciprocidad</h1>
+    <p class="rt-subtitle">Exploración laica sobre la interdependencia y el proceso de recuperación funcional.</p>
+</section>
 
-    <div class="news-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px;">
-        
-        {% for post in site.posts %}
-        <article class="news-item" style="border-bottom: 1px solid var(--rt-border, #ddd); padding-bottom: 25px; position: relative; background: transparent; display: flex; flex-direction: column;">
-            
-            <div style="color: var(--rt-red, #e30613); font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 0.7rem; margin-bottom: 10px; letter-spacing: 1px;">
-                {{ post.category | default: "Ensayo" }}
-            </div>
-
-            <a href="{{ post.url | relative_url }}" style="text-decoration: none; color: var(--rt-black, #000); display: block; flex-grow: 1;">
-                <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.3rem; line-height: 1.1; margin: 0 0 12px 0; letter-spacing: -0.5px; transition: color 0.2s;">
-                    {{ post.title }}
-                </h3>
-            </a>
-
-            <p style="font-size: 0.95rem; color: var(--rt-text-sec, #666); line-height: 1.4; margin-bottom: 15px; font-weight: 400;">
-                {{ post.content | strip_html | truncatewords: 15 }}
-            </p>
-
-            <div style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #999; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; gap: 8px; margin-top: auto;">
-                <span>{{ post.date | date: "%d %b %Y" }}</span>
-                <span style="color: var(--rt-red, #e30613);">•</span>
-                <span>Carlos Hernández</span>
-            </div>
-
-        </article>
-        {% endfor %}
-
-    </div>
+<div class="news-grid">
+    {% for post in site.posts %}
+    <article class="news-item">
+        <a href="{{ post.url | relative_url }}">
+            <div class="news-category">{{ post.category | default: "Actualidad" }}</div>
+            <h3 class="news-title">{{ post.title }}</h3>
+            <p class="news-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+            <span class="news-more">Leer más <i class="fas fa-arrow-right"></i></span>
+        </a>
+    </article>
+    {% endfor %}
 </div>
 
 <style>
-    /* Estilos de interacción y responsividad */
-    .news-item:hover h3 {
-        color: var(--rt-red, #e30613) !important;
-    }
-    
-    .news-item:hover {
-        transform: translateY(-2px);
-        transition: transform 0.2s ease;
-    }
+/* Estilos específicos de Portada (Grid RT) */
+.rt-hero {
+    text-align: center;
+    padding: 60px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 40px;
+}
 
-    /* Ajustes para pantallas medianas (3 columnas) */
-    @media (max-width: 1200px) {
-        .news-grid {
-            grid-template-columns: repeat(3, 1fr) !important;
-        }
-    }
+.rt-subtitle {
+    font-family: var(--font-main);
+    font-size: 1.4rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
 
-    /* Ajustes para tablets (2 columnas) */
-    @media (max-width: 900px) {
-        .news-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 20px !important;
-        }
-    }
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-    /* Ajustes para móviles (1 columna) */
-    @media (max-width: 600px) {
-        .news-grid {
-            grid-template-columns: 1fr !important;
-        }
-        h3 {
-            font-size: 1.4rem !important;
-        }
-    }
+.news-item {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    transition: transform 0.2s ease;
+}
+
+.news-item:hover {
+    transform: translateY(-5px);
+}
+
+.news-item a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.news-category {
+    font-family: var(--font-heading);
+    color: var(--rt-red);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.news-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    color: var(--rt-black);
+}
+
+.news-excerpt {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.news-more {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--rt-black);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+@media (max-width: 600px) {
+    .rt-hero { padding: 40px 20px; }
+    .news-grid { grid-template-columns: 1fr; }
+}
 </style>
