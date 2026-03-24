@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<article class="post-content">
+<article class="post-content editorial-flow">
     
     <header class="post-header">
         <div class="news-category">{{ page.category | default: "Actualidad" }}</div>
@@ -12,7 +12,8 @@ layout: default
             {% if site.author.avatar %}
                 <img src="{{ site.author.avatar | relative_url }}" 
                      alt="{{ site.author.name }}" 
-                     class="author-avatar">
+                     class="author-avatar"
+                     onerror="this.style.display='none'">
             {% endif %}
             <div class="author-details">
                 <span class="author-name">{{ site.author.name }}</span>
@@ -27,64 +28,89 @@ layout: default
         {{ content }}
     </div>
 
+    <nav class="post-navigation" aria-label="Navegación entre artículos">
+        <div class="nav-wrapper">
+            {% if page.previous.url %}
+            <a class="nav-link prev" href="{{ page.previous.url | relative_url }}">
+                <span class="nav-label">&larr; ANTERIOR</span>
+                <span class="nav-title">{{ page.previous.title }}</span>
+            </a>
+            {% else %}
+            <div class="nav-spacer"></div>
+            {% endif %}
+            
+            {% if page.next.url %}
+            <a class="nav-link next" href="{{ page.next.url | relative_url }}">
+                <span class="nav-label">SIGUIENTE &rarr;</span>
+                <span class="nav-title">{{ page.next.title }}</span>
+            </a>
+            {% endif %}
+        </div>
+    </nav>
+
 </article>
 
 <style>
-/* --- ESTILOS ORIGINALES REINSTALADOS --- */
-.post-content { 
-    max-width: 740px; 
-    margin: 40px auto; 
-    padding: 0 20px; 
-}
-.post-header { 
-    margin-bottom: 40px; 
-    border-bottom: 1px solid #eee; 
-    padding-bottom: 30px; 
-}
-.post-title { 
-    font-family: var(--font-heading); 
-    font-weight: 700; 
-    font-size: 1.5rem; /* Ajustado a tu escala de portada */
-    line-height: 1.15; 
-    text-transform: uppercase; 
-    color: var(--rt-black); 
+/* --- ESTILOS DE POST --- */
+.post-content { max-width: 740px; margin: 40px auto; padding: 0 20px; }
+.post-header { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 30px; }
+.post-title { font-family: var(--font-heading); font-weight: 700; font-size: 2.5rem; line-height: 1.1; text-transform: uppercase; color: var(--rt-black); }
+
+/* Bloque de autor */
+.post-meta-author { display: flex; align-items: center; gap: 15px; margin-top: 25px; }
+.author-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--rt-red); }
+.author-details { display: flex; flex-direction: column; }
+.author-name { font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; color: var(--rt-black); font-size: 1.1rem; }
+.post-date { font-family: var(--font-heading); color: #888; font-size: 0.9rem; text-transform: uppercase; }
+
+/* Cuerpo del texto */
+.post-body { font-family: var(--font-main); font-size: 1.25rem; line-height: 1.75; color: var(--rt-text); margin-bottom: 60px; }
+
+/* --- ESTILOS DE NAVEGACIÓN (SISTEMA RT) --- */
+.post-navigation {
+    border-top: 1px solid #eee;
+    padding-top: 40px;
+    margin-top: 60px;
 }
 
-/* Bloque de autor funcional */
-.post-meta-author { 
-    display: flex; 
-    align-items: center; 
-    gap: 15px; 
-    margin-top: 25px; 
-}
-.author-avatar { 
-    width: 60px; 
-    height: 60px; 
-    border-radius: 50%; 
-    object-fit: cover; 
-    border: 2px solid var(--rt-red); 
-}
-.author-details { 
-    display: flex; 
-    flex-direction: column; 
-}
-.author-name { 
-    font-family: var(--font-heading); 
-    font-weight: 700; 
-    text-transform: uppercase; 
-    color: var(--rt-black); 
-}
-.post-date { 
-    font-family: var(--font-heading); 
-    color: #888; 
-    font-size: 0.9rem; 
-    text-transform: uppercase; 
+.nav-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
 }
 
-.post-body { 
-    font-family: var(--font-main); 
-    font-size: 1.2rem; 
-    line-height: 1.6; 
-    color: var(--rt-text); 
+.nav-link {
+    text-decoration: none;
+    color: var(--rt-black);
+    display: flex;
+    flex-direction: column;
+    transition: opacity 0.2s;
+}
+
+.nav-link:hover { opacity: 0.7; }
+.nav-link.next { text-align: right; }
+
+.nav-label {
+    font-family: var(--font-heading);
+    color: var(--rt-red);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.nav-title {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    line-height: 1.2;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Ajuste móvil */
+@media (max-width: 600px) {
+    .nav-wrapper { grid-template-columns: 1fr; gap: 20px; }
+    .nav-link.next { text-align: left; }
+    .nav-spacer { display: none; }
 }
 </style>
