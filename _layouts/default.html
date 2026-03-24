@@ -28,7 +28,7 @@
 
         <aside class="fb-right">
             <h3 class="sidebar-title">Ecosistema de Red</h3>
-            <div style="padding: 20px; background: var(--rt-grey); text-align: center;">
+            <div style="padding: 20px; background: var(--rt-grey); text-align: center; border-bottom: 1px solid var(--rt-border);">
                 <svg viewBox="0 0 200 200" width="100%" height="auto">
                     <line x1="100" y1="100" x2="50" y2="40" stroke="#ccc" stroke-width="2"/>
                     <line x1="100" y1="100" x2="160" y2="60" stroke="#ccc" stroke-width="2"/>
@@ -48,49 +48,54 @@
 
     </div>
 
-    <footer class="site-footer" style="background: var(--rt-black); padding: 40px 20px; color: white; margin-top: 80px;">
-        <div style="max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-            <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.5rem; text-transform: uppercase;">Red Humana</div>
-            <div style="font-size: 0.85rem; color: #999;">
-                &copy; {{ 'now' | date: "%Y" }} Carlos Hernández. Red Humana no es una plataforma de apoyo, es un vínculo de ingeniería humana.
+    <footer class="site-footer" style="background: var(--rt-black); padding: 60px 20px; color: white; margin-top: 80px; border-top: 5px solid var(--rt-red);">
+        <div style="max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px;">
+            <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.8rem; text-transform: uppercase; letter-spacing: -1px;">Red Humana</div>
+            <div style="font-size: 0.85rem; color: #888; max-width: 400px; line-height: 1.5;">
+                &copy; {{ 'now' | date: "%Y" }} Carlos Hernández. Red Humana es un proceso laico de Ingeniería Humana basado en la interdependencia y la reciprocidad del cuidado.
             </div>
         </div>
     </footer>
 
-    <button class="dark-mode-toggle" id="theme-toggle" style="border-radius: 4px;">
+    <button class="dark-mode-toggle" id="theme-toggle" style="border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
         <i class="fas fa-moon"></i>
     </button>
 
     <script>
-        // Barra de progreso
+        // Función para la Barra de Progreso de Lectura
         window.onscroll = function() {
             var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             var scrolled = (winScroll / height) * 100;
-            document.getElementById("progress-bar").style.width = scrolled + "%";
+            const progressBar = document.getElementById("progress-bar");
+            if (progressBar) {
+                progressBar.style.width = scrolled + "%";
+            }
         };
 
-        // Lógica Modo Oscuro
+        // Lógica para el Cambio de Tema (Modo Oscuro/Claro)
         const toggleBtn = document.getElementById('theme-toggle');
-        const body = document.documentElement;
+        const bodyElement = document.documentElement;
         const currentTheme = localStorage.getItem('theme');
-        const icon = toggleBtn.querySelector('i');
+        const themeIcon = toggleBtn.querySelector('i');
 
         if (currentTheme) {
-            body.setAttribute('data-theme', currentTheme);
-            if (currentTheme === 'dark') icon.classList.replace('fa-moon', 'fa-sun');
+            bodyElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            }
         }
 
         toggleBtn.addEventListener('click', () => {
-            let theme = body.getAttribute('data-theme');
+            let theme = bodyElement.getAttribute('data-theme');
             if (theme === 'dark') {
-                body.removeAttribute('data-theme');
+                bodyElement.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'light');
-                icon.classList.replace('fa-sun', 'fa-moon');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
             } else {
-                body.setAttribute('data-theme', 'dark');
+                bodyElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
-                icon.classList.replace('fa-moon', 'fa-sun');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
             }
         });
     </script>
