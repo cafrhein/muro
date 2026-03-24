@@ -2,10 +2,10 @@
 ---
 /* ============================================================
    REDISEÑO CARLOS - PORTAL DE AUTOR
-   ARQUITECTURA V8.3 | RESTAURACIÓN EXACTA DE FUENTES TIPO RT
+   CÓDIGO DEFINITIVO | CORRECCIÓN DE MENÚ Y CAPAS
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@800;900&display=swap');
 
 :root {
     --rt-red: #e30613;
@@ -25,38 +25,28 @@ html, body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
 }
+a { text-decoration: none; color: inherit; }
 
-/* 2. ENLACES GLOBALES */
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-/* 3. HEADER NEGRO Y STICKY */
+/* 2. HEADER NEGRO Y STICKY */
 .fb-header {
     background-color: #000000 !important;
-    height: 75px;
+    height: 75px !important;
     display: flex;
     align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 2000; 
-    border-bottom: 5px solid var(--rt-red);
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 2000 !important; 
+    border-bottom: 5px solid var(--rt-red) !important;
 }
 
 .header-content {
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 20px;
+    display: flex; justify-content: space-between; align-items: center;
 }
 
-/* 4. BOTÓN DE MENÚ */
+/* 3. BOTÓN DE MENÚ (BLINDADO) */
 #menu-toggle {
-    background: none !important;
+    background: transparent !important;
     border: none !important;
     color: #ffffff !important;
     font-family: var(--font-heading) !important;
@@ -64,16 +54,11 @@ a {
     text-transform: uppercase;
     cursor: pointer;
     font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    transition: opacity 0.2s ease;
+    display: flex; align-items: center; gap: 10px;
 }
-
-#menu-toggle:hover { opacity: 0.8; }
 #menu-toggle i { font-size: 1.4rem; }
 
-/* 5. LOGO Y FECHA */
+/* 4. LOGO Y FECHA */
 .rt-logo {
     font-family: var(--font-heading) !important;
     font-weight: 900 !important;
@@ -82,38 +67,43 @@ a {
     color: #ffffff !important;
     text-transform: uppercase;
 }
+.header-date { color: #ffffff !important; font-family: var(--font-heading); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
 
-.header-date {
-    color: #ffffff !important;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-}
-
-/* 6. BARRA DE PROGRESO */
+/* 5. BARRA DE PROGRESO */
 #progress-container {
-    position: sticky;
-    top: 75px;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: rgba(255,255,255,0.1);
-    z-index: 2100; 
+    position: sticky !important;
+    top: 75px !important;
+    left: 0; width: 100%; height: 5px;
+    background: rgba(0,0,0,0.1);
+    z-index: 1900 !important; 
 }
 #progress-bar { height: 100%; width: 0%; background: var(--rt-red); transition: width 0.1s ease; }
 
+/* 6. MENÚ LATERAL DESPLEGABLE (RESTAURADO Y PROTEGIDO) */
+#side-menu {
+    position: fixed !important;
+    top: 0 !important;
+    width: 320px !important;
+    height: 100vh !important;
+    background: #000000 !important;
+    z-index: 4000 !important; /* Capa más alta para que pase sobre el header */
+    transition: left 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    padding: 50px 40px !important;
+    border-right: 6px solid var(--rt-red) !important;
+    box-shadow: 20px 0 50px rgba(0,0,0,0.5);
+}
+#side-menu h3 { color: var(--rt-red) !important; font-size: 1.2rem; margin-bottom: 40px; border-bottom: 2px solid #333; padding-bottom: 10px; }
+#side-menu ul { list-style: none; padding: 0; }
+#side-menu li { margin-bottom: 25px; }
+#side-menu a { color: #ffffff !important; font-family: var(--font-heading) !important; font-weight: 800 !important; font-size: 1.4rem; text-transform: uppercase; }
+#menu-close { background: none; border: none; color: #fff; font-size: 2.2rem; position: absolute; top: 20px; right: 20px; cursor: pointer; }
+#menu-overlay { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: rgba(0,0,0,0.85) !important; z-index: 3900 !important; display: none; backdrop-filter: blur(4px); }
+
 /* 7. CONTENIDO Y POSTS */
 .fb-container { width: 100%; max-width: 1400px; margin: 40px auto; padding: 0 25px; min-height: 70vh; }
-
-h1, h2, h3 {
-    font-family: var(--font-heading) !important;
-    color: #000000;
-    line-height: 1.1;
-    text-transform: uppercase;
-}
-
-.post-content h1 { font-size: 3.5rem; font-weight: 900 !important; letter-spacing: -2px; margin-bottom: 30px; text-align: left; }
+h1, h2, h3 { font-family: var(--font-heading) !important; font-weight: 900 !important; color: #000000; text-transform: uppercase; }
+.post-content { max-width: 900px; margin: 0 auto; word-wrap: break-word; overflow-wrap: break-word; }
+.post-content h1 { font-size: 3.5rem; letter-spacing: -2px; margin-bottom: 30px; text-align: left; }
 .post-body p { font-size: 1.25rem; margin-bottom: 1.8rem; text-align: left; }
 
 /* 8. REJILLA PORTADA */
