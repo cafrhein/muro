@@ -2,7 +2,7 @@
 ---
 /* ============================================================
    REDISEÑO CARLOS - PORTAL DE AUTOR
-   ARQUITECTURA V7.0 | OPTIMIZACIÓN DE POSTS Y RESPONSIVIDAD
+   ARQUITECTURA V7.2 | ENCABEZADO Y BARRA PERSISTENTES
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;800;900&display=swap');
@@ -33,18 +33,18 @@ html, body {
     color: var(--rt-text);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden; /* Evita desbordamiento horizontal global */
+    overflow-x: hidden;
 }
 
-/* 2. HEADER TIPO RT */
+/* 2. HEADER TIPO RT (PERSISTENTE AL HACER SCROLL) */
 .fb-header {
     background: var(--rt-black);
     height: 70px;
     display: flex;
     align-items: center;
-    position: sticky;
+    position: sticky; /* ESTO HACE QUE SE DESPLACE CON EL LECTOR */
     top: 0;
-    z-index: 2000;
+    z-index: 3000; /* Prioridad máxima sobre el resto del sitio */
     border-bottom: 4px solid var(--rt-red);
 }
 
@@ -58,7 +58,25 @@ html, body {
     align-items: center;
 }
 
-/* 3. LAYOUT DE CONTENEDOR */
+/* 3. BARRA DE PROGRESO (ANCLADA AL HEADER PERSISTENTE) */
+#progress-container {
+    position: sticky; /* Sigue al header, pero no vuela sobre el texto */
+    top: 70px; /* Se queda exactamente donde termina el header */
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: rgba(0,0,0,0.1);
+    z-index: 2900; /* Justo debajo del header */
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--rt-red);
+    transition: width 0.1s ease;
+}
+
+/* 4. LAYOUT DE CONTENEDOR */
 .fb-container {
     width: 100%;
     max-width: 1400px;
@@ -66,11 +84,11 @@ html, body {
     padding: 0 25px;
 }
 
-/* 4. DISEÑO DE POSTS (ARTÍCULOS) */
+/* 5. DISEÑO DE POSTS (ARTÍCULOS) */
 .post-content {
-    max-width: 900px; /* Ancho óptimo de lectura */
+    max-width: 900px;
     margin: 0 auto;
-    word-wrap: break-word; /* Rompe palabras largas para evitar desborde */
+    word-wrap: break-word;
     overflow-wrap: break-word;
 }
 
@@ -92,19 +110,19 @@ h1, h2, h3 {
 .post-body p {
     font-size: 1.25rem;
     margin-bottom: 1.8rem;
-    text-align: left; /* Justificación a la izquierda en escritorio */
+    text-align: left;
     color: var(--rt-text);
-    max-width: 100%; /* Asegura que el párrafo no sea más ancho que su padre */
+    max-width: 100%;
 }
 
-/* 5. REJILLA DE PORTADA (4 COLUMNAS) */
+/* 6. REJILLA DE PORTADA (4 COLUMNAS) */
 .news-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
 }
 
-/* 6. MODO OSCURO */
+/* 7. MODO OSCURO */
 [data-theme="dark"] {
     --rt-white: #0f0f0f;
     --rt-black: #ffffff;
@@ -118,39 +136,19 @@ h1, h2, h3 {
     color: #ffffff;
 }
 
-/* 7. RESPONSIVO (CORRECCIÓN CRÍTICA DE DESBORDE) */
+/* 8. RESPONSIVO */
 @media (max-width: 1050px) {
     .fb-container {
         margin: 20px auto;
-        padding: 0 20px; /* Margen de seguridad en móviles */
+        padding: 0 20px;
     }
-    
-    .news-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .post-content h1 {
-        font-size: 2.2rem;
-        letter-spacing: -1px;
-    }
-
-    .post-body p {
-        font-size: 1.15rem;
-        text-align: left; /* Mantiene izquierda en móvil */
-        line-height: 1.5;
-    }
+    .news-grid { grid-template-columns: repeat(2, 1fr); }
+    .post-content h1 { font-size: 2.2rem; }
+    .post-body p { font-size: 1.15rem; }
 }
 
 @media (max-width: 600px) {
-    .news-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .fb-container {
-        padding: 0 15px; /* Margen estrecho para pantallas pequeñas */
-    }
-
-    .post-content h1 {
-        font-size: 1.8rem;
-    }
+    .news-grid { grid-template-columns: 1fr; }
+    .fb-container { padding: 0 15px; }
+    .post-content h1 { font-size: 1.8rem; }
 }
