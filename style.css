@@ -2,10 +2,10 @@
 ---
 /* ============================================================
    REDISEÑO CARLOS - PORTAL DE AUTOR
-   ARQUITECTURA V7.6 | CABECERA Y POSTS CORREGIDOS
+   ARQUITECTURA V7.7 | CORRECCIÓN DE STICKY Y TIPOGRAFÍA
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@800;900&display=swap');
 
 :root {
     --rt-red: #e30613;
@@ -33,16 +33,16 @@ html, body {
     color: var(--rt-text);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    /* IMPORTANTE: Se eliminó overflow-x: hidden porque esto es lo que "rompía" el header sticky */
 }
 
-/* 2. HEADER TIPO RT (AHORA SÍ FUNCIONA BIEN) */
+/* 2. HEADER TIPO RT (AHORA SÍ TE SIGUE) */
 .fb-header {
     background: var(--rt-black);
     height: 75px;
     display: flex;
     align-items: center;
-    position: sticky;
+    position: sticky; /* Ahora sí va a funcionar al no haber overflow oculto */
     top: 0;
     z-index: 3000;
     border-bottom: 5px solid var(--rt-red);
@@ -58,10 +58,10 @@ html, body {
     align-items: center;
 }
 
-/* 3. BARRA DE PROGRESO (DEBAJO DEL HEADER) */
+/* 3. BARRA DE PROGRESO (ANCLADA AL HEADER) */
 #progress-container {
     position: sticky;
-    top: 75px;
+    top: 75px; /* Se pega justo donde termina el header */
     left: 0;
     width: 100%;
     height: 5px;
@@ -93,8 +93,10 @@ html, body {
     overflow-wrap: break-word;
 }
 
-h1, h2, h3 {
-    font-family: var(--font-heading);
+/* Forzado de tipografía pesada para recuperar tu estilo */
+h1, h2, h3, .rt-logo {
+    font-family: var(--font-heading) !important;
+    font-weight: 900 !important;
     color: var(--rt-black);
     line-height: 1.1;
     text-transform: uppercase;
@@ -102,7 +104,6 @@ h1, h2, h3 {
 
 .post-content h1 {
     font-size: 3.5rem;
-    font-weight: 900;
     letter-spacing: -2px;
     margin-bottom: 30px;
     text-align: left;
