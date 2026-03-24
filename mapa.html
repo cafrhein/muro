@@ -55,6 +55,16 @@ title: Mapa de Red MBTI | Protocolos de Auxilio
         </button>
     </div>
 
+    <div id="recommendation-container" style="margin-bottom: 40px; display: none;">
+        <div id="rec-card" style="background: var(--rt-black); color: white; padding: 25px; border-left: 10px solid var(--rt-red); display: flex; align-items: center; gap: 20px; animation: slideIn 0.5s ease-out;">
+            <div style="font-size: 2.5rem; color: var(--rt-red);"><i class="fas fa-microchip"></i></div>
+            <div>
+                <h3 id="rec-title" style="font-family: var(--font-heading); text-transform: uppercase; margin: 0 0 5px 0; font-size: 1.2rem;">RECOMENDACIÓN DE VÍNCULO</h3>
+                <p id="rec-body" style="font-family: var(--font-main); font-size: 0.95rem; margin: 0; line-height: 1.4; color: #ddd;"></p>
+            </div>
+        </div>
+    </div>
+
     <div id="canvas-wrapper" style="position: relative; width: 100%; height: 600px; background: #fff; border: 2px solid #000; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 50px;">
         <div id="core-node" style="position: absolute; width: 80px; height: 80px; background: var(--rt-black); color: #fff; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--font-heading); font-weight: 700; z-index: 10; border: 3px solid var(--rt-red); font-size: 0.9rem; line-height: 1;">
             <span>YO</span>
@@ -109,6 +119,7 @@ title: Mapa de Red MBTI | Protocolos de Auxilio
 .ring-label { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #fff; padding: 0 10px; font-size: 0.65rem; color: #999; font-family: var(--font-heading); font-weight: 700; letter-spacing: 1px; }
 .v-node { animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: help; }
 @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+@keyframes slideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 
 <script>
@@ -116,6 +127,8 @@ function calculateMBTI() {
     const nameInput = document.getElementById('v-name');
     const btn = document.getElementById('btn-diag');
     const toast = document.getElementById('rt-toast');
+    const recContainer = document.getElementById('recommendation-container');
+    const recBody = document.getElementById('rec-body');
     
     const name = nameInput.value;
     const ei = document.getElementById('v-ei').value;
@@ -126,16 +139,24 @@ function calculateMBTI() {
     
     if(!name) return alert("Ingresa el nombre del vínculo");
 
-    // ANIMACIÓN DEL BOTÓN
     btn.style.background = "var(--rt-red)";
-    btn.innerText = "Insertando...";
+    btn.innerText = "Diagnosticando...";
 
     let distance = 270; 
+    let recMessage = "";
     const coreTypes = ['ENFJ', 'INFJ', 'ESTJ', 'ISTJ', 'ISFJ', 'ESFJ'];
     const collabTypes = ['ENTJ', 'INTJ', 'ENFP', 'INFP', 'INTP', 'ENTP'];
 
-    if(coreTypes.includes(type)) distance = 100;
-    else if(collabTypes.includes(type)) distance = 195;
+    if(coreTypes.includes(type)) {
+        distance = 100;
+        recMessage = `Este perfil posee alta idoneidad para el **Protocolo A (Carga Vital)**. Acude a este vínculo ante crisis existenciales o de salud; su estructura mental le permite sostener tu vulnerabilidad sin fragmentarse.`;
+    } else if(collabTypes.includes(type)) {
+        distance = 195;
+        recMessage = `Perfil optimizado para el **Protocolo B (Carga Operativa)**. No busques consuelo emocional aquí; utiliza este vínculo para resolución de problemas técnicos, estratégicos o logísticos.`;
+    } else {
+        distance = 270;
+        recMessage = `Vínculo ideal para el **Protocolo C (Saturación)**. Recurre a esta persona para "bajar el volumen" de la crisis, buscar distracción y recargar energía sin la presión de resolver el conflicto de fondo.`;
+    }
 
     const layer = document.getElementById('nodes-layer');
     const angle = Math.random() * Math.PI * 2;
@@ -165,6 +186,10 @@ function calculateMBTI() {
     node.innerHTML = `<span style="font-size: 0.7rem; font-weight: 700;">${name.toUpperCase()}</span><span style="font-size: 0.55rem; opacity: 0.9;">${type}</span>`;
 
     layer.appendChild(node);
+
+    // ACTIVAR RECOMENDACIÓN
+    recBody.innerHTML = `<strong>${name.toUpperCase()} (${type}):</strong> ${recMessage}`;
+    recContainer.style.display = "block";
 
     // ACTIVAR NOTIFICACIÓN
     toast.style.right = "20px";
