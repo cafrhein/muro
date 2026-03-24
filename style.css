@@ -1,8 +1,8 @@
 ---
 ---
 /* ============================================================
-   REDISEÑO RED HUMANA - ESTILO PORTAL NOTICIAS (TIPO RT)
-   ARQUITECTURA V4.0 | CARLOS HERNÁNDEZ
+   REDISEÑO RED HUMANA - PORTAL DE NOTICIAS IMPACTO (RT STYLE)
+   ARQUITECTURA V4.1 | CORRECCIÓN DE UX/UI CRÍTICA
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@800;900&display=swap');
@@ -15,11 +15,12 @@
     --rt-border: #e0e0e0;
     --rt-text: #1a1a1a;
     --rt-text-sec: #666666;
+    --rt-white: #ffffff;
     --font-main: 'Inter', sans-serif;
     --font-heading: 'Montserrat', sans-serif;
 }
 
-/* 1. BASES DEL PORTAL */
+/* 1. RESET TOTAL */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -31,10 +32,10 @@ body {
     font-family: var(--font-main);
     color: var(--rt-text);
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 
-/* 2. HEADER DE ALTO IMPACTO (ESTILO RT) */
+/* 2. HEADER TIPO RT (NEGRO + BORDE ROJO) */
 .fb-header {
     background: var(--rt-black);
     height: 70px;
@@ -47,16 +48,20 @@ body {
     border-bottom: 4px solid var(--rt-red);
 }
 
+.fb-header a {
+    text-decoration: none;
+}
+
 .fb-header div {
     font-family: var(--font-heading);
     font-weight: 900;
     font-size: 1.8rem;
-    color: #fff;
+    color: #ffffff;
     text-transform: uppercase;
     letter-spacing: -1px;
 }
 
-/* 3. BARRA DE PROGRESO DISCRETA */
+/* 3. BARRA DE LECTURA */
 #progress-container {
     position: fixed;
     top: 70px;
@@ -71,39 +76,33 @@ body {
     height: 100%;
     width: 0%;
     background: var(--rt-red);
-    transition: width 0.1s ease-out;
 }
 
-/* 4. LAYOUT DE NOTICIAS (GRID) */
+/* 4. CONTENEDOR MAESTRO (LAYOUT DE NOTICIAS) */
 .fb-container {
     display: grid;
-    grid-template-columns: 850px 350px; /* Columna principal ancha y sidebar lateral */
-    justify-content: center;
-    gap: 40px;
-    max-width: 1300px;
+    grid-template-columns: 1fr 320px; /* Columna de noticia y sidebar */
+    gap: 50px;
+    max-width: 1250px;
     margin: 40px auto;
-    padding: 0 20px;
+    padding: 0 25px;
 }
 
-/* 5. DISEÑO DE ARTÍCULO (SIN CAJAS NI SOMBRAS) */
-article.post-content {
-    background: transparent;
-    border: none;
-    padding: 0;
+/* 5. DISEÑO DE POST / NOTICIA */
+.fb-center {
+    width: 100%;
 }
 
-/* Título masivo tipo RT */
-h1 {
+.post-content h1 {
     font-family: var(--font-heading);
     font-weight: 900;
-    font-size: 3rem;
-    line-height: 1.1;
+    font-size: 3.2rem;
+    line-height: 1.05;
     color: var(--rt-black);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     letter-spacing: -1.5px;
 }
 
-/* 6. METADATOS BAJO EL TÍTULO */
 .post-meta {
     border-top: 1px solid var(--rt-border);
     border-bottom: 1px solid var(--rt-border);
@@ -117,76 +116,88 @@ h1 {
     gap: 20px;
 }
 
-.post-meta span i {
-    color: var(--rt-red);
-    margin-right: 5px;
-}
-
-/* 7. CUERPO DEL TEXTO (UX LECTURA NOTICIAS) */
 .post-body p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
     font-size: 1.15rem;
     color: var(--rt-text);
-    text-align: left;
 }
 
-.post-body blockquote {
-    margin: 40px 0;
-    padding-left: 30px;
-    border-left: 8px solid var(--rt-red);
-    font-family: var(--font-heading);
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--rt-dark);
-    line-height: 1.3;
-}
-
-/* 8. SIDEBAR DERECHO (LO MÁS VISTO / RELACIONADOS) */
+/* 6. SIDEBAR DERECHO (RECURSOS) */
 .fb-right {
     position: sticky;
     top: 110px;
+    height: fit-content;
 }
 
 .sidebar-title {
     font-family: var(--font-heading);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     text-transform: uppercase;
     border-bottom: 3px solid var(--rt-red);
-    padding-bottom: 5px;
+    padding-bottom: 8px;
     margin-bottom: 20px;
+    color: var(--rt-black);
 }
 
-/* 9. RESPONSIVO MÓVIL (CIERRE TOTAL DE LA "SALCHICHA") */
-@media (max-width: 1150px) {
+/* 7. PORTADA (INDEX) */
+.news-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.news-item {
+    border-bottom: 1px solid var(--rt-border);
+    padding-bottom: 25px;
+}
+
+.news-item h3 {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin: 10px 0;
+}
+
+/* 8. RESPONSIVO (ADIÓS AL DESORDEN EN MÓVIL) */
+@media (max-width: 1000px) {
     .fb-container {
         grid-template-columns: 1fr;
-        margin: 20px 0;
-        padding: 0 15px;
-    }
-
-    h1 {
-        font-size: 2.2rem;
-    }
-
-    .fb-header {
+        margin: 20px auto;
         padding: 0 20px;
     }
 
-    .fb-left, .fb-right {
+    .post-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .fb-right {
         display: none;
+    }
+
+    .news-grid {
+        grid-template-columns: 1fr;
     }
 }
 
-/* 10. BOTÓN MODO OSCURO */
+/* 9. MODO OSCURO */
+[data-theme="dark"] {
+    --rt-white: #121212;
+    --rt-black: #000000;
+    --rt-text: #e0e0e0;
+    --rt-text-sec: #aaaaaa;
+    --rt-border: #333333;
+    --rt-grey: #1a1a1a;
+}
+
 .dark-mode-toggle {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
+    bottom: 20px;
+    right: 20px;
     background: var(--rt-black);
     color: white;
-    border: none;
+    border: 1px solid var(--rt-red);
+    padding: 10px;
     cursor: pointer;
     z-index: 3000;
 }
