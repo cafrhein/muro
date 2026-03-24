@@ -2,10 +2,10 @@
 ---
 /* ============================================================
    REDISEÑO CARLOS - PORTAL DE AUTOR
-   ARQUITECTURA V8.2 | CORRECCIÓN DE CAPAS Y ENLACES (FINAL)
+   ARQUITECTURA V8.3 | RESTAURACIÓN EXACTA DE FUENTES TIPO RT
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;800;900&display=swap');
 
 :root {
     --rt-red: #e30613;
@@ -26,13 +26,13 @@ html, body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* 2. ENLACES GLOBALES (RESTITUIDOS) */
+/* 2. ENLACES GLOBALES */
 a {
     text-decoration: none;
     color: inherit;
 }
 
-/* 3. HEADER NEGRO Y STICKY (Z-INDEX CORREGIDO) */
+/* 3. HEADER NEGRO Y STICKY */
 .fb-header {
     background-color: #000000 !important;
     height: 75px;
@@ -40,7 +40,7 @@ a {
     align-items: center;
     position: sticky;
     top: 0;
-    z-index: 2000; /* Bajado a 2000 para que el menú (3000) pueda pasar por encima */
+    z-index: 2000; 
     border-bottom: 5px solid var(--rt-red);
 }
 
@@ -99,7 +99,7 @@ a {
     width: 100%;
     height: 5px;
     background: rgba(255,255,255,0.1);
-    z-index: 2100; /* Arriba del header, pero debajo del menú lateral */
+    z-index: 2100; 
 }
 #progress-bar { height: 100%; width: 0%; background: var(--rt-red); transition: width 0.1s ease; }
 
@@ -108,15 +108,15 @@ a {
 
 h1, h2, h3 {
     font-family: var(--font-heading) !important;
-    font-weight: 900 !important;
-    text-transform: uppercase;
     color: #000000;
+    line-height: 1.1;
+    text-transform: uppercase;
 }
 
-.post-content h1 { font-size: 3.5rem; letter-spacing: -2px; margin-bottom: 30px; text-align: left; }
+.post-content h1 { font-size: 3.5rem; font-weight: 900 !important; letter-spacing: -2px; margin-bottom: 30px; text-align: left; }
 .post-body p { font-size: 1.25rem; margin-bottom: 1.8rem; text-align: left; }
 
-/* 8. REJILLA PORTADA (TÍTULOS RESTITUIDOS) */
+/* 8. REJILLA PORTADA */
 .news-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
 .news-item h3 { font-size: 1.3rem; margin: 15px 0; transition: color 0.2s; }
 .news-item:hover h3 { color: var(--rt-red); }
