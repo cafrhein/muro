@@ -1,104 +1,68 @@
 ---
 ---
 /* ============================================================
-   ECOSISTEMA RED HUMANA - ARQUITECTURA INTEGRAL V3.6
-   DISEÑO, UX Y SEGURIDAD: CARLOS HERNÁNDEZ
-   SISTEMA: JEKYLL + GITHUB PAGES (ADESTRAT.COM)
+   REDISEÑO RED HUMANA - ESTILO PORTAL NOTICIAS (TIPO RT)
+   ARQUITECTURA V4.0 | CARLOS HERNÁNDEZ
    ============================================================ */
 
-/* 1. IMPORTACIÓN DE TIPOGRAFÍA DE AUTOR */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@800;900&display=swap');
 
-/* 2. VARIABLES DE ENTORNO (SISTEMA DE COLOR) */
 :root {
-    --fb-bg: #f0f2f5;
-    --fb-blue: #1877f2;
-    --fb-blue-hover: #166fe5;
-    --fb-white: #ffffff;
-    --fb-border: #dddfe2;
-    --fb-text: #1c1e21;
-    --fb-text-sec: #65676b;
-    --fb-hover: #f2f3f5;
-    --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
-    --radius: 12px;
-    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    --spring: all 0.55s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --rt-red: #e30613;
+    --rt-black: #000000;
+    --rt-dark: #1a1a1a;
+    --rt-grey: #f4f4f4;
+    --rt-border: #e0e0e0;
+    --rt-text: #1a1a1a;
+    --rt-text-sec: #666666;
+    --font-main: 'Inter', sans-serif;
+    --font-heading: 'Montserrat', sans-serif;
 }
 
-/* VARIABLES PARA MODO OSCURO */
-[data-theme="dark"] {
-    --fb-bg: #18191a;
-    --fb-white: #242526;
-    --fb-border: #3e4042;
-    --fb-text: #e4e6eb;
-    --fb-text-sec: #b0b3b8;
-    --fb-hover: #3a3b3c;
-    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    --card-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.45);
-}
-
-/* 3. RESET Y BASES */
+/* 1. BASES DEL PORTAL */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 body {
-    background-color: var(--fb-bg);
-    font-family: 'Inter', sans-serif;
-    color: var(--fb-text);
+    background-color: var(--rt-white);
+    font-family: var(--font-main);
+    color: var(--rt-text);
     line-height: 1.6;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* 4. SCROLLBAR PERSONALIZADA */
-::-webkit-scrollbar { 
-    width: 8px; 
-}
-
-::-webkit-scrollbar-track { 
-    background: var(--fb-bg); 
-}
-
-::-webkit-scrollbar-thumb { 
-    background: var(--fb-border); 
-    border-radius: 10px; 
-}
-
-::-webkit-scrollbar-thumb:hover { 
-    background: var(--fb-text-sec); 
-}
-
-/* 5. NAVEGACIÓN (HEADER) */
+/* 2. HEADER DE ALTO IMPACTO (ESTILO RT) */
 .fb-header {
-    background: var(--fb-white);
-    height: 60px;
+    background: var(--rt-black);
+    height: 70px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    box-shadow: var(--card-shadow);
+    padding: 0 40px;
     position: sticky;
     top: 0;
     z-index: 2000;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--fb-border);
+    border-bottom: 4px solid var(--rt-red);
 }
 
-/* 6. BARRA DE PROGRESO DE LECTURA */
+.fb-header div {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+/* 3. BARRA DE PROGRESO DISCRETA */
 #progress-container {
     position: fixed;
-    top: 60px;
+    top: 70px;
     left: 0;
     width: 100%;
-    height: 3px;
+    height: 4px;
     background: transparent;
     z-index: 2100;
 }
@@ -106,472 +70,123 @@ body {
 #progress-bar {
     height: 100%;
     width: 0%;
-    background: linear-gradient(to right, var(--fb-blue), #00d2ff);
-    box-shadow: 0 0 8px rgba(24, 119, 242, 0.4);
+    background: var(--rt-red);
     transition: width 0.1s ease-out;
 }
 
-/* 7. ESTRUCTURA DE GRID (LAYOUT MAESTRO EN ESCRITORIO) */
+/* 4. LAYOUT DE NOTICIAS (GRID) */
 .fb-container {
     display: grid;
-    /* Contenedor central más ancho (800px) para que no se vea delgado */
-    grid-template-columns: 320px 800px 280px; 
+    grid-template-columns: 850px 350px; /* Columna principal ancha y sidebar lateral */
     justify-content: center;
-    gap: 20px;
-    max-width: 1460px; 
-    margin: 20px auto;
+    gap: 40px;
+    max-width: 1300px;
+    margin: 40px auto;
     padding: 0 20px;
-    flex: 1;
 }
 
-/* 8. SIDEBARS PEGAJOSOS */
-.fb-left, 
+/* 5. DISEÑO DE ARTÍCULO (SIN CAJAS NI SOMBRAS) */
+article.post-content {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* Título masivo tipo RT */
+h1 {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 3rem;
+    line-height: 1.1;
+    color: var(--rt-black);
+    margin-bottom: 20px;
+    letter-spacing: -1.5px;
+}
+
+/* 6. METADATOS BAJO EL TÍTULO */
+.post-meta {
+    border-top: 1px solid var(--rt-border);
+    border-bottom: 1px solid var(--rt-border);
+    padding: 15px 0;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+    color: var(--rt-text-sec);
+    text-transform: uppercase;
+    font-weight: 700;
+    display: flex;
+    gap: 20px;
+}
+
+.post-meta span i {
+    color: var(--rt-red);
+    margin-right: 5px;
+}
+
+/* 7. CUERPO DEL TEXTO (UX LECTURA NOTICIAS) */
+.post-body p {
+    margin-bottom: 1.5rem;
+    font-size: 1.15rem;
+    color: var(--rt-text);
+    text-align: left;
+}
+
+.post-body blockquote {
+    margin: 40px 0;
+    padding-left: 30px;
+    border-left: 8px solid var(--rt-red);
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--rt-dark);
+    line-height: 1.3;
+}
+
+/* 8. SIDEBAR DERECHO (LO MÁS VISTO / RELACIONADOS) */
 .fb-right {
     position: sticky;
-    top: 80px;
-    align-self: start;
-    height: fit-content;
-    z-index: 100;
+    top: 110px;
 }
 
-/* 9. COMPONENTES DE TARJETA PRINCIPALES */
-.fb-card {
-    background: var(--fb-white);
-    border-radius: var(--radius);
-    box-shadow: var(--card-shadow);
+.sidebar-title {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    border-bottom: 3px solid var(--rt-red);
+    padding-bottom: 5px;
     margin-bottom: 20px;
-    padding: 20px;
-    border: 1px solid var(--fb-border);
-    position: relative;
-    overflow: visible; 
 }
 
-.fb-card.post-content {
-    padding: 40px; 
-}
-
-.fb-card > img {
-    border-radius: var(--radius) var(--radius) 0 0;
-}
-
-.post-card {
-    transition: var(--transition);
-    cursor: pointer;
-}
-
-.post-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--card-shadow-hover);
-    border-color: var(--fb-blue);
-}
-
-/* 10. EFECTO DE RED VIVA (SVG ANIMATION) */
-.fb-right circle {
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.fb-right svg:hover circle[fill="#45bd62"] {
-    r: 10;
-    filter: drop-shadow(0 0 8px #45bd62);
-}
-
-.fb-right svg:hover circle[fill="var(--fb-blue)"] {
-    r: 18;
-    filter: drop-shadow(0 0 12px var(--fb-blue));
-}
-
-/* 11. PESTAÑAS Y NAVEGACIÓN DEL PERFIL */
-.profile-tabs {
-    display: flex;
-    list-style: none;
-    background: var(--fb-white);
-    border-top: 1px solid var(--fb-border);
-    margin-top: 10px;
-}
-
-.tab-item {
-    flex: 1;
-    text-align: center;
-    padding: 16px 10px;
-    color: var(--fb-text-sec);
-    font-weight: 600;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    font-size: 0.9rem;
-    transition: var(--transition);
-}
-
-.tab-item:hover { 
-    background: var(--fb-hover); 
-    color: var(--fb-blue); 
-}
-
-.tab-item.active { 
-    color: var(--fb-blue); 
-    border-bottom: 3px solid var(--fb-blue); 
-}
-
-.tab-item i { 
-    margin-right: 8px; 
-}
-
-/* 12. TIPOGRAFÍA Y JERARQUÍA */
-h1, h2, h3 {
-    font-family: 'Montserrat', sans-serif;
-    color: var(--fb-text);
-    letter-spacing: -0.5px;
-}
-
-/* 13. UX DE LECTURA (CONTENIDO DEL POST) */
-.post-content {
-    font-size: 1rem; /* Cuerpo de texto reducido para contraste con el título */
-    color: var(--fb-text);
-    line-height: 1.85;
-    position: relative;
-}
-
-.post-content p {
-    margin-bottom: 1.8rem;
-    text-align: justify;
-}
-
-.post-content blockquote {
-    margin: 3rem 0;
-    padding: 2.2rem;
-    background: var(--fb-bg);
-    border-left: 6px solid var(--fb-blue);
-    border-radius: 4px 18px 18px 4px;
-    font-style: italic;
-    font-size: 1.25rem;
-    color: var(--fb-text-sec);
-}
-
-.post-content img {
-    max-width: 100%;
-    height: auto;
-    border-radius: var(--radius);
-    margin: 2.5rem 0;
-    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
-}
-
-/* 14. TOOLTIPS INTELIGENTES DE INGENIERÍA HUMANA */
-.tooltip-vinc {
-    position: relative;
-    display: inline;
-    color: var(--fb-blue);
-    font-weight: 700;
-    border-bottom: 2px dotted var(--fb-blue);
-    cursor: help;
-    z-index: 10;
-}
-
-.tooltip-vinc:hover {
-    z-index: 5000;
-}
-
-.tooltip-vinc .tooltip-text {
-    visibility: hidden;
-    width: max-content;
-    max-width: 250px;
-    background-color: var(--fb-white);
-    color: var(--fb-text);
-    text-align: center;
-    border-radius: 10px;
-    padding: 14px;
-    position: absolute;
-    z-index: 5001;
-    bottom: 145%;
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-    border: 1px solid var(--fb-border);
-    font-size: 0.9rem;
-    line-height: 1.4;
-    font-weight: 400;
-    pointer-events: none;
-}
-
-.tooltip-vinc .tooltip-text::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -8px;
-    border-width: 8px;
-    border-style: solid;
-    border-color: var(--fb-white) transparent transparent transparent;
-}
-
-.tooltip-vinc:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
-
-[data-theme="dark"] .tooltip-text {
-    background-color: #242526;
-    color: #e4e6eb;
-    border-color: #3e4042;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-}
-
-[data-theme="dark"] .tooltip-text::after {
-    border-color: #242526 transparent transparent transparent;
-}
-
-/* 15. TARJETAS RELACIONADAS */
-.related-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 30px;
-    padding-top: 25px;
-    border-top: 1px solid var(--fb-border);
-}
-
-.related-card {
-    background: var(--fb-white);
-    padding: 18px;
-    border-radius: var(--radius);
-    text-decoration: none;
-    color: inherit;
-    border: 1px solid var(--fb-border);
-    transition: var(--transition);
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--card-shadow);
-}
-
-.related-card:hover {
-    border-color: var(--fb-blue);
-    box-shadow: var(--card-shadow-hover);
-    transform: translateY(-5px);
-}
-
-.related-card strong {
-    color: var(--fb-blue);
-    font-size: 0.95rem;
-    margin-bottom: 5px;
-    display: block;
-}
-
-.related-card span {
-    font-size: 0.85rem;
-    color: var(--fb-text-sec);
-}
-
-/* 16. ANIMACIONES SKELETON */
-@keyframes fadeIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(15px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
-}
-
-.skeleton-item {
-    background: linear-gradient(90deg, var(--fb-hover) 25%, var(--fb-bg) 50%, var(--fb-hover) 75%);
-    background-size: 200% 100%;
-    animation: loading 1.5s infinite linear;
-    border-radius: 4px;
-}
-
-@keyframes loading {
-    from { 
-        background-position: 200% 0; 
-    }
-    to { 
-        background-position: -200% 0; 
-    }
-}
-
-/* 17. LISTAS DEL SIDEBAR PERSONAL (MÁRGENES COMPACTOS) */
-.intro-list { 
-    list-style: none; 
-    margin-top: 5px; 
-}
-
-.intro-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-    font-size: 0.85rem;
-}
-
-.intro-item i { 
-    width: 24px; 
-    text-align: center; 
-    color: var(--fb-text-sec); 
-    font-size: 1.15rem; 
-}
-
-/* 18. FOOTER */
-.site-footer {
-    background: var(--fb-white);
-    border-top: 1px solid var(--fb-border);
-    padding: 60px 20px;
-    margin-top: 40px;
-    text-align: center;
-}
-
-.footer-nav {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 25px;
-    list-style: none;
-    font-weight: 600;
-}
-
-.footer-nav a { 
-    color: var(--fb-text-sec); 
-    text-decoration: none; 
-    transition: 0.2s; 
-}
-
-.footer-nav a:hover { 
-    color: var(--fb-blue); 
-}
-
-/* 19. BOTÓN FLOTANTE MODO OSCURO */
-.dark-mode-toggle {
-    position: fixed; 
-    bottom: 30px; 
-    right: 30px; 
-    width: 60px; 
-    height: 60px; 
-    border-radius: 50%; 
-    background: var(--fb-blue); 
-    color: white;
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    cursor: pointer; 
-    z-index: 3000; 
-    border: none;
-    box-shadow: 0 8px 20px rgba(24, 119, 242, 0.4);
-}
-
-/* 20. OVERLAY DEL MENÚ MÓVIL */
-.menu-overlay {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
-    background: rgba(0,0,0,0.5); 
-    z-index: 2400; 
-    display: none;
-    backdrop-filter: blur(4px);
-}
-
-.menu-overlay.active { 
-    display: block; 
-}
-
-/* ============================================================
-   21. RESPONSIVO MÓVIL Y TABLET (HASTA 1150px) - UX LECTURA
-   ============================================================ */
+/* 9. RESPONSIVO MÓVIL (CIERRE TOTAL DE LA "SALCHICHA") */
 @media (max-width: 1150px) {
-    /* 1. Fondo limpio tipo App */
-    body { 
-        background-color: var(--fb-white); 
+    .fb-container {
+        grid-template-columns: 1fr;
+        margin: 20px 0;
+        padding: 0 15px;
     }
 
-    .fb-container { 
-        grid-template-columns: 1fr; 
-        max-width: 100%; 
-        padding: 0; 
-        margin-top: 0;
-        gap: 0;
-    }
-    
-    .fb-left {
-        position: fixed; 
-        top: 0; 
-        left: -100%; 
-        width: 85%; 
-        max-width: 320px; 
-        height: 100vh; 
-        background: var(--fb-white); 
-        z-index: 2500;
-        transition: var(--spring); 
-        padding: 60px 25px; 
-        box-shadow: 15px 0 45px rgba(0,0,0,0.3); 
-        overflow-y: auto; 
-    }
-    
-    .fb-left.active { 
-        left: 0; 
-    }
-    
-    .fb-right { 
-        display: none; 
-    }
-    
-    /* 2. ANIQUILAR LA CAJA: Forzamos con !important para vencer al HTML */
-    article.fb-card {
-        border: none !important; 
-        box-shadow: none !important;
-        border-radius: 0 !important;
-        margin-bottom: 0 !important;
-        background: transparent !important;
-    }
-
-    /* Limpiamos las líneas grises internas */
-    article.fb-card > div {
-        border: none !important;
-        background: transparent !important;
-    }
-    
-    /* 3. LECTURA FLUIDA EN MÓVIL: Contenedor más abierto y letra reducida */
-    .post-content {
-        padding: 10px 12px 30px 12px !important; /* Márgenes laterales más delgados (12px) para expandir la zona de lectura */
-    }
-
-    .post-content p {
-        text-align: left !important;
-        font-size: 0.95rem !important; /* Cuerpo reducido únicamente */
-        line-height: 1.6 !important;
-    }
-
-    .post-content img {
-        margin: 1.5rem 0 !important;
-        border-radius: 4px !important;
-    }
-
-    /* El título se mantiene con buen peso visual */
     h1 {
-        font-size: 1.6rem !important; 
+        font-size: 2.2rem;
     }
-    
-    /* 4. Protegemos los tooltips en móviles */
-    .tooltip-vinc .tooltip-text {
-        width: max-content; 
-        max-width: 85vw; 
-        left: auto; 
-        right: 0; 
-        transform: translateY(10px);
+
+    .fb-header {
+        padding: 0 20px;
     }
-    
-    .tooltip-vinc:hover .tooltip-text { 
-        transform: translateY(0); 
+
+    .fb-left, .fb-right {
+        display: none;
     }
-    
-    .tooltip-vinc .tooltip-text::after { 
-        left: 85%; 
-    }
-    
-    /* 5. Vínculos de interdependencia limpios */
-    .related-grid { 
-        padding: 20px 12px; 
-        grid-template-columns: 1fr; 
-        border-top: 1px solid var(--fb-border) !important;
-    }
+}
+
+/* 10. BOTÓN MODO OSCURO */
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--rt-black);
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 3000;
 }
