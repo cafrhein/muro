@@ -2,10 +2,11 @@
 ---
 /* ============================================================
    REDISEÑO CARLOS - PORTAL DE AUTOR
-   CÓDIGO DEFINITIVO | CORRECCIÓN DE MENÚ Y CAPAS
+   ARQUITECTURA V8.4 | FUENTES ORIGINALES, LOGO Y BOTÓN CORREGIDO
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@800;900&display=swap');
+/* 1. FUENTES ORIGINALES (TIPO RT) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;800;900&display=swap');
 
 :root {
     --rt-red: #e30613;
@@ -16,7 +17,7 @@
     --font-heading: 'Montserrat', sans-serif;
 }
 
-/* 1. RESET Y BASE */
+/* 2. RESET Y BASE */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body {
     background-color: var(--rt-white);
@@ -27,7 +28,7 @@ html, body {
 }
 a { text-decoration: none; color: inherit; }
 
-/* 2. HEADER NEGRO Y STICKY */
+/* 3. HEADER NEGRO Y STICKY */
 .fb-header {
     background-color: #000000 !important;
     height: 75px !important;
@@ -42,9 +43,18 @@ a { text-decoration: none; color: inherit; }
 .header-content {
     width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 20px;
     display: flex; justify-content: space-between; align-items: center;
+    flex-direction: row !important; /* Fuerza a que los elementos estén en la misma línea */
 }
 
-/* 3. BOTÓN DE MENÚ (BLINDADO) */
+/* 4. ALINEACIÓN CARLOS Y MENÚ (LADO A LADO) */
+.header-left, .header-content > div:first-child { 
+    display: flex !important; 
+    flex-direction: row !important; /* Fuerza alineación horizontal */
+    align-items: center !important; 
+    gap: 30px !important; 
+}
+
+/* 5. BOTÓN DE MENÚ (ÁREA DE CLIC LIMITADA) */
 #menu-toggle {
     background: transparent !important;
     border: none !important;
@@ -54,22 +64,27 @@ a { text-decoration: none; color: inherit; }
     text-transform: uppercase;
     cursor: pointer;
     font-size: 1rem;
-    display: flex; align-items: center; gap: 10px;
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+    width: max-content !important; /* Evita que el botón ocupe toda la barra negra */
+    padding: 5px;
 }
 #menu-toggle i { font-size: 1.4rem; }
 
-/* 4. LOGO Y FECHA */
+/* 6. LOGO Y FECHA */
 .rt-logo {
     font-family: var(--font-heading) !important;
     font-weight: 900 !important;
     font-size: 1.8rem;
-    letter-spacing: -1.5px;
+    letter-spacing: -2px;
     color: #ffffff !important;
     text-transform: uppercase;
+    line-height: 1;
 }
 .header-date { color: #ffffff !important; font-family: var(--font-heading); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
 
-/* 5. BARRA DE PROGRESO */
+/* 7. BARRA DE PROGRESO */
 #progress-container {
     position: sticky !important;
     top: 75px !important;
@@ -79,43 +94,38 @@ a { text-decoration: none; color: inherit; }
 }
 #progress-bar { height: 100%; width: 0%; background: var(--rt-red); transition: width 0.1s ease; }
 
-/* 6. MENÚ LATERAL DESPLEGABLE (RESTAURADO Y PROTEGIDO) */
+/* 8. MENÚ LATERAL DESPLEGABLE */
 #side-menu {
-    position: fixed !important;
-    top: 0 !important;
-    width: 320px !important;
-    height: 100vh !important;
-    background: #000000 !important;
-    z-index: 4000 !important; /* Capa más alta para que pase sobre el header */
+    position: fixed !important; top: 0 !important; width: 320px !important; height: 100vh !important;
+    background: #000000 !important; z-index: 4000 !important;
     transition: left 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    padding: 50px 40px !important;
-    border-right: 6px solid var(--rt-red) !important;
+    padding: 50px 40px !important; border-right: 6px solid var(--rt-red) !important;
     box-shadow: 20px 0 50px rgba(0,0,0,0.5);
 }
-#side-menu h3 { color: var(--rt-red) !important; font-size: 1.2rem; margin-bottom: 40px; border-bottom: 2px solid #333; padding-bottom: 10px; }
+#side-menu h3 { color: var(--rt-red) !important; font-family: var(--font-heading) !important; font-size: 1.2rem; margin-bottom: 40px; border-bottom: 2px solid #333; padding-bottom: 10px; }
 #side-menu ul { list-style: none; padding: 0; }
 #side-menu li { margin-bottom: 25px; }
 #side-menu a { color: #ffffff !important; font-family: var(--font-heading) !important; font-weight: 800 !important; font-size: 1.4rem; text-transform: uppercase; }
 #menu-close { background: none; border: none; color: #fff; font-size: 2.2rem; position: absolute; top: 20px; right: 20px; cursor: pointer; }
 #menu-overlay { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: rgba(0,0,0,0.85) !important; z-index: 3900 !important; display: none; backdrop-filter: blur(4px); }
 
-/* 7. CONTENIDO Y POSTS */
+/* 9. CONTENIDO Y POSTS */
 .fb-container { width: 100%; max-width: 1400px; margin: 40px auto; padding: 0 25px; min-height: 70vh; }
 h1, h2, h3 { font-family: var(--font-heading) !important; font-weight: 900 !important; color: #000000; text-transform: uppercase; }
 .post-content { max-width: 900px; margin: 0 auto; word-wrap: break-word; overflow-wrap: break-word; }
 .post-content h1 { font-size: 3.5rem; letter-spacing: -2px; margin-bottom: 30px; text-align: left; }
-.post-body p { font-size: 1.25rem; margin-bottom: 1.8rem; text-align: left; }
+.post-body p { font-size: 1.25rem; font-weight: 400; margin-bottom: 1.8rem; text-align: left; }
 
-/* 8. REJILLA PORTADA */
+/* 10. REJILLA PORTADA */
 .news-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
 .news-item h3 { font-size: 1.3rem; margin: 15px 0; transition: color 0.2s; }
 .news-item:hover h3 { color: var(--rt-red); }
 
-/* 9. MODO OSCURO */
+/* 11. MODO OSCURO */
 [data-theme="dark"] { --rt-white: #0f0f0f; --rt-text: #e4e4e4; }
 [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, [data-theme="dark"] a { color: #ffffff !important; }
 
-/* 10. RESPONSIVO */
+/* 12. RESPONSIVO */
 @media (max-width: 1050px) {
     .news-grid { grid-template-columns: repeat(2, 1fr); }
     .post-content h1 { font-size: 2.2rem; }
