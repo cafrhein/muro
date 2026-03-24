@@ -1,67 +1,113 @@
 ---
 ---
 /* ============================================================
-   REDISEÑO RED HUMANA - PORTAL DE NOTICIAS IMPACTO (RT STYLE)
-   ARQUITECTURA V4.1 | CORRECCIÓN DE UX/UI CRÍTICA
+   REDISEÑO RED HUMANA - PORTAL DE NOTICIAS (ESTILO RT)
+   ARQUITECTURA V5.0 | CONTROL TOTAL SIN TEMAS EXTERNOS
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;800;900&display=swap');
 
 :root {
     --rt-red: #e30613;
     --rt-black: #000000;
-    --rt-dark: #1a1a1a;
-    --rt-grey: #f4f4f4;
-    --rt-border: #e0e0e0;
-    --rt-text: #1a1a1a;
-    --rt-text-sec: #666666;
+    --rt-dark: #121212;
+    --rt-grey: #f8f8f8;
+    --rt-border: #dddddd;
     --rt-white: #ffffff;
+    --rt-text: #1a1a1a;
+    --rt-text-sec: #555555;
     --font-main: 'Inter', sans-serif;
     --font-heading: 'Montserrat', sans-serif;
 }
 
-/* 1. RESET TOTAL */
+/* 1. RESET Y ESTRUCTURA BASE */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body {
+html, body {
+    height: 100%;
     background-color: var(--rt-white);
     font-family: var(--font-main);
     color: var(--rt-text);
     line-height: 1.6;
-    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* 2. HEADER TIPO RT (NEGRO + BORDE ROJO) */
+/* 2. HEADER Y NAVEGACIÓN */
 .fb-header {
     background: var(--rt-black);
     height: 70px;
     display: flex;
     align-items: center;
-    padding: 0 40px;
     position: sticky;
     top: 0;
     z-index: 2000;
     border-bottom: 4px solid var(--rt-red);
 }
 
-.fb-header a {
-    text-decoration: none;
+.header-content {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.fb-header div {
+/* 3. LAYOUT DE COLUMNAS (PORTAL) */
+.fb-container {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 60px;
+    max-width: 1250px;
+    margin: 40px auto;
+    padding: 0 25px;
+}
+
+/* 4. TIPOGRAFÍA Y TEXTO (EL CAMBIO QUE BUSCAS) */
+h1, h2, h3 {
     font-family: var(--font-heading);
-    font-weight: 900;
-    font-size: 1.8rem;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: -1px;
+    color: var(--rt-black);
+    text-transform: none;
+    line-height: 1.1;
 }
 
-/* 3. BARRA DE LECTURA */
+.post-content h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+}
+
+.post-body p {
+    font-size: 1.2rem;
+    margin-bottom: 1.8rem;
+    text-align: justify; /* Justificado de texto */
+    hyphens: auto;
+}
+
+/* 5. SIDEBAR DERECHO */
+.fb-right {
+    position: sticky;
+    top: 110px;
+    height: fit-content;
+}
+
+.sidebar-title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-bottom: 3px solid var(--rt-red);
+    padding-bottom: 8px;
+    margin-bottom: 25px;
+}
+
+/* 6. BARRA DE PROGRESO ROJA */
 #progress-container {
     position: fixed;
     top: 70px;
@@ -76,128 +122,47 @@ body {
     height: 100%;
     width: 0%;
     background: var(--rt-red);
+    transition: width 0.1s linear;
 }
 
-/* 4. CONTENEDOR MAESTRO (LAYOUT DE NOTICIAS) */
-.fb-container {
-    display: grid;
-    grid-template-columns: 1fr 320px; /* Columna de noticia y sidebar */
-    gap: 50px;
-    max-width: 1250px;
-    margin: 40px auto;
-    padding: 0 25px;
+/* 7. MODO OSCURO */
+[data-theme="dark"] {
+    --rt-white: #0f0f0f;
+    --rt-black: #000000;
+    --rt-text: #e4e4e4;
+    --rt-text-sec: #aaaaaa;
+    --rt-border: #2a2a2a;
+    --rt-grey: #1a1a1a;
 }
 
-/* 5. DISEÑO DE POST / NOTICIA */
-.fb-center {
-    width: 100%;
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 {
+    color: #ffffff;
 }
 
-.post-content h1 {
-    font-family: var(--font-heading);
-    font-weight: 900;
-    font-size: 3.2rem;
-    line-height: 1.05;
-    color: var(--rt-black);
-    margin-bottom: 15px;
-    letter-spacing: -1.5px;
-}
-
-.post-meta {
-    border-top: 1px solid var(--rt-border);
-    border-bottom: 1px solid var(--rt-border);
-    padding: 15px 0;
-    margin-bottom: 30px;
-    font-size: 0.9rem;
-    color: var(--rt-text-sec);
-    text-transform: uppercase;
-    font-weight: 700;
-    display: flex;
-    gap: 20px;
-}
-
-.post-body p {
-    margin-bottom: 1.8rem;
-    font-size: 1.15rem;
-    color: var(--rt-text);
-}
-
-/* 6. SIDEBAR DERECHO (RECURSOS) */
-.fb-right {
-    position: sticky;
-    top: 110px;
-    height: fit-content;
-}
-
-.sidebar-title {
-    font-family: var(--font-heading);
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    border-bottom: 3px solid var(--rt-red);
-    padding-bottom: 8px;
-    margin-bottom: 20px;
-    color: var(--rt-black);
-}
-
-/* 7. PORTADA (INDEX) */
-.news-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-}
-
-.news-item {
-    border-bottom: 1px solid var(--rt-border);
-    padding-bottom: 25px;
-}
-
-.news-item h3 {
-    font-family: var(--font-heading);
-    font-weight: 900;
-    font-size: 1.5rem;
-    line-height: 1.2;
-    margin: 10px 0;
-}
-
-/* 8. RESPONSIVO (ADIÓS AL DESORDEN EN MÓVIL) */
-@media (max-width: 1000px) {
+/* 8. AJUSTE MÓVIL (ADIÓS AL DESORDEN) */
+@media (max-width: 1050px) {
     .fb-container {
         grid-template-columns: 1fr;
         margin: 20px auto;
         padding: 0 20px;
     }
-
-    .post-content h1 {
-        font-size: 2.2rem;
-    }
-
     .fb-right {
         display: none;
     }
-
-    .news-grid {
-        grid-template-columns: 1fr;
+    .post-content h1 {
+        font-size: 2.2rem;
     }
-}
-
-/* 9. MODO OSCURO */
-[data-theme="dark"] {
-    --rt-white: #121212;
-    --rt-black: #000000;
-    --rt-text: #e0e0e0;
-    --rt-text-sec: #aaaaaa;
-    --rt-border: #333333;
-    --rt-grey: #1a1a1a;
 }
 
 .dark-mode-toggle {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 30px;
+    right: 30px;
     background: var(--rt-black);
     color: white;
     border: 1px solid var(--rt-red);
-    padding: 10px;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
     z-index: 3000;
 }
