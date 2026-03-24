@@ -5,21 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }} | Red Humana</title>
     
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
     <header class="fb-header">
-        <div class="header-content" style="width: 100%; max-width: 1300px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+        <div class="header-content">
             
             <div style="display: flex; align-items: center; gap: 20px;">
-                <button id="menu-toggle" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-weight: 700; text-transform: uppercase;">
+                <button id="menu-toggle" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; gap: 10px; font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase;">
                     <i class="fas fa-bars"></i> <span class="menu-label" style="font-size: 0.9rem;">Menú</span>
                 </button>
                 
                 <a href="/" style="text-decoration: none;">
-                    <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.8rem; color: #ffffff; text-transform: uppercase; letter-spacing: -1px;">
+                    <div style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.8rem; color: #ffffff; text-transform: uppercase; letter-spacing: -1px;">
                         Red Humana
                     </div>
                 </a>
@@ -31,22 +31,21 @@
         </div>
     </header>
 
-    <nav id="side-menu" style="position: fixed; top: 0; left: -350px; width: 320px; height: 100vh; background: var(--rt-black); z-index: 3000; transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); padding: 40px; border-right: 5px solid var(--rt-red);">
+    <nav id="side-menu" style="position: fixed; top: 0; left: -350px; width: 320px; height: 100vh; background: #000000; z-index: 3000; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); padding: 40px; border-right: 5px solid #e30613;">
         <button id="menu-close" style="background: none; border: none; color: white; font-size: 2rem; position: absolute; top: 20px; right: 20px; cursor: pointer;">
             <i class="fas fa-times"></i>
         </button>
 
         <div style="margin-top: 60px;">
-            <h3 style="color: var(--rt-red); font-family: var(--font-heading); text-transform: uppercase; font-size: 1.2rem; margin-bottom: 30px; border-bottom: 2px solid #333; padding-bottom: 10px;">Secciones</h3>
-            <ul style="list-style: none;">
-                <li style="margin-bottom: 20px;"><a href="/" style="color: white; text-decoration: none; font-family: var(--font-heading); font-weight: 700; font-size: 1.3rem; text-transform: uppercase;">Inicio</a></li>
-                <li style="margin-bottom: 20px;"><a href="/filosofia" style="color: white; text-decoration: none; font-family: var(--font-heading); font-weight: 700; font-size: 1.3rem; text-transform: uppercase;">Filosofía</a></li>
-                <li style="margin-bottom: 20px;"><a href="/ingenieria-humana" style="color: white; text-decoration: none; font-family: var(--font-heading); font-weight: 700; font-size: 1.3rem; text-transform: uppercase;">Ingeniería Humana</a></li>
-                <li style="margin-bottom: 20px;"><a href="/acerca" style="color: white; text-decoration: none; font-family: var(--font-heading); font-weight: 700; font-size: 1.3rem; text-transform: uppercase;">Sobre Carlos</a></li>
+            <h3 style="color: #e30613; font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-size: 1.2rem; margin-bottom: 30px; border-bottom: 2px solid #333; padding-bottom: 10px;">Secciones</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 25px;"><a href="/" style="color: white; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.3rem; text-transform: uppercase;">Portada</a></li>
+                <li style="margin-bottom: 25px;"><a href="/filosofia" style="color: white; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.3rem; text-transform: uppercase;">Filosofía</a></li>
+                <li style="margin-bottom: 25px;"><a href="/acerca" style="color: white; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.3rem; text-transform: uppercase;">Sobre Carlos</a></li>
             </ul>
         </div>
     </nav>
-    <div id="menu-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2900; display: none; backdrop-filter: blur(4px);"></div>
+    <div id="menu-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2900; display: none; backdrop-filter: blur(5px);"></div>
 
     <div id="progress-container">
         <div id="progress-bar"></div>
@@ -59,29 +58,29 @@
 
         <aside class="fb-right">
             <h3 class="sidebar-title">Ecosistema de Red</h3>
-            <div style="padding: 20px; background: var(--rt-grey); text-align: center;">
+            <div style="padding: 25px; background: #f8f8f8; text-align: center; border: 1px solid #ddd;">
                 <svg viewBox="0 0 200 200" width="100%" height="auto">
                     <line x1="100" y1="100" x2="50" y2="40" stroke="#ccc" stroke-width="2"/>
                     <line x1="100" y1="100" x2="160" y2="60" stroke="#ccc" stroke-width="2"/>
                     <line x1="100" y1="100" x2="140" y2="160" stroke="#ccc" stroke-width="2"/>
                     <line x1="100" y1="100" x2="40" y2="140" stroke="#ccc" stroke-width="2"/>
-                    <circle cx="50" cy="40" r="8" fill="var(--rt-red)" />
+                    <circle cx="50" cy="40" r="8" fill="#e30613" />
                     <circle cx="160" cy="60" r="8" fill="#45bd62" />
-                    <circle cx="140" cy="160" r="8" fill="var(--rt-red)" />
+                    <circle cx="140" cy="160" r="8" fill="#e30613" />
                     <circle cx="40" cy="140" r="8" fill="#45bd62" />
-                    <circle cx="100" cy="100" r="14" fill="var(--rt-black)" />
+                    <circle cx="100" cy="100" r="14" fill="#000000" />
                 </svg>
-                <p style="font-size: 0.9rem; color: var(--rt-text-sec); margin-top: 20px; font-style: italic; line-height: 1.4;">
+                <p style="font-size: 0.95rem; color: #555; margin-top: 25px; font-style: italic; line-height: 1.4;">
                     "Quien se deja cuidar, dota de sentido a su cuidador."
                 </p>
             </div>
         </aside>
     </div>
 
-    <footer class="site-footer" style="background: var(--rt-black); padding: 60px 20px; color: white; margin-top: 80px; border-top: 5px solid var(--rt-red);">
-        <div style="max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px;">
-            <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.8rem; text-transform: uppercase;">Red Humana</div>
-            <div style="font-size: 0.85rem; color: #888;">&copy; {{ 'now' | date: "%Y" }} Carlos Hernández.</div>
+    <footer style="background: #000000; padding: 60px 20px; color: white; margin-top: 100px; border-top: 5px solid #e30613;">
+        <div style="max-width: 1250px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px;">
+            <div style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.8rem; text-transform: uppercase;">Red Humana</div>
+            <div style="font-size: 0.85rem; color: #777;">&copy; {{ 'now' | date: "%Y" }} Carlos Hernández. Estrategia e Ingeniería de la Reciprocidad.</div>
         </div>
     </footer>
 
@@ -90,7 +89,7 @@
     </button>
 
     <script>
-        // Lógica de Menú Lateral
+        // Control de Menú Lateral (Drawer)
         const menuBtn = document.getElementById('menu-toggle');
         const closeBtn = document.getElementById('menu-close');
         const sideMenu = document.getElementById('side-menu');
@@ -109,27 +108,34 @@
         closeBtn.addEventListener('click', closeMenu);
         overlay.addEventListener('click', closeMenu);
 
-        // Barra de progreso
+        // Barra de Progreso de Lectura
         window.onscroll = function() {
             var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             var scrolled = (winScroll / height) * 100;
-            document.getElementById("progress-bar").style.width = scrolled + "%";
+            const pBar = document.getElementById("progress-bar");
+            if(pBar) pBar.style.width = scrolled + "%";
         };
 
-        // Modo Oscuro
+        // Lógica de Modo Oscuro
         const toggleBtn = document.getElementById('theme-toggle');
-        const body = document.documentElement;
+        const htmlElement = document.documentElement;
+        
         toggleBtn.addEventListener('click', () => {
-            let theme = body.getAttribute('data-theme');
-            if (theme === 'dark') {
-                body.removeAttribute('data-theme');
+            let current = htmlElement.getAttribute('data-theme');
+            if (current === 'dark') {
+                htmlElement.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'light');
             } else {
-                body.setAttribute('data-theme', 'dark');
+                htmlElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
             }
         });
+
+        // Aplicar tema guardado al cargar
+        if (localStorage.getItem('theme') === 'dark') {
+            htmlElement.setAttribute('data-theme', 'dark');
+        }
     </script>
 </body>
 </html>
