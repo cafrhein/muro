@@ -6,7 +6,13 @@ description: "Opinión"
 url: "https://adestrat.com"
 baseurl: ""
 
-# IMPORTANTE: Eliminamos remote_theme para que use nuestro diseño propio
+# IDENTIDAD DEL AUTOR (Bloque necesario para la foto en los posts)
+author:
+  name: Carlos Hernández
+  avatar: "/perfil.png"
+  twitter_username: cafrhein
+
+# IMPORTANTE: Diseño propio
 theme: null
 
 # CONFIGURACIÓN DE MOTOR
@@ -18,7 +24,7 @@ lsi: false
 include: [_posts, _layouts, assets]
 exclude: [Gemfile, Gemfile.lock, node_modules, vendor, .github]
 
-# CONFIGURACIÓN DE PERMALINKS (Estilo Noticias)
+# CONFIGURACIÓN DE PERMALINKS
 permalink: /:categories/:title/
 
 # VALORES POR DEFECTO
