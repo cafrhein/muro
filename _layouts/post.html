@@ -6,7 +6,7 @@ layout: default
     <div id="reading-progress-bar"></div>
 </div>
 
-<article class="post-content editorial-flow">
+<article class="post-content">
     
     <header class="post-header">
         <div class="news-category">{{ page.category | default: "Actualidad" }}</div>
@@ -26,15 +26,15 @@ layout: default
                     {{ page.date | date: "%d %b %Y" }}
                 </time>
                 
-                <div class="author-social" style="display: flex; gap: 15px; margin-top: 8px; font-size: 1.1rem;">
-                    <a href="https://www.facebook.com/shibalbaa" target="_blank" rel="noopener noreferrer" style="color: var(--rt-black); text-decoration: none; transition: color 0.3s;">
+                <div class="author-social">
+                    <a href="https://www.facebook.com/shibalbaa" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-facebook"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/hernandezinurreta/?skipRedirect=true" target="_blank" rel="noopener noreferrer" style="color: var(--rt-black); text-decoration: none; transition: color 0.3s;">
+                    <a href="https://www.linkedin.com/in/hernandezinurreta/?skipRedirect=true" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-linkedin"></i>
                     </a>
-                    <a href="#" style="color: var(--rt-black); text-decoration: none;"><i class="fab fa-x-twitter"></i></a>
-                    <a href="#" style="color: var(--rt-black); text-decoration: none;"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>
@@ -91,18 +91,28 @@ layout: default
     transition: width 0.1s ease-out;
 }
 
-/* --- ESTILOS DE POST (CORRECCIÓN ESTRUCTURAL) --- */
+/* --- ESTILOS DE POST (ESTRUCTURA NEUTRALIZADA) --- */
 .post-content { 
-    max-width: var(--content-width); /* Liberado de los 740px */
+    max-width: var(--content-width);
     margin: 40px auto; 
-    padding: 0; /* Padding cedido al 1% de fb-container en style.css */
+    padding: 0; 
 }
 .post-header { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 30px; }
 
-/* HOVER TÁCTICO PARA RRSS EN POST */
+/* --- COMPONENTES DE CABECERA --- */
+.post-title { font-family: var(--font-heading); font-weight: 700; font-size: 2.5rem; line-height: 1.1; text-transform: uppercase; color: var(--rt-black); }
+.post-meta-author { display: flex; align-items: center; gap: 15px; margin-top: 25px; }
+.author-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--rt-red); }
+.author-details { display: flex; flex-direction: column; }
+.author-name { font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; color: var(--rt-black); font-size: 1.1rem; }
+.post-date { font-family: var(--font-heading); color: #888; font-size: 0.9rem; text-transform: uppercase; }
+
+/* --- BLOQUE RRSS (CONTROL CEDIDO A CSS GLOBAL) --- */
+.author-social { display: flex; gap: 15px; margin-top: 8px; }
+.author-social a { color: var(--rt-black); text-decoration: none; transition: color 0.3s; font-size: 1.1rem; }
 .author-social a:hover { color: var(--rt-red) !important; }
 
-/* --- UI DE PORTADA (RT STYLE: SANGRE EDITORIAL + ACENTO ROJO) --- */
+/* --- UI DE PORTADA --- */
 .post-featured-image.extended-editorial-bleed { 
     width: 100%; 
     max-width: var(--content-width);
@@ -114,33 +124,18 @@ layout: default
     border-bottom: 5px solid var(--rt-red); 
     position: relative;
 }
+.post-featured-image.extended-editorial-bleed img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
 
-.post-featured-image.extended-editorial-bleed img { 
-    width: 100%; 
-    height: 100%; 
-    display: block; 
-    object-fit: cover; 
-    object-position: center; 
-}
-
-.post-title { font-family: var(--font-heading); font-weight: 700; font-size: 2.5rem; line-height: 1.1; text-transform: uppercase; color: var(--rt-black); }
-
-.post-meta-author { display: flex; align-items: center; gap: 15px; margin-top: 25px; }
-.author-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--rt-red); }
-.author-details { display: flex; flex-direction: column; }
-.author-name { font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; color: var(--rt-black); font-size: 1.1rem; }
-.post-date { font-family: var(--font-heading); color: #888; font-size: 0.9rem; text-transform: uppercase; }
-
-/* HERENCIA PARA ESCALA TIPOGRÁFICA GLOBAL */
+/* --- CUERPO DEL POST --- */
 .post-body { 
     font-family: var(--font-main); 
-    font-size: inherit; /* Permite que style.css controle el tamaño en móvil */
+    font-size: inherit; 
     line-height: inherit; 
     color: var(--rt-text); 
     margin-bottom: 60px; 
 }
 
-/* --- ESTILOS DE NAVEGACIÓN --- */
+/* --- NAVEGACIÓN --- */
 .post-navigation { border-top: 1px solid #eee; padding-top: 40px; margin-top: 60px; }
 .nav-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
 .nav-link { text-decoration: none; color: var(--rt-black); display: flex; flex-direction: column; transition: opacity 0.2s; }
@@ -150,23 +145,16 @@ layout: default
 .nav-title { font-family: var(--font-heading); font-size: 1.2rem; line-height: 1.2; font-weight: 700; text-transform: uppercase; }
 
 @media (max-width: 600px) {
-    .post-content { padding: 0; } /* Asegura el 1% lateral definido en style.css */
     .nav-wrapper { grid-template-columns: 1fr; gap: 20px; }
     .nav-link.next { text-align: left; }
     .nav-spacer { display: none; }
     #reading-progress-container { top: 60px; }
-    .post-featured-image.extended-editorial-bleed {
-        width: 100%;
-        margin-left: 0;
-        height: 300px;
-    }
+    .post-featured-image.extended-editorial-bleed { width: 100%; margin-left: 0; height: 300px; }
 }
 </style>
 
 <script>
-/* LÓGICA DE LA BARRA DE PROGRESO */
 window.onscroll = function() { updateProgressBar() };
-
 function updateProgressBar() {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
