@@ -25,6 +25,15 @@ layout: default
                 <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">
                     {{ page.date | date: "%d %b %Y" }}
                 </time>
+                
+                <div class="author-social" style="display: flex; gap: 15px; margin-top: 8px; font-size: 1.1rem;">
+                    <a href="https://www.facebook.com/shibalbaa" target="_blank" rel="noopener noreferrer" style="color: var(--rt-black); text-decoration: none; transition: color 0.3s;">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/hernandezinurreta/?skipRedirect=true" target="_blank" rel="noopener noreferrer" style="color: var(--rt-black); text-decoration: none; transition: color 0.3s;">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -65,7 +74,7 @@ layout: default
 /* --- BARRA DE PROGRESO (INGENIERÍA VISUAL) --- */
 #reading-progress-container {
     position: fixed;
-    top: 64px; /* Debe coincidir con la altura de tu header rígido */
+    top: 64px; 
     left: 0;
     width: 100%;
     height: 4px;
@@ -76,7 +85,7 @@ layout: default
 #reading-progress-bar {
     height: 100%;
     width: 0%;
-    background: var(--rt-red); /* Usamos tu rojo de marca */
+    background: var(--rt-red); 
     transition: width 0.1s ease-out;
 }
 
@@ -84,15 +93,18 @@ layout: default
 .post-content { max-width: 740px; margin: 40px auto; padding: 0 20px; }
 .post-header { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 30px; }
 
+/* HOVER TÁCTICO PARA RRSS EN POST */
+.author-social a:hover { color: var(--rt-red) !important; }
+
 /* --- UI DE PORTADA (RT STYLE: SANGRE EDITORIAL + ACENTO ROJO) --- */
 .post-featured-image.extended-editorial-bleed { 
-    width: calc(100% + 100px); /* Propuesta 2: Ancho extendido */
+    width: calc(100% + 100px); 
     margin: 40px 0 0 -50px; 
-    height: 400px; /* Altura fija con recorte central */
+    height: 400px; 
     overflow: hidden; 
     border-radius: 4px; 
-    box-shadow: 0 10px 40px rgba(0,0,0,0.18); /* Sombra profunda */
-    border-bottom: 5px solid var(--rt-red); /* Propuesta 3: Cimiento RT Red */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.18); 
+    border-bottom: 5px solid var(--rt-red); 
     position: relative;
 }
 
