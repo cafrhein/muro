@@ -1,9 +1,8 @@
 ---
 ---
-/* ============================================================
-   REDISEÑO RED HUMANA - PORTAL DE NOTICIAS (ESTILO RT)
-   ARQUITECTURA V5.0 | CONTROL TOTAL SIN TEMAS EXTERNOS
-   ============================================================ */
+/* IMPORTANTE: Las tres líneas de arriba (guiones) son VITALES. 
+   Sin ellas, Jekyll no procesa este archivo y no cargará nada.
+*/
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;800;900&display=swap');
 
@@ -28,7 +27,6 @@
 }
 
 html, body {
-    height: 100%;
     background-color: var(--rt-white);
     font-family: var(--font-main);
     color: var(--rt-text);
@@ -36,7 +34,7 @@ html, body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* 2. HEADER Y NAVEGACIÓN */
+/* 2. HEADER TIPO RT */
 .fb-header {
     background: var(--rt-black);
     height: 70px;
@@ -58,7 +56,7 @@ html, body {
     align-items: center;
 }
 
-/* 3. LAYOUT DE COLUMNAS (PORTAL) */
+/* 3. LAYOUT DE COLUMNAS */
 .fb-container {
     display: grid;
     grid-template-columns: 1fr 320px;
@@ -68,11 +66,10 @@ html, body {
     padding: 0 25px;
 }
 
-/* 4. TIPOGRAFÍA Y TEXTO (EL CAMBIO QUE BUSCAS) */
+/* 4. TIPOGRAFÍA Y TEXTO (JUSTIFICADO) */
 h1, h2, h3 {
     font-family: var(--font-heading);
     color: var(--rt-black);
-    text-transform: none;
     line-height: 1.1;
 }
 
@@ -80,17 +77,17 @@ h1, h2, h3 {
     font-size: 3.5rem;
     font-weight: 900;
     letter-spacing: -2px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .post-body p {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     margin-bottom: 1.8rem;
-    text-align: justify; /* Justificado de texto */
-    hyphens: auto;
+    text-align: justify; /* Aquí está el justificado que pediste */
+    color: var(--rt-text);
 }
 
-/* 5. SIDEBAR DERECHO */
+/* 5. SIDEBAR */
 .fb-right {
     position: sticky;
     top: 110px;
@@ -107,7 +104,7 @@ h1, h2, h3 {
     margin-bottom: 25px;
 }
 
-/* 6. BARRA DE PROGRESO ROJA */
+/* 6. BARRA DE PROGRESO */
 #progress-container {
     position: fixed;
     top: 70px;
@@ -122,7 +119,6 @@ h1, h2, h3 {
     height: 100%;
     width: 0%;
     background: var(--rt-red);
-    transition: width 0.1s linear;
 }
 
 /* 7. MODO OSCURO */
@@ -135,34 +131,12 @@ h1, h2, h3 {
     --rt-grey: #1a1a1a;
 }
 
-[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 {
-    color: #ffffff;
-}
-
-/* 8. AJUSTE MÓVIL (ADIÓS AL DESORDEN) */
+/* 8. RESPONSIVO */
 @media (max-width: 1050px) {
     .fb-container {
         grid-template-columns: 1fr;
         margin: 20px auto;
-        padding: 0 20px;
     }
-    .fb-right {
-        display: none;
-    }
-    .post-content h1 {
-        font-size: 2.2rem;
-    }
-}
-
-.dark-mode-toggle {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: var(--rt-black);
-    color: white;
-    border: 1px solid var(--rt-red);
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    z-index: 3000;
+    .fb-right { display: none; }
+    .post-content h1 { font-size: 2.2rem; }
 }
