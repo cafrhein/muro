@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Portada | Red Humana
+title: Portada | Carlos
 ---
 
 <section class="rt-hero">
-    <h1>Estrategia e Ingeniería de la Reciprocidad</h1>
-    <p class="rt-subtitle">Exploración laica sobre la interdependencia y el proceso de recuperación funcional.</p>
+    <h1>Mi opinión</h1>
+    <p class="rt-subtitle">Opinión y análisis de asuntos públicos</p>
 </section>
 
 <div class="news-grid">
@@ -22,28 +22,43 @@ title: Portada | Red Humana
 </div>
 
 <style>
-/* Estilos específicos de Portada (Grid RT) */
+/* ============================================================
+   ESTILOS DE PORTADA - SISTEMA COMPACTO
+   ============================================================ */
+
 .rt-hero {
     text-align: center;
-    padding: 60px 0;
+    padding: 30px 0 10px 0; /* Espaciado superior e inferior reducido */
     border-bottom: 1px solid #eee;
-    margin-bottom: 40px;
+    margin-bottom: 25px;    /* Espacio controlado antes de la rejilla */
+}
+
+.rt-hero h1 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    text-transform: uppercase;
+    margin-bottom: 8px;     /* Pegado al subtítulo */
+    color: var(--rt-black);
 }
 
 .rt-subtitle {
     font-family: var(--font-main);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: #666;
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
+    line-height: 1.4;
 }
 
+/* REJILLA DINÁMICA */
 .news-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
+    padding-bottom: 60px;
 }
 
 .news-item {
@@ -53,7 +68,7 @@ title: Portada | Red Humana
 }
 
 .news-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
 }
 
 .news-item a {
@@ -68,39 +83,41 @@ title: Portada | Red Humana
     font-weight: 700;
     font-size: 0.8rem;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .news-title {
     font-family: var(--font-heading);
     font-weight: 700;
-    font-size: 1.6rem;
-    line-height: 1.2;
+    font-size: 1.5rem;
+    line-height: 1.15;
     text-transform: uppercase;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     color: var(--rt-black);
 }
 
 .news-excerpt {
-    font-size: 1rem;
-    color: #555;
+    font-size: 0.95rem;
+    color: #444;
     margin-bottom: 15px;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .news-more {
     font-family: var(--font-heading);
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     color: var(--rt-black);
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
 }
 
+/* RESPONSIVO AJUSTADO */
 @media (max-width: 600px) {
-    .rt-hero { padding: 40px 20px; }
-    .news-grid { grid-template-columns: 1fr; }
+    .rt-hero { padding: 30px 15px 10px 15px; }
+    .rt-hero h1 { font-size: 1.8rem; }
+    .news-grid { grid-template-columns: 1fr; gap: 20px; }
 }
 </style>
