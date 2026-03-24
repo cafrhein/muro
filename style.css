@@ -121,14 +121,19 @@ h1, h2, h3 {
     background: var(--rt-red);
 }
 
-/* 7. MODO OSCURO */
+/* 7. MODO OSCURO (CORRECCIÓN DE VISIBILIDAD) */
 [data-theme="dark"] {
     --rt-white: #0f0f0f;
-    --rt-black: #000000;
+    --rt-black: #ffffff; /* Los encabezados pasan a ser blancos */
     --rt-text: #e4e4e4;
     --rt-text-sec: #aaaaaa;
     --rt-border: #2a2a2a;
     --rt-grey: #1a1a1a;
+}
+
+/* Asegurar que los enlaces de los posts también sean blancos en modo noche */
+[data-theme="dark"] a {
+    color: #ffffff;
 }
 
 /* 8. RESPONSIVO */
