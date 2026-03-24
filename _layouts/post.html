@@ -33,6 +33,8 @@ layout: default
                     <a href="https://www.linkedin.com/in/hernandezinurreta/?skipRedirect=true" target="_blank" rel="noopener noreferrer" style="color: var(--rt-black); text-decoration: none; transition: color 0.3s;">
                         <i class="fab fa-linkedin"></i>
                     </a>
+                    <a href="#" style="color: var(--rt-black); text-decoration: none;"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" style="color: var(--rt-black); text-decoration: none;"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>
@@ -89,8 +91,12 @@ layout: default
     transition: width 0.1s ease-out;
 }
 
-/* --- ESTILOS DE POST --- */
-.post-content { max-width: 740px; margin: 40px auto; padding: 0 20px; }
+/* --- ESTILOS DE POST (CORRECCIÓN ESTRUCTURAL) --- */
+.post-content { 
+    max-width: var(--content-width); /* Liberado de los 740px */
+    margin: 40px auto; 
+    padding: 0; /* Padding cedido al 1% de fb-container en style.css */
+}
 .post-header { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 30px; }
 
 /* HOVER TÁCTICO PARA RRSS EN POST */
@@ -98,8 +104,9 @@ layout: default
 
 /* --- UI DE PORTADA (RT STYLE: SANGRE EDITORIAL + ACENTO ROJO) --- */
 .post-featured-image.extended-editorial-bleed { 
-    width: calc(100% + 100px); 
-    margin: 40px 0 0 -50px; 
+    width: 100%; 
+    max-width: var(--content-width);
+    margin: 40px 0 0 0; 
     height: 400px; 
     overflow: hidden; 
     border-radius: 4px; 
@@ -124,7 +131,14 @@ layout: default
 .author-name { font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; color: var(--rt-black); font-size: 1.1rem; }
 .post-date { font-family: var(--font-heading); color: #888; font-size: 0.9rem; text-transform: uppercase; }
 
-.post-body { font-family: var(--font-main); font-size: 1.25rem; line-height: 1.75; color: var(--rt-text); margin-bottom: 60px; }
+/* HERENCIA PARA ESCALA TIPOGRÁFICA GLOBAL */
+.post-body { 
+    font-family: var(--font-main); 
+    font-size: inherit; /* Permite que style.css controle el tamaño en móvil */
+    line-height: inherit; 
+    color: var(--rt-text); 
+    margin-bottom: 60px; 
+}
 
 /* --- ESTILOS DE NAVEGACIÓN --- */
 .post-navigation { border-top: 1px solid #eee; padding-top: 40px; margin-top: 60px; }
@@ -135,15 +149,8 @@ layout: default
 .nav-label { font-family: var(--font-heading); color: var(--rt-red); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px; }
 .nav-title { font-family: var(--font-heading); font-size: 1.2rem; line-height: 1.2; font-weight: 700; text-transform: uppercase; }
 
-@media (max-width: 900px) {
-    .post-featured-image.extended-editorial-bleed {
-        width: calc(100% + 40px);
-        margin-left: -20px;
-        height: 350px;
-    }
-}
-
 @media (max-width: 600px) {
+    .post-content { padding: 0; } /* Asegura el 1% lateral definido en style.css */
     .nav-wrapper { grid-template-columns: 1fr; gap: 20px; }
     .nav-link.next { text-align: left; }
     .nav-spacer { display: none; }
