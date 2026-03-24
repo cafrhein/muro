@@ -220,6 +220,6 @@ p { font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--rt-text); }
     .about-social a, .author-social a { font-size: 1.5rem; }
 
     .fb-container {
-        padding: 15px 2%; /* AJUSTE AUTORIZADO: Reducción de márgenes en móvil */
+        padding: 15px 1%; /* AJUSTE AUTORIZADO: Reducción de márgenes laterales en móvil */
     }
 }
