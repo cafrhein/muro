@@ -171,6 +171,23 @@ h2 {
 
 p { font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--rt-text); }
 
+/* ESTILO DE CITA (BLOQUEQUOTE) */
+blockquote {
+    font-size: 1.2rem;               /* Mismo tamaño que p en escritorio */
+    font-style: italic;              /* En cursiva */
+    background-color: #f4f4f4;       /* Fondo gris */
+    border-left: 5px solid var(--rt-red); /* Línea roja */
+    padding: 20px;
+    margin: 25px 0;
+    color: var(--rt-text);
+}
+
+blockquote p {
+    font-size: 1.2rem !important;
+    font-style: italic !important;
+    margin-bottom: 0;
+}
+
 /* ESTILOS ICONOS RRSS */
 .about-social, .author-social {
     display: flex;
@@ -208,7 +225,7 @@ p { font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--rt-text); }
     
     /* CAMBIO REFORZADO: DISEÑO DE CITA MÓVIL */
     blockquote, blockquote p { 
-        font-size: 1rem !important; 
+        font-size: 1rem !important;    /* Mismo tamaño que p en móvil */
         font-style: italic !important; 
         line-height: 1.45 !important;
     }
