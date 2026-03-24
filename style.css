@@ -183,7 +183,9 @@ p { font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--rt-text); }
 @media (max-width: 600px) {
     .header-date { display: none; }
     .rt-logo { font-size: 1.4rem; }
-    h1 { font-size: 1.9rem; line-height: 1.2; }
-    h2 { font-size: 1.5rem; line-height: 1.3; }
-    p { font-size: 1.15rem; line-height: 1.7; margin-bottom: 1.2rem; }
+    h1 { font-size: 1.65rem; line-height: 1.1; margin-bottom: 1rem; }
+    h2 { font-size: 1.35rem; line-height: 1.2; margin: 1.5rem 0 0.8rem; }
+    h3 { font-size: 1.15rem; line-height: 1.2; margin: 1.2rem 0 0.6rem; }
+    p { font-size: 1rem; line-height: 1.45; margin-bottom: 1rem; }
+    blockquote { font-size: 1.05rem !important; line-height: 1.4 !important; }
 }
