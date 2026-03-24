@@ -2,6 +2,10 @@
 layout: default
 ---
 
+<div id="reading-progress-container">
+    <div id="reading-progress-bar"></div>
+</div>
+
 <article class="post-content editorial-flow">
     
     <header class="post-header">
@@ -51,66 +55,62 @@ layout: default
 </article>
 
 <style>
+/* --- BARRA DE PROGRESO (INGENIERÍA VISUAL) --- */
+#reading-progress-container {
+    position: fixed;
+    top: 64px; /* Debe coincidir con la altura de tu header rígido */
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: transparent;
+    z-index: 1500;
+}
+
+#reading-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--rt-red); /* Usamos tu rojo de marca */
+    transition: width 0.1s ease-out;
+}
+
 /* --- ESTILOS DE POST --- */
 .post-content { max-width: 740px; margin: 40px auto; padding: 0 20px; }
 .post-header { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 30px; }
 .post-title { font-family: var(--font-heading); font-weight: 700; font-size: 2.5rem; line-height: 1.1; text-transform: uppercase; color: var(--rt-black); }
 
-/* Bloque de autor */
 .post-meta-author { display: flex; align-items: center; gap: 15px; margin-top: 25px; }
 .author-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--rt-red); }
 .author-details { display: flex; flex-direction: column; }
 .author-name { font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; color: var(--rt-black); font-size: 1.1rem; }
 .post-date { font-family: var(--font-heading); color: #888; font-size: 0.9rem; text-transform: uppercase; }
 
-/* Cuerpo del texto */
 .post-body { font-family: var(--font-main); font-size: 1.25rem; line-height: 1.75; color: var(--rt-text); margin-bottom: 60px; }
 
-/* --- ESTILOS DE NAVEGACIÓN (SISTEMA RT) --- */
-.post-navigation {
-    border-top: 1px solid #eee;
-    padding-top: 40px;
-    margin-top: 60px;
-}
-
-.nav-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: var(--rt-black);
-    display: flex;
-    flex-direction: column;
-    transition: opacity 0.2s;
-}
-
+/* --- ESTILOS DE NAVEGACIÓN --- */
+.post-navigation { border-top: 1px solid #eee; padding-top: 40px; margin-top: 60px; }
+.nav-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.nav-link { text-decoration: none; color: var(--rt-black); display: flex; flex-direction: column; transition: opacity 0.2s; }
 .nav-link:hover { opacity: 0.7; }
 .nav-link.next { text-align: right; }
+.nav-label { font-family: var(--font-heading); color: var(--rt-red); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px; }
+.nav-title { font-family: var(--font-heading); font-size: 1.2rem; line-height: 1.2; font-weight: 700; text-transform: uppercase; }
 
-.nav-label {
-    font-family: var(--font-heading);
-    color: var(--rt-red);
-    font-weight: 700;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-}
-
-.nav-title {
-    font-family: var(--font-heading);
-    font-size: 1.2rem;
-    line-height: 1.2;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-/* Ajuste móvil */
 @media (max-width: 600px) {
     .nav-wrapper { grid-template-columns: 1fr; gap: 20px; }
     .nav-link.next { text-align: left; }
     .nav-spacer { display: none; }
+    #reading-progress-container { top: 60px; } /* Ajuste para móvil si el header cambia */
 }
 </style>
+
+<script>
+/* LÓGICA DE LA BARRA DE PROGRESO */
+window.onscroll = function() { updateProgressBar() };
+
+function updateProgressBar() {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById("reading-progress-bar").style.width = scrolled + "%";
+}
+</script>
