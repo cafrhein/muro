@@ -9,7 +9,7 @@ title: Portada | Carlos
 </section>
 
 <div class="news-grid">
-    {% for post in site.posts %}
+    {% for post in site.posts limit: 4 %}
     <article class="news-item">
         <a href="{{ post.url | relative_url }}">
             <div class="news-category">{{ post.category | default: "Actualidad" }}</div>
@@ -23,14 +23,14 @@ title: Portada | Carlos
 
 <style>
 /* ============================================================
-   ESTILOS DE PORTADA - SISTEMA COMPACTO
+   ESTILOS DE PORTADA - MÁXIMA ANCHURA
    ============================================================ */
 
 .rt-hero {
     text-align: center;
-    padding: 30px 0 10px 0; /* Espaciado superior e inferior reducido */
+    padding: 30px 0 10px 0;
     border-bottom: 1px solid #eee;
-    margin-bottom: 25px;    /* Espacio controlado antes de la rejilla */
+    margin-bottom: 25px;
 }
 
 .rt-hero h1 {
@@ -38,7 +38,7 @@ title: Portada | Carlos
     font-weight: 700;
     font-size: clamp(1.8rem, 4vw, 2.8rem);
     text-transform: uppercase;
-    margin-bottom: 8px;     /* Pegado al subtítulo */
+    margin-bottom: 8px;
     color: var(--rt-black);
 }
 
@@ -51,14 +51,16 @@ title: Portada | Carlos
     line-height: 1.4;
 }
 
-/* REJILLA DINÁMICA */
+/* REJILLA DINÁMICA - MÁRGENES REDUCIDOS */
 .news-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* Ajustamos el mínimo a 250px para que quepan mejor los 4 en pantallas grandes */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
-    max-width: 1200px;
+    /* Aumentamos de 1200px a 1400px para reducir el espacio lateral */
+    max-width: 1400px; 
     margin: 0 auto;
-    padding-bottom: 60px;
+    padding: 0 20px 60px 20px;
 }
 
 .news-item {
@@ -114,10 +116,14 @@ title: Portada | Carlos
     gap: 6px;
 }
 
-/* RESPONSIVO AJUSTADO */
+/* RESPONSIVO */
 @media (max-width: 600px) {
     .rt-hero { padding: 30px 15px 10px 15px; }
     .rt-hero h1 { font-size: 1.8rem; }
-    .news-grid { grid-template-columns: 1fr; gap: 20px; }
+    .news-grid { 
+        grid-template-columns: 1fr; 
+        gap: 20px;
+        padding: 0 15px 40px 15px;
+    }
 }
 </style>
