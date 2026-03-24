@@ -2,7 +2,7 @@
 ---
 /* ============================================================
    REDISEÑO CARLOS - PORTAL DE AUTOR
-   ARQUITECTURA V7.2 | ENCABEZADO Y BARRA PERSISTENTES
+   ARQUITECTURA V7.3 | SOLUCIÓN DEFINITIVA DE CABECERA EN POSTS
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;800;900&display=swap');
@@ -36,15 +36,15 @@ html, body {
     overflow-x: hidden;
 }
 
-/* 2. HEADER TIPO RT (PERSISTENTE AL HACER SCROLL) */
+/* 2. HEADER TIPO RT (PERSISTENTE) */
 .fb-header {
     background: var(--rt-black);
     height: 70px;
     display: flex;
     align-items: center;
-    position: sticky; /* ESTO HACE QUE SE DESPLACE CON EL LECTOR */
+    position: sticky; /* Se mueve con el lector */
     top: 0;
-    z-index: 3000; /* Prioridad máxima sobre el resto del sitio */
+    z-index: 3000; /* Siempre arriba de todo */
     border-bottom: 4px solid var(--rt-red);
 }
 
@@ -58,22 +58,22 @@ html, body {
     align-items: center;
 }
 
-/* 3. BARRA DE PROGRESO (ANCLADA AL HEADER PERSISTENTE) */
+/* 3. BARRA DE PROGRESO (CORRECCIÓN POSTS) */
 #progress-container {
-    position: sticky; /* Sigue al header, pero no vuela sobre el texto */
-    top: 70px; /* Se queda exactamente donde termina el header */
+    position: sticky; /* Cambiado a sticky para que no flote sobre el texto */
+    top: 70px; /* Se ancla exactamente al final del header */
     left: 0;
     width: 100%;
     height: 5px;
     background: rgba(0,0,0,0.1);
-    z-index: 2900; /* Justo debajo del header */
+    z-index: 2900; /* Justo debajo del header negro */
 }
 
 #progress-bar {
     height: 100%;
     width: 0%;
     background: var(--rt-red);
-    transition: width 0.1s ease;
+    transition: width 0.1s ease-out;
 }
 
 /* 4. LAYOUT DE CONTENEDOR */
