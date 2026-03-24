@@ -2,48 +2,44 @@
 ---
 /* ============================================================
    REDISEÑO CARLOS - PORTAL DE AUTOR
-   ARQUITECTURA V9.4 | OPTIMIZACIÓN DE GPU Y CONTROL DE EVENTOS
+   ARQUITECTURA V11.1 | CIERRE DE SISTEMA Y OPTIMIZACIÓN UX
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;500;700&display=swap');
 
 :root {
     --rt-red: #e30613;
     --rt-black: #000000;
     --rt-white: #ffffff;
     --rt-text: #1a1a1a;
-    --font-main: 'Inter', sans-serif;
-    --font-heading: 'Montserrat', sans-serif;
+    --rt-grey: #444444;
+    --font-main: 'Roboto', sans-serif;
+    --font-heading: 'Oswald', sans-serif;
     --header-height: 75px;
-    --transition-main: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 [data-theme="dark"] {
     --rt-white: #0f0f0f;
     --rt-black: #ffffff;
     --rt-text: #e4e4e4;
+    --rt-grey: #bbbbbb;
 }
 
 /* 1. BASE */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 body {
     background-color: var(--rt-white);
     font-family: var(--font-main);
     color: var(--rt-text);
-    line-height: 1.6;
+    line-height: 1.75;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
 }
 
-a { text-decoration: none; color: inherit; transition: color 0.2s ease; }
-
-/* 2. HEADER STICKY */
+/* 2. HEADER & NAV (UI) */
 .fb-header {
     background-color: #000 !important;
     height: var(--header-height);
-    display: flex;
-    align-items: center;
     position: sticky;
     top: 0;
     z-index: 2000;
@@ -55,133 +51,72 @@ a { text-decoration: none; color: inherit; transition: color 0.2s ease; }
     display: flex; justify-content: space-between; align-items: center;
 }
 
-.header-left { display: flex; align-items: center; gap: 30px; }
-
 #menu-toggle {
     background: transparent; border: none; color: #fff;
-    font-family: var(--font-heading); font-weight: 800;
+    font-family: var(--font-heading); font-weight: 500;
     text-transform: uppercase; cursor: pointer;
-    font-size: 1rem; display: inline-flex; align-items: center; gap: 10px;
+    font-size: 1.1rem; display: inline-flex; align-items: center; gap: 10px;
+    letter-spacing: 1px;
 }
 
 .rt-logo {
-    font-family: var(--font-heading); font-weight: 900;
-    font-size: 1.8rem; letter-spacing: -2px; color: #fff;
+    font-family: var(--font-heading); font-weight: 700;
+    font-size: 2.2rem; color: #fff;
+    text-transform: uppercase; letter-spacing: -1px;
+}
+
+/* 3. COLUMNA DE LECTURA (PRECISIÓN EDITORIAL) */
+.post-content { 
+    max-width: 740px; /* Sweet spot: ~75 caracteres por línea */
+    margin: 0 auto; 
+}
+
+/* H1 Fluido con clamp() */
+.post-content h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 5vw, 3.8rem); 
+    font-weight: 700;
+    line-height: 1.05;
     text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 2.5rem;
+    color: var(--rt-black);
 }
 
-.header-date { color: #fff; font-family: var(--font-heading); font-weight: 700; font-size: 0.85rem; }
+/* H2 y H3 con Tono Diferenciado */
+h2, h3 { font-family: var(--font-main); font-weight: 700; margin: 3rem 0 1.2rem; }
 
-/* 3. MENÚ LATERAL (CONTROL DE INTERACCIÓN Y GPU) */
-#side-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 320px;
-    height: 100vh;
-    background: #000;
-    z-index: 4000;
-    transform: translateX(-100%);
-    transition: transform var(--transition-main);
-    padding: 50px 40px;
-    border-right: 6px solid var(--rt-red);
-    box-shadow: 20px 0 50px rgba(0,0,0,0.5);
-    /* Optimización y Blindaje */
-    will-change: transform; 
-    pointer-events: none; /* Inerte mientras esté oculto */
+h2 { 
+    font-size: 1.8rem; 
+    border-left: 4px solid var(--rt-red); 
+    padding-left: 20px; 
+    color: var(--rt-black);
 }
 
-#side-menu.is-open {
-    transform: translateX(0);
-    pointer-events: auto; /* Activo solo al abrir */
+h3 { 
+    font-size: 1.4rem; 
+    color: var(--rt-grey); /* Tono suavizado para reducir fatiga */
 }
 
-#menu-close {
-    background: none; border: none; color: #fff; font-size: 2.2rem;
-    position: absolute; top: 20px; right: 20px; cursor: pointer;
-}
+.post-body p { font-size: 1.25rem; margin-bottom: 2rem; }
 
-.menu-items h3 {
-    color: var(--rt-red); font-size: 1.2rem; margin-bottom: 40px;
-    border-bottom: 2px solid #333; padding-bottom: 10px;
-}
-
-.menu-items ul { list-style: none; }
-.menu-items li { margin-bottom: 25px; }
-.menu-items a {
-    color: #fff; font-family: var(--font-heading); font-weight: 800;
-    font-size: 1.4rem; text-transform: uppercase;
-}
-
-/* 4. OVERLAY (CONTROL DE INTERACCIÓN EXPLÍCITO) */
-#menu-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    z-index: 3900;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    backdrop-filter: blur(4px);
-}
-
-#menu-overlay.is-active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-}
-
-/* 5. PROGRESO Y LECTURA */
-#progress-container {
-    position: sticky; top: var(--header-height);
-    z-index: 1900; width: 100%; height: 5px;
-    background: rgba(0,0,0,0.1);
-}
-
-#progress-bar { height: 100%; width: 0%; background: var(--rt-red); }
-
-.fb-container { width: 100%; max-width: 1400px; margin: 40px auto; padding: 0 25px; min-height: 70vh; }
-.post-content { max-width: 900px; margin: 0 auto; }
-
-h1, h2, h3 {
-    font-family: var(--font-heading); font-weight: 900;
-    text-transform: uppercase; color: var(--rt-black);
-    margin-bottom: 1.5rem;
-}
-
-.post-content h1 { font-size: 3.5rem; letter-spacing: -2px; line-height: 1.1; text-align: left; }
-.post-body p { font-size: 1.25rem; margin-bottom: 1.8rem; text-align: left; }
-
-/* 6. PORTADA */
+/* 4. PORTADA */
 .news-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
-.news-item h3 { font-size: 1.3rem; margin: 15px 0; line-height: 1.2; }
-.news-item:hover h3 { color: var(--rt-red); }
+.news-item h3 { 
+    font-family: var(--font-heading); 
+    font-size: 1.5rem; 
+    text-transform: uppercase; 
+    line-height: 1.1;
+    color: var(--rt-black);
+}
 
-/* 7. FOOTER Y COMPONENTES */
+/* 5. FOOTER */
 .fb-footer {
-    background: #000; color: #fff; padding: 80px 20px;
-    text-align: center; border-top: 8px solid var(--rt-red); margin-top: 100px;
+    background: #000; color: #fff; padding: 100px 20px;
+    border-top: 10px solid var(--rt-red); margin-top: 120px;
 }
+.footer-quote p { font-family: var(--font-heading); font-weight: 700; font-size: 2.2rem; text-transform: uppercase; }
 
-.footer-quote p { font-family: var(--font-heading); font-weight: 800; font-size: 1.8rem; font-style: italic; }
-
-#theme-toggle {
-    position: fixed; bottom: 30px; right: 30px;
-    background: #000; border: 2px solid var(--rt-red); color: #fff;
-    width: 55px; height: 55px; border-radius: 4px;
-    cursor: pointer; z-index: 2500;
-    display: flex; align-items: center; justify-content: center;
-}
-
-/* 8. RESPONSIVO */
-@media (max-width: 1050px) {
-    .news-grid { grid-template-columns: repeat(2, 1fr); }
-    .post-content h1 { font-size: 2.2rem; }
-}
-
-@media (max-width: 600px) {
-    .news-grid { grid-template-columns: 1fr; }
-    .header-date { display: none; }
-}
+/* 6. RESPONSIVO */
+@media (max-width: 1050px) { .news-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .news-grid { grid-template-columns: 1fr; } .fb-container { padding: 0 20px; } }
