@@ -16,18 +16,16 @@
 
     <header class="fb-header">
         <div class="header-content">
-            <div style="display: flex; align-items: center; gap: 30px;">
-                <button id="menu-toggle" style="background: none; border: none; color: #fff; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; cursor: pointer; font-size: 1rem; display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-bars" style="font-size: 1.4rem;"></i> 
+            <div class="header-left">
+                <button id="menu-toggle">
+                    <i class="fas fa-bars"></i> 
                     <span class="menu-text">Menú</span>
                 </button>
-                
-                <a href="/" style="text-decoration: none; color: #fff;">
-                    <div class="rt-logo" style="font-size: 1.8rem; letter-spacing: -1.5px;">CARLOS</div>
+                <a href="/">
+                    <div class="rt-logo">CARLOS</div>
                 </a>
             </div>
-
-            <div style="color: #fff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">
+            <div class="header-date">
                 {{ "now" | date: "%d %b %Y" }}
             </div>
         </div>
@@ -39,47 +37,36 @@
     </div>
     {% endif %}
 
-    <nav id="side-menu" style="position: fixed; top: 0; left: -350px; width: 320px; height: 100vh; background: #000; z-index: 4000; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); padding: 50px 40px; border-right: 6px solid #e30613; box-shadow: 20px 0 50px rgba(0,0,0,0.5);">
-        <button id="menu-close" style="background: none; border: none; color: #fff; font-size: 2.2rem; position: absolute; top: 20px; right: 20px; cursor: pointer;">
-            <i class="fas fa-times"></i>
-        </button>
-
-        <div style="margin-top: 50px;">
-            <h3 style="color: #e30613; font-size: 1.2rem; margin-bottom: 40px; border-bottom: 2px solid #333; padding-bottom: 10px;">NAVEGACIÓN</h3>
-            <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 25px;"><a href="/" style="color: #fff; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.4rem;">PORTADA</a></li>
-                <li style="margin-bottom: 25px;"><a href="/filosofia" style="color: #fff; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.4rem;">FILOSOFÍA</a></li>
-                <li style="margin-bottom: 25px;"><a href="/acerca" style="color: #fff; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.4rem;">SOBRE CARLOS</a></li>
+    <nav id="side-menu">
+        <button id="menu-close"><i class="fas fa-times"></i></button>
+        <div class="menu-items">
+            <h3>NAVEGACIÓN</h3>
+            <ul>
+                <li><a href="/">PORTADA</a></li>
+                <li><a href="/filosofia">FILOSOFÍA</a></li>
+                <li><a href="/acerca">SOBRE CARLOS</a></li>
             </ul>
         </div>
     </nav>
-    <div id="menu-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3900; display: none; backdrop-filter: blur(4px);"></div>
+    <div id="menu-overlay"></div>
 
     <div class="fb-container">
-        <main class="fb-center" style="width: 100%;">
+        <main class="fb-center">
             {{ content }}
         </main>
     </div>
 
-    <footer style="background: #000; color: #fff; padding: 80px 20px; border-top: 8px solid #e30613; margin-top: 120px; text-align: center;">
-        <div style="max-width: 1000px; margin: 0 auto;">
-            <blockquote style="margin: 0 0 40px 0; padding: 0;">
-                <p style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.8rem; font-style: italic; line-height: 1.2; color: #fff;">
-                    "Finis Origine Pendent | Non Sibi"
-                </p>
+    <footer class="fb-footer">
+        <div class="footer-content">
+            <blockquote>
+                <p>"Finis Origine Pendent | Non Sibi"</p>
             </blockquote>
-            
-            <div style="height: 1px; background: #333; width: 100px; margin: 0 auto 30px auto;"></div>
-            
-            <p style="font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 2px;">
-                &copy; {{ 'now' | date: "%Y" }} Carlos Hernández
-            </p>
+            <div class="footer-divider"></div>
+            <p class="copyright">&copy; {{ 'now' | date: "%Y" }} Carlos Hernández</p>
         </div>
     </footer>
 
-    <button id="theme-toggle" style="position: fixed; bottom: 30px; right: 30px; background: #000; border: 2px solid #e30613; color: #fff; width: 55px; height: 55px; border-radius: 4px; cursor: pointer; z-index: 2500; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
-        <i class="fas fa-moon"></i>
-    </button>
+    <button id="theme-toggle"><i class="fas fa-moon"></i></button>
 
     <script>
         const btnOpen = document.getElementById('menu-toggle');
