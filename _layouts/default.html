@@ -5,136 +5,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }} | Red Humana</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Forzado de tipografía y limpieza de UX */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--rt-white, #ffffff);
+            color: var(--rt-text, #1a1a1a);
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2, h3, .rt-logo {
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: 900 !important;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
 <body>
 
-    <header class="fb-header">
-        <div class="header-content">
+    <header class="fb-header" style="background: #000; height: 75px; border-bottom: 5px solid #e30613; position: sticky; top: 0; z-index: 2000; display: flex; align-items: center;">
+        <div style="max-width: 1200px; margin: 0 auto; width: 100%; padding: 0 20px; display: flex; justify-content: space-between; align-items: center;">
             
-            <div style="display: flex; align-items: center; gap: 20px;">
-                <button id="menu-toggle" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; gap: 10px; font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase;">
-                    <i class="fas fa-bars"></i> <span class="menu-label" style="font-size: 0.9rem;">Menú</span>
+            <div style="display: flex; align-items: center; gap: 30px;">
+                <button id="menu-toggle" style="background: none; border: none; color: #fff; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; cursor: pointer; font-size: 1rem; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-bars" style="font-size: 1.4rem;"></i> 
+                    <span class="menu-text">Menú</span>
                 </button>
                 
-                <a href="/" style="text-decoration: none;">
-                    <div style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.8rem; color: #ffffff; text-transform: uppercase; letter-spacing: -1px;">
-                        Red Humana
-                    </div>
+                <a href="/" style="text-decoration: none; color: #fff;">
+                    <div class="rt-logo" style="font-size: 1.8rem; letter-spacing: -1.5px;">RED HUMANA</div>
                 </a>
             </div>
 
-            <div style="color: white; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;" class="header-date">
+            <div style="color: #fff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">
                 {{ "now" | date: "%d %b %Y" }}
             </div>
         </div>
     </header>
 
-    <nav id="side-menu" style="position: fixed; top: 0; left: -350px; width: 320px; height: 100vh; background: #000000; z-index: 3000; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); padding: 40px; border-right: 5px solid #e30613;">
-        <button id="menu-close" style="background: none; border: none; color: white; font-size: 2rem; position: absolute; top: 20px; right: 20px; cursor: pointer;">
+    <div id="progress-container" style="position: fixed; top: 75px; left: 0; width: 100%; height: 5px; z-index: 2100; background: rgba(0,0,0,0.1);">
+        <div id="progress-bar" style="height: 100%; width: 0%; background: #e30613; transition: width 0.1s ease;"></div>
+    </div>
+
+    <nav id="side-menu" style="position: fixed; top: 0; left: -350px; width: 320px; height: 100vh; background: #000; z-index: 3000; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); padding: 50px 40px; border-right: 6px solid #e30613; box-shadow: 20px 0 50px rgba(0,0,0,0.5);">
+        <button id="menu-close" style="background: none; border: none; color: #fff; font-size: 2.2rem; position: absolute; top: 20px; right: 20px; cursor: pointer;">
             <i class="fas fa-times"></i>
         </button>
 
-        <div style="margin-top: 60px;">
-            <h3 style="color: #e30613; font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-size: 1.2rem; margin-bottom: 30px; border-bottom: 2px solid #333; padding-bottom: 10px;">Secciones</h3>
+        <div style="margin-top: 50px;">
+            <h3 style="color: #e30613; font-size: 1.2rem; margin-bottom: 40px; border-bottom: 2px solid #333; padding-bottom: 10px;">NAVEGACIÓN</h3>
             <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 25px;"><a href="/" style="color: white; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.3rem; text-transform: uppercase;">Portada</a></li>
-                <li style="margin-bottom: 25px;"><a href="/filosofia" style="color: white; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.3rem; text-transform: uppercase;">Filosofía</a></li>
-                <li style="margin-bottom: 25px;"><a href="/acerca" style="color: white; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.3rem; text-transform: uppercase;">Sobre Carlos</a></li>
+                <li style="margin-bottom: 25px;"><a href="/" style="color: #fff; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.4rem;">PORTADA</a></li>
+                <li style="margin-bottom: 25px;"><a href="/filosofia" style="color: #fff; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.4rem;">FILOSOFÍA</a></li>
+                <li style="margin-bottom: 25px;"><a href="/acerca" style="color: #fff; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.4rem;">SOBRE CARLOS</a></li>
             </ul>
         </div>
     </nav>
-    <div id="menu-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2900; display: none; backdrop-filter: blur(5px);"></div>
+    <div id="menu-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2900; display: none; backdrop-filter: blur(4px);"></div>
 
-    <div id="progress-container">
-        <div id="progress-bar"></div>
-    </div>
-
-    <div class="fb-container">
-        <main class="fb-center">
+    <div class="fb-container" style="max-width: 950px; margin: 60px auto; padding: 0 25px; min-height: 70vh;">
+        <main class="fb-center" style="width: 100%;">
             {{ content }}
         </main>
-
-        <aside class="fb-right">
-            <h3 class="sidebar-title">Ecosistema de Red</h3>
-            <div style="padding: 25px; background: #f8f8f8; text-align: center; border: 1px solid #ddd;">
-                <svg viewBox="0 0 200 200" width="100%" height="auto">
-                    <line x1="100" y1="100" x2="50" y2="40" stroke="#ccc" stroke-width="2"/>
-                    <line x1="100" y1="100" x2="160" y2="60" stroke="#ccc" stroke-width="2"/>
-                    <line x1="100" y1="100" x2="140" y2="160" stroke="#ccc" stroke-width="2"/>
-                    <line x1="100" y1="100" x2="40" y2="140" stroke="#ccc" stroke-width="2"/>
-                    <circle cx="50" cy="40" r="8" fill="#e30613" />
-                    <circle cx="160" cy="60" r="8" fill="#45bd62" />
-                    <circle cx="140" cy="160" r="8" fill="#e30613" />
-                    <circle cx="40" cy="140" r="8" fill="#45bd62" />
-                    <circle cx="100" cy="100" r="14" fill="#000000" />
-                </svg>
-                <p style="font-size: 0.95rem; color: #555; margin-top: 25px; font-style: italic; line-height: 1.4;">
-                    "Quien se deja cuidar, dota de sentido a su cuidador."
-                </p>
-            </div>
-        </aside>
     </div>
 
-    <footer style="background: #000000; padding: 60px 20px; color: white; margin-top: 100px; border-top: 5px solid #e30613;">
-        <div style="max-width: 1250px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px;">
-            <div style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.8rem; text-transform: uppercase;">Red Humana</div>
-            <div style="font-size: 0.85rem; color: #777;">&copy; {{ 'now' | date: "%Y" }} Carlos Hernández. Estrategia e Ingeniería de la Reciprocidad.</div>
+    <footer style="background: #000; color: #fff; padding: 80px 20px; border-top: 8px solid #e30613; margin-top: 120px; text-align: center;">
+        <div style="max-width: 850px; margin: 0 auto;">
+            <blockquote style="margin: 0 0 40px 0; padding: 0;">
+                <p style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.8rem; font-style: italic; line-height: 1.2; color: #fff;">
+                    "Quien se deja cuidar, dota de sentido a su cuidador."
+                </p>
+            </blockquote>
+            
+            <div style="height: 1px; background: #333; width: 100px; margin: 0 auto 30px auto;"></div>
+            
+            <p style="font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 2px;">
+                &copy; {{ 'now' | date: "%Y" }} Carlos Hernández | Ingeniería de la Reciprocidad
+            </p>
         </div>
     </footer>
 
-    <button class="dark-mode-toggle" id="theme-toggle">
+    <button id="theme-toggle" style="position: fixed; bottom: 30px; right: 30px; background: #000; border: 2px solid #e30613; color: #fff; width: 55px; height: 55px; border-radius: 4px; cursor: pointer; z-index: 2500; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
         <i class="fas fa-moon"></i>
     </button>
 
     <script>
-        // Control de Menú Lateral (Drawer)
-        const menuBtn = document.getElementById('menu-toggle');
-        const closeBtn = document.getElementById('menu-close');
-        const sideMenu = document.getElementById('side-menu');
-        const overlay = document.getElementById('menu-overlay');
+        // Lógica del Menú Lateral
+        const btnOpen = document.getElementById('menu-toggle');
+        const btnClose = document.getElementById('menu-close');
+        const sideNav = document.getElementById('side-menu');
+        const overlayBg = document.getElementById('menu-overlay');
 
-        menuBtn.addEventListener('click', () => {
-            sideMenu.style.left = '0';
-            overlay.style.display = 'block';
-        });
+        btnOpen.onclick = () => { sideNav.style.left = '0'; overlayBg.style.display = 'block'; }
+        const hideMenu = () => { sideNav.style.left = '-350px'; overlayBg.style.display = 'none'; }
+        btnClose.onclick = hideMenu; overlayBg.onclick = hideMenu;
 
-        const closeMenu = () => {
-            sideMenu.style.left = '-350px';
-            overlay.style.display = 'none';
-        };
-
-        closeBtn.addEventListener('click', closeMenu);
-        overlay.addEventListener('click', closeMenu);
-
-        // Barra de Progreso de Lectura
-        window.onscroll = function() {
-            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            var scrolled = (winScroll / height) * 100;
-            const pBar = document.getElementById("progress-bar");
-            if(pBar) pBar.style.width = scrolled + "%";
+        // Lógica de Scroll (Barra Roja)
+        window.onscroll = () => {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
         };
 
         // Lógica de Modo Oscuro
-        const toggleBtn = document.getElementById('theme-toggle');
-        const htmlElement = document.documentElement;
+        const themeBtn = document.getElementById('theme-toggle');
+        const rootDoc = document.documentElement;
         
-        toggleBtn.addEventListener('click', () => {
-            let current = htmlElement.getAttribute('data-theme');
-            if (current === 'dark') {
-                htmlElement.removeAttribute('data-theme');
+        themeBtn.onclick = () => {
+            let theme = rootDoc.getAttribute('data-theme');
+            if (theme === 'dark') {
+                rootDoc.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'light');
             } else {
-                htmlElement.setAttribute('data-theme', 'dark');
+                rootDoc.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
             }
-        });
+        };
 
-        // Aplicar tema guardado al cargar
+        // Mantener tema al recargar
         if (localStorage.getItem('theme') === 'dark') {
-            htmlElement.setAttribute('data-theme', 'dark');
+            rootDoc.setAttribute('data-theme', 'dark');
         }
     </script>
 </body>
