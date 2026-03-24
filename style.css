@@ -2,7 +2,7 @@
 ---
 /* ============================================================
    REDISEÑO CARLOS - PORTAL DE AUTOR
-   ARQUITECTURA V7.8 | CORRECCIÓN DE CONTRASTE Y FONDO NEGRO
+   ARQUITECTURA V7.9 | CORRECCIÓN DE HEADER NEGRO Y TIPOGRAFÍA
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@800;900&display=swap');
@@ -16,7 +16,7 @@
     --font-heading: 'Montserrat', sans-serif;
 }
 
-/* 1. ESTRUCTURA BASE */
+/* 1. RESET Y ESTRUCTURA */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
@@ -27,9 +27,9 @@ html, body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* 2. HEADER (FONDO NEGRO FORZADO) */
+/* 2. HEADER (FONDO NEGRO Y STICKY) */
 .fb-header {
-    background-color: #000000 !important; /* Asegura el fondo negro */
+    background-color: #000000 !important; /* Fondo negro absoluto */
     height: 75px;
     display: flex;
     align-items: center;
@@ -49,28 +49,27 @@ html, body {
     align-items: center;
 }
 
-/* 3. ELEMENTOS DEL HEADER (COLOR BLANCO) */
+.header-left { display: flex; align-items: center; gap: 30px; }
+
+/* 3. LOGO Y ELEMENTOS DEL HEADER (BLANCOS) */
 .rt-logo {
     font-family: var(--font-heading) !important;
     font-weight: 900 !important;
     font-size: 1.8rem;
     letter-spacing: -1.5px;
-    color: #ffffff !important; /* Texto blanco sobre fondo negro */
+    color: #ffffff !important; /* Texto blanco */
     text-transform: uppercase;
 }
 
 #menu-toggle {
-    background: none;
-    border: none;
+    background: none; border: none;
     color: #ffffff !important;
     font-family: var(--font-heading);
     font-weight: 800;
     text-transform: uppercase;
     cursor: pointer;
     font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    display: flex; align-items: center; gap: 10px;
 }
 
 .header-date {
@@ -96,10 +95,16 @@ html, body {
     height: 100%;
     width: 0%;
     background: var(--rt-red);
-    transition: width 0.1s ease;
 }
 
-/* 5. DISEÑO DE POSTS (ALINEACIÓN IZQUIERDA) */
+/* 5. PORTADA Y POSTS (TIPOGRAFÍA PESADA) */
+h1, h2, h3 {
+    font-family: var(--font-heading) !important;
+    font-weight: 900 !important;
+    color: #000000;
+    text-transform: uppercase;
+}
+
 .fb-container {
     width: 100%;
     max-width: 1400px;
@@ -107,20 +112,11 @@ html, body {
     padding: 0 25px;
 }
 
-.post-content {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
 .post-content h1 {
-    font-family: var(--font-heading) !important;
-    font-weight: 900 !important;
     font-size: 3.5rem;
     letter-spacing: -2px;
     margin-bottom: 30px;
     text-align: left;
-    text-transform: uppercase;
-    color: #000;
 }
 
 .post-body p {
@@ -141,7 +137,7 @@ html, body {
     --rt-white: #0f0f0f;
     --rt-text: #e4e4e4;
 }
-[data-theme="dark"] .post-content h1 { color: #fff; }
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 { color: #ffffff !important; }
 
 /* 8. RESPONSIVO */
 @media (max-width: 1050px) {
