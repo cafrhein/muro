@@ -1,55 +1,61 @@
 ---
 layout: default
+title: Portada
 ---
-<article class="post-content">
+
+<div class="rt-home-wrapper">
     
-    <header style="margin-bottom: 40px;">
-        
-        <div style="color: var(--rt-red); font-family: var(--font-heading); font-weight: 900; text-transform: uppercase; font-size: 1.1rem; margin-bottom: 10px; letter-spacing: 1px;">
-            {{ page.category | default: "Filosofía" }}
-        </div>
-
-        <h1 style="margin-bottom: 15px; font-size: 3.2rem; line-height: 1.05;">{{ page.title }}</h1>
-        
-        <div style="font-family: var(--font-main); font-size: 0.95rem; color: var(--rt-text-sec); font-weight: 400;">
-            <span style="font-weight: 700; color: var(--rt-black);">Publicado:</span> 
-            {{ page.date | date: "%e %b %Y %H:%M" }} GMT
-        </div>
-
-    </header>
-
-    <div class="post-body" style="border-top: 1px solid var(--rt-border); padding-top: 30px;">
-        {{ content }}
+    <div style="border-bottom: 4px solid var(--rt-black); margin-bottom: 30px; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: flex-end;">
+        <h2 style="font-family: var(--font-heading); font-weight: 900; text-transform: uppercase; font-size: 1.5rem; margin: 0; letter-spacing: -1px;">
+            Últimas Entradas <span style="color: var(--rt-red);">/ Red Humana</span>
+        </h2>
     </div>
 
-    <div class="author-signature" style="margin-top: 60px; padding: 30px; background: var(--rt-grey); border-left: 8px solid var(--rt-red); display: flex; align-items: center; gap: 25px;">
-        <div style="width: 100px; height: 100px; border-radius: 50%; background-color: var(--rt-border); overflow: hidden; border: 4px solid var(--rt-white); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <img src="{{ '/assets/img/profile.jpg' | relative_url }}" alt="Carlos Hernández" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://via.placeholder.com/100?text=CH'">
-        </div>
-        <div style="flex: 1;">
-            <strong style="display: block; font-family: var(--font-heading); font-size: 1.4rem; color: var(--rt-black); margin-bottom: 5px;">Carlos Hernández</strong>
-            <p style="font-size: 0.95rem; color: var(--rt-text-sec); font-style: italic; margin: 0;">Director de Administración y Finanzas. Planeación Estratégica & Ingeniería Humana.</p>
-        </div>
+    <div class="news-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 30px;">
+        
+        {% for post in site.posts %}
+        <article class="news-item" style="border-bottom: 1px solid var(--rt-border); padding-bottom: 20px; transition: transform 0.2s ease;">
+            
+            <div style="color: var(--rt-red); font-family: var(--font-heading); font-weight: 800; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 10px; letter-spacing: 1px;">
+                {{ post.category | default: "Filosofía" }}
+            </div>
+
+            <a href="{{ post.url | relative_url }}" style="text-decoration: none; color: var(--rt-black);">
+                <h3 style="font-family: var(--font-heading); font-weight: 900; font-size: 1.6rem; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.5px;">
+                    {{ post.title }}
+                </h3>
+            </a>
+
+            <p style="font-size: 1rem; color: var(--rt-text-sec); line-height: 1.5; margin-bottom: 15px;">
+                {{ post.excerpt | strip_html | truncatewords: 25 }}
+            </p>
+
+            <div style="font-size: 0.85rem; color: #999; font-weight: 600; text-transform: uppercase;">
+                {{ post.date | date: "%d %b %Y" }}
+            </div>
+
+        </article>
+        {% endfor %}
+
     </div>
-
-    <footer style="margin-top: 60px; padding-top: 30px; border-top: 4px solid var(--rt-black);">
-        <h2 class="sidebar-title" style="border: none; margin-bottom: 25px;">Siguientes Vínculos</h2>
-        <div class="related-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-            {% assign count = 0 %}
-            {% for post in site.posts %}
-                {% if post.url != page.url and count < 2 %}
-                <a href="{{ post.url | relative_url }}" style="text-decoration: none; color: var(--rt-black); display: block; padding: 20px; background: var(--rt-grey); border-left: 5px solid var(--rt-red); transition: transform 0.2s;">
-                    <strong style="display: block; font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 10px;">{{ post.title }}</strong>
-                    <span style="font-size: 0.85rem; color: var(--rt-text-sec); font-weight: 700;">{{ post.date | date: "%d/%m/%Y" }}</span>
-                </a>
-                {% assign count = count | plus: 1 %}
-                {% endif %}
-            {% endfor %}
-        </div>
-    </footer>
-
-</article>
+</div>
 
 <style>
-    .related-grid a:hover { transform: scale(1.02); background: #eee; }
+    /* Efecto de titulares al pasar el mouse */
+    .news-item:hover h3 {
+        color: var(--rt-red);
+    }
+    .news-item:hover {
+        transform: translateY(-3px);
+    }
+
+    /* Ajuste para móviles */
+    @media (max-width: 768px) {
+        .news-grid {
+            grid-template-columns: 1fr;
+        }
+        h3 {
+            font-size: 1.4rem;
+        }
+    }
 </style>
