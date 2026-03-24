@@ -11,24 +11,55 @@
 <body>
 
     <header class="fb-header">
-        <a href="/" style="text-decoration: none;">
-            <div>Red Humana</div>
-        </a>
+        <div class="header-content" style="width: 100%; max-width: 1300px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+            
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <button id="menu-toggle" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-weight: 700; text-transform: uppercase;">
+                    <i class="fas fa-bars"></i> <span class="menu-label" style="font-size: 0.9rem;">Menú</span>
+                </button>
+                
+                <a href="/" style="text-decoration: none;">
+                    <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.8rem; color: #ffffff; text-transform: uppercase; letter-spacing: -1px;">
+                        Red Humana
+                    </div>
+                </a>
+            </div>
+
+            <div style="color: white; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;" class="header-date">
+                {{ "now" | date: "%d %b %Y" }}
+            </div>
+        </div>
     </header>
+
+    <nav id="side-menu" style="position: fixed; top: 0; left: -350px; width: 320px; height: 100vh; background: var(--rt-black); z-index: 3000; transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); padding: 40px; border-right: 5px solid var(--rt-red);">
+        <button id="menu-close" style="background: none; border: none; color: white; font-size: 2rem; position: absolute; top: 20px; right: 20px; cursor: pointer;">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div style="margin-top: 60px;">
+            <h3 style="color: var(--rt-red); font-family: var(--font-heading); text-transform: uppercase; font-size: 1.2rem; margin-bottom: 30px; border-bottom: 2px solid #333; padding-bottom: 10px;">Secciones</h3>
+            <ul style="list-style: none;">
+                <li style="margin-bottom: 20px;"><a href="/" style="color: white; text-decoration: none; font-family: var(--font-heading); font-weight: 700; font-size: 1.3rem; text-transform: uppercase;">Inicio</a></li>
+                <li style="margin-bottom: 20px;"><a href="/filosofia" style="color: white; text-decoration: none; font-family: var(--font-heading); font-weight: 700; font-size: 1.3rem; text-transform: uppercase;">Filosofía</a></li>
+                <li style="margin-bottom: 20px;"><a href="/ingenieria-humana" style="color: white; text-decoration: none; font-family: var(--font-heading); font-weight: 700; font-size: 1.3rem; text-transform: uppercase;">Ingeniería Humana</a></li>
+                <li style="margin-bottom: 20px;"><a href="/acerca" style="color: white; text-decoration: none; font-family: var(--font-heading); font-weight: 700; font-size: 1.3rem; text-transform: uppercase;">Sobre Carlos</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="menu-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2900; display: none; backdrop-filter: blur(4px);"></div>
 
     <div id="progress-container">
         <div id="progress-bar"></div>
     </div>
 
     <div class="fb-container">
-        
         <main class="fb-center">
             {{ content }}
         </main>
 
         <aside class="fb-right">
             <h3 class="sidebar-title">Ecosistema de Red</h3>
-            <div style="padding: 20px; background: var(--rt-grey); text-align: center; border-bottom: 1px solid var(--rt-border);">
+            <div style="padding: 20px; background: var(--rt-grey); text-align: center;">
                 <svg viewBox="0 0 200 200" width="100%" height="auto">
                     <line x1="100" y1="100" x2="50" y2="40" stroke="#ccc" stroke-width="2"/>
                     <line x1="100" y1="100" x2="160" y2="60" stroke="#ccc" stroke-width="2"/>
@@ -45,57 +76,58 @@
                 </p>
             </div>
         </aside>
-
     </div>
 
     <footer class="site-footer" style="background: var(--rt-black); padding: 60px 20px; color: white; margin-top: 80px; border-top: 5px solid var(--rt-red);">
         <div style="max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px;">
-            <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.8rem; text-transform: uppercase; letter-spacing: -1px;">Red Humana</div>
-            <div style="font-size: 0.85rem; color: #888; max-width: 400px; line-height: 1.5;">
-                &copy; {{ 'now' | date: "%Y" }} Carlos Hernández. Red Humana es un proceso laico de Ingeniería Humana basado en la interdependencia y la reciprocidad del cuidado.
-            </div>
+            <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.8rem; text-transform: uppercase;">Red Humana</div>
+            <div style="font-size: 0.85rem; color: #888;">&copy; {{ 'now' | date: "%Y" }} Carlos Hernández.</div>
         </div>
     </footer>
 
-    <button class="dark-mode-toggle" id="theme-toggle" style="border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+    <button class="dark-mode-toggle" id="theme-toggle">
         <i class="fas fa-moon"></i>
     </button>
 
     <script>
-        // Función para la Barra de Progreso de Lectura
+        // Lógica de Menú Lateral
+        const menuBtn = document.getElementById('menu-toggle');
+        const closeBtn = document.getElementById('menu-close');
+        const sideMenu = document.getElementById('side-menu');
+        const overlay = document.getElementById('menu-overlay');
+
+        menuBtn.addEventListener('click', () => {
+            sideMenu.style.left = '0';
+            overlay.style.display = 'block';
+        });
+
+        const closeMenu = () => {
+            sideMenu.style.left = '-350px';
+            overlay.style.display = 'none';
+        };
+
+        closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+
+        // Barra de progreso
         window.onscroll = function() {
             var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             var scrolled = (winScroll / height) * 100;
-            const progressBar = document.getElementById("progress-bar");
-            if (progressBar) {
-                progressBar.style.width = scrolled + "%";
-            }
+            document.getElementById("progress-bar").style.width = scrolled + "%";
         };
 
-        // Lógica para el Cambio de Tema (Modo Oscuro/Claro)
+        // Modo Oscuro
         const toggleBtn = document.getElementById('theme-toggle');
-        const bodyElement = document.documentElement;
-        const currentTheme = localStorage.getItem('theme');
-        const themeIcon = toggleBtn.querySelector('i');
-
-        if (currentTheme) {
-            bodyElement.setAttribute('data-theme', currentTheme);
-            if (currentTheme === 'dark') {
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
-            }
-        }
-
+        const body = document.documentElement;
         toggleBtn.addEventListener('click', () => {
-            let theme = bodyElement.getAttribute('data-theme');
+            let theme = body.getAttribute('data-theme');
             if (theme === 'dark') {
-                bodyElement.removeAttribute('data-theme');
+                body.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'light');
-                themeIcon.classList.replace('fa-sun', 'fa-moon');
             } else {
-                bodyElement.setAttribute('data-theme', 'dark');
+                body.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
             }
         });
     </script>
