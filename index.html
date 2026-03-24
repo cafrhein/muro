@@ -72,6 +72,11 @@ title: Portada | Carlos
     transform: translateY(-3px);
 }
 
+/* CAMBIO DE COLOR AL PASAR EL CURSOR POR EL ARTÍCULO */
+.news-item:hover .news-title {
+    color: var(--rt-red);
+}
+
 .news-item a {
     text-decoration: none;
     color: inherit;
@@ -95,6 +100,8 @@ title: Portada | Carlos
     text-transform: uppercase;
     margin-bottom: 12px;
     color: var(--rt-black);
+    /* Transición suave para el color */
+    transition: color 0.3s ease;
 }
 
 .news-excerpt {
