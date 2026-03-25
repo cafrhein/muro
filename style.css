@@ -240,6 +240,6 @@ blockquote p {
     .about-social a, .author-social a { font-size: 1.5rem; }
 
     .fb-container {
-        padding: 10px 1% !important; /* AJUSTE AUTORIZADO: Reducción drástica de márgenes en móvil */
+        padding: 10px 5% !important; /* CAMBIO: Margen lateral aumentado del 1% al 5% para celulares */
     }
 }
