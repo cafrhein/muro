@@ -1,6 +1,6 @@
 /* ============================================================
    ADESTRAT.COM - RED HUMANA
-   SISTEMA VISUAL: RÉPLICA RT (ACTUALIDAD) - V1.1
+   SISTEMA VISUAL: RÉPLICA RT (ACTUALIDAD) - V1.0
    ============================================================ */
 
 /* 1. VARIABLES DE SISTEMA */
@@ -23,10 +23,8 @@
     --rt-ui-grey: #888888;
 }
 
-/* 2. RESET TÉCNICO Y ESCALA BASE */
+/* 2. RESET TÉCNICO */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 16px !important; } /* Forzado de escala base para evitar inflado tipográfico */
-
 body {
     background-color: var(--rt-white);
     font-family: var(--font-main);
@@ -59,6 +57,35 @@ body {
     flex-wrap: nowrap;
 }
 
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+#menu-toggle {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
 .rt-logo {
     font-family: var(--font-heading);
     font-weight: 700;
@@ -78,9 +105,39 @@ body {
     white-space: nowrap;
 }
 
-/* 4. CONTENIDO EDITORIAL (ÚNICO PUNTO DE CONTROL) */
-.fb-container, .post-content {
-    padding: 20px 1% !important; 
+/* 4. MENÚ LATERAL (RT OVERLAY) */
+#side-menu {
+    position: fixed; top: 0; left: 0; width: 320px; height: 100vh;
+    background: #000; z-index: 4000;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    padding: 50px 40px; border-right: 6px solid var(--rt-red);
+}
+#side-menu.is-open { transform: translateX(0); }
+
+#menu-close { background: none; border: none; color: #fff; font-size: 2rem; position: absolute; top: 20px; right: 20px; cursor: pointer; }
+
+.menu-items h3 {
+    color: var(--rt-red); font-family: var(--font-heading); font-size: 1.2rem; 
+    margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 5px;
+}
+.menu-items ul { list-style: none; }
+.menu-items a {
+    color: #fff; font-family: var(--font-heading); font-weight: 700;
+    font-size: 1.6rem; text-transform: uppercase; text-decoration: none;
+    display: block; margin-bottom: 15px;
+}
+
+#menu-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); z-index: 3900;
+    opacity: 0; visibility: hidden; transition: 0.3s;
+}
+#menu-overlay.is-active { opacity: 1; visibility: visible; }
+
+/* 5. CONTENIDO EDITORIAL */
+.fb-container {
+    padding: 20px 1%; /* AJUSTE AUTORIZADO: Reducción de márgenes laterales */
 }
 
 main {
@@ -105,23 +162,30 @@ h2, h3 {
     text-transform: none;
 }
 
+h2 { 
+    font-size: 1.8rem; 
+    border-left: 5px solid var(--rt-red); 
+    padding-left: 15px; 
+    color: var(--rt-black);
+}
+
 p { font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--rt-text); }
 
-/* ESTILO DE CITA (BLOQUEQUOTE) - HERENCIA LIMPIA */
+/* ESTILO DE CITA (BLOQUEQUOTE) */
 blockquote {
-    font-size: 1.2rem;
-    font-style: italic;
-    background-color: #f4f4f4;
-    border-left: 5px solid var(--rt-red);
+    font-size: 1.2rem;               /* Mismo tamaño que p en escritorio */
+    font-style: italic;              /* En cursiva */
+    background-color: #f4f4f4;       /* Fondo gris */
+    border-left: 5px solid var(--rt-red); /* Línea roja */
     padding: 20px;
     margin: 25px 0;
     color: var(--rt-text);
 }
 
 blockquote p {
-    font-size: inherit !important;
+    font-size: 1.2rem !important;
     font-style: italic !important;
-    margin: 0 !important;
+    margin-bottom: 0;
 }
 
 /* ESTILOS ICONOS RRSS */
@@ -132,7 +196,7 @@ blockquote p {
 }
 
 .about-social a, .author-social a {
-    font-size: 1.8rem; 
+    font-size: 1.8rem; /* Aumentado por autorización */
     color: var(--rt-black);
     text-decoration: none;
     transition: color 0.3s;
@@ -142,29 +206,40 @@ blockquote p {
     color: var(--rt-red);
 }
 
-/* 7. RESPONSIVO (BLINDADO) */
+/* 6. UI: BOTÓN TEMA */
+#theme-toggle {
+    position: fixed; bottom: 20px; right: 20px;
+    background: var(--rt-red); color: #fff;
+    border: none; width: 45px; height: 45px; border-radius: 50%;
+    cursor: pointer; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* 7. RESPONSIVO */
 @media (max-width: 600px) {
     .header-date { display: none; }
     .rt-logo { font-size: 1.4rem; }
-    
-    .fb-container, .post-content {
-        padding: 10px 1% !important; 
-    }
-
     h1 { font-size: 1.65rem; line-height: 1.1; margin-bottom: 1rem; }
     h2 { font-size: 1.35rem; line-height: 1.2; margin: 1.5rem 0 0.8rem; }
     h3 { font-size: 1.15rem; line-height: 1.2; margin: 1.2rem 0 0.6rem; }
+    p { font-size: 1rem; line-height: 1.45; margin-bottom: 1rem; }
     
-    p, blockquote, blockquote p { 
-        font-size: 1rem !important; 
-        line-height: 1.45 !important; 
-        margin-bottom: 1rem; 
+    /* CAMBIO REFORZADO: DISEÑO DE CITA MÓVIL */
+    blockquote, blockquote p { 
+        font-size: 1rem !important;    /* Mismo tamaño que p en móvil */
+        font-style: italic !important; 
+        line-height: 1.45 !important;
     }
     
     blockquote {
-        padding: 12px !important; 
+        background-color: #f4f4f4 !important; 
+        border-left: 5px solid var(--rt-red) !important; 
+        padding: 10px !important; 
         margin: 15px 0 !important; 
     }
     
     .about-social a, .author-social a { font-size: 1.5rem; }
+
+    .fb-container {
+        padding: 10px 1% !important; /* AJUSTE AUTORIZADO: Reducción drástica de márgenes en móvil */
+    }
 }
