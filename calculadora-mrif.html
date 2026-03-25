@@ -1,0 +1,190 @@
+---
+layout: default
+title: Calculadora Salarial MRIF | Red Humana
+---
+
+<div class="fb-container">
+    <section class="rt-hero">
+        <h1>Calculadora Salarial MRIF</h1>
+        <p class="rt-subtitle">Determinación del Nivel Funcional y proyección de remuneración base (2026).</p>
+    </section>
+
+    <div class="mrif-tool-container">
+        <div class="mrif-form">
+            <div class="mrif-variable">
+                <h3>Impacto Sistémico (IS)</h3>
+                <p>Nivel de trascendencia de la función sobre la operación total.</p>
+                <select id="is-value" class="mrif-select">
+                    <option value="3">Crítico (3): Falla detiene operación o ingresos</option>
+                    <option value="2">Relevante (2): Genera fricción significativa</option>
+                    <option value="1" selected>Soporte (1): Impacto indirecto o diferido</option>
+                </select>
+            </div>
+
+            <div class="mrif-variable">
+                <h3>Sustituibilidad Real (SR)</h3>
+                <p>Dificultad técnica y de confianza para reemplazar al individuo.</p>
+                <select id="sr-value" class="mrif-select">
+                    <option value="3">Baja (3): Muy difícil de reemplazar</option>
+                    <option value="2">Media (2): Reemplazable con tiempo</option>
+                    <option value="1" selected>Alta (1): Reemplazo rápido</option>
+                </select>
+            </div>
+
+            <div class="mrif-anchor">
+                <label>Salario Base Ancla (MXN):</label>
+                <input type="number" id="base-salary" value="9451" readonly class="mrif-input-readonly">
+                <small>Valor referencial oficial para 2026.</small>
+            </div>
+
+            <button onclick="calcularMRIF()" class="tool-btn" style="width: 100%; margin-top: 20px;">CALCULAR NIVEL FUNCIONAL</button>
+        </div>
+
+        <div id="mrif-result-panel" class="mrif-result" style="display: none;">
+            <div class="result-card">
+                <h4 id="nivel-label">NIVEL 1: BÁSICO</h4>
+                <div id="puntos-badge">Puntaje: 2</div>
+            </div>
+            
+            <div class="salary-display">
+                <div class="factor-box">
+                    <span>Factor de Nivel:</span>
+                    <strong id="factor-value">1.0x</strong>
+                </div>
+                <div class="total-box">
+                    <span>Sueldo Bruto Sugerido:</span>
+                    <strong id="final-salary">$9,451.00</strong>
+                </div>
+            </div>
+
+            <div class="mrif-notes">
+                <p id="nivel-desc">Funciones de apoyo con baja especialización técnica.</p>
+                <p class="disclaimer">* El salario final puede variar según el ajuste de Calidad de Vinculación (CV).</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.mrif-tool-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mrif-form {
+    background: #fff;
+    padding: 30px;
+    border-top: 5px solid var(--rt-red);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.mrif-variable { margin-bottom: 25px; }
+.mrif-variable h3 { margin: 0 0 5px 0; font-size: 1.2rem; }
+.mrif-variable p { font-size: 0.85rem; color: #666; margin-bottom: 12px; }
+
+.mrif-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+.mrif-anchor {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px dashed #ccc;
+}
+.mrif-input-readonly {
+    width: 100%;
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--rt-black);
+}
+
+.mrif-result {
+    background: #111;
+    color: #fff;
+    padding: 30px;
+    border-radius: 4px;
+}
+
+.result-card {
+    text-align: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+#nivel-label { font-size: 1.8rem; color: var(--rt-red); margin: 0; }
+#puntos-badge { font-size: 1rem; color: #aaa; text-transform: uppercase; }
+
+.salary-display { margin-bottom: 30px; }
+.factor-box, .total-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.total-box strong { font-size: 2rem; color: #fff; }
+.factor-box strong { font-size: 1.4rem; color: var(--rt-red); }
+
+.mrif-notes { font-size: 0.9rem; border-top: 1px solid #333; padding-top: 15px; }
+.disclaimer { font-style: italic; color: #888; margin-top: 10px; }
+
+@media (max-width: 900px) {
+    .mrif-tool-container { grid-template-columns: 1fr; }
+}
+</style>
+
+<script>
+function calcularMRIF() {
+    /* CAMBIO: Implementación de la Aritmética MRIF */
+    const is = parseInt(document.getElementById('is-value').value);
+    const sr = parseInt(document.getElementById('sr-value').value);
+    const base = 9451;
+    
+    const puntos = is + sr;
+    let nivel = "";
+    let factor = 1.0;
+    let desc = "";
+
+    /* Lógica de Rangos basada en el PDF */
+    if (puntos >= 6) {
+        nivel = "NIVEL 4: CRÍTICO";
+        factor = 3.0;
+        desc = "Funciones vitales cuya ausencia detiene el sistema por completo.";
+    } else if (puntos >= 5) {
+        nivel = "NIVEL 3: ESTRATÉGICO";
+        factor = 2.2;
+        desc = "Funciones de alta relevancia con difícil sustitución inmediata.";
+    } else if (puntos >= 4) {
+        nivel = "NIVEL 2: OPERATIVO";
+        factor = 1.6;
+        desc = "Funciones necesarias con impacto directo en la fluidez del sistema.";
+    } else {
+        nivel = "NIVEL 1: BÁSICO";
+        factor = 1.0;
+        desc = "Funciones de apoyo con baja especialización técnica.";
+    }
+
+    const total = base * factor;
+
+    /* CAMBIO: Actualización de UI */
+    document.getElementById('nivel-label').innerText = nivel;
+    document.getElementById('puntos-badge').innerText = `Puntaje Total: ${puntos}`;
+    document.getElementById('factor-value').innerText = `${factor.toFixed(1)}x`;
+    document.getElementById('final-salary').innerText = `$${total.toLocaleString('es-MX', {minimumFractionDigits: 2})}`;
+    document.getElementById('nivel-desc').innerText = desc;
+    
+    document.getElementById('mrif-result-panel').style.display = "block";
+    
+    window.scrollTo({ top: document.getElementById('mrif-result-panel').offsetTop - 100, behavior: 'smooth' });
+}
+</script>
