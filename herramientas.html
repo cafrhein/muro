@@ -30,6 +30,7 @@ title: Central de Herramientas | Red Humana
         <p class="tool-desc">Mide tu impacto en la coordinación operativa mediante CA, CO, CS e IR.</p>
         <a href="/evaluacion-cv" class="tool-btn">MEDIR VÍNCULO</a>
     </article>
+
     <article class="tool-card">
         <div class="tool-icon"><i class="fas fa-clipboard-list"></i></div>
         <h3 class="tool-title">Inventario Relacional</h3>
@@ -50,11 +51,19 @@ title: Central de Herramientas | Red Humana
         <p class="tool-desc">Calcula tu Nivel Funcional (IS+SR) y el factor de remuneración base.</p>
         <a href="/calculadora-mrif" class="tool-btn">CALCULAR NIVEL</a>
     </article>
+
     <article class="tool-card">
         <div class="tool-icon"><i class="fas fa-shield-alt"></i></div>
         <h3 class="tool-title">Auditoría Nivel 5</h3>
         <p class="tool-desc">Valida si una función califica como Perfil de Mercado Alto según riesgo sistémico.</p>
         <a href="/auditoria-nivel5" class="tool-btn">VALIDAR RIESGO</a>
+    </article>
+
+    <article class="tool-card">
+        <div class="tool-icon"><i class="fas fa-chess-knight"></i></div>
+        <h3 class="tool-title">Estrategia de Cobertura</h3>
+        <p class="tool-desc">Decide entre outsourcing, contratación parcial o interna según criticidad y presupuesto.</p>
+        <a href="/estrategia-cobertura" class="tool-btn">DEFINIR MÉTODO</a>
     </article>
     </div>
 
@@ -63,7 +72,6 @@ title: Central de Herramientas | Red Humana
 
 .tools-grid {
     display: grid;
-    /* CAMBIO: Ajuste de cuadrícula para soportar más elementos de forma equilibrada */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     gap: 25px;
     max-width: 1400px;
@@ -80,7 +88,7 @@ title: Central de Herramientas | Red Humana
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 320px; /* CAMBIO: Altura mínima para uniformidad */
+    min-height: 320px;
 }
 
 .tool-card:hover {
@@ -128,17 +136,6 @@ title: Central de Herramientas | Red Humana
 
 .tool-btn:hover {
     background: var(--rt-red);
-}
-
-/* Estado bloqueado para lo que aún no construyes */
-.tool-card.locked {
-    opacity: 0.6;
-    background: #fdfdfd;
-}
-
-.tool-btn.disabled {
-    background: #ccc;
-    cursor: not-allowed;
 }
 
 /* Responsivo */
