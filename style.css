@@ -191,15 +191,17 @@ blockquote p {
 /* ESTILOS ICONOS RRSS */
 .about-social, .author-social {
     display: flex;
-    gap: 30px; /* CAMBIO: Mayor separación para iconos más grandes */
+    /* CAMBIO: Separación equilibrada de 15px (estándar UI) */
+    gap: 15px; 
     margin-top: 20px;
     align-items: center;
 }
 
-/* Estilo base para todos los iconos (con y sin enlace) */
+/* Estilo base para todos los iconos */
 .about-social a, .author-social a,
 .about-social span, .author-social span {
-    font-size: 3rem; /* CAMBIO: Escala heroica (48px aprox) */
+    /* CAMBIO: Tamaño reducido a 1.5rem (24px) para mayor elegancia */
+    font-size: 1.5rem; 
     text-decoration: none;
     display: inline-block;
     transition: color 0.3s, transform 0.2s;
@@ -212,14 +214,14 @@ blockquote p {
 
 .about-social a:hover, .author-social a:hover {
     color: var(--rt-red);
-    transform: scale(1.1) translateY(-3px); /* CAMBIO: Efecto visual más dinámico */
+    transform: scale(1.1); /* CAMBIO: Eliminado el desplazamiento vertical excesivo */
 }
 
-/* CAMBIO: Estilo para iconos placeholder (SIN href) */
+/* Estilo para iconos placeholder (SIN href) */
 .about-social span.social-placeholder, 
 .author-social span.social-placeholder {
-    color: var(--rt-ui-grey); /* Tono gris atenuado */
-    cursor: default;          /* Cursor normal, no de clic */
+    color: var(--rt-ui-grey);
+    cursor: default;
     opacity: 0.5;
 }
 
@@ -253,14 +255,14 @@ blockquote p {
         margin: 15px 0 !important; 
     }
     
-    /* CAMBIO: Ajuste de tamaño en móvil */
+    /* CAMBIO: Ajuste proporcional para móvil */
     .about-social a, .author-social a,
     .about-social span, .author-social span { 
-        font-size: 2.4rem; /* Tamaño optimizado para pulgar en móvil (38px aprox) */
+        font-size: 1.3rem; 
     }
     
     .about-social, .author-social {
-        gap: 20px; /* Separación reducida en móvil */
+        gap: 12px; 
     }
 
     .fb-container {
