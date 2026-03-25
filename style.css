@@ -25,6 +25,7 @@
 
 /* 2. RESET TÉCNICO */
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
     background-color: var(--rt-white);
     font-family: var(--font-main);
@@ -113,6 +114,7 @@ body {
     transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     padding: 50px 40px; border-right: 6px solid var(--rt-red);
 }
+
 #side-menu.is-open { transform: translateX(0); }
 
 #menu-close { background: none; border: none; color: #fff; font-size: 2rem; position: absolute; top: 20px; right: 20px; cursor: pointer; }
@@ -121,7 +123,9 @@ body {
     color: var(--rt-red); font-family: var(--font-heading); font-size: 1.2rem; 
     margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 5px;
 }
+
 .menu-items ul { list-style: none; }
+
 .menu-items a {
     color: #fff; font-family: var(--font-heading); font-weight: 700;
     font-size: 1.6rem; text-transform: uppercase; text-decoration: none;
@@ -133,6 +137,7 @@ body {
     background: rgba(0,0,0,0.8); z-index: 3900;
     opacity: 0; visibility: hidden; transition: 0.3s;
 }
+
 #menu-overlay.is-active { opacity: 1; visibility: visible; }
 
 /* 5. CONTENIDO EDITORIAL */
@@ -192,25 +197,24 @@ blockquote p {
 .about-social, .author-social {
     display: flex;
     flex-wrap: wrap;
-    /* : Gap reducido para compensar el tamaño de la caja contenedora */
-    gap: 10px; 
-    margin-top: 20px;
+    /* CAMBIO: Gap reducido para control de espacio entre contenedores simétricos */
+    gap: 5px; 
+    margin-top: 15px;
     align-items: center;
     justify-content: flex-start;
 }
 
-/* : Se crea una caja invisible (44px) para centrar cada icono perfectamente */
+/* CAMBIO: Normalización de área de impacto y alineación central */
 .about-social a, .author-social a,
 .about-social span, .author-social span {
     text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;  
-    height: 44px; 
-    font-size: 1.5rem; 
+    display: inline-flex; /* Permite centrado interno */
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    width: 44px;  /* Cuadrícula fija para simetría */
+    height: 44px; /* Cuadrícula fija para simetría */
+    font-size: 1.5rem; /* Tamaño de icono robusto */
     transition: all 0.3s ease;
-    border-radius: 4px;
 }
 
 /* Iconos ACTIVOS (con href) */
@@ -219,14 +223,12 @@ blockquote p {
 }
 
 .about-social a:hover, .author-social a:hover {
-    /* : Efecto visual de elevación y cambio de color */
     color: var(--rt-red);
-    transform: translateY(-3px);
+    transform: scale(1.1);
 }
 
 /* Estilo para iconos placeholder (SIN href) */
-.about-social span.social-placeholder, 
-.author-social span.social-placeholder {
+.about-social span.social-placeholder, .author-social span.social-placeholder {
     color: var(--rt-ui-grey);
     cursor: default;
     opacity: 0.5;
@@ -262,16 +264,16 @@ blockquote p {
         margin: 15px 0 !important; 
     }
     
-    /* : Ajuste de cajas de iconos para pantallas pequeñas */
+    /* CAMBIO: Adaptación de simetría para pantallas móviles */
     .about-social a, .author-social a,
     .about-social span, .author-social span { 
-        width: 40px;
-        height: 40px;
+        width: 38px;
+        height: 38px;
         font-size: 1.3rem; 
     }
     
     .about-social, .author-social {
-        gap: 8px; 
+        gap: 5px; 
     }
 
     .fb-container {
