@@ -3,8 +3,10 @@
 # ==========================================
 title: "Adestrat | Carlos"
 description: "Opinión"
+/* CAMBIO: Se asegura la URL base completa para Open Graph */
 url: "https://adestrat.com"
 baseurl: ""
+enforce_ssl: true
 
 # IDENTIDAD DEL AUTOR (Bloque necesario para la foto en los posts)
 author:
