@@ -7,8 +7,7 @@ url: "https://adestrat.com"
 baseurl: ""
 enforce_ssl: true
 
-# CAMBIO: ID de aplicación para evitar advertencias de Facebook
-fb_app_id: "123456789"
+/* CAMBIO: Se elimina fb_app_id para evitar error de ID no válido */
 
 # IDENTIDAD DEL AUTOR
 author:
