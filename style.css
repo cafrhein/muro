@@ -13,7 +13,7 @@
     --font-main: 'Roboto', sans-serif;
     --font-heading: 'Roboto Condensed', sans-serif;
     --header-height: 64px;
-    --content-width: 1400px;     /* EDITADO: De 740px a 1400px para reducir márgenes */
+    --content-width: 1400px;
 }
 
 [data-theme="dark"] {
@@ -137,7 +137,7 @@ body {
 
 /* 5. CONTENIDO EDITORIAL */
 .fb-container {
-    padding: 20px 1%; /* AJUSTE AUTORIZADO: Reducción de márgenes laterales */
+    padding: 20px 1%; 
 }
 
 main {
@@ -173,10 +173,10 @@ p { font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--rt-text); }
 
 /* ESTILO DE CITA (BLOQUEQUOTE) */
 blockquote {
-    font-size: 1.2rem;               /* Mismo tamaño que p en escritorio */
-    font-style: italic;              /* En cursiva */
-    background-color: #f4f4f4;       /* Fondo gris */
-    border-left: 5px solid var(--rt-red); /* Línea roja */
+    font-size: 1.2rem;
+    font-style: italic;
+    background-color: #f4f4f4;
+    border-left: 5px solid var(--rt-red);
     padding: 20px;
     margin: 25px 0;
     color: var(--rt-text);
@@ -191,19 +191,21 @@ blockquote p {
 /* ESTILOS ICONOS RRSS */
 .about-social, .author-social {
     display: flex;
-    gap: 20px;
+    gap: 25px; /* CAMBIO: Aumento de separación */
     margin-top: 15px;
 }
 
 .about-social a, .author-social a {
-    font-size: 1.8rem; /* Aumentado por autorización */
+    font-size: 2.2rem; /* CAMBIO: Aumento de tamaño (antes 1.8rem) */
     color: var(--rt-black);
     text-decoration: none;
-    transition: color 0.3s;
+    transition: color 0.3s, transform 0.2s;
+    display: inline-block; /* CAMBIO: Para permitir transformación */
 }
 
 .about-social a:hover, .author-social a:hover {
     color: var(--rt-red);
+    transform: scale(1.1); /* CAMBIO: Efecto visual al pasar el mouse */
 }
 
 /* 6. UI: BOTÓN TEMA */
@@ -223,9 +225,8 @@ blockquote p {
     h3 { font-size: 1.15rem; line-height: 1.2; margin: 1.2rem 0 0.6rem; }
     p { font-size: 1rem; line-height: 1.45; margin-bottom: 1rem; }
     
-    /* CAMBIO REFORZADO: DISEÑO DE CITA MÓVIL */
     blockquote, blockquote p { 
-        font-size: 1rem !important;    /* Mismo tamaño que p en móvil */
+        font-size: 1rem !important;
         font-style: italic !important; 
         line-height: 1.45 !important;
     }
@@ -237,9 +238,11 @@ blockquote p {
         margin: 15px 0 !important; 
     }
     
-    .about-social a, .author-social a { font-size: 1.5rem; }
+    .about-social a, .author-social a { 
+        font-size: 1.8rem; /* CAMBIO: Aumento en móvil (antes 1.5rem) */
+    }
 
     .fb-container {
-        padding: 10px 5% !important; /* CAMBIO: Margen lateral aumentado del 1% al 5% para celulares */
+        padding: 10px 5% !important; 
     }
 }
