@@ -6,13 +6,29 @@ title: Calculadora Salarial MRIF | Red Humana
 <div class="fb-container">
     <section class="rt-hero">
         <h1>Calculadora Salarial MRIF</h1>
-        <p class="rt-subtitle">Determinación del Nivel Funcional y proyección de remuneración base (2026).</p>
+        <p class="rt-subtitle">Determinación del Nivel Funcional con base en Salarios Mínimos Profesionales 2026.</p>
     </section>
 
     <div class="mrif-tool-container">
         <div class="mrif-form">
             <div class="mrif-variable">
-                <h3>Impacto Sistémico (IS)</h3>
+                <h3>1. Zona Geográfica</h3>
+                <p>Define el monto base según la ubicación (ZLFN incluye frontera norte)[cite: 5, 10].</p>
+                <select id="zona-geo" class="mrif-select" onchange="actualizarOficios()">
+                    <option value="ZSMG" selected>Zona Salario Mínimo General (Resto del país)</option>
+                    <option value="ZLFN">Zona Libre de la Frontera Norte</option>
+                </select>
+            </div>
+
+            <div class="mrif-variable">
+                <h3>2. Profesión u Oficio</h3>
+                <p>Seleccione la categoría técnica según la tabla oficial de CONASAMI 2026[cite: 4, 13].</p>
+                <select id="oficio-select" class="mrif-select" onchange="actualizarAncla()">
+                    </select>
+            </div>
+
+            <div class="mrif-variable">
+                <h3>3. Impacto Sistémico (IS)</h3>
                 <p>Nivel de trascendencia de la función sobre la operación total.</p>
                 <select id="is-value" class="mrif-select">
                     <option value="3">Crítico (3): Falla detiene operación o ingresos</option>
@@ -22,7 +38,7 @@ title: Calculadora Salarial MRIF | Red Humana
             </div>
 
             <div class="mrif-variable">
-                <h3>Sustituibilidad Real (SR)</h3>
+                <h3>4. Sustituibilidad Real (SR)</h3>
                 <p>Dificultad técnica y de confianza para reemplazar al individuo.</p>
                 <select id="sr-value" class="mrif-select">
                     <option value="3">Baja (3): Muy difícil de reemplazar</option>
@@ -32,12 +48,14 @@ title: Calculadora Salarial MRIF | Red Humana
             </div>
 
             <div class="mrif-anchor">
-                <label>Salario Base Ancla (MXN):</label>
-                <input type="number" id="base-salary" value="9451" readonly class="mrif-input-readonly">
-                <small>Valor referencial oficial para 2026.</small>
+                <label>Salario Base Ancla Mensual (MXN):</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <input type="text" id="base-salary-display" value="$9,451.20" readonly class="mrif-input-readonly">
+                    <small id="daily-wage-label" style="color: #666;">($315.04 diario)</small>
+                </div>
             </div>
 
-            <button onclick="calcularMRIF()" class="tool-btn" style="width: 100%; margin-top: 20px;">CALCULAR NIVEL FUNCIONAL</button>
+            <button onclick="calcularMRIF()" class="tool-btn" style="width: 100%; margin-top: 20px;">CALCULAR NIVEL Y REMUNERACIÓN</button>
         </div>
 
         <div id="mrif-result-panel" class="mrif-result" style="display: none;">
@@ -53,138 +71,115 @@ title: Calculadora Salarial MRIF | Red Humana
                 </div>
                 <div class="total-box">
                     <span>Sueldo Bruto Sugerido:</span>
-                    <strong id="final-salary">$9,451.00</strong>
+                    <strong id="final-salary">$9,451.20</strong>
                 </div>
             </div>
 
             <div class="mrif-notes">
                 <p id="nivel-desc">Funciones de apoyo con baja especialización técnica.</p>
-                <p class="disclaimer">* El salario final puede variar según el ajuste de Calidad de Vinculación (CV).</p>
+                <p class="disclaimer">* Basado en Tablas de Salarios Mínimos 2026 de CONASAMI[cite: 1, 2].</p>
             </div>
         </div>
     </div>
 </div>
 
 <style>
-.mrif-tool-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-top: 40px;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.mrif-form {
-    background: #fff;
-    padding: 30px;
-    border-top: 5px solid var(--rt-red);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
+/* Se mantienen los estilos anteriores por consistencia */
+.mrif-tool-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; max-width: 1200px; margin-left: auto; margin-right: auto; }
+.mrif-form { background: #fff; padding: 30px; border-top: 5px solid var(--rt-red); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
 .mrif-variable { margin-bottom: 25px; }
-.mrif-variable h3 { margin: 0 0 5px 0; font-size: 1.2rem; }
+.mrif-variable h3 { margin: 0 0 5px 0; font-size: 1.1rem; text-transform: uppercase; }
 .mrif-variable p { font-size: 0.85rem; color: #666; margin-bottom: 12px; }
-
-.mrif-select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    font-size: 1rem;
-}
-
-.mrif-anchor {
-    margin-top: 20px;
-    padding: 15px;
-    background: #f9f9f9;
-    border: 1px dashed #ccc;
-}
-.mrif-input-readonly {
-    width: 100%;
-    background: transparent;
-    border: none;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--rt-black);
-}
-
-.mrif-result {
-    background: #111;
-    color: #fff;
-    padding: 30px;
-    border-radius: 4px;
-}
-
-.result-card {
-    text-align: center;
-    border-bottom: 1px solid #333;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-}
+.mrif-select { width: 100%; padding: 12px; border: 1px solid #ddd; font-size: 1rem; }
+.mrif-anchor { margin-top: 20px; padding: 15px; background: #f9f9f9; border: 1px dashed #ccc; }
+.mrif-input-readonly { width: 100%; background: transparent; border: none; font-size: 1.4rem; font-weight: 700; color: var(--rt-black); }
+.mrif-result { background: #111; color: #fff; padding: 30px; border-radius: 4px; }
+.result-card { text-align: center; border-bottom: 1px solid #333; padding-bottom: 20px; margin-bottom: 20px; }
 #nivel-label { font-size: 1.8rem; color: var(--rt-red); margin: 0; }
 #puntos-badge { font-size: 1rem; color: #aaa; text-transform: uppercase; }
-
 .salary-display { margin-bottom: 30px; }
-.factor-box, .total-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
+.factor-box, .total-box { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .total-box strong { font-size: 2rem; color: #fff; }
 .factor-box strong { font-size: 1.4rem; color: var(--rt-red); }
-
 .mrif-notes { font-size: 0.9rem; border-top: 1px solid #333; padding-top: 15px; }
 .disclaimer { font-style: italic; color: #888; margin-top: 10px; }
-
-@media (max-width: 900px) {
-    .mrif-tool-container { grid-template-columns: 1fr; }
-}
+@media (max-width: 900px) { .mrif-tool-container { grid-template-columns: 1fr; } }
 </style>
 
 <script>
+/* CAMBIO: Base de datos de salarios mínimos 2026 extraída del PDF  */
+const salarios2026 = {
+    "General": { ZSMG: 315.04, ZLFN: 440.87 },
+    "Albañilería": { ZSMG: 363.44, ZLFN: 440.87 },
+    "Cajero(a)": { ZSMG: 326.84, ZLFN: 440.87 },
+    "Cocinero(a) mayor": { ZSMG: 368.05, ZLFN: 440.87 },
+    "Chofer camión carga": { ZSMG: 370.90, ZLFN: 440.87 },
+    "Electricista": { ZSMG: 356.19, ZLFN: 440.87 },
+    "Mecánico(a) automotriz": { ZSMG: 375.35, ZLFN: 440.87 },
+    "Reportero(a)": { ZSMG: 705.46, ZLFN: 705.46 },
+    "Secretario(a) auxiliar": { ZSMG: 374.60, ZLFN: 440.87 },
+    "Trabajador(a) del hogar": { ZSMG: 342.47, ZLFN: 440.87 },
+    "Trabajador(a) social": { ZSMG: 405.82, ZLFN: 440.87 },
+    "Velador(a)": { ZSMG: 326.38, ZLFN: 440.87 }
+    /* Nota: Se incluyeron los más representativos para brevedad, expandible a los 61 */
+};
+
+let salarioDiarioActual = 315.04;
+
+function actualizarOficios() {
+    const select = document.getElementById('oficio-select');
+    const zona = document.getElementById('zona-geo').value;
+    
+    // Solo regenerar la lista si es la primera vez o cambia zona
+    if (select.options.length === 0) {
+        for (let oficio in salarios2026) {
+            let option = document.createElement('option');
+            option.value = oficio;
+            option.text = oficio;
+            select.add(option);
+        }
+    }
+    actualizarAncla();
+}
+
+function actualizarAncla() {
+    const zona = document.getElementById('zona-geo').value;
+    const oficio = document.getElementById('oficio-select').value;
+    
+    salarioDiarioActual = salarios2026[oficio][zona];
+    const mensual = salarioDiarioActual * 30;
+    
+    document.getElementById('base-salary-display').value = `$${mensual.toLocaleString('es-MX', {minimumFractionDigits: 2})}`;
+    document.getElementById('daily-wage-label').innerText = `($${salarioDiarioActual} diario)`;
+}
+
 function calcularMRIF() {
-    /* CAMBIO: Implementación de la Aritmética MRIF */
     const is = parseInt(document.getElementById('is-value').value);
     const sr = parseInt(document.getElementById('sr-value').value);
-    const base = 9451;
+    const mensualBase = salarioDiarioActual * 30;
     
     const puntos = is + sr;
-    let nivel = "";
     let factor = 1.0;
+    let nivel = "";
     let desc = "";
 
-    /* Lógica de Rangos basada en el PDF */
-    if (puntos >= 6) {
-        nivel = "NIVEL 4: CRÍTICO";
-        factor = 3.0;
-        desc = "Funciones vitales cuya ausencia detiene el sistema por completo.";
-    } else if (puntos >= 5) {
-        nivel = "NIVEL 3: ESTRATÉGICO";
-        factor = 2.2;
-        desc = "Funciones de alta relevancia con difícil sustitución inmediata.";
-    } else if (puntos >= 4) {
-        nivel = "NIVEL 2: OPERATIVO";
-        factor = 1.6;
-        desc = "Funciones necesarias con impacto directo en la fluidez del sistema.";
-    } else {
-        nivel = "NIVEL 1: BÁSICO";
-        factor = 1.0;
-        desc = "Funciones de apoyo con baja especialización técnica.";
-    }
+    if (puntos >= 6) { nivel = "NIVEL 4: CRÍTICO"; factor = 3.0; desc = "Funciones vitales cuya ausencia detiene el sistema."; }
+    else if (puntos >= 5) { nivel = "NIVEL 3: ESTRATÉGICO"; factor = 2.2; desc = "Funciones de alta relevancia y difícil sustitución."; }
+    else if (puntos >= 4) { nivel = "NIVEL 2: OPERATIVO"; factor = 1.6; desc = "Funciones necesarias para la fluidez operativa."; }
+    else { nivel = "NIVEL 1: BÁSICO"; factor = 1.0; desc = "Funciones de apoyo con especialización estándar."; }
 
-    const total = base * factor;
+    const total = mensualBase * factor;
 
-    /* CAMBIO: Actualización de UI */
     document.getElementById('nivel-label').innerText = nivel;
     document.getElementById('puntos-badge').innerText = `Puntaje Total: ${puntos}`;
     document.getElementById('factor-value').innerText = `${factor.toFixed(1)}x`;
     document.getElementById('final-salary').innerText = `$${total.toLocaleString('es-MX', {minimumFractionDigits: 2})}`;
     document.getElementById('nivel-desc').innerText = desc;
-    
     document.getElementById('mrif-result-panel').style.display = "block";
     
     window.scrollTo({ top: document.getElementById('mrif-result-panel').offsetTop - 100, behavior: 'smooth' });
 }
+
+// Inicialización
+actualizarOficios();
 </script>
