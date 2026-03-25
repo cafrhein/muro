@@ -6,7 +6,7 @@
     <title>{{ page.title | default: site.title }}</title>
     
     <script>
-        /* Sincronización de tema inmediata para evitar parpadeo blanco */
+        /* Sincronización de tema inmediata */
         (function() {
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
@@ -25,7 +25,6 @@
         <meta property="og:image" content="{{ '/assets/img/image.default.png' | absolute_url }}">
         <meta name="twitter:image" content="{{ '/assets/img/image.default.png' | absolute_url }}">
     {% endif %}
-
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@{{ site.author.twitter_username }}">
     <meta name="twitter:title" content="{{ page.title | default: site.title }}">
@@ -56,7 +55,7 @@
                     {{ "now" | date: "%d %b %Y" }}
                 </time>
                 <span id="live-clock" style="margin-left: 10px; padding-left: 10px; border-left: 1px solid var(--rt-ui-grey);"></span>
-            </div>
+                </div>
         </div>
     </header>
 
@@ -96,35 +95,39 @@
         const overlayBg = document.getElementById('menu-overlay');
         const themeBtn = document.getElementById('theme-toggle');
 
-        /* Lógica del reloj digital (Horario CDMX) */
         function updateClock() {
             const clockElement = document.getElementById('live-clock');
             if (!clockElement) return;
 
             const now = new Date();
             const options = {
-                timeZone: 'America/Mexico_City', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+                timeZone: 'America/Mexico_City',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
             };
+            
             const formatter = new Intl.DateTimeFormat('es-MX', options);
             clockElement.textContent = formatter.format(now);
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        /* Lógica del Menú Lateral */
         const toggleMenu = (isOpen) => {
             sideNav.classList.toggle('is-open', isOpen);
             overlayBg.classList.toggle('is-active', isOpen);
             sideNav.setAttribute('aria-hidden', !isOpen);
             btnOpen.setAttribute('aria-expanded', isOpen);
             document.body.style.overflow = isOpen ? 'hidden' : '';
+            if (isOpen) { requestAnimationFrame(() => btnClose.focus()); }
+            else { btnOpen.focus(); }
         };
 
         btnOpen.addEventListener('click', () => toggleMenu(true));
         btnClose.addEventListener('click', () => toggleMenu(false));
         overlayBg.addEventListener('click', () => toggleMenu(false));
 
-        /* Lógica de Cambio de Tema (Dark/Light) */
         const applyTheme = (theme) => {
             document.documentElement.setAttribute('data-theme', theme);
             themeBtn.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
