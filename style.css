@@ -191,19 +191,26 @@ blockquote p {
 /* ESTILOS ICONOS RRSS */
 .about-social, .author-social {
     display: flex;
-    gap: 25px; /* CAMBIO: Ajuste de espaciado para 6 iconos */
-    margin-top: 15px;
+    flex-wrap: wrap;
+    /* : Gap reducido para compensar el tamaño de la caja contenedora */
+    gap: 10px; 
+    margin-top: 20px;
     align-items: center;
+    justify-content: flex-start;
 }
 
-/* Estilo base para todos los iconos */
+/* : Se crea una caja invisible (44px) para centrar cada icono perfectamente */
 .about-social a, .author-social a,
 .about-social span, .author-social span {
-    /* CAMBIO: Se aumenta el tamaño de 1.1rem a 1.5rem para mayor impacto visual */
-    font-size: 1.5rem; 
     text-decoration: none;
-    display: inline-block;
-    transition: color 0.3s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;  
+    height: 44px; 
+    font-size: 1.5rem; 
+    transition: all 0.3s ease;
+    border-radius: 4px;
 }
 
 /* Iconos ACTIVOS (con href) */
@@ -212,8 +219,9 @@ blockquote p {
 }
 
 .about-social a:hover, .author-social a:hover {
+    /* : Efecto visual de elevación y cambio de color */
     color: var(--rt-red);
-    transform: scale(1.1) translateY(-2px); /* CAMBIO: Efecto hover sutil */
+    transform: translateY(-3px);
 }
 
 /* Estilo para iconos placeholder (SIN href) */
@@ -254,14 +262,16 @@ blockquote p {
         margin: 15px 0 !important; 
     }
     
-    /* CAMBIO: Ajuste de tamaño en móvil para los nuevos iconos */
+    /* : Ajuste de cajas de iconos para pantallas pequeñas */
     .about-social a, .author-social a,
     .about-social span, .author-social span { 
+        width: 40px;
+        height: 40px;
         font-size: 1.3rem; 
     }
     
     .about-social, .author-social {
-        gap: 15px; 
+        gap: 8px; 
     }
 
     .fb-container {
