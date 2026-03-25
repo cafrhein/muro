@@ -25,7 +25,6 @@
 
 /* 2. RESET TÉCNICO */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 body {
     background-color: var(--rt-white);
     font-family: var(--font-main);
@@ -114,7 +113,6 @@ body {
     transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     padding: 50px 40px; border-right: 6px solid var(--rt-red);
 }
-
 #side-menu.is-open { transform: translateX(0); }
 
 #menu-close { background: none; border: none; color: #fff; font-size: 2rem; position: absolute; top: 20px; right: 20px; cursor: pointer; }
@@ -123,9 +121,7 @@ body {
     color: var(--rt-red); font-family: var(--font-heading); font-size: 1.2rem; 
     margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 5px;
 }
-
 .menu-items ul { list-style: none; }
-
 .menu-items a {
     color: #fff; font-family: var(--font-heading); font-weight: 700;
     font-size: 1.6rem; text-transform: uppercase; text-decoration: none;
@@ -137,7 +133,6 @@ body {
     background: rgba(0,0,0,0.8); z-index: 3900;
     opacity: 0; visibility: hidden; transition: 0.3s;
 }
-
 #menu-overlay.is-active { opacity: 1; visibility: visible; }
 
 /* 5. CONTENIDO EDITORIAL */
@@ -196,25 +191,18 @@ blockquote p {
 /* ESTILOS ICONOS RRSS */
 .about-social, .author-social {
     display: flex;
-    flex-wrap: wrap;
-    /* CAMBIO: Gap reducido para control de espacio entre contenedores simétricos */
-    gap: 5px; 
-    margin-top: 15px;
+    gap: 30px; /* CAMBIO: Mayor separación para iconos más grandes */
+    margin-top: 20px;
     align-items: center;
-    justify-content: flex-start;
 }
 
-/* CAMBIO: Normalización de área de impacto y alineación central */
+/* Estilo base para todos los iconos (con y sin enlace) */
 .about-social a, .author-social a,
 .about-social span, .author-social span {
+    font-size: 3rem; /* CAMBIO: Escala heroica (48px aprox) */
     text-decoration: none;
-    display: inline-flex; /* Permite centrado interno */
-    align-items: center; /* Centrado vertical */
-    justify-content: center; /* Centrado horizontal */
-    width: 44px;  /* Cuadrícula fija para simetría */
-    height: 44px; /* Cuadrícula fija para simetría */
-    font-size: 1.5rem; /* Tamaño de icono robusto */
-    transition: all 0.3s ease;
+    display: inline-block;
+    transition: color 0.3s, transform 0.2s;
 }
 
 /* Iconos ACTIVOS (con href) */
@@ -224,13 +212,14 @@ blockquote p {
 
 .about-social a:hover, .author-social a:hover {
     color: var(--rt-red);
-    transform: scale(1.1);
+    transform: scale(1.1) translateY(-3px); /* CAMBIO: Efecto visual más dinámico */
 }
 
-/* Estilo para iconos placeholder (SIN href) */
-.about-social span.social-placeholder, .author-social span.social-placeholder {
-    color: var(--rt-ui-grey);
-    cursor: default;
+/* CAMBIO: Estilo para iconos placeholder (SIN href) */
+.about-social span.social-placeholder, 
+.author-social span.social-placeholder {
+    color: var(--rt-ui-grey); /* Tono gris atenuado */
+    cursor: default;          /* Cursor normal, no de clic */
     opacity: 0.5;
 }
 
@@ -264,16 +253,14 @@ blockquote p {
         margin: 15px 0 !important; 
     }
     
-    /* CAMBIO: Adaptación de simetría para pantallas móviles */
+    /* CAMBIO: Ajuste de tamaño en móvil */
     .about-social a, .author-social a,
     .about-social span, .author-social span { 
-        width: 38px;
-        height: 38px;
-        font-size: 1.3rem; 
+        font-size: 2.4rem; /* Tamaño optimizado para pulgar en móvil (38px aprox) */
     }
     
     .about-social, .author-social {
-        gap: 5px; 
+        gap: 20px; /* Separación reducida en móvil */
     }
 
     .fb-container {
