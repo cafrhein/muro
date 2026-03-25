@@ -1,0 +1,184 @@
+---
+layout: default
+title: Estrategia de Cobertura | Red Humana
+---
+
+<div class="fb-container">
+    <section class="rt-hero">
+        <h1>Estrategia de Cobertura</h1>
+        <p class="rt-subtitle">Determinación del esquema de contratación basado en criticidad y capacidad sistémica.</p>
+    </section>
+
+    <div class="strategy-tool-container">
+        <div class="strategy-form">
+            <div class="strategy-step">
+                <h3>1. Nivel de Criticidad (IS + SR)</h3>
+                <p>Ingrese los valores obtenidos en la Calculadora Salarial.</p>
+                <div class="input-row">
+                    <select id="strat-is" class="mrif-select">
+                        <option value="3">IS 3: Crítico</option>
+                        <option value="2">IS 2: Relevante</option>
+                        <option value="1">IS 1: Soporte</option>
+                    </select>
+                    <select id="strat-sr" class="mrif-select">
+                        <option value="3">SR 3: Baja Sustituibilidad</option>
+                        <option value="2">SR 2: Media Sustituibilidad</option>
+                        <option value="1">SR 1: Alta Sustituibilidad</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="strategy-step">
+                <h3>2. Capacidad Financiera Actual</h3>
+                <p>¿Dispone el sistema de flujo para carga prestacional completa?</p>
+                <select id="strat-finance" class="mrif-select">
+                    <option value="alta">Alta: Presupuesto para nómina completa</option>
+                    <option value="limitada">Limitada: Presupuesto para honorarios/parcial</option>
+                    <option value="critica">Crítica: Solo para intervenciones mínimas</option>
+                </select>
+            </div>
+
+            <div class="strategy-step">
+                <h3>3. Urgencia de la Función</h3>
+                <p>¿En cuánto tiempo debe estar operativa la función?</p>
+                <select id="strat-urgency" class="mrif-select">
+                    <option value="inmediata">Inmediata (Días)</option>
+                    <option value="media">Media (Semanas)</option>
+                    <option value="baja">Baja (Meses - Permite formación)</option>
+                </select>
+            </div>
+
+            <button onclick="definirEstrategia()" class="tool-btn" style="width: 100%; margin-top: 20px;">DETERMINAR MÉTODO</button>
+        </div>
+
+        <div id="strategy-result" class="strategy-result" style="display: none;">
+            <div class="res-header">
+                <span class="label">ESTRATEGIA RECOMENDADA:</span>
+                <h2 id="res-title">CONTRATACIÓN COMPLETA</h2>
+            </div>
+            
+            <div class="res-content">
+                <p id="res-desc"></p>
+                
+                <div class="progression-rule">
+                    <h4>Regla de Progresión:</h4>
+                    <p id="res-progression"></p>
+                </div>
+
+                <div class="prohibitions">
+                    <h4>Prohibición Operativa:</h4>
+                    <ul id="res-prohibition"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.strategy-tool-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.strategy-form {
+    background: #fff;
+    padding: 30px;
+    border-left: 5px solid var(--rt-red);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.strategy-step { margin-bottom: 25px; }
+.strategy-step h3 { font-size: 1.1rem; text-transform: uppercase; margin-bottom: 5px; }
+.strategy-step p { font-size: 0.85rem; color: #666; margin-bottom: 10px; }
+
+.input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.strategy-result {
+    background: var(--rt-black);
+    color: #fff;
+    padding: 40px;
+    border-radius: 4px;
+}
+
+.label { color: var(--rt-red); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+#res-title { font-size: 2.2rem; margin: 10px 0 20px 0; line-height: 1.1; }
+
+.res-content p { font-size: 1rem; color: #ccc; margin-bottom: 20px; }
+
+.progression-rule {
+    background: #1a1a1a;
+    padding: 20px;
+    border-top: 2px solid var(--rt-red);
+    margin-bottom: 20px;
+}
+.progression-rule h4 { color: var(--rt-red); margin-bottom: 10px; text-transform: uppercase; font-size: 0.9rem; }
+
+.prohibitions h4 { font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; }
+.prohibitions ul { padding-left: 20px; color: #ff8e8e; font-size: 0.85rem; }
+.prohibitions li { margin-bottom: 5px; }
+
+@media (max-width: 900px) {
+    .strategy-tool-container { grid-template-columns: 1fr; }
+}
+</style>
+
+<script>
+function definirEstrategia() {
+    const is = parseInt(document.getElementById('strat-is').value);
+    const sr = parseInt(document.getElementById('strat-sr').value);
+    const finance = document.getElementById('strat-finance').value;
+    const urgency = document.getElementById('strat-urgency').value;
+    
+    let title = "";
+    let desc = "";
+    let progression = "";
+    let prohibitions = [];
+
+    /* Lógica basada en el MRIF Capítulo 17 */
+    if (is === 3 && finance === "alta") {
+        title = "CONTRATACIÓN COMPLETA (INTERNA)";
+        desc = "Para necesidades operativas continuas y alta especialización. Ofrece control total y máxima alineación cultural.";
+        progression = "Esta función debe ser el cimiento del sistema. No se permite su externalización a largo plazo.";
+        prohibitions = ["Depender de una sola persona sin respaldo", "Mantener la función sin cobertura"];
+    } 
+    else if (is === 3 && finance !== "alta") {
+        title = "CONTRATACIÓN PARCIAL ESTRATÉGICA";
+        desc = "Intervenciones clave con recursos limitados. El objetivo es asegurar el núcleo crítico mientras el sistema crece.";
+        progression = "Evolucionar hacia esquema completo en cuanto el flujo operativo lo permita.";
+        prohibitions = ["Justificar omisiones por falta de recursos"];
+    }
+    else if (is === 2 && urgency === "baja") {
+        title = "DESARROLLO INTERNO";
+        desc = "Formación de talento propio. Garantiza alta alineación aunque requiere tiempo de maduración.";
+        progression = "Ideal para funciones relevantes que requieren conocimiento específico del sistema.";
+        prohibitions = ["Ignorar la curva de aprendizaje", "Cargar urgencia a un perfil en formación"];
+    }
+    else {
+        title = "OUTSOURCING (EXTERNA)";
+        desc = "Para funciones estandarizables con baja necesidad de integración estratégica.";
+        progression = "Mantener externo a menos que la función se vuelva crítica (IS 3).";
+        prohibitions = ["Delegar decisiones estratégicas a externos"];
+    }
+
+    /* Actualización de UI */
+    document.getElementById('res-title').innerText = title;
+    document.getElementById('res-desc').innerText = desc;
+    document.getElementById('res-progression').innerText = progression;
+    
+    const probList = document.getElementById('res-prohibition');
+    probList.innerHTML = "";
+    prohibitions.forEach(p => {
+        let li = document.createElement('li');
+        li.innerText = p;
+        probList.appendChild(li);
+    });
+
+    document.getElementById('strategy-result').style.display = "block";
+    window.scrollTo({ top: document.getElementById('strategy-result').offsetTop - 100, behavior: 'smooth' });
+}
+</script>
