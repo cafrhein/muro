@@ -106,7 +106,14 @@ title: Estrategia de Cobertura | Red Humana
 }
 
 .label { color: var(--rt-red); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-#res-title { font-size: 2.2rem; margin: 10px 0 20px 0; line-height: 1.1; }
+
+/* CAMBIO: Se fuerza explícitamente el color blanco para el título para asegurar contraste contra el fondo negro */
+#res-title {
+    color: #fff;        /* CAMBIO */
+    font-size: 2.2rem;
+    margin: 10px 0 20px 0;
+    line-height: 1.1;
+}
 
 .res-content p { font-size: 1rem; color: #ccc; margin-bottom: 20px; }
 
