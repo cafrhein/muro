@@ -1,0 +1,185 @@
+---
+layout: default
+title: Auditoría de Nivel 5 | Red Humana
+---
+
+<div class="fb-container">
+    <section class="rt-hero">
+        <h1>Auditoría de Nivel 5</h1>
+        <p class="rt-subtitle">Validación de Perfiles de Mercado Alto y Estructuras de Compensación Híbrida.</p>
+    </section>
+
+    <div class="n5-tool-container">
+        <div class="n5-filter">
+            <h3>Protocolo de Activación</h3>
+            <p>Para calificar como Nivel 5, la función debe cumplir obligatoriamente con los máximos niveles de criticidad.</p>
+            
+            <div class="check-group">
+                <input type="checkbox" id="check-is" onchange="validarN5()">
+                <label for="check-is"><strong>IS = 3:</strong> La falla de esta función detiene ingresos o la operación total.</label>
+            </div>
+            
+            <div class="check-group">
+                <input type="checkbox" id="check-sr" onchange="validarN5()">
+                <label for="check-sr"><strong>SR = 3:</strong> No existe reemplazo viable en el corto plazo (confianza/especialización).</label>
+            </div>
+
+            <div class="n5-market-input">
+                <label>Valor de Mercado Validado (MXN Mensual):</label>
+                <input type="number" id="market-value" placeholder="Ej: 55000" oninput="validarN5()">
+            </div>
+        </div>
+
+        <div id="n5-result-panel" class="n5-result locked">
+            <div id="lock-overlay">
+                <i class="fas fa-lock"></i>
+                <p>REQUISITOS INSUFICIENTES PARA NIVEL 5</p>
+            </div>
+
+            <div class="n5-content">
+                <h2 class="alert-title">PERFIL DE MERCADO ALTO VALIDADO</h2>
+                
+                <div class="n5-breakdown">
+                    <div class="b-item">
+                        <span>Base Fija (Máx 4.0 SM):</span>
+                        <strong id="n5-base">$37,804.00</strong>
+                    </div>
+                    <div class="b-item">
+                        <span>Componente Variable (30-60%):</span>
+                        <strong id="n5-variable">$0.00</strong>
+                    </div>
+                </div>
+
+                <div class="n5-requirements">
+                    <h4>Obligaciones del Sistema:</h4>
+                    <ul>
+                        <li><strong>Plan de Impacto:</strong> Definición de indicadores de mejora operativa.</li>
+                        <li><strong>Estrategia de Salida:</strong> Protocolo obligatorio de transferencia de conocimiento.</li>
+                        <li><strong>Revisión Trimestral:</strong> Validación de la persistencia de la criticidad.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.n5-tool-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.n5-filter {
+    background: #fff;
+    padding: 30px;
+    border-left: 5px solid #000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.check-group {
+    margin: 20px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.check-group input { width: 20px; height: 20px; margin-top: 4px; }
+.check-group label { font-size: 0.95rem; line-height: 1.4; }
+
+.n5-market-input {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+.n5-market-input input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    font-size: 1.1rem;
+}
+
+.n5-result {
+    position: relative;
+    background: #f4f4f4;
+    padding: 40px;
+    border: 2px solid #ddd;
+    min-height: 400px;
+    transition: all 0.5s ease;
+}
+
+.n5-result.unlocked {
+    background: #fff;
+    border-color: var(--rt-red);
+}
+
+#lock-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(240, 240, 240, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    color: #999;
+}
+
+.n5-result.unlocked #lock-overlay { display: none; }
+
+.alert-title { color: var(--rt-red); font-size: 1.4rem; margin-bottom: 25px; text-align: center; }
+
+.n5-breakdown {
+    background: #000;
+    color: #fff;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.b-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.b-item strong { color: var(--rt-red); font-size: 1.2rem; }
+
+.n5-requirements h4 { text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 5px; margin-bottom: 15px; }
+.n5-requirements ul { padding-left: 20px; }
+.n5-requirements li { margin-bottom: 10px; font-size: 0.9rem; }
+
+@media (max-width: 900px) {
+    .n5-tool-container { grid-template-columns: 1fr; }
+}
+</style>
+
+<script>
+function validarN5() {
+    /* CAMBIO: Lógica de desbloqueo condicional */
+    const isChecked = document.getElementById('check-is').checked;
+    const srChecked = document.getElementById('check-sr').checked;
+    const marketValue = parseFloat(document.getElementById('market-value').value) || 0;
+    const panel = document.getElementById('n5-result-panel');
+    
+    const baseSalarialAncla = 9451;
+    const maxBaseFija = baseSalarialAncla * 4; // Límite del 4.0 SM
+
+    if (isChecked && srChecked && marketValue > 0) {
+        panel.classList.add('unlocked');
+        
+        /* Cálculo de componentes */
+        let baseFija = Math.min(marketValue * 0.5, maxBaseFija);
+        let variable = marketValue - baseFija;
+        
+        document.getElementById('n5-base').innerText = `$${baseFija.toLocaleString('es-MX', {minimumFractionDigits: 2})}`;
+        document.getElementById('n5-variable').innerText = `$${variable.toLocaleString('es-MX', {minimumFractionDigits: 2})}`;
+        
+    } else {
+        panel.classList.remove('unlocked');
+    }
+}
+</script>
