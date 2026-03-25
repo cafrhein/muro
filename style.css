@@ -191,21 +191,36 @@ blockquote p {
 /* ESTILOS ICONOS RRSS */
 .about-social, .author-social {
     display: flex;
-    gap: 25px; /* CAMBIO: Aumento de separación */
-    margin-top: 15px;
+    gap: 30px; /* CAMBIO: Mayor separación para iconos más grandes */
+    margin-top: 20px;
+    align-items: center;
 }
 
-.about-social a, .author-social a {
-    font-size: 2.2rem; /* CAMBIO: Aumento de tamaño (antes 1.8rem) */
-    color: var(--rt-black);
+/* Estilo base para todos los iconos (con y sin enlace) */
+.about-social a, .author-social a,
+.about-social span, .author-social span {
+    font-size: 3rem; /* CAMBIO: Escala heroica (48px aprox) */
     text-decoration: none;
+    display: inline-block;
     transition: color 0.3s, transform 0.2s;
-    display: inline-block; /* CAMBIO: Para permitir transformación */
+}
+
+/* Iconos ACTIVOS (con href) */
+.about-social a, .author-social a {
+    color: var(--rt-black);
 }
 
 .about-social a:hover, .author-social a:hover {
     color: var(--rt-red);
-    transform: scale(1.1); /* CAMBIO: Efecto visual al pasar el mouse */
+    transform: scale(1.1) translateY(-3px); /* CAMBIO: Efecto visual más dinámico */
+}
+
+/* CAMBIO: Estilo para iconos placeholder (SIN href) */
+.about-social span.social-placeholder, 
+.author-social span.social-placeholder {
+    color: var(--rt-ui-grey); /* Tono gris atenuado */
+    cursor: default;          /* Cursor normal, no de clic */
+    opacity: 0.5;
 }
 
 /* 6. UI: BOTÓN TEMA */
@@ -238,8 +253,14 @@ blockquote p {
         margin: 15px 0 !important; 
     }
     
-    .about-social a, .author-social a { 
-        font-size: 1.8rem; /* CAMBIO: Aumento en móvil (antes 1.5rem) */
+    /* CAMBIO: Ajuste de tamaño en móvil */
+    .about-social a, .author-social a,
+    .about-social span, .author-social span { 
+        font-size: 2.4rem; /* Tamaño optimizado para pulgar en móvil (38px aprox) */
+    }
+    
+    .about-social, .author-social {
+        gap: 20px; /* Separación reducida en móvil */
     }
 
     .fb-container {
