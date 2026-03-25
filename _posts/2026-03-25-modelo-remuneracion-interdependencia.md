@@ -1,5 +1,14 @@
+---
+layout: post
+title: "Modelo de Remuneración por Interdependencia Funcional (MRIF)"
+category: Actualidad
+image: assets/img/posts/Gemini_Generated_Image_1d0g851d0g851d0g.png
+---
+
 # Modelo de Remuneración por Interdependencia Funcional (MRIF)
 ## Ingeniería de la Estabilidad Organizacional
+
+![Visualización del Modelo MRIF]({{ site.baseurl }}/assets/img/posts/Gemini_Generated_Image_1d0g851d0g851d0g.png)
 
 ### I. Fundamentos del Valor Funcional y Estabilidad Sistémica
 El **Modelo de Remuneración por Interdependencia Funcional (MRIF)** se establece como un sistema diseñado para alinear el ingreso económico con la capacidad real de cada función para sostener la estabilidad, continuidad y coordinación de una organización. A diferencia de los esquemas tradicionales que se basan en la antigüedad o percepciones subjetivas, el MRIF postula que la remuneración no se asigna por el puesto en sí, sino por el **valor funcional** que una persona aporta a la estabilidad del sistema.
@@ -42,7 +51,7 @@ La CV convierte el comportamiento en un factor económico medible. No evalúa la
 El ajuste se aplica directamente sobre el Salario Base:
 * **CV +1 (Puntaje +3 a +4):** Incremento del **+10% al +20%**.
 * **CV 0 (Puntaje +1 a +2):** Sin ajuste (Impacto neutro).
-* **CV -1 (Puntaje 0 a -4):** Reducción del **-10% al -25%** (Genera fricción/desorden).
+* **CV -1 (Puntaje +0 a -4):** Reducción del **-10% al -25%** (Genera fricción/desorden).
 
 > **Regla Crítica:** Tres evaluaciones consecutivas en **CV -1** resultan en la salida inmediata del colaborador. El talento técnico no compensa la disfunción relacional.
 
