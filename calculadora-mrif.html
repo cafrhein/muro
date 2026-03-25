@@ -6,15 +6,15 @@ title: Calculadora Salarial MRIF | Red Humana
 <div class="fb-container">
     <section class="rt-hero">
         <h1>Calculadora Salarial MRIF</h1>
-        <p class="rt-subtitle">Determinación del Nivel Funcional con base en Salarios Mínimos Profesionales 2026.</p>
+        <p class="rt-subtitle">Determinación del Nivel Funcional basada en los 61 Salarios Mínimos Profesionales 2026.</p>
     </section>
 
     <div class="mrif-tool-container">
         <div class="mrif-form">
             <div class="mrif-variable">
                 <h3>1. Zona Geográfica</h3>
-                <p>Define el monto base según la ubicación (ZLFN incluye frontera norte)[cite: 5, 10].</p>
-                <select id="zona-geo" class="mrif-select" onchange="actualizarOficios()">
+                <p>Monto base según la ubicación oficial (ZLFN o ZSMG).</p>
+                <select id="zona-geo" class="mrif-select" onchange="actualizarAncla()">
                     <option value="ZSMG" selected>Zona Salario Mínimo General (Resto del país)</option>
                     <option value="ZLFN">Zona Libre de la Frontera Norte</option>
                 </select>
@@ -22,24 +22,24 @@ title: Calculadora Salarial MRIF | Red Humana
 
             <div class="mrif-variable">
                 <h3>2. Profesión u Oficio</h3>
-                <p>Seleccione la categoría técnica según la tabla oficial de CONASAMI 2026[cite: 4, 13].</p>
+                <p>Seleccione la categoría técnica oficial (CONASAMI 2026).</p>
                 <select id="oficio-select" class="mrif-select" onchange="actualizarAncla()">
-                    </select>
+                </select>
             </div>
 
             <div class="mrif-variable">
                 <h3>3. Impacto Sistémico (IS)</h3>
-                <p>Nivel de trascendencia de la función sobre la operación total.</p>
+                <p>Efecto de la función sobre la operación total.</p>
                 <select id="is-value" class="mrif-select">
-                    <option value="3">Crítico (3): Falla detiene operación o ingresos</option>
-                    <option value="2">Relevante (2): Genera fricción significativa</option>
+                    <option value="3">Crítico (3): Falla detiene operación/ingresos</option>
+                    <option value="2">Relevante (2): Genera fricción operativa</option>
                     <option value="1" selected>Soporte (1): Impacto indirecto o diferido</option>
                 </select>
             </div>
 
             <div class="mrif-variable">
                 <h3>4. Sustituibilidad Real (SR)</h3>
-                <p>Dificultad técnica y de confianza para reemplazar al individuo.</p>
+                <p>Dificultad técnica para reemplazar al individuo.</p>
                 <select id="sr-value" class="mrif-select">
                     <option value="3">Baja (3): Muy difícil de reemplazar</option>
                     <option value="2">Media (2): Reemplazable con tiempo</option>
@@ -50,41 +50,40 @@ title: Calculadora Salarial MRIF | Red Humana
             <div class="mrif-anchor">
                 <label>Salario Base Ancla Mensual (MXN):</label>
                 <div style="display: flex; align-items: center; gap: 10px;">
-                    <input type="text" id="base-salary-display" value="$9,451.20" readonly class="mrif-input-readonly">
-                    <small id="daily-wage-label" style="color: #666;">($315.04 diario)</small>
+                    <input type="text" id="base-salary-display" readonly class="mrif-input-readonly">
+                    <small id="daily-wage-label" style="color: #666;"></small>
                 </div>
             </div>
 
-            <button onclick="calcularMRIF()" class="tool-btn" style="width: 100%; margin-top: 20px;">CALCULAR NIVEL Y REMUNERACIÓN</button>
+            <button onclick="calcularMRIF()" class="tool-btn" style="width: 100%; margin-top: 20px;">CALCULAR REMUNERACIÓN</button>
         </div>
 
         <div id="mrif-result-panel" class="mrif-result" style="display: none;">
             <div class="result-card">
-                <h4 id="nivel-label">NIVEL 1: BÁSICO</h4>
-                <div id="puntos-badge">Puntaje: 2</div>
+                <h4 id="nivel-label"></h4>
+                <div id="puntos-badge"></div>
             </div>
             
             <div class="salary-display">
                 <div class="factor-box">
                     <span>Factor de Nivel:</span>
-                    <strong id="factor-value">1.0x</strong>
+                    <strong id="factor-value"></strong>
                 </div>
                 <div class="total-box">
                     <span>Sueldo Bruto Sugerido:</span>
-                    <strong id="final-salary">$9,451.20</strong>
+                    <strong id="final-salary"></strong>
                 </div>
             </div>
 
             <div class="mrif-notes">
-                <p id="nivel-desc">Funciones de apoyo con baja especialización técnica.</p>
-                <p class="disclaimer">* Basado en Tablas de Salarios Mínimos 2026 de CONASAMI[cite: 1, 2].</p>
+                <p id="nivel-desc"></p>
+                <p class="disclaimer">* Basado en Tablas de Salarios Mínimos 2026 de CONASAMI.</p>
             </div>
         </div>
     </div>
 </div>
 
 <style>
-/* Se mantienen los estilos anteriores por consistencia */
 .mrif-tool-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; max-width: 1200px; margin-left: auto; margin-right: auto; }
 .mrif-form { background: #fff; padding: 30px; border-top: 5px solid var(--rt-red); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
 .mrif-variable { margin-bottom: 25px; }
@@ -107,38 +106,85 @@ title: Calculadora Salarial MRIF | Red Humana
 </style>
 
 <script>
-/* CAMBIO: Base de datos de salarios mínimos 2026 extraída del PDF  */
+/* CAMBIO: Base de datos completa - 61 Oficios (CONASAMI 2026) */
 const salarios2026 = {
-    "General": { ZSMG: 315.04, ZLFN: 440.87 },
-    "Albañilería": { ZSMG: 363.44, ZLFN: 440.87 },
-    "Cajero(a)": { ZSMG: 326.84, ZLFN: 440.87 },
-    "Cocinero(a) mayor": { ZSMG: 368.05, ZLFN: 440.87 },
-    "Chofer camión carga": { ZSMG: 370.90, ZLFN: 440.87 },
-    "Electricista": { ZSMG: 356.19, ZLFN: 440.87 },
+    "General (Resto del país)": { ZSMG: 315.04, ZLFN: 440.87 },
+    "Albañilería, oficial de": { ZSMG: 363.44, ZLFN: 440.87 },
+    "Boticas, farmacias y droguería, dependiente(a) en": { ZSMG: 321.26, ZLFN: 440.87 },
+    "Buldozer y/o traxcavo, operador(a) de": { ZSMG: 380.74, ZLFN: 440.87 },
+    "Cajero(a) de máquina registradora": { ZSMG: 326.84, ZLFN: 440.87 },
+    "Cantinero(a) preparador de bebidas": { ZSMG: 333.52, ZLFN: 440.87 },
+    "Carpintero(a) de obra negra": { ZSMG: 363.44, ZLFN: 440.87 },
+    "Carpintero(a) en fabricación de muebles": { ZSMG: 357.45, ZLFN: 440.87 },
+    "Cocinero(a) mayor (Restaurantes/Fondas)": { ZSMG: 368.05, ZLFN: 440.87 },
+    "Colchones, oficial en fabricación": { ZSMG: 336.83, ZLFN: 440.87 },
+    "Colocador(a) de mosaicos y azulejos": { ZSMG: 356.19, ZLFN: 440.87 },
+    "Construcción, yesero(a) en": { ZSMG: 339.20, ZLFN: 440.87 },
+    "Cortador(a) manufactura de calzado": { ZSMG: 330.31, ZLFN: 440.87 },
+    "Costurero(a) en talleres o fábricas": { ZSMG: 326.38, ZLFN: 440.87 },
+    "Costurero(a) trabajo a domicilio": { ZSMG: 334.94, ZLFN: 440.87 },
+    "Chofer acomodador de autos": { ZSMG: 341.42, ZLFN: 440.87 },
+    "Chofer de camión de carga": { ZSMG: 370.90, ZLFN: 440.87 },
+    "Chofer de camioneta de carga": { ZSMG: 360.39, ZLFN: 440.87 },
+    "Chofer operador de grúa": { ZSMG: 346.67, ZLFN: 440.87 },
+    "Draga, operador(a) de": { ZSMG: 384.25, ZLFN: 440.87 },
+    "Ebanista oficial": { ZSMG: 362.61, ZLFN: 440.87 },
+    "Electricista instalador/reparador": { ZSMG: 356.19, ZLFN: 440.87 },
+    "Electricista automotriz": { ZSMG: 359.63, ZLFN: 440.87 },
+    "Electricista de motores/generadores": { ZSMG: 346.67, ZLFN: 440.87 },
+    "Empleado(a) de góndola autoservicio": { ZSMG: 320.32, ZLFN: 440.87 },
+    "Encargado(a) de bodega/almacén": { ZSMG: 331.76, ZLFN: 440.87 },
+    "Ferreterías, dependiente(a) en": { ZSMG: 338.38, ZLFN: 440.87 },
+    "Fogonero(a) de calderas de vapor": { ZSMG: 349.22, ZLFN: 440.87 },
+    "Gasolinero(a) oficial": { ZSMG: 326.38, ZLFN: 440.87 },
+    "Herrería, oficial de": { ZSMG: 351.59, ZLFN: 440.87 },
+    "Hojalatero(a) automotriz": { ZSMG: 357.45, ZLFN: 440.87 },
+    "Jornalero(a) agrícola": { ZSMG: 356.16, ZLFN: 440.87 },
+    "Lubricador(a) automotriz": { ZSMG: 328.83, ZLFN: 440.87 },
+    "Manejador(a) en granja avícola": { ZSMG: 316.85, ZLFN: 440.87 },
+    "Maquinaria agrícola, operador de": { ZSMG: 365.24, ZLFN: 440.87 },
+    "Máquinas para madera, operador de": { ZSMG: 349.22, ZLFN: 440.87 },
     "Mecánico(a) automotriz": { ZSMG: 375.35, ZLFN: 440.87 },
-    "Reportero(a)": { ZSMG: 705.46, ZLFN: 705.46 },
+    "Montador(a) calzado": { ZSMG: 330.31, ZLFN: 440.87 },
+    "Peluquero(a) / Cultor(a) de belleza": { ZSMG: 341.42, ZLFN: 440.87 },
+    "Pintor(a) automotriz": { ZSMG: 351.59, ZLFN: 440.87 },
+    "Pintor(a) de casas/edificios": { ZSMG: 349.22, ZLFN: 440.87 },
+    "Planchador(a) a máquina": { ZSMG: 326.84, ZLFN: 440.87 },
+    "Plomero(a) oficial": { ZSMG: 349.84, ZLFN: 440.87 },
+    "Radiotécnico(a) reparador": { ZSMG: 362.61, ZLFN: 440.87 },
+    "Recamarero(a) en hoteles": { ZSMG: 320.32, ZLFN: 440.87 },
+    "Refaccionaria, dependiente en": { ZSMG: 331.76, ZLFN: 440.87 },
+    "Reparador(a) aparatos domésticos": { ZSMG: 345.36, ZLFN: 440.87 },
+    "Reportero(a) prensa diaria": { ZSMG: 705.46, ZLFN: 705.46 },
+    "Reportero(a) gráfico(a) prensa": { ZSMG: 705.46, ZLFN: 705.46 },
+    "Repostero(a) o pastelero(a)": { ZSMG: 363.44, ZLFN: 440.87 },
+    "Sastrería a domicilio": { ZSMG: 365.24, ZLFN: 440.87 },
     "Secretario(a) auxiliar": { ZSMG: 374.60, ZLFN: 440.87 },
+    "Soldador(a) oficial": { ZSMG: 359.63, ZLFN: 440.87 },
+    "Tablajero(a) / Carnicero(a)": { ZSMG: 341.42, ZLFN: 440.87 },
+    "Tapicero(a) automotriz": { ZSMG: 346.67, ZLFN: 440.87 },
+    "Tapicero(a) muebles": { ZSMG: 346.67, ZLFN: 440.87 },
     "Trabajador(a) del hogar": { ZSMG: 342.47, ZLFN: 440.87 },
-    "Trabajador(a) social": { ZSMG: 405.82, ZLFN: 440.87 },
-    "Velador(a)": { ZSMG: 326.38, ZLFN: 440.87 }
-    /* Nota: Se incluyeron los más representativos para brevedad, expandible a los 61 */
+    "Trabajador(a) social técnico": { ZSMG: 405.82, ZLFN: 440.87 },
+    "Vaquero(a) ordeñador": { ZSMG: 320.32, ZLFN: 440.87 },
+    "Velador(a)": { ZSMG: 326.38, ZLFN: 440.87 },
+    "Vendedor(a) de aparatos domésticos": { ZSMG: 334.94, ZLFN: 440.87 },
+    "Zapatero(a) oficial": { ZSMG: 330.31, ZLFN: 440.87 }
 };
 
 let salarioDiarioActual = 315.04;
 
-function actualizarOficios() {
+function inicializarFormulario() {
     const select = document.getElementById('oficio-select');
-    const zona = document.getElementById('zona-geo').value;
+    // Ordenar alfabéticamente para UX
+    const oficiosOrdenados = Object.keys(salarios2026).sort();
     
-    // Solo regenerar la lista si es la primera vez o cambia zona
-    if (select.options.length === 0) {
-        for (let oficio in salarios2026) {
-            let option = document.createElement('option');
-            option.value = oficio;
-            option.text = oficio;
-            select.add(option);
-        }
-    }
+    oficiosOrdenados.forEach(oficio => {
+        let option = document.createElement('option');
+        option.value = oficio;
+        option.text = oficio;
+        select.add(option);
+    });
     actualizarAncla();
 }
 
@@ -147,10 +193,10 @@ function actualizarAncla() {
     const oficio = document.getElementById('oficio-select').value;
     
     salarioDiarioActual = salarios2026[oficio][zona];
-    const mensual = salarioDiarioActual * 30;
+    const mensual = salarioDiarioActual * 30; // Cálculo mensual según Ley 
     
     document.getElementById('base-salary-display').value = `$${mensual.toLocaleString('es-MX', {minimumFractionDigits: 2})}`;
-    document.getElementById('daily-wage-label').innerText = `($${salarioDiarioActual} diario)`;
+    document.getElementById('daily-wage-label').innerText = `($${salarioDiarioActual.toFixed(2)} diario)`;
 }
 
 function calcularMRIF() {
@@ -163,10 +209,10 @@ function calcularMRIF() {
     let nivel = "";
     let desc = "";
 
-    if (puntos >= 6) { nivel = "NIVEL 4: CRÍTICO"; factor = 3.0; desc = "Funciones vitales cuya ausencia detiene el sistema."; }
-    else if (puntos >= 5) { nivel = "NIVEL 3: ESTRATÉGICO"; factor = 2.2; desc = "Funciones de alta relevancia y difícil sustitución."; }
-    else if (puntos >= 4) { nivel = "NIVEL 2: OPERATIVO"; factor = 1.6; desc = "Funciones necesarias para la fluidez operativa."; }
-    else { nivel = "NIVEL 1: BÁSICO"; factor = 1.0; desc = "Funciones de apoyo con especialización estándar."; }
+    if (puntos >= 6) { nivel = "NIVEL 4: CRÍTICO"; factor = 3.0; desc = "Funciones vitales cuya falla detiene el sistema."; }
+    else if (puntos >= 5) { nivel = "NIVEL 3: ESTRATÉGICO"; factor = 2.2; desc = "Funciones estratégicas de alta relevancia."; }
+    else if (puntos >= 4) { nivel = "NIVEL 2: OPERATIVO"; factor = 1.6; desc = "Funciones clave para la fluidez operativa."; }
+    else { nivel = "NIVEL 1: BÁSICO"; factor = 1.0; desc = "Funciones de soporte general."; }
 
     const total = mensualBase * factor;
 
@@ -180,6 +226,5 @@ function calcularMRIF() {
     window.scrollTo({ top: document.getElementById('mrif-result-panel').offsetTop - 100, behavior: 'smooth' });
 }
 
-// Inicialización
-actualizarOficios();
+inicializarFormulario();
 </script>
