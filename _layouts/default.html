@@ -48,14 +48,15 @@
                     <span class="menu-text">Menú</span>
                 </button>
                 <a href="/" class="logo-link">
-                    <span class="rt-logo">ADESTRAT</span>
+                    <span class="rt-logo">CARLOS</span>
                 </a>
             </div>
             <div class="header-date">
                 <time datetime="{{ 'now' | date: '%Y-%m-%d' }}">
                     {{ "now" | date: "%d %b %Y" }}
                 </time>
-            </div>
+                <span id="live-clock" style="margin-left: 10px; padding-left: 10px; border-left: 1px solid var(--rt-ui-grey);"></span>
+                </div>
         </div>
     </header>
 
@@ -82,7 +83,7 @@
 
     <footer class="fb-footer">
         <div class="footer-content">
-            <p>&copy; {{ 'now' | date: "%Y" }} FINIS ORIGINE PENDENT</p>
+            <p>&copy; {{ 'now' | date: "%Y" }} CARLOS | FINIS ORIGINE PENDENT</p>
         </div>
     </footer>
 
@@ -94,6 +95,27 @@
         const sideNav = document.getElementById('side-menu');
         const overlayBg = document.getElementById('menu-overlay');
         const themeBtn = document.getElementById('theme-toggle');
+
+        /* CAMBIO: Lógica del reloj digital (Horario Centro de México) */
+        function updateClock() {
+            const clockElement = document.getElementById('live-clock');
+            if (!clockElement) return;
+
+            const now = new Date();
+            const options = {
+                timeZone: 'America/Mexico_City',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            
+            const formatter = new Intl.DateTimeFormat('es-MX', options);
+            clockElement.textContent = formatter.format(now);
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+        /* FIN CAMBIO */
 
         const toggleMenu = (isOpen) => {
             sideNav.classList.toggle('is-open', isOpen);
