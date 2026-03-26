@@ -150,21 +150,21 @@ layout: default
     margin: 2rem 0 1rem; 
 }
 
-/* CAMBIO: Unificación de fuentes y alineación de listas con el cuerpo del texto */
+/* Unificación de fuentes y alineación de listas */
 .post-body ul, .post-body ol {
     margin-left: 35px;
     margin-bottom: 1.8rem;
-    font-size: 1.2rem; /* CAMBIO: Asegura que la lista tenga el mismo tamaño que el párrafo */
-    line-height: 1.8;  /* CAMBIO: Asegura que el interlineado sea idéntico al párrafo */
+    font-size: 1.2rem; 
+    line-height: 1.8;  
 }
 
 .post-body li {
     margin-bottom: 0.8rem;
     padding-left: 5px;
-    font-family: inherit; /* CAMBIO: Fuerza la herencia de la fuente principal */
+    font-family: inherit; 
 }
 
-/* CAMBIO: Estilo de viñeta roja alineada con el texto */
+/* Estilo de viñeta roja alineada con el texto */
 .post-body ul {
     list-style-type: none;
 }
@@ -175,10 +175,10 @@ layout: default
     display: inline-block;
     width: 1.5em;
     margin-left: -1.5em;
-    font-size: 0.7rem; /* CAMBIO: Tamaño de viñeta ajustado para no verse más grande que el texto */
+    font-size: 0.7rem; 
     vertical-align: middle;
     position: relative;
-    top: -1px; /* Ajuste fino de alineación vertical */
+    top: -1px; 
 }
 
 .post-body img { 
@@ -197,6 +197,7 @@ layout: default
 .nav-label { font-family: var(--font-heading); color: var(--rt-red); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px; }
 .nav-title { font-family: var(--font-heading); font-size: 1.2rem; line-height: 1.2; font-weight: 700; text-transform: uppercase; }
 
+/* --- RESPONSIVIDAD (MÓVIL) --- */
 @media (max-width: 600px) {
     .nav-wrapper { grid-template-columns: 1fr; gap: 20px; }
     .nav-link.next { text-align: left; }
@@ -204,12 +205,25 @@ layout: default
     #reading-progress-container { top: 60px; }
     .post-featured-image.extended-editorial-bleed { width: 100%; margin-left: 0; height: 300px; }
     
-    /* CAMBIO: Coherencia en móviles */
-    .post-body { font-size: 1.1rem; line-height: 1.6; }
+    /* CAMBIO: Controles específicos y estrictos para tipografía en móvil */
+    .post-body, .post-body p { 
+        font-size: 1.1rem !important; 
+        line-height: 1.6 !important; 
+    }
+    
+    /* CAMBIO: Se aumenta el margen izquierdo de las listas en móvil de 20px a 25px 
+       para dar espacio a que la viñeta negativa no toque el borde de la pantalla */
     .post-body ul, .post-body ol { 
-        margin-left: 20px; 
-        font-size: 1.1rem; 
-        line-height: 1.6; 
+        margin-left: 25px; 
+        font-size: 1.1rem !important; 
+        line-height: 1.6 !important; 
+        margin-bottom: 1.5rem;
+    }
+
+    /* CAMBIO: Se ajusta el tamaño y alineación vertical de la viñeta para la escala móvil */
+    .post-body ul li::before {
+        font-size: 0.65rem; 
+        top: -1px;
     }
 }
 </style>
