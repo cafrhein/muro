@@ -128,7 +128,7 @@ layout: default
 }
 .post-featured-image.extended-editorial-bleed img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
 
-/* --- CUERPO DEL POST --- */
+/* --- CUERPO DEL POST (ESCRITORIO: 1.2rem) --- */
 .post-body { 
     font-family: var(--font-main); 
     font-size: 1.2rem; 
@@ -205,24 +205,24 @@ layout: default
     #reading-progress-container { top: 60px; }
     .post-featured-image.extended-editorial-bleed { width: 100%; margin-left: 0; height: 300px; }
     
-    /* CAMBIO: Controles específicos y estrictos para tipografía en móvil */
+    /* CAMBIO: Reducción estricta de fuente en móvil solicitada por el usuario */
     .post-body, .post-body p { 
-        font-size: 1.1rem !important; 
+        /* CAMBIO: De 1.1rem a 1rem (aprox 16px, estándar de lectura móvil) */
+        font-size: 1rem !important; 
         line-height: 1.6 !important; 
     }
     
-    /* CAMBIO: Se aumenta el margen izquierdo de las listas en móvil de 20px a 25px 
-       para dar espacio a que la viñeta negativa no toque el borde de la pantalla */
     .post-body ul, .post-body ol { 
         margin-left: 25px; 
-        font-size: 1.1rem !important; 
+        /* CAMBIO: Se aplica la misma reducción a las listas para mantener coherencia */
+        font-size: 1rem !important; 
         line-height: 1.6 !important; 
         margin-bottom: 1.5rem;
     }
 
-    /* CAMBIO: Se ajusta el tamaño y alineación vertical de la viñeta para la escala móvil */
     .post-body ul li::before {
-        font-size: 0.65rem; 
+        /* CAMBIO: Reducción proporcional de la viñeta (de 0.65rem a 0.6rem) */
+        font-size: 0.6rem; 
         top: -1px;
     }
 }
