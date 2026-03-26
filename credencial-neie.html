@@ -6,79 +6,139 @@
     <title>Credencial Digital - NEIE-002</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* CAMBIO: Estilos específicos para el contenedor de la credencial */
+        /* Estilos base del contenedor */
         .credential-container {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            background-color: #f4f4f4;
+            background-color: #e9ecef; /* CAMBIO: Fondo ligeramente más oscuro para resaltar la tarjeta */
         }
+
+        /* Estilo Inspiración Ivy League (Harvard/MIT) */
         .credential-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            max-width: 450px;
+            background: #ffffff;
+            max-width: 550px; /* CAMBIO: Un poco más ancha para estilo diploma */
             width: 100%;
-            overflow: hidden;
-            border-top: 5px solid var(--accent-color, #007bff); /* CAMBIO: Uso de variable del sistema */
+            padding: 60px; /* CAMBIO: Espaciado interno amplio (Luxury padding) */
+            border: 1px solid #d1d1d1;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            text-align: center; /* Centrado institucional */
         }
+
+        /* CAMBIO: Marco decorativo interno sutil */
+        .credential-card::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 1px solid #f0f0f0;
+            pointer-events: none;
+        }
+
         .credential-header {
-            padding: 25px;
-            text-align: center;
-            background: #f8f9fa;
+            margin-bottom: 40px;
         }
-        .credential-body {
-            padding: 30px;
-        }
-        .credential-title {
-            font-size: 1.2rem;
-            font-weight: bold;
+
+        .credential-issuer-logo {
+            font-family: "Georgia", serif;
+            font-size: 1.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #1a1a1a;
             margin-bottom: 10px;
+            display: block;
+        }
+
+        .credential-divider {
+            width: 50px;
+            height: 2px;
+            background: var(--accent-color, #8a1538); /* CAMBIO: Color institucional */
+            margin: 20px auto;
+        }
+
+        .credential-title {
+            font-family: "Georgia", serif;
+            font-size: 1.5rem;
+            font-style: italic;
             color: #333;
+            margin-bottom: 5px;
         }
-        .credential-issuer {
-            color: #666;
-            font-size: 1rem;
-            margin-bottom: 20px;
-        }
-        .credential-meta {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+
+        .credential-subtitle {
+            font-family: "Helvetica", sans-serif;
             font-size: 0.9rem;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
+            letter-spacing: 1px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 30px;
         }
+
+        .credential-body {
+            margin-bottom: 40px;
+        }
+
+        .holder-name {
+            font-family: "Helvetica", sans-serif;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #1a1a1a;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .credential-meta-grid {
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
         .meta-label {
             display: block;
-            color: #888;
+            font-size: 0.7rem;
+            color: #999;
             text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
         }
+
         .meta-value {
-            display: block;
-            font-weight: 600;
-            color: #333;
-        }
-        .credential-footer {
-            padding: 20px;
-            background: #333;
-            color: white;
-            text-align: center;
-            font-family: monospace;
+            font-family: "Helvetica", sans-serif;
             font-size: 0.85rem;
+            font-weight: 600;
+            color: #444;
         }
-        .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            background: #e8f5e9;
-            color: #2e7d32;
-            margin-bottom: 15px;
+
+        .credential-footer {
+            margin-top: 30px;
+            font-family: "Courier New", monospace;
+            font-size: 0.75rem;
+            color: #aaa;
+        }
+
+        /* Badge de estado minimalista */
+        .status-pill {
+            position: absolute;
+            top: 40px;
+            right: -10px;
+            background: #1a1a1a;
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: rotate(0deg);
         }
     </style>
 </head>
@@ -86,33 +146,33 @@
 
     <div class="credential-container">
         <article class="credential-card">
-            <div class="credential-header">
-                <div class="status-badge">Credencial Verificada</div>
-                <h1 class="credential-title">NE-INVESTRAT-003-SIF-2021</h1>
-                <p>Directrices para los Sistemas de Información Financiera</p>
-            </div>
+            <div class="status-pill">Oficial</div>
             
-            <div class="credential-body">
-                <div class="credential-issuer">
-                    <span class="meta-label">Organismo Emisor</span>
-                    <span class="meta-value" style="font-size: 1.2rem;">Adestrat</span>
-                </div>
+            <header class="credential-header">
+                <span class="credential-issuer-logo">Adestrat</span>
+                <div class="credential-divider"></div>
+                <p class="credential-subtitle">Certificación Profesional</p>
+            </header>
+            
+            <main class="credential-body">
+                <h1 class="credential-title">NE-INVESTRAT-003-SIF-2021</h1>
+                <p style="font-size: 0.95rem; color: #555;">Directrices para los Sistemas de Información Financiera</p>
+            </main>
 
-                <div class="credential-meta">
-                    <div>
-                        <span class="meta-label">Expedición</span>
-                        <span class="meta-value">jul. 2019</span>
-                    </div>
-                    <div>
-                        <span class="meta-label">Vencimiento</span>
-                        <span class="meta-value">jul. 2025</span>
-                    </div>
+            <section class="credential-meta-grid">
+                <div class="meta-item">
+                    <span class="meta-label">Expedición</span>
+                    <span class="meta-value">JULIO 2019</span>
                 </div>
-            </div>
+                <div class="meta-item">
+                    <span class="meta-label">Vencimiento</span>
+                    <span class="meta-value">JULIO 2025</span>
+                </div>
+            </section>
 
-            <div class="credential-footer">
-                ID: 2307219/NEIE-002
-            </div>
+            <footer class="credential-footer">
+                VERIFICACIÓN ID: 2307219/NEIE-002
+            </footer>
         </article>
     </div>
 
