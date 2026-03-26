@@ -99,7 +99,6 @@ layout: default
 
 /* --- ESTILOS DE POST (ESTRUCTURA NEUTRALIZADA) --- */
 .post-content { 
-    /* CAMBIO: Ancho máximo reducido para optimizar la longitud de línea (legibilidad) */
     max-width: 800px; 
     margin: 40px auto; 
     padding: 0 20px; 
@@ -120,7 +119,6 @@ layout: default
 /* --- UI DE PORTADA --- */
 .post-featured-image.extended-editorial-bleed { 
     width: 100%; 
-    /* CAMBIO: Eliminado el límite de ancho para que ocupe el 100% de la nueva columna */
     margin: 40px 0 0 0; 
     height: 400px; 
     overflow: hidden; 
@@ -132,7 +130,6 @@ layout: default
 .post-featured-image.extended-editorial-bleed img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
 
 /* --- CUERPO DEL POST --- */
-/* CAMBIO: Ajustes de formato de texto y jerarquía visual dentro del contenido */
 .post-body { 
     font-family: var(--font-main); 
     font-size: 1.2rem; 
@@ -152,6 +149,32 @@ layout: default
 .post-body h3 { 
     font-size: 1.4rem; 
     margin: 2rem 0 1rem; 
+}
+
+/* CAMBIO: Formato de listas y viñetas con sangría justificada */
+.post-body ul, .post-body ol {
+    margin-left: 35px; /* Crea el desplazamiento hacia adelante */
+    margin-bottom: 1.8rem;
+}
+
+.post-body li {
+    margin-bottom: 0.8rem; /* Espacio entre cada punto de la lista */
+    padding-left: 5px;
+}
+
+/* CAMBIO: Estilo específico para viñetas para que coincidan con el sistema visual */
+.post-body ul {
+    list-style-type: none;
+}
+
+.post-body ul li::before {
+    content: "■"; /* Uso de cuadrado pequeño coherente con el estilo RT */
+    color: var(--rt-red);
+    display: inline-block;
+    width: 1.5em;
+    margin-left: -1.5em;
+    font-size: 0.8rem;
+    vertical-align: middle;
 }
 
 .post-body img { 
@@ -176,8 +199,10 @@ layout: default
     .nav-spacer { display: none; }
     #reading-progress-container { top: 60px; }
     .post-featured-image.extended-editorial-bleed { width: 100%; margin-left: 0; height: 300px; }
-    /* CAMBIO: Reducción de tamaño de fuente para dispositivos pequeños */
     .post-body { font-size: 1.1rem; line-height: 1.6; }
+    
+    /* CAMBIO: Ajuste de sangría en móviles para no perder espacio horizontal */
+    .post-body ul, .post-body ol { margin-left: 20px; }
 }
 </style>
 
