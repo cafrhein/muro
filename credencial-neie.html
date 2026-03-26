@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Credencial Digital - NEIE-002</title>
+    <title>Credencial Digital - Carlos Francisco Hernández Inurreta</title>
     <link rel="stylesheet" href="style.css">
     <style>
         html, body {
@@ -19,16 +19,27 @@
             padding: 20px;
             background-color: #f4f4f4;
         }
+
         .credential-card {
             background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             max-width: 450px;
             width: 100%;
             overflow: hidden;
             border-top: 5px solid var(--accent-color, #007bff);
             position: relative;
+            /* CAMBIO: Transición para suavizar el efecto hover */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: default;
         }
+
+        /* CAMBIO: Efecto de interactividad (Hover) */
+        .credential-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
         .credential-header {
             padding: 20px;
             padding-bottom: 60px;
@@ -59,7 +70,7 @@
         }
         
         .credential-holder-name {
-            font-size: 1.2rem; /* Ajustado para nombre largo */
+            font-size: 1.2rem;
             font-weight: 800;
             color: #1a1a1a;
             margin-bottom: 5px;
@@ -71,7 +82,6 @@
             gap: 8px;
         }
 
-        /* */
         .verification-badge {
             display: inline-flex;
             width: 18px;
@@ -105,6 +115,8 @@
             font-size: 0.9rem;
             margin-bottom: 25px;
         }
+
+        /* CAMBIO: Estilos para iconos de meta-datos */
         .credential-meta {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -115,19 +127,27 @@
             text-align: left;
         }
         .meta-label {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 5px;
             color: #888;
             text-transform: uppercase;
             font-size: 0.65rem;
             letter-spacing: 0.8px;
             font-weight: 500;
+            margin-bottom: 4px;
+        }
+        .meta-icon {
+            width: 12px;
+            height: 12px;
+            opacity: 0.6;
         }
         .meta-value {
             display: block;
             font-weight: 600;
             color: #333;
-            margin-top: 2px;
         }
+
         .credential-footer {
             padding: 18px;
             background: #333;
@@ -161,13 +181,11 @@
             </div>
 
             <div class="credential-body">
-                -->
+                ' y se ajustó el contenedor -->
                 <div class="credential-holder-name">
                     Carlos Francisco Hernández Inurreta
-                    <span class="verification-badge" title="Identidad Verificada">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <g><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2l-3.53-3.55 1.35-1.37 2.18 2.18 6.03-6.05 1.35 1.37-7.38 7.42z"></path></g>
-                        </svg>
+                    <span class="verification-badge">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2l-3.53-3.55 1.35-1.37 2.18 2.18 6.03-6.05 1.35 1.37-7.38 7.42z"/></svg>
                     </span>
                 </div>
                 
@@ -177,17 +195,23 @@
                 </div>
 
                 <div class="credential-issuer">
-                    <span class="meta-label">Organismo Emisor</span>
+                    <span class="meta-label" style="justify-content: center;">Organismo Emisor</span>
                     <span class="meta-value">Adestrat</span>
                 </div>
 
                 <div class="credential-meta">
                     <div>
-                        <span class="meta-label">Expedición</span>
+                        <span class="meta-label">
+                            <svg class="meta-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg>
+                            Expedición
+                        </span>
                         <span class="meta-value">JUL. 2019</span>
                     </div>
                     <div>
-                        <span class="meta-label">Vencimiento</span>
+                        <span class="meta-label">
+                            <svg class="meta-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm0 18c-3.41-.93-6-4.79-6-8.91V6.3l6-2.25 6 2.25v2.84c0 4.12-2.59 7.98-6 8.91z"/></svg>
+                            Vencimiento
+                        </span>
                         <span class="meta-value">JUL. 2025</span>
                     </div>
                 </div>
