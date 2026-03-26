@@ -6,7 +6,7 @@
     <title>Credencial Digital - NEIE-002</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* */
+        /* Estilos base (Preservados) */
         .credential-container {
             display: flex;
             justify-content: center;
@@ -23,14 +23,35 @@
             width: 100%;
             overflow: hidden;
             border-top: 5px solid var(--accent-color, #007bff);
+            position: relative; /* CAMBIO: Necesario para el posicionamiento de la foto si se requiere, aunque aquí se usa flujo normal */
         }
         .credential-header {
             padding: 25px;
+            padding-bottom: 10px; /* CAMBIO: Reducido para acercar la foto */
             text-align: center;
             background: #f8f9fa;
         }
+
+        /* CAMBIO: Estilos específicos para la foto de perfil */
+        .credential-profile-img-container {
+            text-align: center;
+            margin-top: -50px; /* CAMBIO: Superpone la foto ligeramente sobre el header */
+            position: relative;
+            z-index: 10;
+        }
+        .credential-profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%; /* Foto circular */
+            border: 5px solid white; /* Borde grueso blanco para resaltar */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); /* Sombra suave */
+            object-fit: cover; /* Asegura que la foto se corte correctamente sin deformarse */
+            background-color: #eee; /* Fondo gris si la imagen tarda en cargar */
+        }
+
         .credential-body {
             padding: 30px;
+            padding-top: 60px; /* CAMBIO: Aumentado para dar espacio a la foto superpuesta */
         }
         .credential-title {
             font-size: 1.2rem;
@@ -85,7 +106,6 @@
 <body>
 
     <div class="credential-container">
-        -->
         <article class="credential-card">
             <div class="credential-header">
                 <div class="status-badge">Credencial Verificada</div>
@@ -93,6 +113,10 @@
                 <p>Directrices para los Sistemas de Información Financiera</p>
             </div>
             
+            <div class="credential-profile-img-container">
+                <img src="assets/img/mi-foto-perfil.png" alt="Foto de Perfil del Titular" class="credential-profile-img">
+            </div>
+
             <div class="credential-body">
                 <div class="credential-issuer">
                     <span class="meta-label">Organismo Emisor</span>
