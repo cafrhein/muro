@@ -120,22 +120,41 @@ function generateRadar() {
 </script>
 
 <style>
+/* CAMBIO: Estilización fina de carril y controlador */
 .radar-slider {
     -webkit-appearance: none;
-    height: 6px;
-    border-radius: 3px;
-    background: #eee;
+    height: 3px; /* Reducción de 6px a 3px para mayor finura */
+    border-radius: 2px;
+    background: #e0e0e0;
     outline: none;
-    margin: 15px 0;
+    margin: 20px 0;
+    transition: background 0.3s;
 }
+
 .radar-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 14px; /* Reducción de 20px a 14px */
+    height: 14px; /* Reducción de 20px a 14px */
     border-radius: 50%;
-    background: var(--rt-red);
+    background: var(--rt-black); /* Cambio a negro para jerarquía visual */
     cursor: pointer;
-    border: 2px solid #fff;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    border: 2px solid var(--rt-red); /* Borde rojo para vínculo de marca */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease-in-out, background 0.2s;
+}
+
+.radar-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.3); /* Feedback visual al pasar el cursor */
+    background: var(--rt-red);
+}
+
+.radar-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--rt-black);
+    cursor: pointer;
+    border: 2px solid var(--rt-red);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 </style>
