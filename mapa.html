@@ -90,6 +90,17 @@ title: Mapa de Red MBTI | Protocolos de Auxilio
             <div id="nodes-layer" style="position: absolute; width: 100%; height: 100%;"></div>
         </div>
 
+        <section id="dictamen-idoneidad" style="margin-bottom: 50px;">
+            <h3 style="font-family: var(--font-heading); text-transform: uppercase; font-size: 1rem; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px;">
+                Dictamen de Integridad del Sistema
+            </h3>
+            <div id="alerta-sistema" style="display: flex; flex-direction: column; gap: 10px;">
+                <p id="placeholder-dictamen" style="font-family: var(--font-main); color: #999; font-style: italic; font-size: 0.9rem;">
+                    Inicie el diagnóstico para evaluar la estabilidad de la red...
+                </p>
+            </div>
+        </section>
+
         <section class="protocol-guide">
             <h2 style="font-family: var(--font-heading); text-transform: uppercase; text-align: center; margin-bottom: 35px; color: #000;">
                 Guía de Protocolos de Interdependencia
@@ -131,11 +142,27 @@ title: Mapa de Red MBTI | Protocolos de Auxilio
 #canvas-wrapper { box-shadow: inset 0 0 50px rgba(0,0,0,0.02); }
 .ring-label { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #fff; padding: 0 10px; font-size: 0.65rem; color: #999; font-family: var(--font-heading); font-weight: 700; letter-spacing: 1px; }
 .v-node { animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: help; }
+/* CAMBIO: Estilo para las alertas del dictamen */
+.alerta-item {
+    padding: 12px 15px;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-left: 4px solid var(--rt-red);
+    background: #fff1f1;
+    color: #000;
+    text-transform: uppercase;
+}
 @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
 @keyframes slideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 
 <script>
+/* CAMBIO: Contadores Globales de Auditoría */
+let countNucleo = 0;
+let countColab = 0;
+let countPeriferia = 0;
+
 function calculateMBTI() {
     const nameInput = document.getElementById('v-name');
     const btn = document.getElementById('btn-diag');
@@ -162,14 +189,20 @@ function calculateMBTI() {
 
     if(coreTypes.includes(type)) {
         distance = 100;
+        countNucleo++; /* CAMBIO */
         recMessage = `Este perfil posee alta idoneidad para el **Protocolo A (Carga Vital)**. Acude a este vínculo ante crisis existenciales o de salud; su estructura mental le permite sostener tu vulnerabilidad sin fragmentarse.`;
     } else if(collabTypes.includes(type)) {
         distance = 195;
+        countColab++; /* CAMBIO */
         recMessage = `Perfil optimizado para el **Protocolo B (Carga Operativa)**. No busques consuelo emocional aquí; utiliza este vínculo para resolución de problemas técnicos, estratégicos o logísticos.`;
     } else {
         distance = 270;
+        countPeriferia++; /* CAMBIO */
         recMessage = `Vínculo ideal para el **Protocolo C (Saturación)**. Recurre a esta persona para "bajar el volumen" de la crisis, buscar distracción y recargar energía sin la presión de resolver el conflicto de fondo.`;
     }
+
+    // Ejecutar auditoría de integridad
+    checkNetworkIntegrity(); /* CAMBIO */
 
     const layer = document.getElementById('nodes-layer');
     const angle = Math.random() * Math.PI * 2;
@@ -213,6 +246,44 @@ function calculateMBTI() {
     }, 2000);
 }
 
+/* CAMBIO: Función de Auditoría de Red */
+function checkNetworkIntegrity() {
+    const alertaContainer = document.getElementById('alerta-sistema');
+    const placeholder = document.getElementById('placeholder-dictamen');
+    if(placeholder) placeholder.remove();
+    
+    alertaContainer.innerHTML = ""; // Limpiar alertas previas para actualizar
+
+    // Regla 1: Vulnerabilidad Crítica
+    if (countNucleo === 0) {
+        addAlert("SISTEMA FRÁGIL: No se detectan perfiles de Sostén (J/F). Riesgo alto de autosuficiencia forzada.");
+    }
+    // Regla 2: Riesgo de Burnout
+    if (countNucleo === 1) {
+        addAlert("SOBRECARGA DETECTADA: Tu apoyo depende de un solo vínculo. Se recomienda diversificar el Núcleo.");
+    }
+    // Regla 3: Inoperatividad Técnica
+    if (countColab === 0) {
+        addAlert("DÉFICIT OPERATIVO: Careces de perfiles T/N para resolución objetiva. Riesgo de desgaste emocional en tareas técnicas.");
+    }
+    // Regla 4: Rigidez Sistémica
+    if (countPeriferia === 0) {
+        addAlert("FALTA DE SATURACIÓN: No hay válvulas de escape. El sistema colapsará por exceso de seriedad sin perfiles de desconexión.");
+    }
+
+    // Si no hay alertas tras el primer nodo, mostrar sistema estable
+    if (alertaContainer.innerHTML === "") {
+        alertaContainer.innerHTML = '<div class="alerta-item" style="border-left-color: #28a745; background: #f4fff4;">SISTEMA EN EQUILIBRIO PROGRESIVO</div>';
+    }
+}
+
+function addAlert(message) {
+    const div = document.createElement('div');
+    div.className = 'alerta-item';
+    div.innerText = message;
+    document.getElementById('alerta-sistema').appendChild(div);
+}
+
 document.getElementById('btn-pdf-export').addEventListener('click', async function() {
     const { jsPDF } = window.jspdf;
     const area = document.getElementById('capture-pdf-area');
@@ -241,7 +312,7 @@ document.getElementById('btn-pdf-export').addEventListener('click', async functi
         const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
         pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-        pdf.save('diagnostico-red-mbti.pdf');
+        pdf.save('reporte-auditoria-red.pdf');
     } catch (e) {
         console.error("Error en exportación:", e);
     } finally {
