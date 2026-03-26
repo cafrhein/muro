@@ -79,7 +79,7 @@ layout: default
 </article>
 
 <style>
-/* --- BARRA DE PROGRESO (INGENIERÍA VISUAL) --- */
+/* --- BARRA DE PROGRESO --- */
 #reading-progress-container {
     position: fixed;
     top: 64px; 
@@ -97,7 +97,7 @@ layout: default
     transition: width 0.1s ease-out;
 }
 
-/* --- ESTILOS DE POST (ESTRUCTURA NEUTRALIZADA) --- */
+/* --- ESTILOS DE POST --- */
 .post-content { 
     max-width: 800px; 
     margin: 40px auto; 
@@ -113,7 +113,6 @@ layout: default
 .author-name { font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; color: var(--rt-black); font-size: 1.1rem; }
 .post-date { font-family: var(--font-heading); color: #888; font-size: 0.9rem; text-transform: uppercase; }
 
-/* --- BLOQUE RRSS (CONTROL CEDIDO A CSS GLOBAL) --- */
 .author-social { display: flex; gap: 15px; margin-top: 8px; }
 
 /* --- UI DE PORTADA --- */
@@ -151,30 +150,35 @@ layout: default
     margin: 2rem 0 1rem; 
 }
 
-/* CAMBIO: Formato de listas y viñetas con sangría justificada */
+/* CAMBIO: Unificación de fuentes y alineación de listas con el cuerpo del texto */
 .post-body ul, .post-body ol {
-    margin-left: 35px; /* Crea el desplazamiento hacia adelante */
+    margin-left: 35px;
     margin-bottom: 1.8rem;
+    font-size: 1.2rem; /* CAMBIO: Asegura que la lista tenga el mismo tamaño que el párrafo */
+    line-height: 1.8;  /* CAMBIO: Asegura que el interlineado sea idéntico al párrafo */
 }
 
 .post-body li {
-    margin-bottom: 0.8rem; /* Espacio entre cada punto de la lista */
+    margin-bottom: 0.8rem;
     padding-left: 5px;
+    font-family: inherit; /* CAMBIO: Fuerza la herencia de la fuente principal */
 }
 
-/* CAMBIO: Estilo específico para viñetas para que coincidan con el sistema visual */
+/* CAMBIO: Estilo de viñeta roja alineada con el texto */
 .post-body ul {
     list-style-type: none;
 }
 
 .post-body ul li::before {
-    content: "■"; /* Uso de cuadrado pequeño coherente con el estilo RT */
+    content: "■";
     color: var(--rt-red);
     display: inline-block;
     width: 1.5em;
     margin-left: -1.5em;
-    font-size: 0.8rem;
+    font-size: 0.7rem; /* CAMBIO: Tamaño de viñeta ajustado para no verse más grande que el texto */
     vertical-align: middle;
+    position: relative;
+    top: -1px; /* Ajuste fino de alineación vertical */
 }
 
 .post-body img { 
@@ -199,10 +203,14 @@ layout: default
     .nav-spacer { display: none; }
     #reading-progress-container { top: 60px; }
     .post-featured-image.extended-editorial-bleed { width: 100%; margin-left: 0; height: 300px; }
-    .post-body { font-size: 1.1rem; line-height: 1.6; }
     
-    /* CAMBIO: Ajuste de sangría en móviles para no perder espacio horizontal */
-    .post-body ul, .post-body ol { margin-left: 20px; }
+    /* CAMBIO: Coherencia en móviles */
+    .post-body { font-size: 1.1rem; line-height: 1.6; }
+    .post-body ul, .post-body ol { 
+        margin-left: 20px; 
+        font-size: 1.1rem; 
+        line-height: 1.6; 
+    }
 }
 </style>
 
