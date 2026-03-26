@@ -196,7 +196,6 @@ blockquote p {
     align-items: center;
 }
 
-/* Estilo base para todos los iconos */
 .about-social a, .author-social a,
 .about-social span, .author-social span {
     font-size: 1.5rem; 
@@ -205,23 +204,97 @@ blockquote p {
     transition: color 0.3s, transform 0.2s;
 }
 
-/* Iconos ACTIVOS (con href) */
 .about-social a, .author-social a {
     color: var(--rt-black);
 }
 
 .about-social a:hover, .author-social a:hover {
     color: var(--rt-red);
-    transform: scale(1.1);
+    transform: scale(1.1); 
 }
 
-/* Estilo para iconos placeholder (SIN href) */
 .about-social span.social-placeholder, 
 .author-social span.social-placeholder {
     color: var(--rt-ui-grey);
     cursor: default;
     opacity: 0.5;
 }
+
+/* =========================================
+   CAMBIO: SECCIÓN DE BLOQUES RESTAURADOS
+   ========================================= */
+
+/* FOOTER */
+.fb-footer {
+    border-top: 1px solid var(--rt-ui-grey);
+    padding: 40px 20px;
+    margin-top: 60px;
+    /* CAMBIO: Se fuerza el centrado absoluto del contenedor */
+    text-align: center;
+    width: 100%;
+}
+
+.footer-content p {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: var(--rt-ui-grey);
+    /* CAMBIO: Se centra el texto interno */
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* POST CONTENT */
+.post-header {
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.post-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.1;
+    color: var(--rt-black);
+}
+
+.post-meta {
+    color: var(--rt-ui-grey);
+    font-size: 0.9rem;
+    font-family: var(--font-heading);
+}
+
+.post-body {
+    max-width: 800px;
+}
+
+/* HERRAMIENTAS */
+.tool-container {
+    background: var(--rt-white);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--rt-ui-grey);
+    margin-bottom: 30px;
+}
+
+input, select, button.action-btn {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid var(--rt-ui-grey);
+    border-radius: 4px;
+    background: var(--rt-white);
+    color: var(--rt-text);
+}
+
+button.action-btn {
+    background: var(--rt-red);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+}
+/* FIN DE BLOQUES RESTAURADOS */
 
 /* 6. UI: BOTÓN TEMA */
 #theme-toggle {
