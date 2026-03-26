@@ -6,7 +6,13 @@
     <title>Credencial Digital - NEIE-002</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Estilos base (Preservados) */
+        /* CAMBIO: Aplicar la fuente Montserrat para coherencia con el sitio web */
+        html, body {
+            font-family: 'Montserrat', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Estilos del contenedor */
         .credential-container {
             display: flex;
             justify-content: center;
@@ -22,53 +28,57 @@
             max-width: 450px;
             width: 100%;
             overflow: hidden;
+            /* CAMBIO: Uso explícito de la variable de acento si existe en style.css */
             border-top: 5px solid var(--accent-color, #007bff);
-            position: relative; /* CAMBIO: Necesario para el posicionamiento de la foto si se requiere, aunque aquí se usa flujo normal */
+            position: relative;
         }
         .credential-header {
             padding: 25px;
-            padding-bottom: 10px; /* CAMBIO: Reducido para acercar la foto */
+            /* CAMBIO: Restaurado padding inferior para dar espacio a la foto sin superposición */
+            padding-bottom: 30px; 
             text-align: center;
             background: #f8f9fa;
         }
 
-        /* CAMBIO: Estilos específicos para la foto de perfil */
+        /* Estilos para la foto de perfil */
         .credential-profile-img-container {
             text-align: center;
-            margin-top: -50px; /* CAMBIO: Superpone la foto ligeramente sobre el header */
+            /* CAMBIO: Reducido el margen negativo para evitar superposición con el texto superior */
+            margin-top: -45px; 
             position: relative;
             z-index: 10;
         }
         .credential-profile-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%; /* Foto circular */
-            border: 5px solid white; /* Borde grueso blanco para resaltar */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15); /* Sombra suave */
-            object-fit: cover; /* Asegura que la foto se corte correctamente sin deformarse */
-            background-color: #eee; /* Fondo gris si la imagen tarda en cargar */
+            width: 90px; /* CAMBIO: Ligeramente más pequeña para mejor equilibrio visual */
+            height: 90px;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            object-fit: cover;
+            background-color: #eee;
         }
 
         .credential-body {
             padding: 30px;
-            padding-top: 60px; /* CAMBIO: Aumentado para dar espacio a la foto superpuesta */
+            /* CAMBIO: Ajustado padding superior para dar aire después de la foto */
+            padding-top: 50px; 
         }
         .credential-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #333;
+            font-size: 1.15rem; /* CAMBIO: Ligeramente reducido para mejor jerarquía con Montserrat */
+            font-weight: 700; /* Coherente con Montserrat Bold */
+            margin-bottom: 8px;
+            color: #222;
         }
         .credential-issuer {
-            color: #666;
-            font-size: 1rem;
-            margin-bottom: 20px;
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
         }
         .credential-meta {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             border-top: 1px solid #eee;
             padding-top: 20px;
         }
@@ -76,30 +86,37 @@
             display: block;
             color: #888;
             text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.5px;
+            font-size: 0.7rem;
+            letter-spacing: 0.8px;
+            font-weight: 500;
         }
         .meta-value {
             display: block;
             font-weight: 600;
             color: #333;
+            margin-top: 2px;
         }
         .credential-footer {
-            padding: 20px;
+            padding: 18px;
             background: #333;
-            color: white;
+            color: #eee;
             text-align: center;
-            font-family: monospace;
-            font-size: 0.85rem;
+            /* CAMBIO: Coherente con el estilo de código/ID en el sitio */
+            font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
         }
         .status-badge {
             display: inline-block;
-            padding: 4px 12px;
+            padding: 5px 14px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 600;
             background: #e8f5e9;
             color: #2e7d32;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -110,7 +127,7 @@
             <div class="credential-header">
                 <div class="status-badge">Credencial Verificada</div>
                 <h1 class="credential-title">NE-INVESTRAT-003-SIF-2021</h1>
-                <p>Directrices para los Sistemas de Información Financiera</p>
+                <p style="font-size: 0.9rem; color: #666; margin: 0;">Directrices para los Sistemas de Información Financiera</p>
             </div>
             
             <div class="credential-profile-img-container">
@@ -120,17 +137,17 @@
             <div class="credential-body">
                 <div class="credential-issuer">
                     <span class="meta-label">Organismo Emisor</span>
-                    <span class="meta-value" style="font-size: 1.2rem;">Adestrat</span>
+                    <span class="meta-value" style="font-size: 1.1rem;">Adestrat</span>
                 </div>
 
                 <div class="credential-meta">
                     <div>
                         <span class="meta-label">Expedición</span>
-                        <span class="meta-value">jul. 2019</span>
+                        <span class="meta-value">JUL. 2019</span>
                     </div>
                     <div>
                         <span class="meta-label">Vencimiento</span>
-                        <span class="meta-value">jul. 2025</span>
+                        <span class="meta-value">JUL. 2025</span>
                     </div>
                 </div>
             </div>
