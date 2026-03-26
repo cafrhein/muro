@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credencial Digital - NEIE-002</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CAMBIO: Estilos específicos para el contenedor de la credencial */
+        .credential-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .credential-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 100%;
+            overflow: hidden;
+            border-top: 5px solid var(--accent-color, #007bff); /* CAMBIO: Uso de variable del sistema */
+        }
+        .credential-header {
+            padding: 25px;
+            text-align: center;
+            background: #f8f9fa;
+        }
+        .credential-body {
+            padding: 30px;
+        }
+        .credential-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .credential-issuer {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        .credential-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .meta-label {
+            display: block;
+            color: #888;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+        .meta-value {
+            display: block;
+            font-weight: 600;
+            color: #333;
+        }
+        .credential-footer {
+            padding: 20px;
+            background: #333;
+            color: white;
+            text-align: center;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            background: #e8f5e9;
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="credential-container">
+        <article class="credential-card">
+            <div class="credential-header">
+                <div class="status-badge">Credencial Verificada</div>
+                <h1 class="credential-title">NE-INVESTRAT-003-SIF-2021</h1>
+                <p>Directrices para los Sistemas de Información Financiera</p>
+            </div>
+            
+            <div class="credential-body">
+                <div class="credential-issuer">
+                    <span class="meta-label">Organismo Emisor</span>
+                    <span class="meta-value" style="font-size: 1.2rem;">Adestrat</span>
+                </div>
+
+                <div class="credential-meta">
+                    <div>
+                        <span class="meta-label">Expedición</span>
+                        <span class="meta-value">jul. 2019</span>
+                    </div>
+                    <div>
+                        <span class="meta-label">Vencimiento</span>
+                        <span class="meta-value">jul. 2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="credential-footer">
+                ID: 2307219/NEIE-002
+            </div>
+        </article>
+    </div>
+
+</body>
+</html>
