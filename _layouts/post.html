@@ -99,9 +99,10 @@ layout: default
 
 /* --- ESTILOS DE POST (ESTRUCTURA NEUTRALIZADA) --- */
 .post-content { 
-    max-width: var(--content-width);
+    /* CAMBIO: Ancho máximo reducido para optimizar la longitud de línea (legibilidad) */
+    max-width: 800px; 
     margin: 40px auto; 
-    padding: 0; 
+    padding: 0 20px; 
 }
 .post-header { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 30px; }
 
@@ -114,13 +115,12 @@ layout: default
 .post-date { font-family: var(--font-heading); color: #888; font-size: 0.9rem; text-transform: uppercase; }
 
 /* --- BLOQUE RRSS (CONTROL CEDIDO A CSS GLOBAL) --- */
-/* CAMBIO: Se eliminan estilos locales para que rijan las variables de style.css */
 .author-social { display: flex; gap: 15px; margin-top: 8px; }
 
 /* --- UI DE PORTADA --- */
 .post-featured-image.extended-editorial-bleed { 
     width: 100%; 
-    max-width: var(--content-width);
+    /* CAMBIO: Eliminado el límite de ancho para que ocupe el 100% de la nueva columna */
     margin: 40px 0 0 0; 
     height: 400px; 
     overflow: hidden; 
@@ -132,12 +132,33 @@ layout: default
 .post-featured-image.extended-editorial-bleed img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
 
 /* --- CUERPO DEL POST --- */
+/* CAMBIO: Ajustes de formato de texto y jerarquía visual dentro del contenido */
 .post-body { 
     font-family: var(--font-main); 
-    font-size: inherit; 
-    line-height: inherit; 
+    font-size: 1.2rem; 
+    line-height: 1.8; 
     color: var(--rt-text); 
     margin-bottom: 60px; 
+}
+
+.post-body p { margin-bottom: 1.8rem; }
+
+.post-body h2 { 
+    font-size: 1.8rem; 
+    margin: 2.5rem 0 1.2rem; 
+    line-height: 1.3;
+}
+
+.post-body h3 { 
+    font-size: 1.4rem; 
+    margin: 2rem 0 1rem; 
+}
+
+.post-body img { 
+    max-width: 100%; 
+    height: auto; 
+    margin: 2rem 0; 
+    border-radius: 4px; 
 }
 
 /* --- NAVEGACIÓN --- */
@@ -155,6 +176,8 @@ layout: default
     .nav-spacer { display: none; }
     #reading-progress-container { top: 60px; }
     .post-featured-image.extended-editorial-bleed { width: 100%; margin-left: 0; height: 300px; }
+    /* CAMBIO: Reducción de tamaño de fuente para dispositivos pequeños */
+    .post-body { font-size: 1.1rem; line-height: 1.6; }
 }
 </style>
 
