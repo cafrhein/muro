@@ -67,7 +67,7 @@ title: Mapa de Red MBTI | Protocolos de Auxilio
             </button>
         </div>
 
-        <div id="recommendation-container" style="margin-bottom: 40px; display: none;">
+        <div id="recommendation-container" data-html2canvas-ignore="true" style="margin-bottom: 40px; display: none;">
             <div id="rec-card" style="background: #000 !important; color: #fff !important; padding: 25px; border-left: 10px solid var(--rt-red); display: flex; align-items: center; gap: 20px; animation: slideIn 0.5s ease-out;">
                 <div style="font-size: 2.5rem; color: var(--rt-red);"><i class="fas fa-microchip"></i></div>
                 <div>
@@ -186,7 +186,6 @@ function calculateMBTI() {
     node.style.top = y + 'px';
     node.style.width = '65px';
     node.style.height = '65px';
-    // CAMBIO: Colores sólidos para consistencia PDF
     node.style.background = distance === 100 ? '#e30613' : (distance === 195 ? '#000' : '#aaa');
     node.style.color = '#fff';
     node.style.borderRadius = '50%';
