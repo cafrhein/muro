@@ -6,13 +6,13 @@
     <title>Credencial Digital - NEIE-002</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* CAMBIO: Aplicar la fuente Montserrat para coherencia con el sitio web */
+        /* Aplicar la fuente Montserrat para coherencia con el sitio web (Preservado) */
         html, body {
             font-family: 'Montserrat', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Estilos del contenedor */
+        /* Estilos del contenedor (Preservado) */
         .credential-container {
             display: flex;
             justify-content: center;
@@ -28,14 +28,13 @@
             max-width: 450px;
             width: 100%;
             overflow: hidden;
-            /* CAMBIO: Uso explícito de la variable de acento si existe en style.css */
             border-top: 5px solid var(--accent-color, #007bff);
             position: relative;
         }
         .credential-header {
-            padding: 25px;
-            /* CAMBIO: Restaurado padding inferior para dar espacio a la foto sin superposición */
-            padding-bottom: 30px; 
+            /* CAMBIO: Padding reducido. Solo contiene el badge */
+            padding: 20px;
+            padding-bottom: 60px; /* Espacio para que la foto sobresalga */
             text-align: center;
             background: #f8f9fa;
         }
@@ -43,14 +42,14 @@
         /* Estilos para la foto de perfil */
         .credential-profile-img-container {
             text-align: center;
-            /* CAMBIO: Reducido el margen negativo para evitar superposición con el texto superior */
-            margin-top: -45px; 
+            /* CAMBIO: Margen negativo mantenido para estética, pero ya no hay texto debajo */
+            margin-top: -50px; 
             position: relative;
             z-index: 10;
         }
         .credential-profile-img {
-            width: 90px; /* CAMBIO: Ligeramente más pequeña para mejor equilibrio visual */
-            height: 90px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             border: 5px solid white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.15);
@@ -59,18 +58,35 @@
         }
 
         .credential-body {
-            padding: 30px;
             /* CAMBIO: Ajustado padding superior para dar aire después de la foto */
-            padding-top: 50px; 
+            padding: 30px;
+            padding-top: 20px; 
+            text-align: center; /* Centrar texto en el cuerpo */
         }
+        
+        /* CAMBIO: Nuevos estilos para el título y descripción dentro del cuerpo */
+        .credential-main-content {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
         .credential-title {
-            font-size: 1.15rem; /* CAMBIO: Ligeramente reducido para mejor jerarquía con Montserrat */
-            font-weight: 700; /* Coherente con Montserrat Bold */
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 0;
             margin-bottom: 8px;
             color: #222;
         }
-        .credential-issuer {
+        .credential-description {
+            font-size: 0.95rem;
             color: #555;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .credential-issuer {
+            color: #666;
             font-size: 0.95rem;
             margin-bottom: 25px;
         }
@@ -81,6 +97,7 @@
             font-size: 0.85rem;
             border-top: 1px solid #eee;
             padding-top: 20px;
+            text-align: left; /* Alinear datos a la izquierda en la grid */
         }
         .meta-label {
             display: block;
@@ -101,7 +118,6 @@
             background: #333;
             color: #eee;
             text-align: center;
-            /* CAMBIO: Coherente con el estilo de código/ID en el sitio */
             font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
             font-size: 0.8rem;
             letter-spacing: 0.5px;
@@ -114,7 +130,8 @@
             font-weight: 600;
             background: #e8f5e9;
             color: #2e7d32;
-            margin-bottom: 18px;
+            /* CAMBIO: Margen inferior eliminado del badge */
+            margin-bottom: 0;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -126,8 +143,6 @@
         <article class="credential-card">
             <div class="credential-header">
                 <div class="status-badge">Credencial Verificada</div>
-                <h1 class="credential-title">NE-INVESTRAT-003-SIF-2021</h1>
-                <p style="font-size: 0.9rem; color: #666; margin: 0;">Directrices para los Sistemas de Información Financiera</p>
             </div>
             
             <div class="credential-profile-img-container">
@@ -135,6 +150,11 @@
             </div>
 
             <div class="credential-body">
+                <div class="credential-main-content">
+                    <h1 class="credential-title">NE-INVESTRAT-003-SIF-2021</h1>
+                    <p class="credential-description">Directrices para los Sistemas de Información Financiera</p>
+                </div>
+
                 <div class="credential-issuer">
                     <span class="meta-label">Organismo Emisor</span>
                     <span class="meta-value" style="font-size: 1.1rem;">Adestrat</span>
