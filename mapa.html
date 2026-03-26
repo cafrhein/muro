@@ -142,23 +142,39 @@ title: Mapa de Red MBTI | Protocolos de Auxilio
 #canvas-wrapper { box-shadow: inset 0 0 50px rgba(0,0,0,0.02); }
 .ring-label { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #fff; padding: 0 10px; font-size: 0.65rem; color: #999; font-family: var(--font-heading); font-weight: 700; letter-spacing: 1px; }
 .v-node { animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: help; }
-/* CAMBIO: Estilo para las alertas del dictamen */
+
+/* CAMBIO: Estilos de Alerta con Alta Jerarquía Visual */
 .alerta-item {
-    padding: 12px 15px;
-    font-family: var(--font-main);
+    padding: 15px 20px;
+    font-family: var(--font-heading); /* Fuente de encabezados para mayor impacto */
     font-size: 0.85rem;
     font-weight: 700;
-    border-left: 4px solid var(--rt-red);
-    background: #fff1f1;
-    color: #000;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
+.alerta-critical {
+    background: #e30613 !important; /* Rojo Crítico */
+    color: #ffffff !important;
+}
+
+.alerta-warning {
+    background: #000000 !important; /* Negro Advertencia */
+    color: #ffffff !important;
+}
+
+.alerta-stable {
+    background: #28a745 !important; /* Verde Estabilidad */
+    color: #ffffff !important;
+}
+
 @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
 @keyframes slideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 
 <script>
-/* CAMBIO: Contadores Globales de Auditoría */
 let countNucleo = 0;
 let countColab = 0;
 let countPeriferia = 0;
@@ -189,20 +205,19 @@ function calculateMBTI() {
 
     if(coreTypes.includes(type)) {
         distance = 100;
-        countNucleo++; /* CAMBIO */
+        countNucleo++;
         recMessage = `Este perfil posee alta idoneidad para el **Protocolo A (Carga Vital)**. Acude a este vínculo ante crisis existenciales o de salud; su estructura mental le permite sostener tu vulnerabilidad sin fragmentarse.`;
     } else if(collabTypes.includes(type)) {
         distance = 195;
-        countColab++; /* CAMBIO */
+        countColab++;
         recMessage = `Perfil optimizado para el **Protocolo B (Carga Operativa)**. No busques consuelo emocional aquí; utiliza este vínculo para resolución de problemas técnicos, estratégicos o logísticos.`;
     } else {
         distance = 270;
-        countPeriferia++; /* CAMBIO */
+        countPeriferia++;
         recMessage = `Vínculo ideal para el **Protocolo C (Saturación)**. Recurre a esta persona para "bajar el volumen" de la crisis, buscar distracción y recargar energía sin la presión de resolver el conflicto de fondo.`;
     }
 
-    // Ejecutar auditoría de integridad
-    checkNetworkIntegrity(); /* CAMBIO */
+    checkNetworkIntegrity();
 
     const layer = document.getElementById('nodes-layer');
     const angle = Math.random() * Math.PI * 2;
@@ -246,40 +261,36 @@ function calculateMBTI() {
     }, 2000);
 }
 
-/* CAMBIO: Función de Auditoría de Red */
 function checkNetworkIntegrity() {
     const alertaContainer = document.getElementById('alerta-sistema');
     const placeholder = document.getElementById('placeholder-dictamen');
     if(placeholder) placeholder.remove();
     
-    alertaContainer.innerHTML = ""; // Limpiar alertas previas para actualizar
+    alertaContainer.innerHTML = "";
 
-    // Regla 1: Vulnerabilidad Crítica
+    // CAMBIO: Aplicación de jerarquía visual por severidad
     if (countNucleo === 0) {
-        addAlert("SISTEMA FRÁGIL: No se detectan perfiles de Sostén (J/F). Riesgo alto de autosuficiencia forzada.");
+        addAlert("SISTEMA FRÁGIL: No se detectan perfiles de Sostén (J/F). Riesgo alto de autosuficiencia forzada.", "critical");
     }
-    // Regla 2: Riesgo de Burnout
     if (countNucleo === 1) {
-        addAlert("SOBRECARGA DETECTADA: Tu apoyo depende de un solo vínculo. Se recomienda diversificar el Núcleo.");
+        addAlert("SOBRECARGA DETECTADA: Tu apoyo depende de un solo vínculo. Se recomienda diversificar el Núcleo.", "critical");
     }
-    // Regla 3: Inoperatividad Técnica
     if (countColab === 0) {
-        addAlert("DÉFICIT OPERATIVO: Careces de perfiles T/N para resolución objetiva. Riesgo de desgaste emocional en tareas técnicas.");
+        addAlert("DÉFICIT OPERATIVO: Careces de perfiles T/N para resolución objetiva. Riesgo de desgaste emocional en tareas técnicas.", "warning");
     }
-    // Regla 4: Rigidez Sistémica
     if (countPeriferia === 0) {
-        addAlert("FALTA DE SATURACIÓN: No hay válvulas de escape. El sistema colapsará por exceso de seriedad sin perfiles de desconexión.");
+        addAlert("FALTA DE SATURACIÓN: No hay válvulas de escape. El sistema colapsará por exceso de seriedad sin perfiles de desconexión.", "warning");
     }
 
-    // Si no hay alertas tras el primer nodo, mostrar sistema estable
     if (alertaContainer.innerHTML === "") {
-        alertaContainer.innerHTML = '<div class="alerta-item" style="border-left-color: #28a745; background: #f4fff4;">SISTEMA EN EQUILIBRIO PROGRESIVO</div>';
+        addAlert("SISTEMA EN EQUILIBRIO PROGRESIVO", "stable");
     }
 }
 
-function addAlert(message) {
+/* CAMBIO: Función addAlert actualizada para manejar tipos de fondo */
+function addAlert(message, type) {
     const div = document.createElement('div');
-    div.className = 'alerta-item';
+    div.className = `alerta-item alerta-${type}`;
     div.innerText = message;
     document.getElementById('alerta-sistema').appendChild(div);
 }
