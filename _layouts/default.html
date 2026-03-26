@@ -19,11 +19,11 @@
     <meta property="og:url" content="{{ page.url | absolute_url }}">
     
     {% if page.image %}
-        <meta property="og:image" content="{{ page.image | absolute_url }}">
-        <meta name="twitter:image" content="{{ page.image | absolute_url }}">
+    <meta property="og:image" content="{{ page.image | absolute_url }}">
+    <meta name="twitter:image" content="{{ page.image | absolute_url }}">
     {% else %}
-        <meta property="og:image" content="{{ '/assets/img/image.default.png' | absolute_url }}">
-        <meta name="twitter:image" content="{{ '/assets/img/image.default.png' | absolute_url }}">
+    <meta property="og:image" content="{{ '/assets/img/image.default.png' | absolute_url }}">
+    <meta name="twitter:image" content="{{ '/assets/img/image.default.png' | absolute_url }}">
     {% endif %}
 
     <meta name="twitter:card" content="summary_large_image">
@@ -96,6 +96,7 @@
         const overlayBg = document.getElementById('menu-overlay');
         const themeBtn = document.getElementById('theme-toggle');
 
+        /* Lógica del reloj digital (Horario Centro de México) */
         function updateClock() {
             const clockElement = document.getElementById('live-clock');
             if (!clockElement) return;
