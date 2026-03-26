@@ -13,6 +13,7 @@
 
         .credential-container {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -29,12 +30,10 @@
             overflow: hidden;
             border-top: 5px solid var(--accent-color, #007bff);
             position: relative;
-            /* CAMBIO: Transición para suavizar el efecto hover */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: default;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='50%25' font-size='8' fill='%23000' fill-opacity='0.03' font-family='Arial' text-anchor='middle' transform='rotate(-45 50 50)'%3EVERIFIED ADESTRAT%3C/text%3E%3C/svg%3E");
         }
 
-        /* CAMBIO: Efecto de interactividad (Hover) */
         .credential-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 30px rgba(0,0,0,0.12);
@@ -44,7 +43,7 @@
             padding: 20px;
             padding-bottom: 60px;
             text-align: center;
-            background: #f8f9fa;
+            background: rgba(248, 249, 250, 0.8);
         }
 
         .credential-profile-img-container {
@@ -116,7 +115,6 @@
             margin-bottom: 25px;
         }
 
-        /* CAMBIO: Estilos para iconos de meta-datos */
         .credential-meta {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -156,6 +154,30 @@
             font-family: Consolas, monospace;
             font-size: 0.8rem;
         }
+
+        .credential-actions {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .btn-download {
+            background-color: #333;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-download:hover {
+            background-color: #555;
+        }
+
         .status-badge {
             display: inline-block;
             padding: 5px 14px;
@@ -165,6 +187,12 @@
             background: #e8f5e9;
             color: #2e7d32;
             text-transform: uppercase;
+        }
+
+        @media print {
+            .credential-actions { display: none; }
+            .credential-container { padding: 0; min-height: auto; }
+            body { background: white; }
         }
     </style>
 </head>
@@ -181,7 +209,6 @@
             </div>
 
             <div class="credential-body">
-                ' y se ajustó el contenedor -->
                 <div class="credential-holder-name">
                     Carlos Francisco Hernández Inurreta
                     <span class="verification-badge">
@@ -221,6 +248,13 @@
                 ID: 2307219/NEIE-002
             </div>
         </article>
+
+        <div class="credential-actions">
+            <button onclick="window.print()" class="btn-download">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2m-2 4H8v-4h8v4z"/></svg>
+                Guardar como PDF / Imprimir
+            </button>
+        </div>
     </div>
 
 </body>
