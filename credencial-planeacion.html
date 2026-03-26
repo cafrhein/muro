@@ -6,42 +6,209 @@
     <title>Credencial Digital - Carlos Francisco Hernández Inurreta</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        html, body { font-family: 'Montserrat', sans-serif; -webkit-font-smoothing: antialiased; }
-        .credential-container { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; background-color: #f4f4f4; }
-        .credential-card { 
-            background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); max-width: 450px; width: 100%; overflow: hidden; 
-            border-top: 5px solid var(--accent-color, #007bff); position: relative; transition: transform 0.3s ease, box-shadow 0.3s ease;
+        html, body {
+            font-family: 'Montserrat', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .credential-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .credential-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            max-width: 450px;
+            width: 100%;
+            overflow: hidden;
+            border-top: 5px solid var(--accent-color, #007bff);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* MARCA DE AGUA PRESERVADA */
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='50%25' font-size='8' fill='%23000' fill-opacity='0.03' font-family='Arial' text-anchor='middle' transform='rotate(-45 50 50)'%3EVERIFIED ADESTRAT%3C/text%3E%3C/svg%3E");
         }
-        .credential-card:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(0,0,0,0.12); }
-        .credential-header { padding: 20px; padding-bottom: 60px; text-align: center; background: rgba(248, 249, 250, 0.8); }
-        .credential-profile-img-container { text-align: center; margin-top: -50px; position: relative; z-index: 10; }
-        .credential-profile-img { width: 100px; height: 100px; border-radius: 50%; border: 5px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.15); object-fit: cover; background-color: #eee; }
-        .credential-body { padding: 30px; padding-top: 15px; text-align: center; }
-        .credential-holder-name { font-size: 1.2rem; font-weight: 800; color: #1a1a1a; margin-bottom: 5px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .verification-badge { display: inline-flex; width: 18px; height: 18px; color: #1d9bf0; flex-shrink: 0; }
-        .credential-main-content { margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
-        .credential-title { font-size: 1.1rem; font-weight: 700; margin-top: 10px; margin-bottom: 5px; color: #444; }
-        .credential-description { font-size: 0.85rem; color: #666; margin: 0; line-height: 1.4; }
-        .credential-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 0.8rem; border-top: 1px solid #eee; padding-top: 20px; text-align: left; }
-        .meta-label { display: flex; align-items: center; gap: 5px; color: #888; text-transform: uppercase; font-size: 0.65rem; font-weight: 500; }
-        .meta-icon { width: 12px; height: 12px; opacity: 0.6; }
-        .meta-value { font-weight: 600; color: #333; }
-        .credential-footer { padding: 18px; background: #333; color: #eee; text-align: center; font-family: Consolas, monospace; font-size: 0.8rem; }
-        .credential-actions { margin-top: 30px; text-align: center; }
-        .btn-download { background-color: #333; color: white; padding: 12px 25px; border-radius: 30px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; transition: background 0.3s ease; }
-        .btn-download:hover { background-color: #555; }
-        .status-badge { display: inline-block; padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: #e8f5e9; color: #2e7d32; text-transform: uppercase; }
-        @media print { .credential-actions { display: none; } .credential-container { padding: 0; min-height: auto; } body { background: white; } }
+
+        .credential-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        .credential-header {
+            padding: 20px;
+            padding-bottom: 60px;
+            text-align: center;
+            background: rgba(248, 249, 250, 0.8);
+        }
+
+        .credential-profile-img-container {
+            text-align: center;
+            margin-top: -50px; 
+            position: relative;
+            z-index: 10;
+        }
+        .credential-profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .credential-body {
+            padding: 30px;
+            padding-top: 15px;
+            text-align: center;
+        }
+        
+        .credential-holder-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .verification-badge {
+            display: inline-flex;
+            width: 18px;
+            height: 18px;
+            color: #1d9bf0; 
+            flex-shrink: 0;
+        }
+
+        .credential-main-content {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .credential-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            color: #444;
+        }
+        .credential-description {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .credential-issuer {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        .credential-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            font-size: 0.8rem;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            text-align: left;
+        }
+        .meta-label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #888;
+            text-transform: uppercase;
+            font-size: 0.65rem;
+            letter-spacing: 0.8px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        .meta-icon {
+            width: 12px;
+            height: 12px;
+            opacity: 0.6;
+        }
+        .meta-value {
+            display: block;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .credential-footer {
+            padding: 18px;
+            background: #333;
+            color: #eee;
+            text-align: center;
+            font-family: Consolas, monospace;
+            font-size: 0.8rem;
+        }
+
+        .credential-actions {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .btn-download {
+            background-color: #333;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-download:hover {
+            background-color: #555;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #e8f5e9;
+            color: #2e7d32;
+            text-transform: uppercase;
+        }
+
+        @media print {
+            .credential-actions { display: none; }
+            .credential-container { padding: 0; min-height: auto; }
+            body { background: white; }
+        }
     </style>
 </head>
 <body>
+
     <div class="credential-container">
         <article class="credential-card">
-            <div class="credential-header"><div class="status-badge">Credencial Verificada</div></div>
-            <div class="credential-profile-img-container">
-                <img src="assets/img/mi-foto-perfil.png" alt="Perfil" class="credential-profile-img">
+            <div class="credential-header">
+                <div class="status-badge">Credencial Verificada</div>
             </div>
+            
+            <div class="credential-profile-img-container">
+                <img src="assets/img/mi-foto-perfil.png" alt="Foto de Perfil" class="credential-profile-img">
+            </div>
+
             <div class="credential-body">
                 <div class="credential-holder-name">
                     Carlos Francisco Hernández Inurreta
@@ -49,10 +216,17 @@
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2l-3.53-3.55 1.35-1.37 2.18 2.18 6.03-6.05 1.35 1.37-7.38 7.42z"/></svg>
                     </span>
                 </div>
+                
                 <div class="credential-main-content">
                     <h1 class="credential-title">NE-ADESTRAT-002-SPE-2021</h1>
                     <p class="credential-description">Directrices para los Sistemas de Planeación Estratégica</p>
                 </div>
+
+                <div class="credential-issuer">
+                    <span class="meta-label" style="justify-content: center;">Organismo Emisor</span>
+                    <span class="meta-value">Adestrat</span>
+                </div>
+
                 <div class="credential-meta">
                     <div>
                         <span class="meta-label">
@@ -70,11 +244,19 @@
                     </div>
                 </div>
             </div>
-            <div class="credential-footer">ID: 1206219/NEAE-0001</div>
+
+            <div class="credential-footer">
+                ID: 1206219/NEAE-0001
+            </div>
         </article>
+
         <div class="credential-actions">
-            <button onclick="window.print()" class="btn-download">Imprimir / Guardar PDF</button>
+            <button onclick="window.print()" class="btn-download">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2m-2 4H8v-4h8v4z"/></svg>
+                Guardar como PDF / Imprimir
+            </button>
         </div>
     </div>
+
 </body>
 </html>
