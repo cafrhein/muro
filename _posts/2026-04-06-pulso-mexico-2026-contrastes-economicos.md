@@ -4,8 +4,6 @@ title: "El pulso de México en 2026: Empresas son optimistas mientras las famili
 category: Economía 
 ---
 
-# El pulso de México en 2026: Empresas son optimistas mientras las familias cuidan el bolsillo
-
 **Ciudad de México** – La economía mexicana presenta un escenario de contrastes al cierre del primer trimestre de 2026. Mientras los datos oficiales del INEGI muestran que los hogares mexicanos han reducido su gasto, los dueños y directivos de empresas reportan una visión de crecimiento y expansión.
 
 ### El tropiezo del consumo en enero
