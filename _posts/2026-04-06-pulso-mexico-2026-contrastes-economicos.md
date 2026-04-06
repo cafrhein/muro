@@ -22,9 +22,7 @@ Al superar la barrera de los 50 puntos, sectores como la Manufactura, Construcci
 
 ---
 
-### ¿Qué significan estos números?
-
-Si no eres experto en economía o estadística, aquí te explicamos por qué estas noticias son importantes en tu día a día:
+### ¿Por qué estas noticias son importantes en tu día a día?
 
 #### 1. El "Termómetro" del Consumo (IMCP)
 Imagina que el IMCP es un termómetro que mide cuánta confianza tenemos los mexicanos para gastar nuestro dinero.
