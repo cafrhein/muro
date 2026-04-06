@@ -6,7 +6,7 @@ category: Asociaciones Civiles
 
 **Ciudad de México.** Para asegurar el éxito en la obtención de recursos, toda organización debe mirar primero hacia adentro. El Diagnóstico es el paso inicial y la piedra angular dentro de los requisitos para elaborar un exitoso Plan Anual de Procuración de Fondos. Esta fase fundamental permite comprender la situación financiera y material real de la institución antes de trazar cualquier objetivo o estrategia a futuro.
 
-De acuerdo con el procedimiento institucional, un buen diagnóstico se divide en cinco etapas clave, todas bajo la responsabilidad del Tesorero de Grupo:
+Un buen diagnóstico se divide en cinco etapas clave, todas bajo la responsabilidad del Tesorero de Grupo:
 
 ![Proceso de Diagnóstico Financiero]({{ site.baseurl }}/assets/img/posts/unnamed (5).png)
 
