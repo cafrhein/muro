@@ -2,7 +2,7 @@
 layout: post
 title: "Modelo de Remuneración en Interdependencia: Hacia una Reciprocidad Sostenible"
 date: 2026-03-25
-categories: actualidad
+categories: Finanzas
 image: /assets/img/posts/Gemini_Generated_Image_1d0g851d0g851d0g.png
 ---
 
