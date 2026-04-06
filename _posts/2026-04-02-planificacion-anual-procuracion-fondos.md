@@ -1,38 +1,30 @@
 ---
 layout: post
-title: "Cómo hacer una Planificación Anual de Procuración de Fondos Exitosa"
+title: "EL DIAGNÓSTICO FINANCIERO: EL PRIMER PASO CRUCIAL PARA LA PROCURACIÓN DE FONDOS"
 category: Actualidad
 ---
 
-Adoptar un plan anual de procuración de fondos no es solo un trámite, ¡es una decisión estratégica clave! Ayuda a mejorar el desempeño global de tu organización y sienta una base sólida para su desarrollo sustentable. Contar con este plan te brinda una guía detallada para obtener recursos y alinea los esfuerzos de todo tu equipo para lograr sus metas.
+**Ciudad de México.** Para asegurar el éxito en la obtención de recursos, toda organización debe mirar primero hacia adentro. El Diagnóstico es el paso inicial y la piedra angular dentro de los requisitos para elaborar un exitoso Plan Anual de Procuración de Fondos. Esta fase fundamental permite comprender la situación financiera y material real de la institución antes de trazar cualquier objetivo o estrategia a futuro.
 
-Aquí te compartimos los pasos esenciales para crear una planificación exitosa:
+De acuerdo con el procedimiento institucional, un buen diagnóstico se divide en cinco etapas clave, todas bajo la responsabilidad del Tesorero de Grupo:
 
-**Paso 1: Realiza un Diagnóstico Profundo**
-Antes de buscar fondos, necesitas saber exactamente dónde estás parado. 
-* **Evalúa la disponibilidad:** Determina los recursos que necesitas para tus programas y evalúa con qué cuentas actualmente, proyectando el consumo de al menos **12 meses de operación**. 
-* **Revisa tu flujo de efectivo:** Debes conocer en todo momento cuánto efectivo tienes disponible.
-* **Calcula tu necesidad real:** Para saber cuánto necesitas conseguir, utiliza la siguiente fórmula:  
-    $$Saldo\ neto\ efectivo - Costo\ de\ adquisición = Necesidad\ de\ financiamiento$$.
+### 1. Evaluación de disponibilidad (4.1.1)
+Todo comienza verificando lo que hay en casa. La organización debe identificar la cantidad de recursos económicos y materiales necesarios para ejecutar sus programas, evaluar qué está disponible actualmente y proyectar su consumo anual. Este meticuloso inventario inicial resulta en un documento formal llamado *Checklist de programas institucionales (M-003/F01)*.
 
-**Paso 2: Establece Objetivos Claros**
-La organización debe documentar sus objetivos de procuración de fondos y comunicarlos a todo el equipo. Asegúrate de que estos objetivos cumplan con cinco características clave:
-1. **Específicos**
-2. **Medibles**
-3. **Alcanzables**
-4. **Realistas**
-5. **Acotados al tiempo**
+### 2. Determinación de las necesidades (4.1.2)
+Con el inventario en mano, el siguiente paso es proyectar el futuro. Basándose en el consumo y la disponibilidad actual, la organización debe determinar qué necesitará para garantizar la operatividad de sus programas por un periodo mínimo de 12 meses. Este análisis queda plasmado en el *Reporte de necesidades de los programas institucionales (M-003/F02)*.
 
-**Paso 3: Selecciona y Programa tus Fuentes de Financiamiento**
-Elige las fuentes de financiamiento que se alineen a tu marco jurídico y clasifícalas a **corto, mediano o largo plazo**. Después, es momento de programarlas: identifica qué campañas, convocatorias o donativos incidentales vas a utilizar para financiar cada programa institucional en específico.
+### 3. Determinación del costo de adquisición (4.1.3)
+Una vez identificadas las carencias, hay que ponerles precio. En esta fase se cotizan los productos y servicios faltantes para calcular exactamente cuánto costará adquirir los elementos necesarios que no están disponibles.
 
-**Paso 4: Crea un Plan de Desarrollo de la Estrategia**
-El último paso es aterrizar todo en un proyecto documentado. Tu estrategia de procuración de fondos debe estar perfectamente alineada con tus fuentes elegidas y además debe incluir:
-* Un **presupuesto proyectado** de ingresos y egresos.
-* El cálculo del **Retorno de Inversión (ROI)** y del **Retorno de Inversión Social (RSI)**.
-* Una proyección de tu utilidad neta y flujo de efectivo .
-* La descripción detallada de todas las **actividades, los lugares, las herramientas y los responsables** de ejecutarlas.
+### 4. Revisión del flujo de efectivo (4.1.4)
+A la par de calcular los costos, la organización necesita mantener un estado financiero totalmente actualizado y accesible. El objetivo de revisar los estados de cuenta es conocer con precisión milimétrica con cuánto efectivo real se cuenta para echar a andar los programas. Esto genera un *Reporte de saldo final en efectivo (M-003/F04A)*.
 
-*Tip extra:* Incluir una memoria técnica del proyecto es una excelente práctica para inspirar a otros miembros de tu equipo y dejar una base de conocimiento para el futuro.
+### 5. El cálculo final: La Necesidad de Financiamiento (4.1.5)
+La gran conclusión de todo este esfuerzo se resume en una fórmula matemática vital para la supervivencia de los proyectos:
 
-¡Con estos pasos tendrás una hoja de ruta clara para hacer crecer tu organización y maximizar tus oportunidades de procuración de fondos! 
+$$SNE - CA = NF$$
+
+Es decir, al **Saldo Neto Efectivo (SNE)** se le resta el **Costo de Adquisición (CA)**, y el resultado es la **Necesidad de Financiamiento (NF)**.
+
+Este número final no es solo una cifra en un documento; es la brújula real que servirá como entrada para establecer los objetivos de procuración de la organización. A través de estos rigurosos pasos y la generación de reportes controlados, el Tesorero de Grupo asegura que la organización no navegue a ciegas, sino con un rumbo financiero claro y fundamentado.
