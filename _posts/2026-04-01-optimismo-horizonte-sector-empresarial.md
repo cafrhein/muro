@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Optimismo en el Horizonte: El Sector Empresarial Toma Impulso"
-category: Actualidad
+category: Economía
 ---
 
 # Optimismo en el Horizonte: El Sector Empresarial Toma Impulso
