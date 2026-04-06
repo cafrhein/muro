@@ -4,8 +4,6 @@ title: "EL DIAGNÓSTICO FINANCIERO: EL PRIMER PASO CRUCIAL PARA LA PROCURACIÓN 
 category: Asociaciones Civiles
 ---
 
-# EL DIAGNÓSTICO FINANCIERO: EL PRIMER PASO CRUCIAL PARA LA PROCURACIÓN DE FONDOS
-
 **Ciudad de México.** Para asegurar el éxito en la obtención de recursos, toda organización debe mirar primero hacia adentro. El Diagnóstico es el paso inicial y la piedra angular dentro de los requisitos para elaborar un exitoso Plan Anual de Procuración de Fondos. Esta fase fundamental permite comprender la situación financiera y material real de la institución antes de trazar cualquier objetivo o estrategia a futuro.
 
 De acuerdo con el procedimiento institucional, un buen diagnóstico se divide en cinco etapas clave, todas bajo la responsabilidad del Tesorero de Grupo:
