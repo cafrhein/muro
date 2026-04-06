@@ -2,13 +2,14 @@
 layout: post
 title: "Retrocede el consumo privado en México: caída de 1.6% al inicio de 2026"
 category: Actualidad
+image: assets/img/posts/Gemini_Generated_Image_1d0g851d0g851d0g.png
 ---
-
-# Retrocede el consumo privado en México: caída de 1.6% al inicio de 2026
 
 **Ciudad de México** — El gasto que realizan los hogares mexicanos en bienes y servicios inició el año con el pie izquierdo. De acuerdo con el Indicador Mensual del Consumo Privado (IMCP) publicado por el INEGI, este indicador registró una caída real de **1.6%** en enero de 2026 respecto al mes anterior, utilizando cifras desestacionalizadas.
 
 Este retroceso mensual es el más pronunciado observado en el último año, contrastando con el crecimiento de 1.0% que se había registrado en diciembre de 2025.
+
+![Gráfico del Consumo Privado en México]({{ site.baseurl }}/assets/img/posts/Gemini_Generated_Image_1d0g851d0g851d0g.png)
 
 ### El desplome de lo importado
 
@@ -26,6 +27,6 @@ Sin embargo, al analizar las cifras originales (sin el ajuste estacional), el cr
 
 ### ¿Qué mide este indicador?
 
-El IMCP es una pieza clave para entender la economía mexicana, ya que mide el componente más significativo del Producto Interno Bruto (PIB) desde el lado de la demanda. En términos sencillos, refleja la capacidad y disposición de los hogares para gastar, lo cual es el motor principal del crecimiento económico del país.
+El IMCP es una pieza clave para entender la economía mexicana, ya que mide el componente más significativo del Producto Interno Burto (PIB) desde el lado de la demanda. En términos sencillos, refleja la capacidad y disposición de los hogares para gastar, lo cual es el motor principal del crecimiento económico del país.
 
 El INEGI informó que para integrar este reporte se consideraron encuestas económicas, registros administrativos y datos del comercio exterior, logrando niveles altos de cobertura estadística. La próxima actualización de estos datos está programada para el **6 de mayo de 2026**.
