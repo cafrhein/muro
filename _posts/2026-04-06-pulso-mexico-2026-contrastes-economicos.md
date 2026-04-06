@@ -10,6 +10,8 @@ category: Economía
 
 El gasto en bienes y servicios, motor principal de la economía, inició el año con el "pie izquierdo". El Indicador Mensual del Consumo Privado (IMCP) registró una caída real de **1.6%** en enero respecto al mes anterior.
 
+![Contraste Económico México 2026]({{ site.baseurl }}/assets/img/posts/unnamed (6).png)
+
 Este retroceso es el más fuerte del último año y destaca por el desplome en el consumo de productos extranjeros (**-6.8%**) y una baja en el consumo nacional (**-0.7%**). Además, las familias han dejado de comprar bienes duraderos, como autos o electrodomésticos, los cuales cayeron un **2.9%** en la comparación anual.
 
 ### El repunte de la confianza empresarial en marzo
