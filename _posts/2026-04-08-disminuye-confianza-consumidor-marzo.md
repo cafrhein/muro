@@ -8,7 +8,7 @@ category: Economía
 
 En la comparación anual, el indicador muestra un retroceso de **2.0 puntos** frente a marzo de 2025.
 
-### Comparativa Mensual ICC
+### Evolución del Índice de Confianza (Mensual)
 <canvas id="iccChart" width="400" height="150"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -36,7 +36,6 @@ new Chart(ctx, {
 </script>
 
 ### Comportamiento por rubros
-
 El ICC se obtiene a partir del promedio de cinco indicadores parciales. Durante el tercer mes del año, los resultados fueron los siguientes:
 
 | Componente del ICC | Nivel (Puntos) | Variación Mensual |
@@ -46,6 +45,7 @@ El ICC se obtiene a partir del promedio de cinco indicadores parciales. Durante 
 | Situación futura del país | 45.1 | 0.0 |
 | Situación actual del hogar | 48.2* | +0.2 |
 | Situación esperada del hogar | 56.4* | +0.5 |
+
 <small>*Valores estimados basados en la tendencia del reporte.</small>
 
 * **Bienes de consumo duradero:** Las posibilidades actuales para adquirir muebles, televisores o lavadoras cayeron **1.2 puntos** en el mes, situándose en **29.1 puntos**.
@@ -53,29 +53,29 @@ El ICC se obtiene a partir del promedio de cinco indicadores parciales. Durante 
 * **Situación futura del país:** La expectativa para dentro de 12 meses se mantuvo sin cambios (**0.0 puntos**) respecto al mes previo, con un nivel de **45.1 puntos**.
 * **Situación en el hogar:** El componente sobre la situación económica actual de los miembros del hogar subió **0.2 puntos**, mientras que la situación esperada para el próximo año aumentó **0.5 puntos**.
 
-### Datos complementarios de la encuesta
+### Indicadores complementarios de gasto y ahorro
 
-Representación visual de la capacidad de gasto y ahorro:
+Análisis de las expectativas de consumo y capacidad financiera de las familias:
 
 <table style="width:100%; font-family:var(--font-heading); border-collapse: collapse;">
   <tr style="background:var(--rt-black); color:white;">
-    <th style="padding:10px; text-align:left;">Indicador Complementario</th>
-    <th style="padding:10px; width:40%;">Impacto Visual</th>
+    <th style="padding:10px; text-align:left;">Variable de Consumo</th>
+    <th style="padding:10px; width:40%;">Distribución de Tendencia</th>
     <th style="padding:10px;">Var.</th>
   </tr>
   <tr>
     <td>Posibilidades de Vacaciones</td>
     <td><div style="background:#eee; width:100%;"><div style="background:#2ecc71; width:65%; height:15px;"></div></div></td>
-    <td style="color:#2ecc71;">+1.7</td>
+    <td style="color:#2ecc71; font-weight:bold;">+1.7</td>
   </tr>
   <tr>
-    <td>Posibilidades de Ahorro</td>
+    <td>Capacidad de Ahorro Actual</td>
     <td><div style="background:#eee; width:100%;"><div style="background:var(--rt-red); width:35%; height:15px;"></div></div></td>
-    <td style="color:var(--rt-red);">-0.6</td>
+    <td style="color:var(--rt-red); font-weight:bold;">-0.6</td>
   </tr>
   <tr>
-    <td>Compra de Auto / Vivienda</td>
-    <td><div style="background:#eee; width:100%;"><div style="background:var(--rt-ui-grey); width:10%; height:15px;"></div></div></td>
+    <td>Inversión en Vivienda / Autos</td>
+    <td><div style="background:#eee; width:100%;"><div style="background:var(--rt-ui-grey); width:15%; height:15px;"></div></div></td>
     <td>0.0</td>
   </tr>
 </table>
