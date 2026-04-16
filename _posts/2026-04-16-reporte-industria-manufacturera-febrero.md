@@ -1,14 +1,15 @@
 ---
 layout: post
-title: Reporte de la Industria Manufacturera: Crecimiento en Producción y Desafíos en el Empleo a Febrero de 2026
+title: "Reporte de la Industria Manufacturera: Crecimiento en Producción y Desafíos en el Empleo a Febrero de 2026"
 category: Economía
+date: 2026-02-28
 ---
 
 ## Panorama del Sector Manufacturero (Febrero 2026)
 
-[span_0](start_span)[span_1](start_span)De acuerdo con la **Encuesta Mensual de la Industria Manufacturera (EMIM)**, el sector industrial en México mostró señales mixtas durante el segundo mes del año[span_0](end_span)[span_1](end_span). [span_2](start_span)[span_3](start_span)[span_4](start_span)Mientras el volumen físico de la producción experimentó un sólido avance, el dinamismo en la contratación de personal y las horas trabajadas mostró un ritmo distinto[span_2](end_span)[span_3](end_span)[span_4](end_span).
+De acuerdo con la **Encuesta Mensual de la Industria Manufacturera (EMIM)**, el sector industrial en México mostró señales mixtas durante el segundo mes del año. Mientras el volumen físico de la producción experimentó un sólido avance, el dinamismo en la contratación de personal y las horas trabajadas mostró un ritmo distinto.
 
-[span_5](start_span)[span_6](start_span)Para ti, como consumidor o trabajador, esto significa que las fábricas están logrando producir más —posiblemente por una mayor eficiencia o demanda—, pero esto no se está traduciendo necesariamente en la creación de nuevas vacantes, sino en un ajuste de las plantillas actuales y un ligero incremento en la productividad de las horas laboradas[span_5](end_span)[span_6](end_span).
+Para ti, como consumidor o trabajador, esto significa que las fábricas están logrando producir más —posiblemente por una mayor eficiencia o demanda—, pero esto no se está traduciendo necesariamente en la creación de nuevas vacantes, sino en un ajuste de las plantillas actuales y un ligero incremento en la productividad de las horas laboradas.
 
 ---
 
@@ -45,7 +46,7 @@ new Chart(ctx, {
 ---
 
 ### Desglose por Indicador y Tipo de Personal
-[span_7](start_span)A continuación, se detalla el comportamiento de las variables operativas durante febrero de 2026 bajo un esquema comparativo mensual y anual[span_7](end_span):
+A continuación, se detalla el comportamiento de las variables operativas durante febrero de 2026 bajo un esquema comparativo mensual y anual:
 
 | Indicador | Var. Mensual (%) | Var. Anual (%) |
 | :--- | :---: | :---: |
@@ -59,8 +60,9 @@ new Chart(ctx, {
 ---
 
 ### Análisis de Tendencias de Gasto y Remuneración
-[span_8](start_span)[span_9](start_span)Las remuneraciones medias reales, que representan el poder adquisitivo real de los trabajadores del sector tras descontar la inflación, presentaron los siguientes movimientos[span_8](end_span)[span_9](end_span):
+Las remuneraciones medias reales, que representan el poder adquisitivo real de los trabajadores del sector tras descontar la inflación, presentaron los siguientes movimientos mensuales:
 
+<div style="overflow-x: auto;">
 <table>
   <thead>
     <tr>
@@ -92,17 +94,18 @@ new Chart(ctx, {
     </tr>
   </tbody>
 </table>
+</div>
 
 ### Desempeño por Subsector (Cifras Originales)
-El comportamiento no fue uniforme en toda la industria. [span_10](start_span)Algunos subsectores destacan por su crecimiento atípico o contracciones marcadas en su variación anual[span_10](end_span):
+El comportamiento no fue uniforme en toda la industria. Algunos subsectores destacan por su desempeño anual:
 
-* **[span_11](start_span)Fabricación de productos derivados del petróleo y carbón:** Presentó el mayor incremento anual en producción con un **26.5%**[span_11](end_span).
-* **[span_12](start_span)Fabricación de equipo de computación y medición:** Registró un alza anual de **6.6%** en producción y **3.3%** en personal ocupado[span_12](end_span).
-* **[span_13](start_span)Fabricación de accesorios y aparatos eléctricos:** Sufrió una caída anual importante de **-10.9%** en su volumen de producción[span_13](end_span).
-* **[span_14](start_span)Industria de las bebidas y del tabaco:** Registró una ligera disminución anual en producción de **-1.8%**[span_14](end_span).
+* **Fabricación de productos derivados del petróleo y carbón:** Presentó el mayor incremento anual en producción con un **26.5%**.
+* **Fabricación de equipo de computación y medición:** Registró un alza anual de **6.6%** en producción y **3.3%** en personal ocupado.
+* **Fabricación de accesorios y aparatos eléctricos:** Sufrió una caída anual importante de **-10.9%** en su volumen de producción.
+* **Industria de las bebidas y del tabaco:** Registró una ligera disminución anual en producción de **-1.8%**.
 
 ---
 
-> **[span_15](start_span)[span_16](start_span)Nota Metodológica:** Los datos aquí presentados provienen de la EMIM realizada por el INEGI, cubriendo 206 clases de actividad económica[span_15](end_span)[span_16](end_span). [span_17](start_span)Las remuneraciones reales están deflactadas utilizando el Índice Nacional de Precios al Consumidor (INPC) para reflejar su valor real[span_17](end_span).
+> **Nota Metodológica:** Los datos aquí presentados provienen de la EMIM realizada por el INEGI, cubriendo 206 clases de actividad económica. Las remuneraciones reales están deflactadas utilizando el Índice Nacional de Precios al Consumidor (INPC) para reflejar su valor real.
 >
-> **[span_18](start_span)Próxima publicación:** 15 de mayo de 2026[span_18](end_span).
+> **Próxima publicación:** 15 de mayo de 2026.
