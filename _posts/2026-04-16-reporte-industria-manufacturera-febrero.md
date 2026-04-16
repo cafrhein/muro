@@ -2,7 +2,7 @@
 layout: post
 title: "Reporte de la Industria Manufacturera: Crecimiento en Producción y Desafíos en el Empleo a Febrero de 2026"
 category: Economía
-date: 2026-02-28
+date: 2026-04-16
 ---
 
 ## Panorama del Sector Manufacturero (Febrero 2026)
