@@ -30,5 +30,5 @@ Los datos sobre la fuerza laboral y el consumo privado reflejan una estabilidad 
 * **Tasa de Desocupación Estable:** La Población Económicamente Activa (PEA) mantuvo una tasa de desocupación del 2.7% en febrero de 2026.
 * **Pronóstico de Consumo:** Respecto a la demanda interna, el Indicador Oportuno del Consumo Privado (IOCP) anticipa un incremento anual moderado del 2.1% del consumo privado para el periodo de febrero y marzo de 2026.
 
-> **En resumen:** La economía mexicana comienza el segundo trimestre con una actividad industrial robusta, especialmente en minería y manufactura, pero el avance de la inflación y la ligera contracción en el empleo maquilador son factores clave a seguir de cerca por analistas y responsables de política económica.
+> La economía mexicana comienza el segundo trimestre con una actividad industrial robusta, especialmente en minería y manufactura, pero el avance de la inflación y la ligera contracción en el empleo maquilador son factores clave a seguir de cerca por analistas y responsables de política económica.
 
