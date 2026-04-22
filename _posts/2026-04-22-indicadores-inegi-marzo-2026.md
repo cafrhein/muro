@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Indicadores de INEGI Muestran un Panorama Mixto: Fuerte Repunte Minero y Aceleración de la Inflación en el Cierre del Primer Trimestre de 2026"
+title: "Indicadores de INEGI muestran un panorama mixto: fuerte repunte minero y aceleración de la inflación en el cierre del primer trimestre de 2026"
 date: 2026-04-22
-category: Actualidad
+category: Economía 
 ---
 
 **Ciudad de México, 22 de abril de 2026.** Los recientes informes del Instituto Nacional de Estadística y Geografía (INEGI) revelan un comportamiento contrastante en la economía mexicana durante el periodo de febrero a marzo de 2026. Mientras sectores clave como la minería y la manufactura mostraron dinamismo, los datos de inflación y empleo en la industria maquiladora sugieren cautela, delineando un escenario económico de luces y sombras para el segundo trimestre del año.
