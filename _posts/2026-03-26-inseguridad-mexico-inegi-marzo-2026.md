@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Más de 6 de cada 10 mexicanos se sienten inseguros: INEGI revela panorama social y económico de marzo de 2026"
-date: 2026-03-26
+date: 2026-04-24
 category: Actualidad 
 ---
 
