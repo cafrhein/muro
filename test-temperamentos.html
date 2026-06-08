@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Test de Personalidad y Temperamentos
+title: Test de Personalidad y Temperamentos | Red Humana
 ---
 
 <style>
@@ -9,51 +9,69 @@ title: Test de Personalidad y Temperamentos
         margin: 0 auto;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: #333;
+        padding: 20px 2%;
     }
     .panel {
         background: #ffffff;
         border: 1px solid #e0e0e0;
         border-radius: 8px;
-        padding: 30px;
+        padding: 40px 30px;
         margin-bottom: 20px;
         box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
     .hidden { display: none; }
-    h2 { color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
-    .question-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 20px; }
+    h2 { color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; font-weight: 700; text-transform: uppercase; font-size: 1.6rem; }
+    h3 { color: #2d3748; font-weight: 600; margin-top: 25px; margin-bottom: 10px; }
+    .question-title { font-size: 1.25rem; font-weight: bold; margin-bottom: 25px; color: #1a365d; line-height: 1.4; }
     .option-btn {
         display: block;
         width: 100%;
         text-align: left;
-        padding: 15px;
-        margin-bottom: 10px;
+        padding: 18px 20px;
+        margin-bottom: 12px;
         background: #f8fafc;
         border: 1px solid #cbd5e1;
         border-radius: 6px;
         cursor: pointer;
-        transition: background 0.3s, border-color 0.3s;
+        transition: all 0.2s ease;
         font-size: 1rem;
+        line-height: 1.4;
     }
-    .option-btn:hover { background: #e2e8f0; border-color: #94a3b8; }
-    .result-section { margin-top: 25px; }
+    .option-btn:hover { background: #e2e8f0; border-color: #94a3b8; transform: translateX(5px); }
+    .result-section { margin-top: 30px; border-top: 1px solid #edf2f7; padding-top: 20px; }
+    .badge-container { margin-bottom: 25px; }
     .temperament-badge {
         display: inline-block;
-        padding: 8px 15px;
+        padding: 8px 16px;
         border-radius: 4px;
         font-weight: bold;
         color: #fff;
-        background: #2b6cb0;
-        margin-right: 10px;
+        background: #1a365d;
+        margin-right: 12px;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
     .secondary-badge { background: #4a5568; }
+    .canvas-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 30px 0;
+        padding: 20px;
+        background: #f8fafc;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+    }
     .reto-diario {
         background: #ebf8ff;
         border-left: 5px solid #3182ce;
-        padding: 15px;
-        margin-top: 20px;
+        padding: 20px;
+        margin-top: 30px;
+        border-radius: 0 8px 8px 0;
     }
     .btn-primary {
-        background: #1a365d; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem;
+        background: #1a365d; color: #fff; padding: 14px 28px; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s;
     }
     .btn-primary:hover { background: #2a4365; }
 </style>
@@ -62,126 +80,135 @@ title: Test de Personalidad y Temperamentos
     
     <div id="intro-panel" class="panel">
         <h2>Biblioteca de Evaluaciones Interpersonales</h2>
-        <p>Este instrumento está diseñado para auditar tus patrones de conducta mediante el cuadrante de los cuatro temperamentos. El objetivo no es justificarte, sino identificar las fricciones que bloquean tu capacidad para sostener vínculos funcionales y mitigar la autosuficiencia.</p>
-        <button class="btn-primary" onclick="iniciarTest()">Iniciar Evaluación de Temperamentos</button>
+        <p style="line-height: 1.6; color: #4a5568; margin-bottom: 25px;">
+            Este instrumento técnico audita tus vectores de conducta mediante la métrica del cuadrante de los cuatro temperamentos corporativos e interpersonales. Su propósito funcional es mapear con precisión matemática tus fortalezas operativas e identificar los sesgos y fricciones conductuales que limitan tu idoneidad relacional, impidiendo el óptimo desarrollo de tus vínculos y fomentando una autosuficiencia disfuncional.
+        </p>
+        <button class="btn-primary" onclick="iniciarTest()">Iniciar Auditoría de Temperamento</button>
     </div>
 
     <div id="test-panel" class="panel hidden">
-        <div id="progress-bar" style="margin-bottom: 20px; font-weight: bold; color: #718096;">Pregunta 1 de 5</div>
+        <div id="progress-bar" style="margin-bottom: 20px; font-weight: bold; color: #718096; text-transform: uppercase; letter-spacing: 0.5px;">Reactivo 1 de 5</div>
         <div id="question-container" class="question-title"></div>
         <div id="options-container"></div>
     </div>
 
     <div id="result-panel" class="panel hidden">
-        <h2>Informe de Idoneidad Relacional</h2>
-        <div style="margin-bottom: 20px;">
+        <h2>Informe de Idoneidad Relacional y Distribución Funcional</h2>
+        
+        <div class="badge-container">
             <span class="temperament-badge" id="dom-badge">Dominante: </span>
             <span class="temperament-badge secondary-badge" id="sec-badge">Secundario: </span>
         </div>
+
+        <h3>Mapa del Cuadrante de Temperamentos</h3>
+        <div class="canvas-wrapper">
+            <canvas id="radarCanvas" width="360" height="360"></canvas>
+        </div>
         
         <div class="result-section">
-            <h3>Radiografía de Fortalezas</h3>
-            <p id="res-fortalezas"></p>
+            <h3>Radiografía de Fortalezas Operativas</h3>
+            <p id="res-fortalezas" style="line-height: 1.6; color: #4a5568;"></p>
         </div>
 
         <div class="result-section">
-            <h3>Inventario de Fricciones (Áreas de Intervención)</h3>
-            <p id="res-debilidades"></p>
+            <h3>Inventario de Fricciones (Bloqueos de Interdependencia)</h3>
+            <p id="res-debilidades" style="line-height: 1.6; color: #4a5568;"></p>
         </div>
 
         <div class="result-section">
             <h3>La Lección del Vínculo</h3>
-            <p id="res-vinculo"></p>
+            <p id="res-vinculo" style="line-height: 1.6; color: #4a5568; font-style: italic;"></p>
         </div>
 
         <div class="reto-diario">
-            <h3>Reto Diario Asignado</h3>
-            <p id="res-reto"></p>
+            <h3 style="margin-top: 0; color: #2c5282;">Programa de Intervención Gradual: Reto Diario</h3>
+            <p id="res-reto" style="line-height: 1.6; color: #2b6cb0; margin-bottom: 0; font-weight: 500;"></p>
         </div>
 
-        <button class="btn-primary" style="margin-top: 20px;" onclick="reiniciarTest()">Realizar nuevamente</button>
+        <button class="btn-primary" style="margin-top: 30px;" onclick="reiniciarTest()">Reauditar Perfil</button>
     </div>
 
 </div>
 
 <script>
-    // Estructura de Datos
+    // Configuración de Reactivos Clínico-Laborales
     const preguntas = [
         {
-            pregunta: "Ante una crisis operativa o un conflicto inesperado en tu entorno, tu reacción inmediata es:",
+            pregunta: "Ante una crisis operativa crítica o un escenario de alta presión en tu entorno, tu vector inmediato de respuesta es:",
             opciones: [
-                { texto: "Tomar el control de la situación y dictar instrucciones precisas para resolverlo de inmediato.", temperamento: "colerico" },
-                { texto: "Analizar detenidamente las causas del fallo para estructurar una solución definitiva y evitar que se repita.", temperamento: "melancolico" },
-                { texto: "Mantener la calma, apaciguar los ánimos y buscar que el entorno no se desestabilice.", temperamento: "flematico" },
-                { texto: "Actuar con optimismo, animando a los demás y confiando en que encontrarán una salida sobre la marcha.", temperamento: "sanguineo" }
+                { texto: "Asumir la dirección unilateral del proceso, dictar instrucciones directas y resolver la contingencia de forma expedita.", temperamento: "colerico" },
+                { texto: "Aislarme para auditar las variables técnicas del fallo, estructurando un plan de contención de alta precisión y calidad.", temperamento: "melancolico" },
+                { texto: "Mantener la neutralidad, amortiguar las fricciones del entorno y asegurar que la estabilidad no se quiebre.", temperamento: "flematico" },
+                { texto: "Inyectar dinamismo y optimismo al equipo, improvisando soluciones ágiles sobre la marcha mediante la interacción.", temperamento: "sanguineo" }
             ]
         },
         {
-            pregunta: "Cuando se trata de sostener compromisos a largo plazo o procesos estructurados, tu mayor obstáculo suele ser:",
+            pregunta: "Al coordinar flujos de trabajo estructurados o sostener compromisos de largo alcance, tu principal fricción es:",
             opciones: [
-                { texto: "La impaciencia frente a la incompetencia o lentitud de los demás.", temperamento: "colerico" },
-                { texto: "El perfeccionismo excesivo que me paraliza o me aísla si las cosas no cumplen mi estándar.", temperamento: "melancolico" },
-                { texto: "La falta de motivación o la resistencia a abandonar mi zona de confort.", temperamento: "flematico" },
-                { texto: "La dispersión; me aburro rápido y me cuesta mantener la disciplina sin estímulos nuevos.", temperamento: "sanguineo" }
+                { texto: "La intolerancia y la rigidez ante los ritmos de ejecución o fallos de los demás integrantes.", temperamento: "colerico" },
+                { texto: "Un nivel de autoexigencia y perfeccionismo tan elevado que ralentiza la entrega o induce al aislamiento técnico.", temperamento: "melancolico" },
+                { texto: "Inercia operativa o resistencia activa a salir de esquemas preestablecidos para evitar el desgaste.", temperamento: "flematico" },
+                { texto: "La volatilidad en el seguimiento; tendencia a perder el enfoque y la disciplina cuando el proceso se vuelve monótono.", temperamento: "sanguineo" }
             ]
         },
         {
-            pregunta: "En la interacción diaria con las personas de tu círculo cercano, tiendes a:",
+            pregunta: "En la interacción cotidiana y la gestión de la comunicación con tu círculo de confianza, tiendes a:",
             opciones: [
-                { texto: "Ser directo, debatir con firmeza y, en ocasiones, imponer mi visión sin darme cuenta.", temperamento: "colerico" },
-                { texto: "Ser reservado, observar los detalles y mostrarme susceptible si percibo falta de lealtad o fallos.", temperamento: "melancolico" },
-                { texto: "Evitar los conflictos a toda costa, cediendo para mantener la paz, aunque implique no expresar mi inconformidad.", temperamento: "flematico" },
-                { texto: "Hablar constantemente, buscar ser el centro de la dinámica y priorizar el entusiasmo sobre la profundidad.", temperamento: "sanguineo" }
+                { texto: "Expresarme con un nivel de franqueza radical, debatir con severidad y, en ocasiones, imponer criterios.", temperamento: "colerico" },
+                { texto: "Ser analítico y hermético, procesando las conductas del entorno con susceptibilidad ante fallos de lealtad.", temperamento: "melancolico" },
+                { texto: "Evasión sistemática de desacuerdos, asintiendo para preservar la armonía superficial aunque disienta internamente.", temperamento: "flematico" },
+                { texto: "Monopolizar la interacción verbal, buscando la validación externa y priorizando el impacto social sobre el fondo.", temperamento: "sanguineo" }
             ]
         },
         {
-            pregunta: "Si debes delegar una tarea crítica a otra persona, ¿cómo gestionas la interdependencia?",
+            pregunta: "Cuando se requiere delegar una asignación de alta criticidad a la red de soporte, ¿cómo ejecutas la interdependencia?",
             opciones: [
-                { texto: "Me cuesta delegar. Prefiero hacerlo yo mismo para asegurar que se haga rápido y a mi manera.", temperamento: "colerico" },
-                { texto: "Delego, pero superviso cada detalle meticulosamente porque desconfío de que alcancen mi nivel de exigencia.", temperamento: "melancolico" },
-                { texto: "Delego sin problemas, a veces de forma pasiva, asumiendo que el otro se encargará sin necesidad de mi intervención.", temperamento: "flematico" },
-                { texto: "Asigno la tarea con entusiasmo inicial, pero olvido dar seguimiento estructurado a los resultados.", temperamento: "sanguineo" }
+                { texto: "Retengo el control absoluto. Considero que la ejecución autónoma garantiza la velocidad y el estándar idóneo.", temperamento: "colerico" },
+                { texto: "Delego bajo un esquema de supervisión microscópica debido a la desconfianza estructural en la competencia ajena.", temperamento: "melancolico" },
+                { texto: "Transfiero la responsabilidad por completo de forma pasiva, asumiendo que el vínculo resolverá sin mi acompañamiento.", temperamento: "flematico" },
+                { texto: "Asigno la responsabilidad con alta efusividad, pero omito establecer mecanismos rígidos de control y evaluación.", temperamento: "sanguineo" }
             ]
         },
         {
-            pregunta: "Frente a un momento de agotamiento o vulnerabilidad personal, tu mecanismo de defensa es:",
+            pregunta: "Al experimentar un escenario de vulnerabilidad, agotamiento sistémico o saturación, tu mecanismo defensivo es:",
             opciones: [
-                { texto: "Incrementar la carga de trabajo y volverme más rígido o exigente con el entorno.", temperamento: "colerico" },
-                { texto: "Aislarme por completo, sobrepensar la situación y rechazar la ayuda externa.", temperamento: "melancolico" },
-                { texto: "Desconectarme de las responsabilidades, postergar decisiones y minimizar el problema.", temperamento: "flematico" },
-                { texto: "Evadir la realidad buscando distracciones sociales inmediatas o negando la gravedad del asunto.", temperamento: "sanguineo" }
+                { texto: "Refugiarme en el hiperactivismo laboral, incrementando la exigencia punitiva hacia mí y hacia el entorno.", temperamento: "colerico" },
+                { texto: "Cortar canales de comunicación, encapsularme en el sobreanálisis y rechazar cualquier soporte externo.", temperamento: "melancolico" },
+                { texto: "Desconectarme emocionalmente de las obligaciones, dilatar las decisiones críticas y sumergirme en la apatía.", temperamento: "flematico" },
+                { texto: "Evadir la realidad inmediata mediante la sobreexposición social o la minimización sistemática de la gravedad del problema.", temperamento: "sanguineo" }
             ]
         }
     ];
 
+    // Matriz de Perfiles Basada en Ingeniería Humana
     const perfiles = {
         colerico: {
-            nombre: "Colérico",
-            fortalezas: "Posees una notable capacidad ejecutiva. Eres pragmático, resolutivo y tienes la firmeza necesaria para tomar decisiones bajo presión. Tu voluntad es un motor que puede impulsar el crecimiento de tu entorno.",
-            debilidades: "Tu tendencia a la autosuficiencia te lleva a la dominancia. Al intentar controlarlo todo, asfixias la iniciativa de los demás y puedes mostrarte insensible, debilitando la confianza en tus vínculos.",
-            vinculo: "La estabilidad no depende de que impongas tu voluntad en solitario. Debes comprender que dejarte apoyar y ceder el control dota de sentido y funcionalidad a quienes te rodean. Tu lección es transformar la imposición en dirección colaborativa.",
-            reto: "Reto del día: Delega una decisión menor a una persona de confianza y acepta su método sin intervenir ni corregir el proceso."
+            nombre: "Colérico (Eje Director / Pragmático)",
+            fortalezas: "Evidencias una alta capacidad ejecutiva y estratégica. Tu toma de decisiones es resolutiva, orientada a la eficiencia y con el empuje necesario para comandar flujos de trabajo en escenarios de alta volatilidad.",
+            debilidades: "Tu principal sesgo es la autosuficiencia radical. Al intentar monopolizar el control, anulas la capacidad operativa de tu entorno y desgastas la simetría de tus relaciones, transformando el liderazgo en dominancia.",
+            vinculo: "Tu estabilidad a largo plazo no radica en la omnipotencia solitaria. Sostener la estructura requiere vulnerabilidad controlada: permitir que la red absorba cargas operativas dota de sentido y propósito a tus colaboradores. Tu evolución estriba en transicionar del control impositivo a la dirección interdependiente.",
+            reto: "Selecciona una asignación o decisión operativa el día de hoy, transfiérela explícitamente a un miembro de tu equipo o entorno cercano y respeta estrictamente su metodología de resolución sin intervenir en el proceso."
         },
         melancolico: {
-            nombre: "Melancólico",
-            fortalezas: "Tu nivel de análisis, profundidad y exigencia te convierten en un estratega nato. Aportas orden, calidad y un sentido de lealtad altamente estructurado a tus relaciones.",
-            debilidades: "El exceso de perfeccionismo te empuja al aislamiento. Tu susceptibilidad y visión crítica pueden generar fricciones constantes, volviéndote propenso a juzgar severamente las limitaciones ajenas.",
-            vinculo: "Tu tendencia es refugiarte en la soledad cuando el entorno falla. La clave de tu equilibrio es aceptar la imperfección de la red humana. Al permitir que otros te acompañen, incluso con sus fallos, encuentras el sostén emocional que tu autoexigencia te niega.",
-            reto: "Reto del día: Identifica y comunícale a un colaborador o persona cercana un aspecto positivo de su aportación, omitiendo cualquier crítica o sugerencia de mejora."
+            nombre: "Melancólico (Eje Analítico / Estratega)",
+            fortalezas: "Posees una destreza superior para el diagnóstico profundo, la planificación minuciosa y la arquitectura de sistemas complejos. Tu aportación dota de orden, rigurosidad metodológica y lealtad a cualquier estructura relacional.",
+            debilidades: "El perfeccionismo paralizante te desplaza con facilidad hacia el aislamiento. Al procesar el entorno bajo un estándar utópico, emerges como un evaluador hipercrítico, propenso a resentir las limitaciones de la red humana.",
+            vinculo: "Frente a la frustración, tu patrón natural es replegarte y romper los puentes de contacto. La clave de tu equilibrio es asimilar la imperfección inherente a la red. Permitir que los demás te brinden sostén emocional y acompañamiento, aun con sus inconsistencias técnicas, mitiga la rigidez de tu autoexigencia.",
+            reto: "Identifica el esfuerzo o la aportación de un colaborador o familiar el día de hoy y verbaliza un reconocimiento explícito hacia su intención o desempeño, inhibiendo activamente cualquier acotación crítica o sugerencia de optimización."
         },
         sanguineo: {
-            nombre: "Sanguíneo",
-            fortalezas: "Posees una habilidad extraordinaria para la adaptabilidad y la persuasión. Tu calidez humana facilita la apertura de canales de comunicación y tienes el don de aligerar las tensiones en momentos críticos.",
-            debilidades: "La indisciplina, la inestabilidad y la falta de seguimiento son tus mayores obstáculos. Prometes más de lo que puedes cumplir, lo que erosiona la fiabilidad de tu palabra frente a los demás.",
-            vinculo: "Tu carisma es útil, pero los vínculos sólidos requieren congruencia. Debes sustituir la validación social momentánea por el compromiso sostenido. Ser recíproco significa estar presente también en la monotonía y en el cumplimiento de los acuerdos.",
-            reto: "Reto del día: Ejecuta y termina una tarea administrativa u operativa pendiente que tome al menos 30 minutos, sin interrupciones, bloqueando distracciones externas."
+            nombre: "Sanguíneo (Eje Vinculador / Adaptable)",
+            fortalezas: "Tu competencia clave es la agilidad relacional y la influencia interpersonal. Posees la facultad orgánica de aperturar canales de comunicación, cohesionar dinámicas colectivas y disipar la fricción mediante el entusiasmo funcional.",
+            debilidades: "La dispersión operativa y la inconsistencia metodológica devalúan tu fiabilidad. Tu tendencia a priorizar la validación social inmediata erosiona el cumplimiento de acuerdos estructurales y el seguimiento formal.",
+            vinculo: "El carisma periférico es estéril si carece de responsabilidad simétrica. Los vínculos sólidos exigen congruencia a lo largo del tiempo. Sostener a los demás implica trascender el estímulo del inicio y comprometerse con la estabilidad en las fases de monotonía y ejecución profunda.",
+            reto: "Bloquea un espacio ininterrumpido de 45 minutos en tu agenda para ejecutar y finalizar por completo una tarea de carácter netamente administrativo o documental pendiente, restringiendo cualquier interacción en plataformas sociales."
         },
         flematico: {
-            nombre: "Flemático",
-            fortalezas: "Eres un pilar de objetividad y diplomacia. Tu resistencia a la alteración proporciona calma y estabilidad a los equipos o relaciones que atraviesan turbulencias.",
-            debilidades: "Tu pasividad y aversión al conflicto te llevan a la indecisión. Al no tomar posturas claras ni asumir responsabilidades proactivas, obligas a otros a cargar con el peso de las decisiones operativas.",
-            vinculo: "La evasión del conflicto no es paz, es estancamiento. Para construir interdependencia real, debes abandonar la comodidad del espectador. Aportar tu perspectiva y tomar postura es tu forma de cuidar y sostener a tu red.",
-            reto: "Reto del día: Toma una decisión operativa o personal que has estado postergando en un plazo máximo de 5 minutos y comunícala con firmeza."
+            nombre: "Flemático (Eje Estabilizador / Diplomático)",
+            fortalezas: "Representas el pilar de la homeostasis operativa. Tu ecuanimidad y objetividad te permiten fungir como un mediador excepcional, proveyendo un entorno de seguridad psicológica y calma en momentos de disrupción sistémica.",
+            debilidades: "La aversión al conflicto te conduce a una pasividad lesiva. Al omitir posturas firmes y dilatar la toma de decisiones por economía de energía, obligas indirectamente a tu red a asumir el costo y la fricción de tus omisiones.",
+            vinculo: "La omisión del conflicto no representa paz real, sino acumulación latente de presión. Para estructurar una interdependencia funcional, requieres abandonar la posición de espectador pasivo. Emitir tu criterio y asumir la incomodidad de una postura es tu mayor acto de cuidado y corresponsabilidad hacia los tuyos.",
+            reto: "Identifica una determinación o comunicación incómoda que hayas estado postergando por economía relacional, toma una postura concreta en un plazo no mayor a 5 minutos y comunícala de manera transparente y asertiva."
         }
     };
 
@@ -198,7 +225,7 @@ title: Test de Personalidad y Temperamentos
 
     function mostrarPregunta() {
         const q = preguntas[preguntaActual];
-        document.getElementById('progress-bar').innerText = `Pregunta ${preguntaActual + 1} de ${preguntas.length}`;
+        document.getElementById('progress-bar').innerText = `Reactivo ${preguntaActual + 1} de ${preguntas.length}`;
         document.getElementById('question-container').innerText = q.pregunta;
         
         const opcionesDiv = document.getElementById('options-container');
@@ -227,10 +254,9 @@ title: Test de Personalidad y Temperamentos
     function calcularResultados() {
         document.getElementById('test-panel').classList.add('hidden');
         
-        // Ordenar temperamentos por puntaje
         const ordenados = Object.keys(puntajes).sort((a, b) => puntajes[b] - puntajes[a]);
         const dominante = ordenados[0];
-        const secundario = ordenados[1]; // Si hay empate, toma el primero según el sort
+        const secundario = ordenados[1];
 
         document.getElementById('dom-badge').innerText = `Dominante: ${perfiles[dominante].nombre}`;
         document.getElementById('sec-badge').innerText = `Secundario: ${perfiles[secundario].nombre}`;
@@ -241,6 +267,112 @@ title: Test de Personalidad y Temperamentos
         document.getElementById('res-reto').innerText = perfiles[dominante].reto;
 
         document.getElementById('result-panel').classList.remove('hidden');
+        
+        // Ejecución inmediata del motor gráfico nativo
+        renderizarMapaRadar(puntajes);
+    }
+
+    function renderizarMapaRadar(scores) {
+        const canvas = document.getElementById('radarCanvas');
+        const ctx = canvas.getContext('2d');
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const rMax = 120; // Radio geométrico de contención
+        const maxVal = 5; // Techo matemático (número de preguntas)
+
+        // Limpieza de lienzo e inicialización de alta fidelidad para pantallas retina
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Mapeo ortogonal de los 4 cuadrantes coordenados
+        const ejes = [
+            { nombre: 'Colérico (Control)', clave: 'colerico', x: cx, y: cy - rMax, align: 'center', baseline: 'bottom', ox: 0, oy: -12 },
+            { nombre: 'Sanguíneo (Relación)', clave: 'sanguineo', x: cx + rMax, y: cy, align: 'left', baseline: 'middle', ox: 12, oy: 0 },
+            { nombre: 'Flemático (Estabilidad)', clave: 'flematico', x: cx, y: cy + rMax, align: 'center', baseline: 'top', ox: 0, oy: 12 },
+            { nombre: 'Melancólico (Análisis)', clave: 'melancolico', x: cx - rMax, y: cy, align: 'right', baseline: 'middle', ox: -12, oy: 0 }
+        ];
+
+        // 1. Renderizado de la retícula isométrica concéntrica (Niveles del 1 al 5)
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.lineWidth = 1;
+        for (let i = 1; i <= maxVal; i++) {
+            const r = (rMax / maxVal) * i;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - r);
+            ctx.lineTo(cx + r, cy);
+            ctx.lineTo(cx, cy + r);
+            ctx.lineTo(cx - r, cy);
+            ctx.closePath();
+            ctx.stroke();
+            
+            // Valores de referencia numérica discretos en el eje vertical
+            ctx.fillStyle = '#a0aec0';
+            ctx.font = '9px sans-serif';
+            ctx.fillText(i, cx + 6, cy - r + 3);
+        }
+
+        // 2. Trazado de vectores de coordenadas vectoriales (Ejes cartesianos)
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - rMax); ctx.lineTo(cx, cy + rMax);
+        ctx.moveTo(cx - rMax, cy); ctx.lineTo(cx + rMax, cy);
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.stroke();
+
+        // 3. Inyección de etiquetas de cuadrante
+        ctx.font = 'bold 11px sans-serif';
+        ejes.forEach(eje => {
+            ctx.fillStyle = '#1a365d';
+            ctx.textAlign = eje.align;
+            ctx.textBaseline = eje.baseline;
+            ctx.fillText(eje.nombre.toUpperCase(), eje.x + eje.ox, eje.y + eje.oy);
+        });
+
+        // 4. Cálculo de coordenadas cartesianas para el Polígono de Comportamiento del Usuario
+        ctx.beginPath();
+        ejes.forEach((eje, index) => {
+            const val = scores[eje.clave];
+            const r = (rMax / maxVal) * val;
+            let px = cx;
+            let py = cy;
+
+            if (index === 0) py = cy - r; // Norte
+            if (index === 1) px = cx + r; // Este
+            if (index === 2) py = cy + r; // Sur
+            if (index === 3) px = cx - r; // Oeste
+
+            if (index === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        });
+        ctx.closePath();
+        
+        // Relleno del área poligonal (Tonalidad institucional translúcida)
+        ctx.fillStyle = 'rgba(26, 54, 93, 0.25)';
+        ctx.fill();
+        
+        // Perímetro del vector
+        ctx.strokeStyle = '#1a365d';
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+
+        // 5. Renderizado de nodos de datos discretos
+        ejes.forEach((eje, index) => {
+            const val = scores[eje.clave];
+            const r = (rMax / maxVal) * val;
+            let px = cx;
+            let py = cy;
+
+            if (index === 0) py = cy - r;
+            if (index === 1) px = cx + r;
+            if (index === 2) py = cy + r;
+            if (index === 3) px = cx - r;
+
+            ctx.beginPath();
+            ctx.arc(px, py, 4.5, 0, 2 * Math.PI);
+            ctx.fillStyle = '#3182ce';
+            ctx.fill();
+            ctx.strokeStyle = '#1a365d';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+        });
     }
 
     function reiniciarTest() {
