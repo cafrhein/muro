@@ -1,428 +1,443 @@
----
-layout: default
-title: Test de Personalidad y Temperamentos | Red Humana
----
-
-<style>
-    /* --- ESTILOS DE INTERFAZ --- */
-    .adestrat-test-container {
-        max-width: 800px;
-        margin: 0 auto;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #333;
-        padding: 20px 2%;
-    }
-    .panel {
-        background: #ffffff;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        padding: 40px 30px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    }
-    .hidden { display: none !important; }
-    h2 { color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; font-weight: 700; text-transform: uppercase; font-size: 1.6rem; }
-    h3 { color: #2d3748; font-weight: 600; margin-top: 25px; margin-bottom: 10px; }
-    .question-title { font-size: 1.25rem; font-weight: bold; margin-bottom: 25px; color: #1a365d; line-height: 1.4; }
-    .option-btn {
-        display: block;
-        width: 100%;
-        text-align: left;
-        padding: 18px 20px;
-        margin-bottom: 12px;
-        background: #f8fafc;
-        border: 1px solid #cbd5e1;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        font-size: 1rem;
-        line-height: 1.4;
-    }
-    .option-btn:hover { background: #e2e8f0; border-color: #94a3b8; transform: translateX(5px); }
-    .result-section { margin-top: 30px; border-top: 1px solid #edf2f7; padding-top: 20px; }
-    .badge-container { margin-bottom: 25px; }
-    .temperament-badge {
-        display: inline-block;
-        padding: 8px 16px;
-        border-radius: 4px;
-        font-weight: bold;
-        color: #fff;
-        background: #1a365d;
-        margin-right: 12px;
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    .secondary-badge { background: #4a5568; }
-    .canvas-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 30px 0;
-        padding: 20px;
-        background: #f8fafc;
-        border-radius: 8px;
-        border: 1px solid #e2e8f0;
-    }
-    .reto-diario {
-        background: #ebf8ff;
-        border-left: 5px solid #3182ce;
-        padding: 20px;
-        margin-top: 30px;
-        border-radius: 0 8px 8px 0;
-    }
-    .action-buttons {
-        margin-top: 30px;
-        display: flex;
-        gap: 15px;
-        flex-wrap: wrap;
-    }
-    .btn-primary {
-        background: #1a365d; color: #fff; padding: 14px 28px; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s;
-    }
-    .btn-primary:hover { background: #2a4365; }
-    .btn-secondary {
-        background: #4a5568; color: #fff; padding: 14px 28px; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s;
-    }
-    .btn-secondary:hover { background: #2d3748; }
-
-    /* --- ESTILOS DE EXPORTACIÓN A PDF (IMPRESIÓN) --- */
-    @media print {
-        /* Ocultar elementos estructurales del sitio web (navegación, footers) */
-        header, footer, nav, aside, .site-header, .site-footer {
-            display: none !important;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario de Interdependencia Relacional | Red Humana</title>
+    <!-- Chart.js para el gráfico de radar -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- html2pdf.js para exportar a PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --background-color: #f9f9f9;
+            --text-color: #333;
         }
-        body { background: #fff; margin: 0; padding: 0; }
-        .adestrat-test-container { max-width: 100%; padding: 0; }
-        
-        /* Ocultar todo excepto el panel de resultados */
-        body * { visibility: hidden; }
-        #result-panel, #result-panel * { visibility: visible; }
-        
-        /* Posicionar el panel de resultados desde la esquina superior izquierda del documento PDF */
-        #result-panel {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
             margin: 0;
-            padding: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h1, h2, h3, h4 {
+            color: var(--primary-color);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+        .instructions {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-left: 4px solid var(--accent-color);
+            margin-bottom: 30px;
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .question-block:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .options {
+            display: flex;
+            justify-content: space-between;
+            background: #f1f1f1;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .options label {
+            flex: 1;
+            text-align: center;
+            padding: 10px 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.9em;
+        }
+        .options label:hover {
+            background: #e0e0e0;
+        }
+        .options input[type="radio"] {
+            display: none;
+        }
+        .options input[type="radio"]:checked + span {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
             border: none;
-            box-shadow: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 30px;
         }
-        
-        /* Ocultar botones de interacción en el documento impreso */
-        .no-print { display: none !important; }
-        
-        /* Forzar la renderización de colores de fondo y el lienzo del radar */
-        * {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-            color-adjust: exact !important;
+        .btn:hover {
+            background-color: var(--accent-color);
         }
-        
-        /* Ajuste de márgenes para evitar cortes de página indeseados */
-        .result-section, .reto-diario, .canvas-wrapper {
-            page-break-inside: avoid;
+        #results-container {
+            display: none;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
         }
-    }
-</style>
+        .chart-wrapper {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 30px auto;
+        }
+        .result-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #fdfdfd;
+            border-left: 4px solid var(--primary-color);
+        }
+        .error {
+            color: #e74c3c;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
 
-<div class="adestrat-test-container">
-    
-    <div id="intro-panel" class="panel">
-        <h2>Biblioteca de Evaluaciones Interpersonales</h2>
-        <p style="line-height: 1.6; color: #4a5568; margin-bottom: 25px;">
-            Este instrumento técnico audita tus vectores de conducta mediante la métrica del cuadrante de los cuatro temperamentos corporativos e interpersonales. Su propósito funcional es mapear con precisión matemática tus fortalezas operativas e identificar los sesgos y fricciones conductuales que limitan tu idoneidad relacional, impidiendo el óptimo desarrollo de tus vínculos y fomentando una autosuficiencia disfuncional.
-        </p>
-        <button class="btn-primary" onclick="iniciarTest()">Iniciar Auditoría de Temperamento</button>
+<div class="container" id="main-content">
+    <div class="header">
+        <h1>Inventario de Interdependencia Relacional</h1>
+        <h3>Ingeniería del Bienestar Humano</h3>
     </div>
 
-    <div id="test-panel" class="panel hidden">
-        <div id="progress-bar" style="margin-bottom: 20px; font-weight: bold; color: #718096; text-transform: uppercase; letter-spacing: 0.5px;">Reactivo 1 de 5</div>
-        <div id="question-container" class="question-title"></div>
-        <div id="options-container"></div>
+    <div class="instructions" id="instructions">
+        <p><strong>Instrucciones:</strong> Este instrumento evalúa tus tendencias operativas y relacionales. Selecciona la opción que mejor represente tu comportamiento habitual. Responde con honestidad basándote en cómo actúas la mayor parte del tiempo, no en cómo te gustaría ser.</p>
+        <p><strong>Escala:</strong> 1 = Totalmente en desacuerdo | 2 = En desacuerdo | 3 = Neutral | 4 = De acuerdo | 5 = Totalmente de acuerdo</p>
     </div>
 
-    <div id="result-panel" class="panel hidden">
-        <h2>Informe de Idoneidad Relacional y Distribución Funcional</h2>
+    <form id="test-form">
+        <div id="questions-area"></div>
+        <div id="error-msg" class="error">Por favor, responde todas las preguntas antes de generar el diagnóstico.</div>
+        <button type="button" class="btn" onclick="procesarTest()" id="btn-procesar">Generar Diagnóstico de Idoneidad Relacional</button>
+    </form>
+
+    <div id="results-container">
+        <h2>INFORME DE IDONEIDAD RELACIONAL Y DISTRIBUCIÓN FUNCIONAL</h2>
+        <h3 id="dom-sec-title"></h3>
         
-        <div class="badge-container">
-            <span class="temperament-badge" id="dom-badge">Dominante: </span>
-            <span class="temperament-badge secondary-badge" id="sec-badge">Secundario: </span>
-        </div>
-
-        <h3>Mapa del Cuadrante de Temperamentos</h3>
-        <div class="canvas-wrapper">
-            <canvas id="radarCanvas" width="360" height="360"></canvas>
-        </div>
-        
-        <div class="result-section">
-            <h3>Radiografía de Fortalezas Operativas</h3>
-            <p id="res-fortalezas" style="line-height: 1.6; color: #4a5568;"></p>
+        <div class="chart-wrapper">
+            <canvas id="temperamentChart"></canvas>
         </div>
 
         <div class="result-section">
-            <h3>Inventario de Fricciones (Bloqueos de Interdependencia)</h3>
-            <p id="res-debilidades" style="line-height: 1.6; color: #4a5568;"></p>
+            <h4>Inventario de Fricciones (Bloqueos de Interdependencia)</h4>
+            <p id="fricciones-text"></p>
         </div>
 
         <div class="result-section">
-            <h3>La Lección del Vínculo</h3>
-            <p id="res-vinculo" style="line-height: 1.6; color: #4a5568; font-style: italic;"></p>
+            <h4>La Lección del Vínculo</h4>
+            <p id="leccion-text"></p>
         </div>
 
-        <div class="reto-diario">
-            <h3 style="margin-top: 0; color: #2c5282;">Programa de Intervención Gradual: Reto Diario</h3>
-            <p id="res-reto" style="line-height: 1.6; color: #2b6cb0; margin-bottom: 0; font-weight: 500;"></p>
-        </div>
-
-        <div class="action-buttons no-print">
-            <button class="btn-primary" onclick="exportarPDF()"><i class="fas fa-file-pdf"></i> Exportar a PDF</button>
-            <button class="btn-secondary" onclick="reiniciarTest()"><i class="fas fa-undo"></i> Reauditar Perfil</button>
-        </div>
+        <button type="button" class="btn" onclick="exportarPDF()">Exportar Diagnóstico a PDF</button>
     </div>
-
 </div>
 
 <script>
-    // Configuración de Reactivos Clínico-Laborales
+    // Array de preguntas clasificadas por temperamento
     const preguntas = [
-        {
-            pregunta: "Ante una crisis operativa crítica o un escenario de alta presión en tu entorno, tu vector inmediato de respuesta es:",
-            opciones: [
-                { texto: "Asumir la dirección unilateral del proceso, dictar instrucciones directas y resolver la contingencia de forma expedita.", temperamento: "colerico" },
-                { texto: "Aislarme para auditar las variables técnicas del fallo, estructurando un plan de contención de alta precisión y calidad.", temperamento: "melancolico" },
-                { texto: "Mantener la neutralidad, amortiguar las fricciones del entorno y asegurar que la estabilidad no se quiebre.", temperamento: "flematico" },
-                { texto: "Inyectar dinamismo y optimismo al equipo, improvisando soluciones ágiles sobre la marcha mediante la interacción.", temperamento: "sanguineo" }
-            ]
-        },
-        {
-            pregunta: "Al coordinar flujos de trabajo estructurados o sostener compromisos de largo alcance, tu principal fricción es:",
-            opciones: [
-                { texto: "La intolerancia y la rigidez ante los ritmos de ejecución o fallos de los demás integrantes.", temperamento: "colerico" },
-                { texto: "Un nivel de autoexigencia y perfeccionismo tan elevado que ralentiza la entrega o induce al aislamiento técnico.", temperamento: "melancolico" },
-                { texto: "Inercia operativa o resistencia activa a salir de esquemas preestablecidos para evitar el desgaste.", temperamento: "flematico" },
-                { texto: "La volatilidad en el seguimiento; tendencia a perder el enfoque y la disciplina cuando el proceso se vuelve monótono.", temperamento: "sanguineo" }
-            ]
-        },
-        {
-            pregunta: "En la interacción cotidiana y la gestión de la comunicación con tu círculo de confianza, tiendes a:",
-            opciones: [
-                { texto: "Expresarme con un nivel de franqueza radical, debatir con severidad y, en ocasiones, imponer criterios.", temperamento: "colerico" },
-                { texto: "Ser analítico y hermético, procesando las conductas del entorno con susceptibilidad ante fallos de lealtad.", temperamento: "melancolico" },
-                { texto: "Evasión sistemática de desacuerdos, asintiendo para preservar la armonía superficial aunque disienta internamente.", temperamento: "flematico" },
-                { texto: "Monopolizar la interacción verbal, buscando la validación externa y priorizando el impacto social sobre el fondo.", temperamento: "sanguineo" }
-            ]
-        },
-        {
-            pregunta: "Cuando se requiere delegar una asignación de alta criticidad a la red de soporte, ¿cómo ejecutas la interdependencia?",
-            opciones: [
-                { texto: "Retengo el control absoluto. Considero que la ejecución autónoma garantiza la velocidad y el estándar idóneo.", temperamento: "colerico" },
-                { texto: "Delego bajo un esquema de supervisión microscópica debido a la desconfianza estructural en la competencia ajena.", temperamento: "melancolico" },
-                { texto: "Transfiero la responsabilidad por completo de forma pasiva, asumiendo que el vínculo resolverá sin mi acompañamiento.", temperamento: "flematico" },
-                { texto: "Asigno la responsabilidad con alta efusividad, pero omito establecer mecanismos rígidos de control y evaluación.", temperamento: "sanguineo" }
-            ]
-        },
-        {
-            pregunta: "Al experimentar un escenario de vulnerabilidad, agotamiento sistémico o saturación, tu mecanismo defensivo es:",
-            opciones: [
-                { texto: "Refugiarme en el hiperactivismo laboral, incrementando la exigencia punitiva hacia mí y hacia el entorno.", temperamento: "colerico" },
-                { texto: "Cortar canales de comunicación, encapsularme en el sobreanálisis y rechazar cualquier soporte externo.", temperamento: "melancolico" },
-                { texto: "Desconectarme emocionalmente de las obligaciones, dilatar las decisiones críticas y sumergirme en la apatía.", temperamento: "flematico" },
-                { texto: "Evadir la realidad inmediata mediante la sobreexposición social o la minimización sistemática de la gravedad del problema.", temperamento: "sanguineo" }
-            ]
-        }
+        // Colérico (Eje Director / Pragmático)
+        { id: 'c1', tipo: 'Colérico', texto: 'Tomo el control inmediatamente cuando percibo falta de dirección o ineficiencia en mi entorno.' },
+        { id: 'c2', tipo: 'Colérico', texto: 'Prefiero ejecutar una tarea por mi cuenta antes que arriesgarme a que otros no cumplan con mis expectativas.' },
+        { id: 'c3', tipo: 'Colérico', texto: 'Veo la vulnerabilidad, la duda o la indecisión como una fuga de energía y una pérdida de eficiencia.' },
+        { id: 'c4', tipo: 'Colérico', texto: 'Cuando enfrento una crisis, mi primer instinto es aislarme para resolver el problema sin intervención externa.' },
+        { id: 'c5', tipo: 'Colérico', texto: 'Suelo imponer mi metodología de resolución sobre los demás, transformando el liderazgo en dominancia.' },
+        { id: 'c6', tipo: 'Colérico', texto: 'Me resulta difícil delegar responsabilidades sin intentar microgestionar el proceso de quien me apoya.' },
+        { id: 'c7', tipo: 'Colérico', texto: 'Asocio mi valor personal directamente con mi capacidad de producir resultados y sostener estructuras.' },
+        { id: 'c8', tipo: 'Colérico', texto: 'Considero que pedir ayuda es un recurso de última instancia, solo justificable cuando mis capacidades se han agotado.' },
+        { id: 'c9', tipo: 'Colérico', texto: 'Tiendo a invalidar o minimizar los procesos emocionales de los demás si interfieren con los objetivos trazados.' },
+        { id: 'c10', tipo: 'Colérico', texto: 'Me cuesta trabajo dejarme cuidar porque siento que al ceder el control pierdo mi posición de autoridad.' },
+        
+        // Melancólico (Eje Analítico / Estratega)
+        { id: 'm1', tipo: 'Melancólico', texto: 'Necesito entender cada variable y detalle de una situación antes de permitir que otros participen en ella.' },
+        { id: 'm2', tipo: 'Melancólico', texto: 'La frustración me invade cuando mis vínculos no respetan los estándares de calidad o las reglas que he establecido.' },
+        { id: 'm3', tipo: 'Melancólico', texto: 'Construyo muros a mi alrededor basados en la premisa de que nadie más comprenderá mi visión con la misma profundidad.' },
+        { id: 'm4', tipo: 'Melancólico', texto: 'Tiendo a anticipar los peores escenarios posibles en mis relaciones, lo que me lleva a ser excesivamente precavido.' },
+        { id: 'm5', tipo: 'Melancólico', texto: 'Prefiero operar en la retaguardia, diseñando estrategias, antes que exponerme directamente al contacto no estructurado.' },
+        { id: 'm6', tipo: 'Melancólico', texto: 'Mi perfeccionismo actúa como una barrera que impide que otros me ofrezcan apoyo práctico o emocional.' },
+        { id: 'm7', tipo: 'Melancólico', texto: 'Guardo un registro mental riguroso de los errores, fallas o fricciones pasadas en mis relaciones.' },
+        { id: 'm8', tipo: 'Melancólico', texto: 'Suelo racionalizar mis conflictos en lugar de expresar directamente lo que necesito de la otra persona.' },
+        { id: 'm9', tipo: 'Melancólico', texto: 'Retraso la toma de decisiones relacionales o la petición de ayuda hasta tener absoluta certeza de que es lo correcto.' },
+        { id: 'm10', tipo: 'Melancólico', texto: 'Me cuesta aceptar apoyo si no viene en el formato exacto o con la metodología que yo considero óptima.' },
+
+        // Flemático (Eje Estabilizador / Conciliador)
+        { id: 'f1', tipo: 'Flemático', texto: 'Prefiero ceder mis propias necesidades o silenciar mis opiniones antes que detonar un conflicto en la red.' },
+        { id: 'f2', tipo: 'Flemático', texto: 'Suelo absorber las cargas operativas o la frustración de otros de forma silenciosa para mantener la paz.' },
+        { id: 'f3', tipo: 'Flemático', texto: 'Me cuesta establecer límites firmes porque temo que mi firmeza fracture la estabilidad de mis vínculos.' },
+        { id: 'f4', tipo: 'Flemático', texto: 'Con frecuencia postergo la confrontación de problemas evidentes, esperando que se resuelvan por sí solos con el tiempo.' },
+        { id: 'f5', tipo: 'Flemático', texto: 'Mi disposición a apoyar a los demás suele derivar en un agotamiento personal que rara vez comunico.' },
+        { id: 'f6', tipo: 'Flemático', texto: 'Encuentro dificultad para tomar la iniciativa cuando se requiere reestructurar dinámicas de relación disfuncionales.' },
+        { id: 'f7', tipo: 'Flemático', texto: 'Asumo un rol de soporte pasivo, esperando que mi entorno intuya mis necesidades sin que yo tenga que verbalizarlas.' },
+        { id: 'f8', tipo: 'Flemático', texto: 'Siento que mi principal función es amortiguar las crisis de los demás, olvidando solicitar cuidado en reciprocidad.' },
+        { id: 'f9', tipo: 'Flemático', texto: 'Minimizo mis propios requerimientos argumentando que "no es para tanto" o "puedo aguantar un poco más".' },
+        { id: 'f10', tipo: 'Flemático', texto: 'Permanezco en dinámicas estancadas porque el miedo al cambio me paraliza más que la insatisfacción actual.' },
+
+        // Sanguíneo (Eje Dinamizador / Vinculante)
+        { id: 's1', tipo: 'Sanguíneo', texto: 'Construyo vínculos rápidamente, pero me resulta complejo sostenerlos cuando exigen constancia y profundidad.' },
+        { id: 's2', tipo: 'Sanguíneo', texto: 'Utilizo mi carisma y facilidad de palabra como mecanismo de defensa para evadir conversaciones densas o conflictivas.' },
+        { id: 's3', tipo: 'Sanguíneo', texto: 'Prometo apoyo o asumo compromisos en momentos de entusiasmo que luego me cuesta trabajo cumplir operativamente.' },
+        { id: 's4', tipo: 'Sanguíneo', texto: 'Mi necesidad de validación externa a menudo me desvía del propósito central de mis proyectos o relaciones.' },
+        { id: 's5', tipo: 'Sanguíneo', texto: 'Tiendo a saltar de una conexión a otra cuando la red actual comienza a exigir trabajo de mantenimiento o reparación.' },
+        { id: 's6', tipo: 'Sanguíneo', texto: 'Me cuesta tolerar el silencio, el aislamiento o los procesos que requieren concentración solitaria prolongada.' },
+        { id: 's7', tipo: 'Sanguíneo', texto: 'Disfrazo mi falta de estructura personal manteniendo un ritmo frenético de interacciones sociales o laborales.' },
+        { id: 's8', tipo: 'Sanguíneo', texto: 'Resto importancia a las fricciones reales mediante el optimismo excesivo, evitando analizar la raíz del problema.' },
+        { id: 's9', tipo: 'Sanguíneo', texto: 'Mi capacidad de atención se fragmenta fácilmente, afectando la calidad de mi escucha y acompañamiento hacia los demás.' },
+        { id: 's10', tipo: 'Sanguíneo', texto: 'Busco que la red me provea de estímulos constantes, pero evito las dinámicas donde se requiere que yo sea el ancla estable.' }
     ];
 
-    // Matriz de Perfiles
-    const perfiles = {
-        colerico: {
-            nombre: "Colérico (Eje Director / Pragmático)",
-            fortalezas: "Evidencias una alta capacidad ejecutiva y estratégica. Tu toma de decisiones es resolutiva, orientada a la eficiencia y con el empuje necesario para comandar flujos de trabajo en escenarios de alta volatilidad.",
-            debilidades: "Tu principal sesgo es la autosuficiencia radical. Al intentar monopolizar el control, anulas la capacidad operativa de tu entorno y desgastas la simetría de tus relaciones, transformando el liderazgo en dominancia.",
-            vinculo: "Tu estabilidad a largo plazo no radica en la omnipotencia solitaria. Sostener la estructura requiere vulnerabilidad controlada: permitir que la red absorba cargas operativas dota de sentido y propósito a tus colaboradores. Tu evolución estriba en transicionar del control impositivo a la dirección interdependiente.",
-            reto: "Selecciona una asignación o decisión operativa el día de hoy, transfiérela explícitamente a un miembro de tu equipo o entorno cercano y respeta estrictamente su metodología de resolución sin intervenir en el proceso."
+    // Mezclar preguntas para evitar sesgos
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+    
+    // Generar el DOM de las preguntas
+    function renderQuestions() {
+        shuffleArray(preguntas);
+        const container = document.getElementById('questions-area');
+        let html = '';
+        
+        preguntas.forEach((q, index) => {
+            html += `
+                <div class="question-block" data-tipo="${q.tipo}">
+                    <div class="question-text">${index + 1}. ${q.texto}</div>
+                    <div class="options">
+                        <label><input type="radio" name="q_${q.id}" value="1"> <span>1</span></label>
+                        <label><input type="radio" name="q_${q.id}" value="2"> <span>2</span></label>
+                        <label><input type="radio" name="q_${q.id}" value="3"> <span>3</span></label>
+                        <label><input type="radio" name="q_${q.id}" value="4"> <span>4</span></label>
+                        <label><input type="radio" name="q_${q.id}" value="5"> <span>5</span></label>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+    // Matriz de diagnósticos
+    const matrizDiagnostica = {
+        "Colérico-Melancólico": {
+            fricciones: "Tu principal sesgo es la autosuficiencia radical combinada con un perfeccionismo táctico. Al intentar monopolizar el control y exigir estándares que solo tú comprendes, anulas la capacidad operativa de tu entorno. Tiendes a aislarte en la planificación y a desgastar la simetría de tus relaciones, transformando el liderazgo en dominancia pura.",
+            leccion: "Tu estabilidad a largo plazo no radica en la omnipotencia solitaria. Sostener la estructura requiere vulnerabilidad controlada: permitir que tus vínculos absorban cargas operativas, incluso si sus metodologías difieren de la tuya, dota de sentido a quienes te rodean. Tu evolución estriba en transicionar del control impositivo a la dirección interdependiente."
         },
-        melancolico: {
-            nombre: "Melancólico (Eje Analítico / Estratega)",
-            fortalezas: "Posees una destreza superior para el diagnóstico profundo, la planificación minuciosa y la arquitectura de sistemas complejos. Tu aportación dota de orden, rigurosidad metodológica y lealtad a cualquier estructura relacional.",
-            debilidades: "El perfeccionismo paralizante te desplaza con facilidad hacia el aislamiento. Al procesar el entorno bajo un estándar utópico, emerges como un evaluador hipercrítico, propenso a resentir las limitaciones de la red humana.",
-            vinculo: "Frente a la frustración, tu patrón natural es replegarte y romper los puentes de contacto. La clave de tu equilibrio es asimilar la imperfección inherente a la red. Permitir que los demás te brinden sostén emocional y acompañamiento, aun con sus inconsistencias técnicas, mitiga la rigidez de tu autoexigencia.",
-            reto: "Identifica el esfuerzo o la aportación de un colaborador o familiar el día de hoy y verbaliza un reconocimiento explícito hacia su intención o desempeño, inhibiendo activamente cualquier acotación crítica o sugerencia de optimización."
+        "Colérico-Flemático": {
+            fricciones: "Impones tu visión de forma directiva, pero evitas la confrontación profunda sobre las necesidades de los demás. Esto genera una estabilidad artificial en tu entorno, sostenida por la imposición de tus ritmos y la absorción pasiva del desgaste por parte de quienes te acompañan.",
+            leccion: "El control carente de retroalimentación aísla. Aprender a recibir soporte y a escuchar activamente las necesidades de tus vínculos te brindará un cimiento mucho más resistente ante las crisis. La verdadera firmeza no es inamovible, sino aquella que sabe apoyarse en otros para mantener el equilibrio."
         },
-        sanguineo: {
-            nombre: "Sanguíneo (Eje Vinculador / Adaptable)",
-            fortalezas: "Tu competencia clave es la agilidad relacional y la influencia interpersonal. Posees la facultad orgánica de aperturar canales de comunicación, cohesionar dinámicas colectivas y disipar la fricción mediante el entusiasmo funcional.",
-            debilidades: "La dispersión operativa y la inconsistencia metodológica devalúan tu fiabilidad. Tu tendencia a priorizar la validación social inmediata erosiona el cumplimiento de acuerdos estructurales y el seguimiento formal.",
-            vinculo: "El carisma periférico es estéril si carece de responsabilidad simétrica. Los vínculos sólidos exigen congruencia a lo largo del tiempo. Sostener a los demás implica trascender el estímulo del inicio y comprometerse con la estabilidad en las fases de monotonía y ejecución profunda.",
-            reto: "Bloquea un espacio ininterrumpido de 45 minutos en tu agenda para ejecutar y finalizar por completo una tarea de carácter netamente administrativo o documental pendiente, restringiendo cualquier interacción en plataformas sociales."
+        "Colérico-Sanguíneo": {
+            fricciones: "Diriges con entusiasmo y un fuerte empuje inicial, pero tu necesidad de resultados inmediatos y de validación externa te vuelve irascible ante la lentitud ajena. Esta impetuosidad desgasta la confianza operativa y emocional de tus relaciones, dificultando la consolidación a largo plazo.",
+            leccion: "La capacidad de influencia no sustituye al cuidado mutuo. Delegar desde la confianza real y permitirte mostrar vulnerabilidad frente a tus vínculos fortalece tu posición. Al dejar de intentar ser el motor solitario de todo proyecto, permites que el soporte de los demás te dé estructura y continuidad."
         },
-        flematico: {
-            nombre: "Flemático (Eje Estabilizador / Diplomático)",
-            fortalezas: "Representas el pilar de la homeostasis operativa. Tu ecuanimidad y objetividad te permiten fungir como un mediador excepcional, proveyendo un entorno de seguridad psicológica y calma en momentos de disrupción sistémica.",
-            debilidades: "La aversión al conflicto te conduce a una pasividad lesiva. Al omitir posturas firmes y dilatar la toma de decisiones por economía de energía, obligas indirectamente a tu red a asumir el costo y la fricción de tus omisiones.",
-            vinculo: "La omisión del conflicto no representa paz real, sino acumulación latente de presión. Para estructurar una interdependencia funcional, requieres abandonar la posición de espectador pasivo. Emitir tu criterio y asumir la incomodidad de una postura es tu mayor acto de cuidado y corresponsabilidad hacia los tuyos.",
-            reto: "Identifica una determinación o comunicación incómoda que hayas estado postergando por economía relacional, toma una postura concreta en un plazo no mayor a 5 minutos y comunícala de manera transparente y asertiva."
+        "Melancólico-Colérico": {
+            fricciones: "Operas desde un aislamiento preventivo. Diseñas estrategias en solitario y te frustras severamente cuando los demás no alcanzan tus parámetros. Eres altamente crítico y te cuesta recibir ayuda porque dudas de la eficacia ajena, priorizando la estructura técnica sobre el contacto humano.",
+            leccion: "La perfección es enemiga de la interdependencia. Aceptar apoyo en formatos imperfectos te enseña que las personas no son variables a controlar, sino fuentes de sostén real. Dejarte cuidar, cediendo el control de los detalles, rompe tu encierro analítico y fortalece tu equilibrio."
+        },
+        "Melancólico-Flemático": {
+            fricciones: "Posees una tendencia severa a la autosuficiencia pasiva. Acumulas resentimiento en silencio al analizar fallas en el sistema que prefieres no confrontar. Este exceso de protección preserva tu espacio individual, pero debilita la convivencia y bloquea cualquier posibilidad de auxilio mutuo.",
+            leccion: "La sobreprotección te fragiliza frente a la incertidumbre. Comunicar tus necesidades operativas y emocionales con transparencia rompe tu barrera de aislamiento. Permitir que tus vínculos sean tu cimiento en la crisis te demostrará que la estabilidad depende de la suma de fuerzas, no de tu resistencia aislada."
+        },
+        "Melancólico-Sanguíneo": {
+            fricciones: "Tu sistema operativo fluctúa entre la necesidad de interacción y la crítica severa. Buscas la compañía de otros, pero te resientes fácilmente si percibes fallas o inestabilidad en ellos. Esta ambivalencia genera vínculos intermitentes y dificulta la construcción de un soporte emocional duradero.",
+            leccion: "El equilibrio no se logra mediante el análisis solitario ni la dispersión. Reconocer tus propios patrones de fricción y aceptar el acompañamiento constante te permitirá estabilizar tus emociones. El propósito se encuentra cuando te dejas sostener para, eventualmente, ofrecer ese mismo sostén a otros."
+        },
+        "Flemático-Colérico": {
+            fricciones: "Evades el conflicto directo, pero mantienes una resistencia terca de forma pasivo-agresiva. Absorbes cargas operativas para no discutir y sostener el sistema, pero al hacerlo, impides que los demás asuman su responsabilidad, generando cuellos de botella en la dinámica de tus relaciones.",
+            leccion: "Evitar la fricción no equivale a crear estabilidad. Poner límites claros, expresar incomodidades y pedir ayuda activamente fomenta relaciones donde el cuidado es bidireccional. La clave es dejar de intentar ser el amortiguador solitario y exigir que la carga se distribuya en la estructura."
+        },
+        "Flemático-Melancólico": {
+            fricciones: "Silencias sistemáticamente tus requerimientos por temor a alterar la paz del entorno, al tiempo que mantienes expectativas internas rigurosas que nadie conoce. Esto te vuelve propenso a la ansiedad y al agotamiento profundo, erosionando tu capacidad para mantener vínculos sanos.",
+            leccion: "Sostener a otros anulando tu propia existencia hace colapsar el sistema. Dotarás de verdadero sentido a quienes te rodean en el momento en que decidas mostrar tus fisuras. Permitir que te cuiden y te apoyen te otorgará la firmeza necesaria para construir un propósito compartido."
+        },
+        "Flemático-Sanguíneo": {
+            fricciones: "Priorizas mantener un ambiente agradable y carente de conflictos a costa de tu propio desgaste. Disfrazas la ausencia de límites claros con buen humor y complacencia, generando dinámicas donde abunda la interacción superficial, pero escasea el compromiso operativo profundo.",
+            leccion: "La verdadera idoneidad relacional requiere la incomodidad de la firmeza. Al expresar con honestidad lo que necesitas y dejarte guiar por personas de confianza en momentos de crisis, construyes una reciprocidad que va más allá de la simpatía, logrando un sostén duradero."
+        },
+        "Sanguíneo-Colérico": {
+            fricciones: "Operas desde la dispersión enérgica. Inicias proyectos y relaciones con una fuerza arrolladora, pero te impacientas y abandonas los compromisos cuando exigen mantenimiento, disciplina y resolución de conflictos estructurales. Tu egocentrismo ocasional desestabiliza a tu entorno.",
+            leccion: "La tracción a largo plazo exige que abandones la ilusión de la autosuficiencia dinámica. Frenar tu dispersión y permitir que vínculos más estables te estructuren y te guíen dotará de verdadero impacto a tu energía. El crecimiento está en sostener el compromiso cuando el entusiasmo inicial se desvanece."
+        },
+        "Sanguíneo-Melancólico": {
+            fricciones: "Posees una alta inestabilidad operativa. Tu necesidad natural de conexión choca abruptamente con tu sensibilidad a la crítica o al rechazo, llevándote de la expresividad exagerada al aislamiento rencoroso. Esta falta de constancia dificulta que otros confíen plenamente en tu soporte.",
+            leccion: "Tu estabilidad no puede depender exclusivamente de tus fluctuaciones internas. Apoyarte en personas de confianza para ganar estructura y orden te enseñará que el equilibrio es un esfuerzo recíproco. Al dejarte cuidar en tus momentos de baja energía, aprenderás a ser un ancla para los demás."
+        },
+        "Sanguíneo-Flemático": {
+            fricciones: "Evades la densidad emocional y los problemas operativos refugiándote en una sociabilidad constante pero superficial. Te cuesta ofrecer o solicitar un soporte profundo porque tu energía se disipa rápidamente ante la presión o las demandas de mantenimiento que requiere una relación madura.",
+            leccion: "El propósito dentro del grupo no se limita a aportar dinamismo y humor. Aprender a detenerte, sostenerte en el consejo de otros y ofrecer un acompañamiento responsable frente a las crisis convertirá tus interacciones cotidianas en vínculos genuinos y equilibrados."
         }
     };
 
-    let preguntaActual = 0;
-    let puntajes = { colerico: 0, melancolico: 0, sanguineo: 0, flematico: 0 };
+    let chartInstance = null;
 
-    function iniciarTest() {
-        document.getElementById('intro-panel').classList.add('hidden');
-        document.getElementById('test-panel').classList.remove('hidden');
-        preguntaActual = 0;
-        puntajes = { colerico: 0, melancolico: 0, sanguineo: 0, flematico: 0 };
-        mostrarPregunta();
-    }
+    function procesarTest() {
+        const errorMsg = document.getElementById('error-msg');
+        let completado = true;
+        let puntajes = {
+            'Colérico': 0,
+            'Melancólico': 0,
+            'Flemático': 0,
+            'Sanguíneo': 0
+        };
 
-    function mostrarPregunta() {
-        const q = preguntas[preguntaActual];
-        document.getElementById('progress-bar').innerText = `Reactivo ${preguntaActual + 1} de ${preguntas.length}`;
-        document.getElementById('question-container').innerText = q.pregunta;
-        
-        const opcionesDiv = document.getElementById('options-container');
-        opcionesDiv.innerHTML = '';
-        
-        q.opciones.forEach(opcion => {
-            const btn = document.createElement('button');
-            btn.className = 'option-btn';
-            btn.innerText = opcion.texto;
-            btn.onclick = () => registrarRespuesta(opcion.temperamento);
-            opcionesDiv.appendChild(btn);
+        // Sumar puntajes
+        preguntas.forEach(q => {
+            const seleccion = document.querySelector(`input[name="q_${q.id}"]:checked`);
+            if (seleccion) {
+                puntajes[q.tipo] += parseInt(seleccion.value);
+            } else {
+                completado = false;
+            }
         });
-    }
 
-    function registrarRespuesta(temperamento) {
-        puntajes[temperamento]++;
-        preguntaActual++;
-        
-        if (preguntaActual < preguntas.length) {
-            mostrarPregunta();
-        } else {
-            calcularResultados();
+        if (!completado) {
+            errorMsg.style.display = 'block';
+            return;
         }
+        errorMsg.style.display = 'none';
+
+        // Ordenar temperamentos por puntaje
+        const ordenados = Object.keys(puntajes).map(key => {
+            return { nombre: key, puntos: puntajes[key] };
+        }).sort((a, b) => b.puntos - a.puntos);
+
+        const dominante = ordenados[0].nombre;
+        const secundario = ordenados[1].nombre;
+        const combinacion = `${dominante}-${secundario}`;
+
+        // Obtener textos
+        const resultado = matrizDiagnostica[combinacion];
+
+        // Rellenar HTML
+        document.getElementById('dom-sec-title').innerHTML = `DOMINANTE: ${dominante.toUpperCase()} <br> SECUNDARIO: ${secundario.toUpperCase()}`;
+        document.getElementById('fricciones-text').innerText = resultado.fricciones;
+        document.getElementById('leccion-text').innerText = resultado.leccion;
+
+        // Ocultar formulario, mostrar resultados
+        document.getElementById('test-form').style.display = 'none';
+        document.getElementById('instructions').style.display = 'none';
+        document.getElementById('results-container').style.display = 'block';
+
+        generarGrafico(puntajes);
     }
 
-    function calcularResultados() {
-        document.getElementById('test-panel').classList.add('hidden');
+    function generarGrafico(puntajes) {
+        const ctx = document.getElementById('temperamentChart').getContext('2d');
         
-        const ordenados = Object.keys(puntajes).sort((a, b) => puntajes[b] - puntajes[a]);
-        const dominante = ordenados[0];
-        const secundario = ordenados[1];
-
-        document.getElementById('dom-badge').innerText = `Dominante: ${perfiles[dominante].nombre}`;
-        document.getElementById('sec-badge').innerText = `Secundario: ${perfiles[secundario].nombre}`;
-        
-        document.getElementById('res-fortalezas').innerText = perfiles[dominante].fortalezas;
-        document.getElementById('res-debilidades').innerText = perfiles[dominante].debilidades;
-        document.getElementById('res-vinculo').innerText = perfiles[dominante].vinculo;
-        document.getElementById('res-reto').innerText = perfiles[dominante].reto;
-
-        document.getElementById('result-panel').classList.remove('hidden');
-        renderizarMapaRadar(puntajes);
-    }
-
-    function renderizarMapaRadar(scores) {
-        const canvas = document.getElementById('radarCanvas');
-        const ctx = canvas.getContext('2d');
-        const cx = canvas.width / 2;
-        const cy = canvas.height / 2;
-        const rMax = 120; 
-        const maxVal = 5; 
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        const ejes = [
-            { nombre: 'Colérico', clave: 'colerico', x: cx, y: cy - rMax, align: 'center', baseline: 'bottom', ox: 0, oy: -12 },
-            { nombre: 'Sanguíneo', clave: 'sanguineo', x: cx + rMax, y: cy, align: 'left', baseline: 'middle', ox: 12, oy: 0 },
-            { nombre: 'Flemático', clave: 'flematico', x: cx, y: cy + rMax, align: 'center', baseline: 'top', ox: 0, oy: 12 },
-            { nombre: 'Melancólico', clave: 'melancolico', x: cx - rMax, y: cy, align: 'right', baseline: 'middle', ox: -12, oy: 0 }
-        ];
-
-        ctx.strokeStyle = '#e2e8f0';
-        ctx.lineWidth = 1;
-        for (let i = 1; i <= maxVal; i++) {
-            const r = (rMax / maxVal) * i;
-            ctx.beginPath();
-            ctx.moveTo(cx, cy - r);
-            ctx.lineTo(cx + r, cy);
-            ctx.lineTo(cx, cy + r);
-            ctx.lineTo(cx - r, cy);
-            ctx.closePath();
-            ctx.stroke();
-            
-            ctx.fillStyle = '#a0aec0';
-            ctx.font = '9px sans-serif';
-            ctx.fillText(i, cx + 6, cy - r + 3);
+        if (chartInstance) {
+            chartInstance.destroy();
         }
 
-        ctx.beginPath();
-        ctx.moveTo(cx, cy - rMax); ctx.lineTo(cx, cy + rMax);
-        ctx.moveTo(cx - rMax, cy); ctx.lineTo(cx + rMax, cy);
-        ctx.strokeStyle = '#cbd5e1';
-        ctx.stroke();
+        // Orden: Colérico (Arriba), Sanguíneo (Derecha), Flemático (Abajo), Melancólico (Izquierda)
+        const data = {
+            labels: ['Colérico', 'Sanguíneo', 'Flemático', 'Melancólico'],
+            datasets: [{
+                label: 'Perfil Operativo',
+                data: [
+                    puntajes['Colérico'], 
+                    puntajes['Sanguíneo'], 
+                    puntajes['Flemático'], 
+                    puntajes['Melancólico']
+                ],
+                fill: true,
+                backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                borderColor: 'rgba(44, 62, 80, 1)',
+                pointBackgroundColor: 'rgba(44, 62, 80, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(44, 62, 80, 1)',
+                borderWidth: 2
+            }]
+        };
 
-        ctx.font = 'bold 11px sans-serif';
-        ejes.forEach(eje => {
-            ctx.fillStyle = '#1a365d';
-            ctx.textAlign = eje.align;
-            ctx.textBaseline = eje.baseline;
-            ctx.fillText(eje.nombre.toUpperCase(), eje.x + eje.ox, eje.y + eje.oy);
-        });
+        const config = {
+            type: 'radar',
+            data: data,
+            options: {
+                scales: {
+                    r: {
+                        angleLines: {
+                            display: true
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 50,
+                        ticks: {
+                            stepSize: 10
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        };
 
-        ctx.beginPath();
-        ejes.forEach((eje, index) => {
-            const val = scores[eje.clave];
-            const r = (rMax / maxVal) * val;
-            let px = cx, py = cy;
-
-            if (index === 0) py = cy - r; 
-            if (index === 1) px = cx + r; 
-            if (index === 2) py = cy + r; 
-            if (index === 3) px = cx - r; 
-
-            if (index === 0) ctx.moveTo(px, py);
-            else ctx.lineTo(px, py);
-        });
-        ctx.closePath();
-        
-        ctx.fillStyle = 'rgba(26, 54, 93, 0.25)';
-        ctx.fill();
-        
-        ctx.strokeStyle = '#1a365d';
-        ctx.lineWidth = 2.5;
-        ctx.stroke();
-
-        ejes.forEach((eje, index) => {
-            const val = scores[eje.clave];
-            const r = (rMax / maxVal) * val;
-            let px = cx, py = cy;
-
-            if (index === 0) py = cy - r;
-            if (index === 1) px = cx + r;
-            if (index === 2) py = cy + r;
-            if (index === 3) px = cx - r;
-
-            ctx.beginPath();
-            ctx.arc(px, py, 4.5, 0, 2 * Math.PI);
-            ctx.fillStyle = '#3182ce';
-            ctx.fill();
-            ctx.strokeStyle = '#1a365d';
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
-        });
+        chartInstance = new Chart(ctx, config);
     }
 
-    // Función nativa para invocar el diálogo de impresión/PDF del sistema operativo
     function exportarPDF() {
-        window.print();
+        const element = document.getElementById('results-container');
+        // Ocultar el botón de exportar temporalmente para el PDF
+        const btn = element.querySelector('button');
+        btn.style.display = 'none';
+
+        const opt = {
+            margin:       1,
+            filename:     'Idoneidad_Relacional_RedHumana.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(element).save().then(() => {
+            // Restaurar botón
+            btn.style.display = 'block';
+        });
     }
 
-    function reiniciarTest() {
-        document.getElementById('result-panel').classList.add('hidden');
-        document.getElementById('intro-panel').classList.remove('hidden');
-    }
+    // Inicializar
+    window.onload = renderQuestions;
 </script>
+
+</body>
+</html>
