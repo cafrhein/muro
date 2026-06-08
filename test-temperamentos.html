@@ -4,6 +4,7 @@ title: Test de Personalidad y Temperamentos | Red Humana
 ---
 
 <style>
+    /* --- ESTILOS DE INTERFAZ --- */
     .adestrat-test-container {
         max-width: 800px;
         margin: 0 auto;
@@ -19,7 +20,7 @@ title: Test de Personalidad y Temperamentos | Red Humana
         margin-bottom: 20px;
         box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
-    .hidden { display: none; }
+    .hidden { display: none !important; }
     h2 { color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; font-weight: 700; text-transform: uppercase; font-size: 1.6rem; }
     h3 { color: #2d3748; font-weight: 600; margin-top: 25px; margin-bottom: 10px; }
     .question-title { font-size: 1.25rem; font-weight: bold; margin-bottom: 25px; color: #1a365d; line-height: 1.4; }
@@ -70,10 +71,61 @@ title: Test de Personalidad y Temperamentos | Red Humana
         margin-top: 30px;
         border-radius: 0 8px 8px 0;
     }
+    .action-buttons {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
     .btn-primary {
         background: #1a365d; color: #fff; padding: 14px 28px; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s;
     }
     .btn-primary:hover { background: #2a4365; }
+    .btn-secondary {
+        background: #4a5568; color: #fff; padding: 14px 28px; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s;
+    }
+    .btn-secondary:hover { background: #2d3748; }
+
+    /* --- ESTILOS DE EXPORTACIÓN A PDF (IMPRESIÓN) --- */
+    @media print {
+        /* Ocultar elementos estructurales del sitio web (navegación, footers) */
+        header, footer, nav, aside, .site-header, .site-footer {
+            display: none !important;
+        }
+        body { background: #fff; margin: 0; padding: 0; }
+        .adestrat-test-container { max-width: 100%; padding: 0; }
+        
+        /* Ocultar todo excepto el panel de resultados */
+        body * { visibility: hidden; }
+        #result-panel, #result-panel * { visibility: visible; }
+        
+        /* Posicionar el panel de resultados desde la esquina superior izquierda del documento PDF */
+        #result-panel {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            border: none;
+            box-shadow: none;
+        }
+        
+        /* Ocultar botones de interacción en el documento impreso */
+        .no-print { display: none !important; }
+        
+        /* Forzar la renderización de colores de fondo y el lienzo del radar */
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+        }
+        
+        /* Ajuste de márgenes para evitar cortes de página indeseados */
+        .result-section, .reto-diario, .canvas-wrapper {
+            page-break-inside: avoid;
+        }
+    }
 </style>
 
 <div class="adestrat-test-container">
@@ -125,7 +177,10 @@ title: Test de Personalidad y Temperamentos | Red Humana
             <p id="res-reto" style="line-height: 1.6; color: #2b6cb0; margin-bottom: 0; font-weight: 500;"></p>
         </div>
 
-        <button class="btn-primary" style="margin-top: 30px;" onclick="reiniciarTest()">Reauditar Perfil</button>
+        <div class="action-buttons no-print">
+            <button class="btn-primary" onclick="exportarPDF()"><i class="fas fa-file-pdf"></i> Exportar a PDF</button>
+            <button class="btn-secondary" onclick="reiniciarTest()"><i class="fas fa-undo"></i> Reauditar Perfil</button>
+        </div>
     </div>
 
 </div>
@@ -180,7 +235,7 @@ title: Test de Personalidad y Temperamentos | Red Humana
         }
     ];
 
-    // Matriz de Perfiles Basada en Ingeniería Humana
+    // Matriz de Perfiles
     const perfiles = {
         colerico: {
             nombre: "Colérico (Eje Director / Pragmático)",
@@ -267,8 +322,6 @@ title: Test de Personalidad y Temperamentos | Red Humana
         document.getElementById('res-reto').innerText = perfiles[dominante].reto;
 
         document.getElementById('result-panel').classList.remove('hidden');
-        
-        // Ejecución inmediata del motor gráfico nativo
         renderizarMapaRadar(puntajes);
     }
 
@@ -277,21 +330,18 @@ title: Test de Personalidad y Temperamentos | Red Humana
         const ctx = canvas.getContext('2d');
         const cx = canvas.width / 2;
         const cy = canvas.height / 2;
-        const rMax = 120; // Radio geométrico de contención
-        const maxVal = 5; // Techo matemático (número de preguntas)
+        const rMax = 120; 
+        const maxVal = 5; 
 
-        // Limpieza de lienzo e inicialización de alta fidelidad para pantallas retina
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Mapeo ortogonal de los 4 cuadrantes coordenados
         const ejes = [
-            { nombre: 'Colérico (Control)', clave: 'colerico', x: cx, y: cy - rMax, align: 'center', baseline: 'bottom', ox: 0, oy: -12 },
-            { nombre: 'Sanguíneo (Relación)', clave: 'sanguineo', x: cx + rMax, y: cy, align: 'left', baseline: 'middle', ox: 12, oy: 0 },
-            { nombre: 'Flemático (Estabilidad)', clave: 'flematico', x: cx, y: cy + rMax, align: 'center', baseline: 'top', ox: 0, oy: 12 },
-            { nombre: 'Melancólico (Análisis)', clave: 'melancolico', x: cx - rMax, y: cy, align: 'right', baseline: 'middle', ox: -12, oy: 0 }
+            { nombre: 'Colérico', clave: 'colerico', x: cx, y: cy - rMax, align: 'center', baseline: 'bottom', ox: 0, oy: -12 },
+            { nombre: 'Sanguíneo', clave: 'sanguineo', x: cx + rMax, y: cy, align: 'left', baseline: 'middle', ox: 12, oy: 0 },
+            { nombre: 'Flemático', clave: 'flematico', x: cx, y: cy + rMax, align: 'center', baseline: 'top', ox: 0, oy: 12 },
+            { nombre: 'Melancólico', clave: 'melancolico', x: cx - rMax, y: cy, align: 'right', baseline: 'middle', ox: -12, oy: 0 }
         ];
 
-        // 1. Renderizado de la retícula isométrica concéntrica (Niveles del 1 al 5)
         ctx.strokeStyle = '#e2e8f0';
         ctx.lineWidth = 1;
         for (let i = 1; i <= maxVal; i++) {
@@ -304,20 +354,17 @@ title: Test de Personalidad y Temperamentos | Red Humana
             ctx.closePath();
             ctx.stroke();
             
-            // Valores de referencia numérica discretos en el eje vertical
             ctx.fillStyle = '#a0aec0';
             ctx.font = '9px sans-serif';
             ctx.fillText(i, cx + 6, cy - r + 3);
         }
 
-        // 2. Trazado de vectores de coordenadas vectoriales (Ejes cartesianos)
         ctx.beginPath();
         ctx.moveTo(cx, cy - rMax); ctx.lineTo(cx, cy + rMax);
         ctx.moveTo(cx - rMax, cy); ctx.lineTo(cx + rMax, cy);
         ctx.strokeStyle = '#cbd5e1';
         ctx.stroke();
 
-        // 3. Inyección de etiquetas de cuadrante
         ctx.font = 'bold 11px sans-serif';
         ejes.forEach(eje => {
             ctx.fillStyle = '#1a365d';
@@ -326,39 +373,33 @@ title: Test de Personalidad y Temperamentos | Red Humana
             ctx.fillText(eje.nombre.toUpperCase(), eje.x + eje.ox, eje.y + eje.oy);
         });
 
-        // 4. Cálculo de coordenadas cartesianas para el Polígono de Comportamiento del Usuario
         ctx.beginPath();
         ejes.forEach((eje, index) => {
             const val = scores[eje.clave];
             const r = (rMax / maxVal) * val;
-            let px = cx;
-            let py = cy;
+            let px = cx, py = cy;
 
-            if (index === 0) py = cy - r; // Norte
-            if (index === 1) px = cx + r; // Este
-            if (index === 2) py = cy + r; // Sur
-            if (index === 3) px = cx - r; // Oeste
+            if (index === 0) py = cy - r; 
+            if (index === 1) px = cx + r; 
+            if (index === 2) py = cy + r; 
+            if (index === 3) px = cx - r; 
 
             if (index === 0) ctx.moveTo(px, py);
             else ctx.lineTo(px, py);
         });
         ctx.closePath();
         
-        // Relleno del área poligonal (Tonalidad institucional translúcida)
         ctx.fillStyle = 'rgba(26, 54, 93, 0.25)';
         ctx.fill();
         
-        // Perímetro del vector
         ctx.strokeStyle = '#1a365d';
         ctx.lineWidth = 2.5;
         ctx.stroke();
 
-        // 5. Renderizado de nodos de datos discretos
         ejes.forEach((eje, index) => {
             const val = scores[eje.clave];
             const r = (rMax / maxVal) * val;
-            let px = cx;
-            let py = cy;
+            let px = cx, py = cy;
 
             if (index === 0) py = cy - r;
             if (index === 1) px = cx + r;
@@ -373,6 +414,11 @@ title: Test de Personalidad y Temperamentos | Red Humana
             ctx.lineWidth = 1.5;
             ctx.stroke();
         });
+    }
+
+    // Función nativa para invocar el diálogo de impresión/PDF del sistema operativo
+    function exportarPDF() {
+        window.print();
     }
 
     function reiniciarTest() {
