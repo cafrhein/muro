@@ -1,0 +1,250 @@
+---
+layout: default
+title: Test de Personalidad y Temperamentos
+---
+
+<style>
+    .adestrat-test-container {
+        max-width: 800px;
+        margin: 0 auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+    }
+    .panel {
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 30px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .hidden { display: none; }
+    h2 { color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+    .question-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 20px; }
+    .option-btn {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 15px;
+        margin-bottom: 10px;
+        background: #f8fafc;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s, border-color 0.3s;
+        font-size: 1rem;
+    }
+    .option-btn:hover { background: #e2e8f0; border-color: #94a3b8; }
+    .result-section { margin-top: 25px; }
+    .temperament-badge {
+        display: inline-block;
+        padding: 8px 15px;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #fff;
+        background: #2b6cb0;
+        margin-right: 10px;
+    }
+    .secondary-badge { background: #4a5568; }
+    .reto-diario {
+        background: #ebf8ff;
+        border-left: 5px solid #3182ce;
+        padding: 15px;
+        margin-top: 20px;
+    }
+    .btn-primary {
+        background: #1a365d; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem;
+    }
+    .btn-primary:hover { background: #2a4365; }
+</style>
+
+<div class="adestrat-test-container">
+    
+    <div id="intro-panel" class="panel">
+        <h2>Biblioteca de Evaluaciones Interpersonales</h2>
+        <p>Este instrumento está diseñado para auditar tus patrones de conducta mediante el cuadrante de los cuatro temperamentos. El objetivo no es justificarte, sino identificar las fricciones que bloquean tu capacidad para sostener vínculos funcionales y mitigar la autosuficiencia.</p>
+        <button class="btn-primary" onclick="iniciarTest()">Iniciar Evaluación de Temperamentos</button>
+    </div>
+
+    <div id="test-panel" class="panel hidden">
+        <div id="progress-bar" style="margin-bottom: 20px; font-weight: bold; color: #718096;">Pregunta 1 de 5</div>
+        <div id="question-container" class="question-title"></div>
+        <div id="options-container"></div>
+    </div>
+
+    <div id="result-panel" class="panel hidden">
+        <h2>Informe de Idoneidad Relacional</h2>
+        <div style="margin-bottom: 20px;">
+            <span class="temperament-badge" id="dom-badge">Dominante: </span>
+            <span class="temperament-badge secondary-badge" id="sec-badge">Secundario: </span>
+        </div>
+        
+        <div class="result-section">
+            <h3>Radiografía de Fortalezas</h3>
+            <p id="res-fortalezas"></p>
+        </div>
+
+        <div class="result-section">
+            <h3>Inventario de Fricciones (Áreas de Intervención)</h3>
+            <p id="res-debilidades"></p>
+        </div>
+
+        <div class="result-section">
+            <h3>La Lección del Vínculo</h3>
+            <p id="res-vinculo"></p>
+        </div>
+
+        <div class="reto-diario">
+            <h3>Reto Diario Asignado</h3>
+            <p id="res-reto"></p>
+        </div>
+
+        <button class="btn-primary" style="margin-top: 20px;" onclick="reiniciarTest()">Realizar nuevamente</button>
+    </div>
+
+</div>
+
+<script>
+    // Estructura de Datos
+    const preguntas = [
+        {
+            pregunta: "Ante una crisis operativa o un conflicto inesperado en tu entorno, tu reacción inmediata es:",
+            opciones: [
+                { texto: "Tomar el control de la situación y dictar instrucciones precisas para resolverlo de inmediato.", temperamento: "colerico" },
+                { texto: "Analizar detenidamente las causas del fallo para estructurar una solución definitiva y evitar que se repita.", temperamento: "melancolico" },
+                { texto: "Mantener la calma, apaciguar los ánimos y buscar que el entorno no se desestabilice.", temperamento: "flematico" },
+                { texto: "Actuar con optimismo, animando a los demás y confiando en que encontrarán una salida sobre la marcha.", temperamento: "sanguineo" }
+            ]
+        },
+        {
+            pregunta: "Cuando se trata de sostener compromisos a largo plazo o procesos estructurados, tu mayor obstáculo suele ser:",
+            opciones: [
+                { texto: "La impaciencia frente a la incompetencia o lentitud de los demás.", temperamento: "colerico" },
+                { texto: "El perfeccionismo excesivo que me paraliza o me aísla si las cosas no cumplen mi estándar.", temperamento: "melancolico" },
+                { texto: "La falta de motivación o la resistencia a abandonar mi zona de confort.", temperamento: "flematico" },
+                { texto: "La dispersión; me aburro rápido y me cuesta mantener la disciplina sin estímulos nuevos.", temperamento: "sanguineo" }
+            ]
+        },
+        {
+            pregunta: "En la interacción diaria con las personas de tu círculo cercano, tiendes a:",
+            opciones: [
+                { texto: "Ser directo, debatir con firmeza y, en ocasiones, imponer mi visión sin darme cuenta.", temperamento: "colerico" },
+                { texto: "Ser reservado, observar los detalles y mostrarme susceptible si percibo falta de lealtad o fallos.", temperamento: "melancolico" },
+                { texto: "Evitar los conflictos a toda costa, cediendo para mantener la paz, aunque implique no expresar mi inconformidad.", temperamento: "flematico" },
+                { texto: "Hablar constantemente, buscar ser el centro de la dinámica y priorizar el entusiasmo sobre la profundidad.", temperamento: "sanguineo" }
+            ]
+        },
+        {
+            pregunta: "Si debes delegar una tarea crítica a otra persona, ¿cómo gestionas la interdependencia?",
+            opciones: [
+                { texto: "Me cuesta delegar. Prefiero hacerlo yo mismo para asegurar que se haga rápido y a mi manera.", temperamento: "colerico" },
+                { texto: "Delego, pero superviso cada detalle meticulosamente porque desconfío de que alcancen mi nivel de exigencia.", temperamento: "melancolico" },
+                { texto: "Delego sin problemas, a veces de forma pasiva, asumiendo que el otro se encargará sin necesidad de mi intervención.", temperamento: "flematico" },
+                { texto: "Asigno la tarea con entusiasmo inicial, pero olvido dar seguimiento estructurado a los resultados.", temperamento: "sanguineo" }
+            ]
+        },
+        {
+            pregunta: "Frente a un momento de agotamiento o vulnerabilidad personal, tu mecanismo de defensa es:",
+            opciones: [
+                { texto: "Incrementar la carga de trabajo y volverme más rígido o exigente con el entorno.", temperamento: "colerico" },
+                { texto: "Aislarme por completo, sobrepensar la situación y rechazar la ayuda externa.", temperamento: "melancolico" },
+                { texto: "Desconectarme de las responsabilidades, postergar decisiones y minimizar el problema.", temperamento: "flematico" },
+                { texto: "Evadir la realidad buscando distracciones sociales inmediatas o negando la gravedad del asunto.", temperamento: "sanguineo" }
+            ]
+        }
+    ];
+
+    const perfiles = {
+        colerico: {
+            nombre: "Colérico",
+            fortalezas: "Posees una notable capacidad ejecutiva. Eres pragmático, resolutivo y tienes la firmeza necesaria para tomar decisiones bajo presión. Tu voluntad es un motor que puede impulsar el crecimiento de tu entorno.",
+            debilidades: "Tu tendencia a la autosuficiencia te lleva a la dominancia. Al intentar controlarlo todo, asfixias la iniciativa de los demás y puedes mostrarte insensible, debilitando la confianza en tus vínculos.",
+            vinculo: "La estabilidad no depende de que impongas tu voluntad en solitario. Debes comprender que dejarte apoyar y ceder el control dota de sentido y funcionalidad a quienes te rodean. Tu lección es transformar la imposición en dirección colaborativa.",
+            reto: "Reto del día: Delega una decisión menor a una persona de confianza y acepta su método sin intervenir ni corregir el proceso."
+        },
+        melancolico: {
+            nombre: "Melancólico",
+            fortalezas: "Tu nivel de análisis, profundidad y exigencia te convierten en un estratega nato. Aportas orden, calidad y un sentido de lealtad altamente estructurado a tus relaciones.",
+            debilidades: "El exceso de perfeccionismo te empuja al aislamiento. Tu susceptibilidad y visión crítica pueden generar fricciones constantes, volviéndote propenso a juzgar severamente las limitaciones ajenas.",
+            vinculo: "Tu tendencia es refugiarte en la soledad cuando el entorno falla. La clave de tu equilibrio es aceptar la imperfección de la red humana. Al permitir que otros te acompañen, incluso con sus fallos, encuentras el sostén emocional que tu autoexigencia te niega.",
+            reto: "Reto del día: Identifica y comunícale a un colaborador o persona cercana un aspecto positivo de su aportación, omitiendo cualquier crítica o sugerencia de mejora."
+        },
+        sanguineo: {
+            nombre: "Sanguíneo",
+            fortalezas: "Posees una habilidad extraordinaria para la adaptabilidad y la persuasión. Tu calidez humana facilita la apertura de canales de comunicación y tienes el don de aligerar las tensiones en momentos críticos.",
+            debilidades: "La indisciplina, la inestabilidad y la falta de seguimiento son tus mayores obstáculos. Prometes más de lo que puedes cumplir, lo que erosiona la fiabilidad de tu palabra frente a los demás.",
+            vinculo: "Tu carisma es útil, pero los vínculos sólidos requieren congruencia. Debes sustituir la validación social momentánea por el compromiso sostenido. Ser recíproco significa estar presente también en la monotonía y en el cumplimiento de los acuerdos.",
+            reto: "Reto del día: Ejecuta y termina una tarea administrativa u operativa pendiente que tome al menos 30 minutos, sin interrupciones, bloqueando distracciones externas."
+        },
+        flematico: {
+            nombre: "Flemático",
+            fortalezas: "Eres un pilar de objetividad y diplomacia. Tu resistencia a la alteración proporciona calma y estabilidad a los equipos o relaciones que atraviesan turbulencias.",
+            debilidades: "Tu pasividad y aversión al conflicto te llevan a la indecisión. Al no tomar posturas claras ni asumir responsabilidades proactivas, obligas a otros a cargar con el peso de las decisiones operativas.",
+            vinculo: "La evasión del conflicto no es paz, es estancamiento. Para construir interdependencia real, debes abandonar la comodidad del espectador. Aportar tu perspectiva y tomar postura es tu forma de cuidar y sostener a tu red.",
+            reto: "Reto del día: Toma una decisión operativa o personal que has estado postergando en un plazo máximo de 5 minutos y comunícala con firmeza."
+        }
+    };
+
+    let preguntaActual = 0;
+    let puntajes = { colerico: 0, melancolico: 0, sanguineo: 0, flematico: 0 };
+
+    function iniciarTest() {
+        document.getElementById('intro-panel').classList.add('hidden');
+        document.getElementById('test-panel').classList.remove('hidden');
+        preguntaActual = 0;
+        puntajes = { colerico: 0, melancolico: 0, sanguineo: 0, flematico: 0 };
+        mostrarPregunta();
+    }
+
+    function mostrarPregunta() {
+        const q = preguntas[preguntaActual];
+        document.getElementById('progress-bar').innerText = `Pregunta ${preguntaActual + 1} de ${preguntas.length}`;
+        document.getElementById('question-container').innerText = q.pregunta;
+        
+        const opcionesDiv = document.getElementById('options-container');
+        opcionesDiv.innerHTML = '';
+        
+        q.opciones.forEach(opcion => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = opcion.texto;
+            btn.onclick = () => registrarRespuesta(opcion.temperamento);
+            opcionesDiv.appendChild(btn);
+        });
+    }
+
+    function registrarRespuesta(temperamento) {
+        puntajes[temperamento]++;
+        preguntaActual++;
+        
+        if (preguntaActual < preguntas.length) {
+            mostrarPregunta();
+        } else {
+            calcularResultados();
+        }
+    }
+
+    function calcularResultados() {
+        document.getElementById('test-panel').classList.add('hidden');
+        
+        // Ordenar temperamentos por puntaje
+        const ordenados = Object.keys(puntajes).sort((a, b) => puntajes[b] - puntajes[a]);
+        const dominante = ordenados[0];
+        const secundario = ordenados[1]; // Si hay empate, toma el primero según el sort
+
+        document.getElementById('dom-badge').innerText = `Dominante: ${perfiles[dominante].nombre}`;
+        document.getElementById('sec-badge').innerText = `Secundario: ${perfiles[secundario].nombre}`;
+        
+        document.getElementById('res-fortalezas').innerText = perfiles[dominante].fortalezas;
+        document.getElementById('res-debilidades').innerText = perfiles[dominante].debilidades;
+        document.getElementById('res-vinculo').innerText = perfiles[dominante].vinculo;
+        document.getElementById('res-reto').innerText = perfiles[dominante].reto;
+
+        document.getElementById('result-panel').classList.remove('hidden');
+    }
+
+    function reiniciarTest() {
+        document.getElementById('result-panel').classList.add('hidden');
+        document.getElementById('intro-panel').classList.remove('hidden');
+    }
+</script>
