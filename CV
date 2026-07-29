@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Carlos Francisco Hernández Inurreta</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0f172a;
+            --primary-accent: #0284c7;
+            --secondary: #334155;
+            --light-bg: #f8fafc;
+            --border: #e2e8f0;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --white: #ffffff;
+            --highlight: #e0f2fe;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: #cbd5e1;
+            line-height: 1.5;
+            padding: 20px;
+        }
+
+        .page {
+            background-color: var(--white);
+            max-width: 1000px;
+            margin: 0 auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 35px 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .profile-header {
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-accent);
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .sidebar h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--primary-accent);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            font-size: 0.88rem;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar li i {
+            color: var(--primary-accent);
+            width: 16px;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.08);
+            color: #e2e8f0;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin: 3px 2px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .lang-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 0.88rem;
+        }
+
+        .lang-level {
+            color: var(--primary-accent);
+            font-weight: 500;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            padding: 40px;
+            background-color: var(--white);
+        }
+
+        .header-title h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .header-title .subtitle {
+            font-size: 1.1rem;
+            color: var(--primary-accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+            margin-bottom: 20px;
+        }
+
+        .profile-summary {
+            font-size: 0.93rem;
+            color: var(--secondary);
+            background-color: var(--light-bg);
+            padding: 16px;
+            border-left: 4px solid var(--primary-accent);
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 6px;
+        }
+
+        .section-title i {
+            color: var(--primary-accent);
+            font-size: 1.1rem;
+        }
+
+        /* EXPERIENCIA & EDUCACION */
+        .timeline-item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+
+        .job-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .company-name {
+            font-weight: 600;
+            color: var(--primary-accent);
+            font-size: 0.95rem;
+        }
+
+        .job-date {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            background: var(--light-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .job-location {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .job-details {
+            list-style: disc;
+            margin-left: 18px;
+            font-size: 0.88rem;
+            color: var(--secondary);
+        }
+
+        .job-details li {
+            margin-bottom: 5px;
+        }
+
+        /* HIGHLIGHTS / LOGROS */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .achievement-card {
+            background-color: var(--light-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .achievement-card i {
+            color: #d97706;
+            font-size: 1.3rem;
+            margin-top: 2px;
+        }
+
+        .achievement-card p {
+            font-size: 0.83rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* CERTIFICACIONES GRUPOS */
+        .cert-group {
+            margin-bottom: 12px;
+        }
+
+        .cert-group-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .cert-list {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            .page {
+                box-shadow: none;
+                max-width: 100%;
+                border-radius: 0;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+
+        /* ACTION BUTTON */
+        .print-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-accent);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            z-index: 1000;
+        }
+
+        .print-btn:hover {
+            transform: translateY(-2px);
+            background: #0369a1;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="print-btn no-print" onclick="window.print()">
+        <i class="fa-solid fa-print"></i> Imprimir / Guardar PDF
+    </button>
+
+    <div class="page">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="profile-header">
+                <img src="https://via.placeholder.com/120" alt="Carlos Hernández Inurreta" class="profile-avatar" id="user-photo">
+                <h3 style="font-size: 1.1rem; font-weight: 600;">Carlos F. Hernández</h3>
+                <p style="font-size: 0.82rem; color: var(--primary-accent);">Ingeniero Industrial</p>
+            </div>
+
+            <div>
+                <h2><i class="fa-solid fa-address-card"></i> Contacto</h2>
+                <ul>
+                    <li><i class="fa-solid fa-location-dot"></i> México</li>
+                    <li><i class="fa-solid fa-language"></i> Español (Nativo)</li>
+                    <li><i class="fa-solid fa-language"></i> Francés (Avanzado)</li>
+                    <li><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2><i class="fa-solid fa-sliders"></i> Habilidades Clave</h2>
+                <div style="margin-top: 5px;">
+                    <span class="skill-tag">Administración Estratégica</span>
+                    <span class="skill-tag">Desarrollo de Negocios</span>
+                    <span class="skill-tag">Industria 4.0 & Data</span>
+                    <span class="skill-tag">Sistemas de Calidad (ISO)</span>
+                    <span class="skill-tag">Comercio Exterior / Importación</span>
+                    <span class="skill-tag">Transformación Digital</span>
+                    <span class="skill-tag">Finanzas Empresariales</span>
+                    <span class="skill-tag">Liderazgo C-Level</span>
+                </div>
+            </div>
+
+            <div>
+                <h2><i class="fa-solid fa-brain"></i> Competencias</h2>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Liderazgo Estratégico</li>
+                    <li><i class="fa-solid fa-check"></i> Negociación Internacional</li>
+                    <li><i class="fa-solid fa-check"></i> Integración de Cadenas de Valor</li>
+                    <li><i class="fa-solid fa-check"></i> Mapeo y Gestión de Procesos</li>
+                    <li><i class="fa-solid fa-check"></i> Resoluciòn de Problemas</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2><i class="fa-solid fa-laptop-code"></i> Software & Herramientas</h2>
+                <div style="margin-top: 5px;">
+                    <span class="skill-tag">MS Project / Visio</span>
+                    <span class="skill-tag">Excel Avanzado</span>
+                    <span class="skill-tag">Business Intelligence</span>
+                    <span class="skill-tag">PowerPoint / Keynote</span>
+                    <span class="skill-tag">Herramientas de Procesos</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <header class="header-title">
+                <h1>CARLOS FRANCISCO HERNÁNDEZ INURRETA</h1>
+                <div class="subtitle">Director de Negocios & Desarrollo Estratégico | C-Level Executive</div>
+            </header>
+
+            <div class="profile-summary">
+                Ingeniero Industrial y Administrador Empresarial con amplia trayectoria en dirección ejecutiva, estrategia financiera, transformación digital e implementación de Sistemas de Gestión de Calidad (ISO). Experto en aceleración de negocios, comercio exterior e integración de cadenas de valor en sectores de innovación e Industria 4.0. Líder analítico orientado al incremento de rentabilidad, la optimización de procesos y el escalamiento de empresas competitivas a nivel global.
+            </div>
+
+            <!-- LOGROS DESTACADOS -->
+            <section>
+                <div class="section-title">
+                    <i class="fa-solid fa-trophy"></i> Reconocimientos & Logros Principales
+                </div>
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <i class="fa-solid fa-award"></i>
+                        <div>
+                            <p><strong>Top 20 Startups Más Innovadoras</strong></p>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Mundo Ejecutivo (Mayo 2017)</span>
+                        </div>
+                    </div>
+                    <div class="achievement-card">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <div>
+                            <p><strong>Top 999 Empresas Más Importantes</strong></p>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Forbes México (Junio 2017)</span>
+                        </div>
+                    </div>
+                    <div class="achievement-card">
+                        <i class="fa-solid fa-vial-circle-check"></i>
+                        <div>
+                            <p><strong>Acreditación Primer Laboratorio EMA</strong></p>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Ensayos/calibración de presión y válvulas</span>
+                        </div>
+                    </div>
+                    <div class="achievement-card">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        <div>
+                            <p><strong>+16% en Rentabilidad Anual</strong></p>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Atracción de Capital de Riesgo y eficiencia financiera</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXPERIENCIA LABORAL -->
+            <section>
+                <div class="section-title">
+                    <i class="fa-solid fa-briefcase"></i> Experiencia Profesional
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <span class="job-title">Director of Business Development</span>
+                        <span class="job-date">2019 - Presente</span>
+                    </div>
+                    <div class="company-name">GO-INFLUENCE S.A.S.</div>
+                    <div class="job-location">Coatzacoalcos, Veracruz</div>
+                    <ul class="job-details">
+                        <li>Dirigí el desarrollo integral de negocios operando sobre 4 pilares: Finanzas, Clientes, Procesos y Aprendizaje Organizacional.</li>
+                        <li>Diseñé e implementé diagnósticos de gestión empresarial (1ª y 3ª parte) e inteligencia de negocios (BI).</li>
+                        <li>Coordiné las estrategias comerciales y lideré al equipo de servicio de atención a clientes, garantizando cumplimiento de metas y rentabilidad.</li>
+                        <li>Supervisé la creación de modelos de tendencia basados en minería de datos enfocados en Industria 4.0 y Marketing.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <span class="job-title">Chief Executive Officer & Chairman of the Board</span>
+                        <span class="job-date">2016 - Presente</span>
+                    </div>
+                    <div class="company-name">ALLKAP, S. de R.L. de C.V.</div>
+                    <div class="job-location">Álvaro Obregón, Ciudad de México</div>
+                    <ul class="job-details">
+                        <li>Lideré la visión estratégica, comercial, fiscal e implementación de Sistemas de Gestión de Calidad corporativos.</li>
+                        <li>Gestioné acuerdos de importación y negociaciones directas con proveedores en China para optimizar costos de hardware y obtener beneficios fiscales aduanales.</li>
+                        <li>Elaboré presupuestos anuales, reportes trimestrales e informes ejecutivos para el Consejo de Administración.</li>
+                        <li>Supervisé la salud financiera de la empresa, implementando acciones correctivas, preventivas y ajustes presupuestarios clave.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <span class="job-title">Director of Administration and Finance</span>
+                        <span class="job-date">2014 - 2016</span>
+                    </div>
+                    <div class="company-name">NEXT-IO S.A. de C.V.</div>
+                    <div class="job-location">Villahermosa, Tabasco</div>
+                    <ul class="job-details">
+                        <li>Diseñé el Modelo de Negocios y Business Plan estratégico, alineando capital humano, maquinaria y procesos para optimizar producción.</li>
+                        <li>Fui representante legal y comercial en licitaciones públicas y privadas, negociación de contratos estructurados y propuestas económicas.</li>
+                        <li>Integré cadenas de valor maximizando el margen operacional.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <span class="job-title">Quality Director</span>
+                        <span class="job-date">2013 - 2014</span>
+                    </div>
+                    <div class="company-name">EINSUR S.A. de C.V.</div>
+                    <div class="job-location">Coatzacoalcos, Veracruz</div>
+                    <ul class="job-details">
+                        <li>Lideré exitosamente el proyecto de acreditación ante la Entidad Mexicana de Acreditación (EMA) para laboratorio de ensayo y calibración.</li>
+                        <li>Garanticé el estricto cumplimiento normativo de las Normas Oficiales Mexicanas (NOM) y sus reglamentos técnicos.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- FORMACIÓN ACADÉMICA -->
+            <section>
+                <div class="section-title">
+                    <i class="fa-solid fa-graduation-cap"></i> Formación Académica
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <span class="job-title">Licenciatura en Administración Empresarial</span>
+                        <span class="job-date">2021</span>
+                    </div>
+                    <div class="company-name">Universidad Interamericana para el Desarrollo (UNID)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <span class="job-title">Ingeniería Industrial</span>
+                        <span class="job-date">2004</span>
+                    </div>
+                    <div class="company-name">Universidad del Ejército y Fuerza Aérea Mexicanos</div>
+                </div>
+            </section>
+
+            <!-- PROYECTOS E INICIATIVAS SOCIALES -->
+            <section>
+                <div class="section-title">
+                    <i class="fa-solid fa-rocket"></i> Emprendimientos y Proyectos de Inversión
+                </div>
+                <ul class="job-details" style="margin-left: 0; list-style: none;">
+                    <li style="margin-bottom: 8px;">
+                        <strong>HUIXEL S.A.S.:</strong> Plataforma para integración de cadenas de valor en Industria 4.0 enfocada en Nicho UI/UX.
+                    </li>
+                    <li style="margin-bottom: 8px;">
+                        <strong>Fundación Construyendo Paz / Campañas ONG:</strong> Dirección de procuración de fondos para centros de rehabilitación contra adicciones; colaboraciones con DIF Coatzacoalcos, Cinépolis y Nestlé Pro Plan.
+                    </li>
+                </ul>
+            </section>
+
+            <!-- CERTIFICACIONES Y CAPACITACIÓN -->
+            <section>
+                <div class="section-title">
+                    <i class="fa-solid fa-certificate"></i> Capacitación Especializada y Certificaciones
+                </div>
+                
+                <div class="cert-group">
+                    <div class="cert-group-title">Executive Education</div>
+                    <div class="cert-list">• Development Business Plan — Harvard Business School (HBS)</div>
+                </div>
+
+                <div class="cert-group">
+                    <div class="cert-group-title">Sistemas de Gestión de Calidad y Auditoría (EMA / IMNC)</div>
+                    <div class="cert-list">
+                        • Diplomado: Sistemas de Gestión de Calidad ISO 9001:2009 / 2015<br>
+                        • Auditorías de Sistemas de Gestión de Calidad NMX-CC-19011-IMNC-2012 / ISO 19011<br>
+                        • Éxito Sostenido en Organizaciones ISO 9004:2018<br>
+                        • Administración de Laboratorios de Ensayo y Calibración ISO/IEC 17025
+                    </div>
+                </div>
+
+                <div class="cert-group">
+                    <div class="cert-group-title">Gestión de Activos y Satisfacción del Cliente</div>
+                    <div class="cert-list">
+                        • Gestión de Activos ISO 55000 / ISO 55001<br>
+                        • Gestión de Satisfacción del Cliente, Trátamiento de Quejas y Conflictos (ISO 10001, 10002, 10003, 10004)<br>
+                        • Planes de Calidad y Beneficios Financieros (ISO 10005, ISO 10006, ISO 10014)
+                    </div>
+                </div>
+
+                <div class="cert-group">
+                    <div class="cert-group-title">Responsabilidad Social e Igualdad</div>
+                    <div class="cert-list">
+                        • IQNet SR10 Sistema de Responsabilidad Social<br>
+                        • NMX-R-025-SCFI Igualdad Laboral y No Discriminación
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>
