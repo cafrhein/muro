@@ -120,6 +120,46 @@ body.editorial-site {
   color: #a9beb3; font-size: 9px; letter-spacing: .13em;
 }
 
+/* Modelo de Gobernanza e Integración */
+.eg-model { padding: 105px 7vw 115px; background: var(--eg-paper-dark); }
+.eg-model-intro {
+  display: grid; grid-template-columns: 1.4fr .7fr; align-items: end;
+  gap: 80px; margin-bottom: 68px;
+}
+.eg-model-intro h2 {
+  margin: 0; padding: 0; border: 0; color: var(--eg-ink);
+  font-family: var(--eg-serif); font-size: clamp(42px, 5vw, 70px);
+  line-height: 1.03; letter-spacing: -.04em; font-weight: 400;
+}
+.eg-model-intro > p {
+  margin: 0; color: var(--eg-muted); font-size: 15px; line-height: 1.65;
+}
+.eg-model-grid {
+  margin: 0; padding: 0; list-style: none; display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid var(--eg-ink); border-left: 1px solid var(--eg-line);
+}
+.eg-model-card {
+  min-height: 350px; padding: 28px 24px 32px; border-right: 1px solid var(--eg-line);
+  border-bottom: 1px solid var(--eg-line); display: flex; flex-direction: column;
+}
+.eg-model-card > span { font-size: 10px; font-weight: 700; }
+.eg-model-card h3 {
+  margin: 60px 0 18px; color: var(--eg-ink); font-family: var(--eg-serif);
+  font-size: 25px; line-height: 1.08; letter-spacing: -.025em; font-weight: 400;
+}
+.eg-model-card p {
+  margin: auto 0 0; color: var(--eg-muted); font-size: 13px; line-height: 1.58;
+}
+.eg-model-route {
+  margin-top: 34px; padding: 30px 34px; background: var(--eg-lime);
+  display: grid; grid-template-columns: .7fr 2fr; gap: 45px; align-items: center;
+}
+.eg-model-route span {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+}
+.eg-model-route p { margin: 0; color: var(--eg-ink); font-size: 15px; line-height: 1.55; }
+
 /* Artículos de portada */
 .eg-journal { padding: 105px 7vw 120px; }
 .eg-section-head {
@@ -249,6 +289,11 @@ body.editorial-site {
 .editorial-site button { font-family: var(--eg-sans); }
 
 /* Responsive */
+@media (max-width: 1100px) {
+  .eg-links { gap: 18px; font-size: 12px; }
+  .eg-cta { display: none; }
+  .eg-model-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (max-width: 850px) {
   .eg-nav { min-height: 76px; }
   .eg-menu-button { display: block; }
@@ -258,12 +303,18 @@ body.editorial-site {
     flex-direction: column; align-items: flex-start; gap: 18px;
   }
   .eg-links.is-open { display: flex; }
-  .eg-cta { font-size: 9px; gap: 8px; padding: 12px; }
+  .eg-cta { display: flex; font-size: 9px; gap: 8px; padding: 12px; }
   .eg-hero { min-height: 650px; padding: 46px 6vw 25px; }
   .eg-hero h1 { margin: 84px 0 58px; font-size: 17vw; line-height: .88; }
   .eg-hero-bottom { padding-left: 0; align-items: end; }
   .eg-hero-bottom > p { max-width: 62%; font-size: 15px; }
   .eg-round-link { width: 96px; height: 96px; }
+  .eg-model { padding: 75px 6vw 85px; }
+  .eg-model-intro { grid-template-columns: 1fr; gap: 28px; }
+  .eg-model-grid { grid-template-columns: 1fr; }
+  .eg-model-card { min-height: 290px; }
+  .eg-model-card h3 { margin-top: 42px; }
+  .eg-model-route { grid-template-columns: 1fr; gap: 18px; padding: 26px; }
   .eg-journal { padding: 75px 6vw 85px; }
   .eg-section-head { grid-template-columns: 1fr; gap: 28px; }
   .eg-featured { grid-template-columns: 40px 1fr; min-height: 480px; }
