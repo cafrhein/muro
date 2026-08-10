@@ -4,22 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
-  <meta name="description" content="{{ page.description | default: site.description | strip_html | strip_newlines | escape }}">
+  <meta name="description" content="{{ meta_description | strip_html | strip_newlines | escape }}">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+  {% assign meta_description = page.description | default: page.excerpt | default: site.description %}
 
   {% assign social_image = page.image | default: '/assets/img/image.default.png' %}
   <meta property="og:locale" content="es_MX">
   <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
   <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
-  <meta property="og:description" content="{{ page.description | default: site.description | strip_html | strip_newlines | escape }}">
+  <meta property="og:description" content="{{ meta_description | strip_html | strip_newlines | escape }}">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   <meta property="og:image" content="{{ social_image | absolute_url }}">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@{{ site.author.twitter_username }}">
   <meta name="twitter:title" content="{{ page.title | default: site.title | escape }}">
-  <meta name="twitter:description" content="{{ page.description | default: site.description | strip_html | strip_newlines | escape }}">
+  <meta name="twitter:description" content="{{ meta_description | strip_html | strip_newlines | escape }}">
   <meta name="twitter:image" content="{{ social_image | absolute_url }}">
 
   <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="{{ '/assets/css/editorial-green.css' | relative_url }}">
 </head>
 <body class="editorial-site {% if page.layout == 'post' %}post-page{% else %}{{ page.body_class | default: 'standard-page' }}{% endif %}">
@@ -39,6 +43,7 @@
       <a href="{{ '/' | relative_url }}">Inicio</a>
       <a href="{{ '/#analisis' | relative_url }}">Análisis</a>
       <a href="{{ '/herramientas' | relative_url }}">Herramientas</a>
+      <a href="{{ '/acerca' | relative_url }}">Sobre Carlos</a>
       <a href="{{ '/mapa-sitio' | relative_url }}">Mapa</a>
     </nav>
 
@@ -55,6 +60,7 @@
   <footer class="eg-footer">
     <a href="{{ '/' | relative_url }}">Adestrat · Carlos Hernández</a>
     <span>Opinión · análisis · herramientas</span>
+    <span>Non Sibi · Finis Origine Pendent</span>
     <span>México · {{ 'now' | date: '%Y' }}</span>
   </footer>
 
