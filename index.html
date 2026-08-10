@@ -58,9 +58,10 @@ body_class: home-page
     </a>
 
     <div class="eg-grid">
-      {% for post in site.posts offset:1 limit:6 %}
+      {% for post in site.posts offset:1 %}
+        {% assign article_number = forloop.index | plus: 1 %}
         <a class="eg-card" href="{{ post.url | relative_url }}">
-          <span class="eg-number">0{{ forloop.index | plus: 1 }}</span>
+          <span class="eg-number">{% if article_number < 10 %}0{% endif %}{{ article_number }}</span>
           <span class="eg-category">
             {{ post.category | default: 'Análisis' }} · {{ post.date | date: "%d.%m.%Y" }}
           </span>
