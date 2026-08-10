@@ -1,145 +1,93 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title | default: site.title }}</title>
-    
-    <script>
-        /* Sincronización de tema inmediata */
-        (function() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        })();
-    </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property="og:title" content="{{ page.title | default: site.title }}">
-    <meta property="og:description" content="{{ content | strip_html | truncate: 160 }}">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
-    
-    {% if page.image %}
-    <meta property="og:image" content="{{ page.image | absolute_url }}">
-    <meta name="twitter:image" content="{{ page.image | absolute_url }}">
-    {% else %}
-    <meta property="og:image" content="{{ '/assets/img/image.default.png' | absolute_url }}">
-    <meta name="twitter:image" content="{{ '/assets/img/image.default.png' | absolute_url }}">
-    {% endif %}
+  {% assign meta_description = page.description | default: page.excerpt | default: site.description %}
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ meta_description | strip_html | strip_newlines | escape }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@{{ site.author.twitter_username }}">
-    <meta name="twitter:title" content="{{ page.title | default: site.title }}">
-    <meta name="twitter:description" content="{{ content | strip_html | truncate: 160 }}">
+  {% assign social_image = page.image | default: '/assets/img/image.default.png' %}
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+  <meta property="og:description" content="{{ meta_description | strip_html | strip_newlines | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ social_image | absolute_url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@{{ site.author.twitter_username }}">
+  <meta name="twitter:title" content="{{ page.title | default: site.title | escape }}">
+  <meta name="twitter:description" content="{{ meta_description | strip_html | strip_newlines | escape }}">
+  <meta name="twitter:image" content="{{ social_image | absolute_url }}">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ '/assets/css/editorial-green.css' | relative_url }}">
 </head>
-<body>
+<body class="editorial-site {% if page.layout == 'post' %}post-page{% else %}{{ page.body_class | default: 'standard-page' }}{% endif %}">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-    <header class="fb-header" role="banner">
-        <div class="header-content">
-            <div class="header-left">
-                <button id="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">
-                    <i class="fas fa-bars"></i> 
-                    <span class="menu-text">Menú</span>
-                </button>
-                <a href="/" class="logo-link">
-                    <span class="rt-logo">Red</span>
-                </a>
-            </div>
-            <div class="header-date">
-                <time datetime="{{ 'now' | date: '%Y-%m-%d' }}">
-                    {{ "now" | date: "%d %b %Y" }}
-                </time>
-                <span id="live-clock" style="margin-left: 10px; padding-left: 10px; border-left: 1px solid var(--rt-ui-grey);"></span>
-                </div>
-        </div>
-    </header>
+  <header class="eg-nav" aria-label="Cabecera del sitio">
+    <a class="eg-brand" href="{{ '/' | relative_url }}" aria-label="Adestrat, ir a la portada">
+      <span class="eg-mark" aria-hidden="true">A</span>
+      <span>Adestrat<br>Carlos Hernández</span>
+    </a>
 
-    <nav id="side-menu" aria-label="Menú principal" aria-hidden="true">
-        <div class="side-menu-container">
-            <button id="menu-close" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
-            <div class="menu-items">
-                <h3>SECCIONES</h3>
-                <ul>
-                    <li><a href="/">PORTADA</a></li>
-                    <li><a href="/herramientas">HERRAMIENTAS</a></li>
-                    <li><a href="/acerca">SOBRE CARLOS</a></li>
-                </ul>
-            </div>
-        </div>
+    <button class="eg-menu-button" id="eg-menu-button" type="button" aria-expanded="false" aria-controls="eg-links">
+      Menú
+    </button>
+
+    <nav class="eg-links" id="eg-links" aria-label="Navegación principal">
+      <a href="{{ '/' | relative_url }}">Inicio</a>
+      <a href="{{ '/#analisis' | relative_url }}">Análisis</a>
+      <a href="{{ '/herramientas' | relative_url }}">Herramientas</a>
+      <a href="{{ '/acerca' | relative_url }}">Sobre Carlos</a>
+      <a href="{{ '/mapa-sitio' | relative_url }}">Mapa</a>
     </nav>
-    <div id="menu-overlay"></div>
 
-    <div class="fb-container">
-        <main role="main">
-            {{ content }}
-        </main>
-    </div>
+    <a class="eg-cta" href="{{ '/#analisis' | relative_url }}">
+      <span>Últimos<br>artículos</span>
+      <span aria-hidden="true">↗</span>
+    </a>
+  </header>
 
-    <footer class="fb-footer">
-        <div class="footer-content">
-            <p>&copy; {{ 'now' | date: "%Y" }} Carlos Hernández • Non Sibi • Finis Origine Pendent</p>
-        </div>
-    </footer>
+  <main class="eg-main" id="contenido">
+    {{ content }}
+  </main>
 
-    <button id="theme-toggle" aria-label="Cambiar modo de color"><i class="fas fa-moon"></i></button>
+  <footer class="eg-footer">
+    <a href="{{ '/' | relative_url }}">Adestrat · Carlos Hernández</a>
+    <span>Opinión · análisis · herramientas</span>
+    <span>Non Sibi · Finis Origine Pendent</span>
+    <span>México · {{ 'now' | date: '%Y' }}</span>
+  </footer>
 
-    <script>
-        const btnOpen = document.getElementById('menu-toggle');
-        const btnClose = document.getElementById('menu-close');
-        const sideNav = document.getElementById('side-menu');
-        const overlayBg = document.getElementById('menu-overlay');
-        const themeBtn = document.getElementById('theme-toggle');
+  <script>
+    (function () {
+      var button = document.getElementById('eg-menu-button');
+      var links = document.getElementById('eg-links');
+      if (!button || !links) return;
 
-        /* Lógica del reloj digital (Horario Centro de México) */
-        function updateClock() {
-            const clockElement = document.getElementById('live-clock');
-            if (!clockElement) return;
+      function closeMenu() {
+        links.classList.remove('is-open');
+        button.setAttribute('aria-expanded', 'false');
+      }
 
-            const now = new Date();
-            const options = {
-                timeZone: 'America/Mexico_City',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            };
-            
-            const formatter = new Intl.DateTimeFormat('es-MX', options);
-            clockElement.textContent = formatter.format(now);
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
+      button.addEventListener('click', function () {
+        var isOpen = links.classList.toggle('is-open');
+        button.setAttribute('aria-expanded', String(isOpen));
+      });
 
-        const toggleMenu = (isOpen) => {
-            sideNav.classList.toggle('is-open', isOpen);
-            overlayBg.classList.toggle('is-active', isOpen);
-            sideNav.setAttribute('aria-hidden', !isOpen);
-            btnOpen.setAttribute('aria-expanded', isOpen);
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-            if (isOpen) { requestAnimationFrame(() => btnClose.focus()); }
-            else { btnOpen.focus(); }
-        };
+      links.addEventListener('click', function (event) {
+        if (event.target.tagName === 'A') closeMenu();
+      });
 
-        btnOpen.addEventListener('click', () => toggleMenu(true));
-        btnClose.addEventListener('click', () => toggleMenu(false));
-        overlayBg.addEventListener('click', () => toggleMenu(false));
-
-        const applyTheme = (theme) => {
-            document.documentElement.setAttribute('data-theme', theme);
-            themeBtn.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-            localStorage.setItem('theme', theme);
-        };
-
-        themeBtn.addEventListener('click', () => {
-            const current = document.documentElement.getAttribute('data-theme');
-            applyTheme(current === 'dark' ? 'light' : 'dark');
-        });
-    </script>
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') closeMenu();
+      });
+    }());
+  </script>
 </body>
 </html>
