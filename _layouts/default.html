@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {% assign meta_description = page.description | default: page.excerpt | default: site.description %}
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ meta_description | strip_html | strip_newlines | escape }}">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
-
-  {% assign meta_description = page.description | default: page.excerpt | default: site.description %}
 
   {% assign social_image = page.image | default: '/assets/img/image.default.png' %}
   <meta property="og:locale" content="es_MX">
