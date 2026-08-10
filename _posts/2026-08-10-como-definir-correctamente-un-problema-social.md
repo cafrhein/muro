@@ -1,12 +1,3 @@
----
-
-layout: post
-title: "Cómo definir correctamente un problema social"
-date: 2026-08-10
-category: Impacto
-author: Carlos Hernández
-------------------------
-
 <p>Una organización social puede ejecutar correctamente un programa y, aun así, producir resultados poco relevantes. Una de las razones es haber comenzado con una definición incorrecta del problema.</p>
 
 <p>Cuando el problema se formula de manera vaga, se confunde con una de sus causas o se expresa como la ausencia de una solución, las decisiones posteriores quedan condicionadas: se plantean objetivos equivocados, se seleccionan intervenciones poco pertinentes y se construyen indicadores que pueden demostrar actividad sin demostrar que la situación que justificó el programa está cambiando.</p>
