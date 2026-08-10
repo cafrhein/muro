@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/editorial-green.css' | relative_url }}">
 </head>
-<body class="editorial-site {{ page.body_class | default: 'standard-page' }}">
+<body class="editorial-site {% if page.layout == 'post' %}post-page{% else %}{{ page.body_class | default: 'standard-page' }}{% endif %}">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <header class="eg-nav" aria-label="Cabecera del sitio">
