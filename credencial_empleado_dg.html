@@ -30,26 +30,58 @@
        AJUSTES ESPECÍFICOS — CREDENCIAL DIRECTOR GENERAL
        ===================================================== */
 
+    /*
+     * El CSS general usa un contenedor circular de 7rem.
+     * Aquí lo sustituimos por un contenedor de ancho completo
+     * para centrar correctamente la fotografía.
+     */
     .credential-profile {
+      position: relative;
+      z-index: 2;
+
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 1.75rem 0 1.5rem;
+
+      width: 100%;
+      height: auto;
+
+      margin: -3.5rem auto 1.5rem;
+      padding: 0;
+
+      border: 0;
+      border-radius: 0;
+
+      background: transparent;
+      box-shadow: none;
     }
 
+    /*
+     * Fotografía
+     */
     .credential-profile img {
-      width: 160px;
-      height: 190px;
-      object-fit: cover;
-      object-position: center top;
       display: block;
 
+      width: 160px;
+      height: 190px;
+
+      margin: 0 auto;
+
+      object-fit: cover;
+      object-position: center top;
+
+      border: 6px solid var(--credential-warm-white);
       border-radius: 14px;
 
+      background: var(--credential-beige);
+
       box-shadow:
-        0 8px 24px rgba(0, 0, 0, 0.18);
+        0 12px 30px rgba(17, 37, 30, 0.20);
     }
 
+    /*
+     * Correo corporativo
+     */
     .credential-meta a.credential-value {
       color: inherit;
       text-decoration: none;
@@ -60,35 +92,45 @@
       text-decoration: underline;
     }
 
-    /* URL de verificación */
+    /*
+     * URL de verificación
+     */
     .credential-verify-link {
       overflow-wrap: anywhere;
       word-break: break-word;
     }
 
-    /* Ajustes móviles */
+    /*
+     * Ajuste para móviles
+     */
     @media (max-width: 600px) {
-
       .credential-profile {
-        margin: 1.4rem 0 1.25rem;
+        width: 100%;
+        margin: -3.25rem auto 1.35rem;
       }
 
       .credential-profile img {
         width: 145px;
         height: 175px;
+        margin: 0 auto;
       }
-
     }
 
-    /* Ajustes al imprimir */
+    /*
+     * Ajuste para impresión
+     */
     @media print {
+      .credential-profile {
+        width: 100%;
+        margin: -3.5rem auto 1.5rem;
+      }
 
       .credential-profile img {
         width: 150px;
         height: 180px;
+        margin: 0 auto;
         box-shadow: none;
       }
-
     }
   </style>
 </head>
@@ -450,7 +492,7 @@
        CONTROL AUTOMÁTICO DE VIGENCIA
        ============================================== -->
 
-  <script src="assets/js/credential.js?v=20260817-8"></script>
+  <script src="assets/js/credential.js?v=20260817-9"></script>
 
 </body>
 </html>
