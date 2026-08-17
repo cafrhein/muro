@@ -2,7 +2,11 @@
 <html lang="es-MX">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
 
   <title>Credencial digital · Director General | Adestrat</title>
 
@@ -20,7 +24,75 @@
     rel="stylesheet"
     href="assets/css/credential.css"
   >
+
+  <style>
+    /* =====================================================
+       AJUSTES ESPECÍFICOS — CREDENCIAL DIRECTOR GENERAL
+       ===================================================== */
+
+    .credential-profile {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 1.75rem 0 1.5rem;
+    }
+
+    .credential-profile img {
+      width: 160px;
+      height: 190px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+
+      border-radius: 14px;
+
+      box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .credential-meta a.credential-value {
+      color: inherit;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+    }
+
+    .credential-meta a.credential-value:hover {
+      text-decoration: underline;
+    }
+
+    /* URL de verificación */
+    .credential-verify-link {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    /* Ajustes móviles */
+    @media (max-width: 600px) {
+
+      .credential-profile {
+        margin: 1.4rem 0 1.25rem;
+      }
+
+      .credential-profile img {
+        width: 145px;
+        height: 175px;
+      }
+
+    }
+
+    /* Ajustes al imprimir */
+    @media print {
+
+      .credential-profile img {
+        width: 150px;
+        height: 180px;
+        box-shadow: none;
+      }
+
+    }
+  </style>
 </head>
+
 
 <body class="credential-page">
 
@@ -32,6 +104,11 @@
         class="credential-card"
         aria-labelledby="credential-title"
       >
+
+
+        <!-- ==========================================
+             ENCABEZADO
+             ========================================== -->
 
         <header class="credential-header">
 
@@ -57,6 +134,7 @@
 
           </div>
 
+
           <span class="credential-authenticity">
 
             <svg
@@ -64,9 +142,11 @@
               fill="currentColor"
               aria-hidden="true"
             >
+
               <path
                 d="M12 2 4 5v6.1c0 5.05 3.41 9.75 8 10.9 4.59-1.15 8-5.85 8-10.9V5l-8-3Zm-1.1 14.2-3.5-3.5 1.4-1.4 2.1 2.1 4.8-4.8 1.4 1.4-6.2 6.2Z"
               />
+
             </svg>
 
             Autenticidad verificada
@@ -79,6 +159,12 @@
 
         </header>
 
+
+
+        <!-- ==========================================
+             FOTOGRAFÍA
+             ========================================== -->
+
         <div class="credential-profile">
 
           <img
@@ -88,11 +174,18 @@
 
         </div>
 
+
+
+        <!-- ==========================================
+             INFORMACIÓN PRINCIPAL
+             ========================================== -->
+
         <div class="credential-body">
 
           <p class="credential-eyebrow">
-            Acreditación laboral
+            Identificación laboral
           </p>
+
 
           <h1
             class="credential-title"
@@ -101,13 +194,24 @@
             Director General
           </h1>
 
+
           <p class="credential-holder">
             Carlos Francisco Hernández Inurreta
           </p>
 
-          <code class="credential-code">
+
+          <code
+            class="credential-code"
+            aria-label="Código de credencial"
+          >
             NE-AD-DG-001
           </code>
+
+
+
+          <!-- ========================================
+               ESTADO DE AUTENTICIDAD Y VIGENCIA
+               ======================================== -->
 
           <div class="credential-verification">
 
@@ -118,10 +222,11 @@
               </strong>
 
               <span>
-                Emitido y verificable directamente por Adestrat.
+                Identificación laboral emitida y verificable directamente por Adestrat.
               </span>
 
             </span>
+
 
             <span
               class="credential-validity"
@@ -133,10 +238,19 @@
 
           </div>
 
+
+
+          <!-- ========================================
+               DATOS DE LA CREDENCIAL
+               ======================================== -->
+
           <ul
             class="credential-meta"
             aria-label="Datos de la credencial"
           >
+
+
+            <!-- ORGANISMO -->
 
             <li>
 
@@ -150,10 +264,30 @@
 
             </li>
 
+
+
+            <!-- PUESTO -->
+
             <li>
 
               <span class="credential-label">
-                Correo electrónico
+                Puesto
+              </span>
+
+              <span class="credential-value">
+                Director General
+              </span>
+
+            </li>
+
+
+
+            <!-- CORREO -->
+
+            <li>
+
+              <span class="credential-label">
+                Correo corporativo
               </span>
 
               <a
@@ -165,6 +299,26 @@
 
             </li>
 
+
+
+            <!-- CÓDIGO -->
+
+            <li>
+
+              <span class="credential-label">
+                Código de credencial
+              </span>
+
+              <code class="credential-value">
+                NE-AD-DG-001
+              </code>
+
+            </li>
+
+
+
+            <!-- EXPEDICIÓN -->
+
             <li>
 
               <span class="credential-label">
@@ -175,10 +329,14 @@
                 class="credential-value"
                 datetime="2025-08"
               >
-                Ago. 2025
+                Agosto de 2025
               </time>
 
             </li>
+
+
+
+            <!-- VENCIMIENTO -->
 
             <li>
 
@@ -190,21 +348,44 @@
                 class="credential-value credential-expiry"
                 datetime="2029-08"
               >
-                Ago. 2029
+                Agosto de 2029
               </time>
 
             </li>
 
+
+
+            <!-- IDENTIFICADOR ÚNICO -->
+
+            <li>
+
+              <span class="credential-label">
+                Identificador único
+              </span>
+
+              <code class="credential-value">
+                2307219/AEDG-001
+              </code>
+
+            </li>
+
+
           </ul>
 
         </div>
+
+
+
+        <!-- ==========================================
+             VERIFICACIÓN OFICIAL
+             ========================================== -->
 
         <footer class="credential-footer">
 
           <div class="credential-id">
 
             <span>
-              Identificador único
+              Verificación oficial
             </span>
 
             <code>
@@ -214,6 +395,7 @@
             <a
               class="credential-verify-link"
               href="https://adestrat.com/credencial_empleado_dg.html"
+              aria-label="Verificar credencial en el sitio oficial de Adestrat"
             >
               adestrat.com/credencial_empleado_dg.html
             </a>
@@ -223,6 +405,12 @@
         </footer>
 
       </article>
+
+
+
+      <!-- ============================================
+           ACCIONES
+           ============================================ -->
 
       <div class="credential-actions">
 
@@ -239,9 +427,11 @@
             viewBox="0 0 24 24"
             aria-hidden="true"
           >
+
             <path
               d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2m-2 4H8v-4h8v4Z"
             />
+
           </svg>
 
           Guardar como PDF o imprimir
@@ -254,7 +444,13 @@
 
   </main>
 
-  <script src="assets/js/credential.js?v=20260817-5"></script>
+
+
+  <!-- ==============================================
+       CONTROL AUTOMÁTICO DE VIGENCIA
+       ============================================== -->
+
+  <script src="assets/js/credential.js?v=20260817-8"></script>
 
 </body>
 </html>
