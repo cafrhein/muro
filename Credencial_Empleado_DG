@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Credencial digital · Director General | Adestrat</title>
+  <meta name="description" content="Verificación de la credencial de empleado emitida por Adestrat.">
+  <link rel="canonical" href="https://adestrat.com/Credencial_Empleado_DG.html">
+  <link rel="stylesheet" href="assets/css/credential.css">
+</head>
+<body class="credential-page">
+  <main class="credential-shell">
+    <div class="credential-wrap">
+      <article class="credential-card" aria-labelledby="credential-title">
+        <header class="credential-header">
+          <div class="credential-brand">
+            <img class="credential-logo" src="assets/img/logo-adestrat-reversa.svg" alt="Adestrat">
+            <span class="credential-brand-copy">
+              <span class="credential-brand-name">Adestrat</span>
+              <span class="credential-brand-type">Credencial digital</span>
+            </span>
+          </div>
+
+          <span class="credential-authenticity">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 4 5v6.1c0 5.05 3.41 9.75 8 10.9 4.59-1.15 8-5.85 8-10.9V5l-8-3Zm-1.1 14.2-3.5-3.5 1.4-1.4 2.1 2.1 4.8-4.8 1.4 1.4-6.2 6.2Z"/></svg>
+            Autenticidad verificada<span class="sr-only"> por Adestrat</span>
+          </span>
+        </header>
+
+        <div class="credential-profile">
+          <img src="assets/img/mi-foto-perfil.png" alt="Retrato de Carlos Francisco Hernández Inurreta">
+        </div>
+
+        <div class="credential-body">
+          <p class="credential-eyebrow">Acreditación laboral</p>
+          <h1 class="credential-title" id="credential-title">Director General</h1>
+          <p class="credential-holder">Carlos Francisco Hernández Inurreta</p>
+          <code class="credential-code">NE-AD-DG-001</code>
+
+          <div class="credential-verification">
+            <span class="credential-verification-copy">
+              <strong>Documento auténtico</strong>
+              <span>Emitido y verificable directamente por Adestrat.</span>
+            </span>
+            <span class="credential-validity" data-validity-status aria-live="polite">Consultando</span>
+          </div>
+
+          <ul class="credential-meta" aria-label="Datos de la credencial">
+            <li>
+              <span class="credential-label">Organismo emisor</span>
+              <span class="credential-value">Adestrat</span>
+            </li>
+            <li>
+              <span class="credential-label">Expedición</span>
+              <time class="credential-value" datetime="2025-08">Ago. 2025</time>
+            </li>
+            <li>
+              <span class="credential-label">Vencimiento</span>
+              <time class="credential-value credential-expiry" datetime="2028-08">Ago. 2028</time>
+            </li>
+          </ul>
+        </div>
+
+        <footer class="credential-footer">
+          <div class="credential-id">
+            <span>Identificador único</span>
+            <code>2307219/AEDG-001</code>
+            <a class="credential-verify-link" href="https://adestrat.com/Credencial_Empleado_DG.html">adestrat.com/Credencial_Empleado_DG.html</a>
+          </div>
+          <img class="credential-qr" src="assets/img/qr-credencial-neie.svg" alt="Código QR para verificar esta credencial en adestrat.com">
+        </footer>
+      </article>
+
+      <div class="credential-actions">
+        <button class="credential-print" type="button" onclick="window.print()">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2m-2 4H8v-4h8v4Z"/></svg>
+          Guardar como PDF o imprimir
+        </button>
+      </div>
+    </div>
+  </main>
+  <script src="assets/js/credential.js?v=20260817-2"></script>
+</body>
+</html>
