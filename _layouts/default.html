@@ -3,12 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   {% assign meta_description = page.description | default: page.excerpt | default: site.description %}
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ meta_description | strip_html | strip_newlines | escape }}">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
-
   {% assign social_image = page.image | default: '/assets/img/image.default.png' %}
   <meta property="og:locale" content="es_MX">
   <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
@@ -18,77 +16,30 @@
   <meta property="og:image" content="{{ social_image | absolute_url }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@{{ site.author.twitter_username }}">
-  <meta name="twitter:title" content="{{ page.title | default: site.title | escape }}">
-  <meta name="twitter:description" content="{{ meta_description | strip_html | strip_newlines | escape }}">
-  <meta name="twitter:image" content="{{ social_image | absolute_url }}">
-
   <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="{{ '/assets/css/editorial-green.css' | relative_url }}">
 </head>
-<body class="editorial-site {% if page.layout == 'post' %}post-page{% else %}{{ page.body_class | default: 'standard-page' }}{% endif %}">
+<body class="{{ page.body_class | default: 'standard-page' }}">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
-
-  <header class="eg-nav" aria-label="Cabecera del sitio">
-    <a class="eg-brand" href="{{ '/' | relative_url }}" aria-label="Adestrat, ir a la portada">
-      <span class="eg-mark" aria-hidden="true">A</span>
-      <span>Adestrat<br>Carlos Hernández</span>
+  <header class="topbar">
+    <a class="brand" href="{{ '/#inicio' | relative_url }}" aria-label="Inicio del Modelo MIG">
+      <span class="brand-mark">MIG</span>
+      <span class="brand-name">Modelo de Gobernanza<br>e Integración</span>
     </a>
-
-    <button class="eg-menu-button" id="eg-menu-button" type="button" aria-expanded="false" aria-controls="eg-links">
-      Menú
-    </button>
-
-    <nav class="eg-links" id="eg-links" aria-label="Navegación principal">
-      <a href="{{ '/' | relative_url }}">Inicio</a>
-      <a href="{{ '/#modelo' | relative_url }}">Modelo MIG</a>
-      <a href="{{ '/#analisis' | relative_url }}">Análisis</a>
-      <a href="{{ '/herramientas' | relative_url }}">Herramientas</a>
-      <a href="{{ '/acerca' | relative_url }}">Sobre Carlos</a>
-      <a href="{{ '/mapa-sitio' | relative_url }}">Mapa</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" data-menu-toggle>Menú</button>
+    <nav id="main-nav" aria-label="Navegación principal" data-main-nav>
+      <a href="{{ '/#modelo' | relative_url }}">El modelo</a>
+      <a href="{{ '/#ruta' | relative_url }}">Ruta</a>
+      <a href="{{ '/#aula' | relative_url }}">Aula</a>
+      <a href="{{ '/#bitacora' | relative_url }}">Bitácora</a>
     </nav>
-
-    <a class="eg-cta" href="{{ '/#analisis' | relative_url }}">
-      <span>Últimos<br>artículos</span>
-      <span aria-hidden="true">↗</span>
-    </a>
+    <a class="nav-cta" href="{{ '/#aula' | relative_url }}">Comenzar <span>↗</span></a>
   </header>
-
-  <main class="eg-main" id="contenido">
-    {{ content }}
-  </main>
-
-  <footer class="eg-footer">
-    <a href="{{ '/' | relative_url }}">Adestrat · Carlos Hernández</a>
-    <span>Opinión · análisis · herramientas</span>
-    <span>Non Sibi · Finis Origine Pendent</span>
-    <span>México · {{ 'now' | date: '%Y' }}</span>
+  <main id="contenido">{{ content }}</main>
+  <footer class="site-footer">
+    <div class="brand footer-brand"><span class="brand-mark">MIG</span><span class="brand-name">Modelo de Gobernanza<br>e Integración</span></div>
+    <p>Conocimiento abierto para organizaciones que buscan gobernar con propósito, evidencia y continuidad.</p>
+    <div><a href="{{ '/#bitacora' | relative_url }}">Bitácora</a><span>México</span><span>2026—2028</span></div>
   </footer>
-
-  <script>
-    (function () {
-      var button = document.getElementById('eg-menu-button');
-      var links = document.getElementById('eg-links');
-      if (!button || !links) return;
-
-      function closeMenu() {
-        links.classList.remove('is-open');
-        button.setAttribute('aria-expanded', 'false');
-      }
-
-      button.addEventListener('click', function () {
-        var isOpen = links.classList.toggle('is-open');
-        button.setAttribute('aria-expanded', String(isOpen));
-      });
-
-      links.addEventListener('click', function (event) {
-        if (event.target.tagName === 'A') closeMenu();
-      });
-
-      document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape') closeMenu();
-      });
-    }());
-  </script>
+  <script src="{{ '/assets/js/mig-site.js' | relative_url }}"></script>
 </body>
 </html>

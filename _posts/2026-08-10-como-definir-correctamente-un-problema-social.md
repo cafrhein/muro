@@ -1,3 +1,11 @@
+---
+layout: post
+title: "Cómo definir correctamente un problema social"
+date: 2026-08-10
+category: Diseño social
+author: Carlos Hernández
+---
+
 <p>Una organización social puede tener una misión clara, un equipo comprometido, recursos disponibles y una buena capacidad de ejecución y, aun así, producir resultados limitados. Una de las razones puede encontrarse mucho antes de la implementación: <strong>haber definido incorrectamente el problema que pretendía resolver</strong>.</p>
 
 <p>Definir un problema social no consiste solamente en identificar una situación que preocupa a la organización. Requiere comprender qué se quiere cambiar, quién experimenta esa situación, cómo la vive y qué factores ayudan a explicarla. También exige evitar un error particularmente frecuente: comenzar con una solución y construir después una definición del problema que la justifique.</p>

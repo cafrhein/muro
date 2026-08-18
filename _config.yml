@@ -1,13 +1,11 @@
 # ==========================================
-# CONFIGURACIÓN GLOBAL - RED HUMANA (RT STYLE)
+# CONFIGURACIÓN GLOBAL - MODELO MIG
 # ==========================================
-title: "Adestrat | Carlos"
-description: "Opinión"
+title: "Modelo de Gobernanza e Integración"
+description: "Una ruta abierta para diseñar organizaciones que deciden, ejecutan, miden y aprenden."
 url: "https://adestrat.com"
 baseurl: ""
 enforce_ssl: true
-
-/* CAMBIO: Se elimina fb_app_id para evitar error de ID no válido */
 
 # IDENTIDAD DEL AUTOR
 author:
@@ -15,7 +13,7 @@ author:
   avatar: "/perfil.png"
   twitter_username: cafrhein
 
-# IMPORTANTE: Diseño propio
+# Diseño propio
 theme: null
 
 # CONFIGURACIÓN DE MOTOR

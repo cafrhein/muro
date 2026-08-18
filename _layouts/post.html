@@ -1,80 +1,37 @@
 ---
 layout: default
+body_class: post-page
 ---
 
-<div class="eg-progress" aria-hidden="true">
-  <span id="reading-progress"></span>
-</div>
-
-<header class="eg-article-hero">
-  <div class="eg-article-index" aria-hidden="true">§</div>
-
+<div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
+<header class="article-hero">
+  <div class="article-index" aria-hidden="true">§</div>
   <div>
-    <span class="eg-category">
-      {{ page.category | default: 'Análisis' }} · Lectura
-    </span>
+    <a class="article-back" href="{{ '/#bitacora' | relative_url }}">← Volver a la Bitácora</a>
+    <p class="eyebrow light"><span></span> {{ page.category | default: 'Análisis' }} · Lectura</p>
     <h1>{{ page.title }}</h1>
-    <div class="eg-article-meta">
+    <div class="article-meta">
       {{ page.author | default: site.author.name | default: site.title }}
       · {{ page.date | date: "%d.%m.%Y" }}
     </div>
   </div>
 </header>
 
-<article class="eg-article">
-  <aside class="eg-article-aside">
+<article class="longform">
+  <aside>
     Archivo editorial<br>
-    Adestrat · {{ page.date | date: "%Y" }}
+    MIG · {{ page.date | date: "%Y" }}
   </aside>
-
-  <div class="eg-article-body">
+  <div class="longform-body">
     {% if page.image %}
-      <figure>
-        <img
-          src="{{ page.image | relative_url }}"
-          alt="{{ page.image_alt | default: page.title | escape }}"
-          loading="eager"
-        >
-      </figure>
+      <figure><img src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: page.title | escape }}"></figure>
     {% endif %}
-
     {{ content }}
-
     {% if page.previous or page.next %}
-      <nav class="eg-post-nav" aria-label="Más artículos">
-        {% if page.previous %}
-          <a href="{{ page.previous.url | relative_url }}" rel="prev">
-            <small>Artículo anterior</small>
-            <strong>{{ page.previous.title }}</strong>
-          </a>
-        {% else %}
-          <span aria-hidden="true"></span>
-        {% endif %}
-
-        {% if page.next %}
-          <a href="{{ page.next.url | relative_url }}" rel="next">
-            <small>Artículo siguiente</small>
-            <strong>{{ page.next.title }}</strong>
-          </a>
-        {% endif %}
+      <nav class="post-nav" aria-label="Más artículos">
+        {% if page.previous %}<a href="{{ page.previous.url | relative_url }}" rel="prev"><small>Artículo anterior</small><strong>{{ page.previous.title }}</strong></a>{% else %}<span></span>{% endif %}
+        {% if page.next %}<a href="{{ page.next.url | relative_url }}" rel="next"><small>Artículo siguiente</small><strong>{{ page.next.title }}</strong></a>{% endif %}
       </nav>
     {% endif %}
   </div>
 </article>
-
-<script>
-  (function () {
-    var progress = document.getElementById('reading-progress');
-    if (!progress) return;
-
-    function updateProgress() {
-      var total = document.documentElement.scrollHeight - window.innerHeight;
-      var amount = total > 0 ? (window.scrollY / total) * 100 : 0;
-      progress.style.width = Math.min(100, Math.max(0, amount)) + '%';
-    }
-
-    updateProgress();
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    window.addEventListener('resize', updateProgress);
-  }());
-</script>
