@@ -1,3 +1,11 @@
+---
+layout: post
+title: "Problema, causa y síntoma: cómo diferenciarlos"
+date: 2026-08-17
+category: Diseño social
+author: Carlos Hernández
+---
+
 <p>Una organización observa que pocos jóvenes asisten a un programa, que las familias abandonan un servicio antes de concluirlo o que determinados beneficiarios no obtienen los resultados esperados. Las situaciones son reales y pueden medirse. Pero observarlas no significa todavía comprender qué está ocurriendo.</p>
 
 <p>Una de las dificultades del diagnóstico consiste precisamente en distinguir entre <strong>el problema que se quiere cambiar, los factores que ayudan a producirlo y las manifestaciones que permiten observarlo</strong>. Es decir, distinguir entre problema, causa y síntoma.</p>
