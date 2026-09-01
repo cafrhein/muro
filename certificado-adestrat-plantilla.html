@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Plantilla de certificado | Adestrat</title>
+  <style>
+    :root{--navy:#213b4a;--navy-2:#385261;--gold:#b18c2e;--gold-light:#d7bd6b;--ink:#28343a;--paper:#fff;--muted:#68757b}
+    *{box-sizing:border-box}
+    body{margin:0;background:#e8ecee;color:var(--ink);font-family:Arial,"Helvetica Neue",sans-serif}
+    .toolbar{position:sticky;top:0;z-index:5;display:flex;justify-content:center;gap:12px;padding:12px;background:#182b35;box-shadow:0 2px 10px #0003}
+    button{border:1px solid #ffffff55;border-radius:6px;padding:9px 16px;background:var(--gold);color:#fff;font-weight:700;cursor:pointer}
+    button.secondary{background:transparent}
+    .stage{padding:28px;overflow:auto}
+    .certificate{position:relative;width:11in;height:8.5in;margin:auto;background:var(--paper);padding:.28in;box-shadow:0 12px 40px #26394238;overflow:hidden}
+    .frame{position:relative;width:100%;height:100%;border:3px solid var(--navy);outline:12px solid var(--navy-2);outline-offset:-18px;padding:.38in .42in .30in 3.05in}
+    .frame:after{content:"";position:absolute;inset:17px;border:2px solid var(--gold);pointer-events:none}
+    .ribbon{position:absolute;z-index:1;left:1.06in;top:17px;bottom:17px;width:1.03in;background:var(--navy);border-left:11px solid var(--gold);border-right:11px solid var(--gold)}
+    .seal{position:absolute;z-index:3;left:.61in;top:1.60in;width:1.92in;height:1.92in;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#f9f3dc,#fff 47%,#e7d08b);border:8px double var(--gold);box-shadow:0 4px 10px #0002}
+    .seal-ring{position:absolute;inset:12px;border:2px solid var(--gold);border-radius:50%}
+    .seal-word{position:absolute;color:#79601d;font-weight:800;letter-spacing:.16em;font-size:10px}
+    .seal-word.top{top:25px}.seal-word.bottom{bottom:24px}
+    .seal-mark{font-family:Georgia,serif;font-size:48px;font-weight:700;color:var(--navy);line-height:1}
+    .seal-star{position:absolute;color:var(--gold);font-size:15px}.seal-star.left{left:20px}.seal-star.right{right:20px}
+    .content{position:relative;z-index:2;height:100%;padding:1.05in 0 .3in .05in}
+    .brand{display:flex;align-items:baseline;gap:9px;margin-bottom:10px;color:var(--navy)}
+    .brand-mark{width:28px;height:28px;display:grid;place-items:center;background:var(--gold);color:white;font-family:Georgia,serif;font-size:22px;font-weight:700}
+    .brand-name{font-size:21px;font-weight:800;letter-spacing:.22em}.brand-tag{font-size:10px;letter-spacing:.13em;color:var(--muted)}
+    .eyebrow{margin:0 0 5px;color:var(--gold);font-size:13px;font-weight:800;letter-spacing:.16em}
+    h1{margin:0 0 5px;font-family:Georgia,"Times New Roman",serif;font-size:35px;font-weight:500;color:var(--navy)}
+    .recipient-intro{font-size:15px;color:var(--muted)}
+    .recipient{margin:4px 0 25px;font-family:Georgia,"Times New Roman",serif;font-size:30px;color:var(--ink);border-bottom:1px solid #cbd2d5;padding-bottom:5px}
+    .course-intro{font-size:14px;color:var(--muted)}
+    .course{max-width:6.5in;margin:6px 0 8px;font-size:26px;line-height:1.12;font-weight:800;color:var(--navy)}
+    .meta{font-size:14px;color:var(--gold);font-weight:700}
+    .statement{max-width:6.55in;margin:18px 0 16px;font-size:13px;line-height:1.45;color:#47545a}
+    .skills-label{margin-bottom:7px;font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--navy)}
+    .skills{max-width:6.55in;font-size:13px;line-height:1.45;color:#47545a}
+    .footer{position:absolute;left:.05in;right:0;bottom:.18in;display:grid;grid-template-columns:1.25fr 1fr;gap:.35in;align-items:end}
+    .signature-line{width:2.4in;border-top:1px solid #7b8589;padding-top:6px;font-family:Georgia,serif;font-size:14px;color:var(--navy)}
+    .role,.organization{font-family:Arial,sans-serif;font-size:10px;line-height:1.4;color:var(--muted)}
+    .folio{text-align:right;font-size:10px;line-height:1.5;color:var(--muted)}
+    [contenteditable="true"]{border-radius:3px;outline:none}
+    [contenteditable="true"]:focus{background:#fff7d8;box-shadow:0 0 0 2px #d5b34f66}
+    @page{size:letter landscape;margin:0}
+    @media print{body{background:#fff}.toolbar{display:none}.stage{padding:0}.certificate{margin:0;box-shadow:none}.frame{outline-color:var(--navy-2)}[contenteditable="true"]{background:transparent!important;box-shadow:none!important}}
+    @media(max-width:900px){.stage{padding:12px}.certificate{transform-origin:top left;transform:scale(.72);margin-bottom:-2.3in}}
+  </style>
+</head>
+<body>
+  <nav class="toolbar" aria-label="Acciones de la plantilla">
+    <button onclick="window.print()">Imprimir / Guardar PDF</button>
+    <button class="secondary" onclick="location.reload()">Restablecer ejemplo</button>
+  </nav>
+  <main class="stage">
+    <article class="certificate" aria-label="Certificado de finalización Adestrat">
+      <div class="ribbon" aria-hidden="true"></div>
+      <div class="seal" aria-label="Sello de certificación Adestrat">
+        <span class="seal-ring"></span><span class="seal-word top">ADESTRAT</span>
+        <span class="seal-star left">★</span><span class="seal-mark">A</span><span class="seal-star right">★</span>
+        <span class="seal-word bottom">FORMACIÓN PROFESIONAL</span>
+      </div>
+      <section class="frame">
+        <div class="content">
+          <div class="brand"><span class="brand-mark">A</span><span class="brand-name">ADESTRAT</span><span class="brand-tag">FORMACIÓN Y CONSULTORÍA</span></div>
+          <p class="eyebrow">CERTIFICADO DE FINALIZACIÓN</p>
+          <h1>Constancia de formación</h1>
+          <div class="recipient-intro">Se otorga el presente certificado a</div>
+          <div class="recipient" contenteditable="true" spellcheck="false">NOMBRE DEL PARTICIPANTE</div>
+          <div class="course-intro">por haber concluido satisfactoriamente el curso</div>
+          <div class="course" contenteditable="true" spellcheck="false">ADMINISTRACIÓN DE RIESGOS</div>
+          <div class="meta"><span contenteditable="true">Curso completado el 1 de septiembre de 2026</span> · <span contenteditable="true">12 horas de formación</span></div>
+          <p class="statement" contenteditable="true">El participante completó las actividades y los contenidos establecidos en el programa de formación desarrollado por Adestrat.</p>
+          <div class="skills-label">COMPETENCIAS DESARROLLADAS</div>
+          <div class="skills" contenteditable="true">Identificación de riesgos · Análisis de riesgos · Evaluación de probabilidad e impacto · Valoración financiera del riesgo · Diseño de controles · Tratamiento y seguimiento de riesgos</div>
+          <footer class="footer">
+            <div><div class="signature-line" contenteditable="true">NOMBRE DEL INSTRUCTOR</div><div class="role" contenteditable="true">Instructor · Adestrat</div></div>
+            <div class="folio"><strong>Folio del certificado</strong><br><span contenteditable="true">AD-RSK-2026-0001</span><br><span contenteditable="true">adestrat.com</span></div>
+          </footer>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>
