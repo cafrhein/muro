@@ -19,7 +19,7 @@
     .seal{position:absolute;z-index:3;left:.61in;top:1.60in;width:1.92in;height:1.92in;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#f9f3dc,#fff 47%,#e7d08b);border:8px double var(--gold);box-shadow:0 4px 10px #0002}
     .seal-ring{position:absolute;inset:12px;border:2px solid var(--gold);border-radius:50%}
     .seal-word{position:absolute;color:#79601d;font-weight:800;letter-spacing:.16em;font-size:10px}
-    .seal-word.top{top:25px}.seal-word.bottom{bottom:24px}
+    .seal-word.top{top:25px}.seal-word.bottom{bottom:24px;letter-spacing:.11em}
     .seal-mark{font-family:Georgia,serif;font-size:48px;font-weight:700;color:var(--navy);line-height:1}
     .seal-star{position:absolute;color:var(--gold);font-size:15px}.seal-star.left{left:20px}.seal-star.right{right:20px}
     .content{position:relative;z-index:2;height:100%;padding:1.05in 0 .3in .05in}
@@ -43,8 +43,8 @@
     [contenteditable="true"]{border-radius:3px;outline:none}
     [contenteditable="true"]:focus{background:#fff7d8;box-shadow:0 0 0 2px #d5b34f66}
     @page{size:letter landscape;margin:0}
-    @media print{body{background:#fff}.toolbar{display:none}.stage{padding:0}.certificate{margin:0;box-shadow:none}.frame{outline-color:var(--navy-2)}[contenteditable="true"]{background:transparent!important;box-shadow:none!important}}
-    @media(max-width:900px){.stage{padding:12px}.certificate{transform-origin:top left;transform:scale(.72);margin-bottom:-2.3in}}
+    @media print{html,body{width:11in;height:8.5in;overflow:hidden;background:#fff}.toolbar{display:none}.stage{width:11in;height:8.5in;padding:0;overflow:hidden}.certificate{margin:0;box-shadow:none;transform:none!important;break-inside:avoid;page-break-inside:avoid;break-after:avoid;page-break-after:avoid}.frame{outline-color:var(--navy-2)}[contenteditable="true"]{background:transparent!important;box-shadow:none!important}}
+    @media screen and (max-width:900px){.stage{padding:12px}.certificate{transform-origin:top left;transform:scale(.72);margin-bottom:-2.3in}}
   </style>
 </head>
 <body>
@@ -58,7 +58,7 @@
       <div class="seal" aria-label="Sello de certificación Adestrat">
         <span class="seal-ring"></span><span class="seal-word top">ADESTRAT</span>
         <span class="seal-star left">★</span><span class="seal-mark">A</span><span class="seal-star right">★</span>
-        <span class="seal-word bottom">FORMACIÓN PROFESIONAL</span>
+        <span class="seal-word bottom">CERTIFICACIÓN</span>
       </div>
       <section class="frame">
         <div class="content">
