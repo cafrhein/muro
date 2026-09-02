@@ -35,7 +35,11 @@
     .footer{position:absolute;left:.05in;right:0;bottom:.18in;display:grid;grid-template-columns:1.55fr .85fr;gap:.28in;align-items:end}
     .signature-line{width:3.45in;max-width:100%;border-top:1px solid #7b8589;padding-top:6px;font-family:Georgia,serif;font-size:13.5px;line-height:1.15;white-space:nowrap;color:var(--navy)}
     .role,.organization{font-family:Arial,sans-serif;font-size:10px;line-height:1.4;color:var(--muted)}
-    .folio{text-align:right;font-size:10px;line-height:1.5;color:var(--muted)}
+    .folio-wrap{display:flex;justify-content:flex-end;align-items:flex-end;gap:10px}
+    .folio{text-align:right;font-size:9px;line-height:1.45;color:var(--muted)}
+    .folio-code{font-weight:700;color:var(--navy);white-space:nowrap}
+    .qr{width:68px;height:68px;flex:0 0 68px;padding:3px;background:#fff;border:1px solid #d5ddda}
+    .qr canvas,.qr img{display:block!important;width:100%!important;height:100%!important}
     [contenteditable="true"]{border-radius:3px;outline:none}
     [contenteditable="true"]:focus{background:#fff7d8;box-shadow:0 0 0 2px #d5b34f66}
     @page{size:letter landscape;margin:0}
@@ -46,7 +50,7 @@
 <body>
   <nav class="toolbar" aria-label="Acciones de la plantilla">
     <button onclick="window.print()">Imprimir / Guardar PDF</button>
-    <button class="secondary" onclick="location.reload()">Restablecer ejemplo</button>
+    <button class="secondary" onclick="resetCertificate()">Restablecer ejemplo</button>
   </nav>
   <main class="stage">
     <article class="certificate" aria-label="Certificado de finalización Adestrat">
@@ -67,11 +71,49 @@
           <div class="skills" contenteditable="true">Identificación de riesgos · Análisis de riesgos · Evaluación de probabilidad e impacto · Valoración financiera del riesgo · Diseño de controles · Tratamiento y seguimiento de riesgos</div>
           <footer class="footer">
             <div><div class="signature-line" contenteditable="true">NOMBRE DEL INSTRUCTOR</div><div class="role" contenteditable="true">Instructor · Adestrat</div></div>
-            <div class="folio"><strong>Folio del certificado</strong><br><span contenteditable="true">AD-RSK-2026-0001</span><br><span contenteditable="true">adestrat.com</span></div>
+            <div class="folio-wrap"><div class="folio"><strong>Folio del certificado</strong><br><span class="folio-code" id="certificate-folio"></span><br>adestrat.com</div><div class="qr" id="certificate-qr" aria-label="Código QR de verificación"></div></div>
           </footer>
         </div>
       </section>
     </article>
   </main>
+  <script src="assets/qrcode.min.js"></script>
+  <script>
+    const FOLIO_STORAGE_KEY = "adestrat-current-certificate-folio";
+
+    function createCertificateFolio() {
+      const now = new Date();
+      const date = [now.getFullYear(), String(now.getMonth() + 1).padStart(2, "0"), String(now.getDate()).padStart(2, "0")].join("");
+      const bytes = new Uint8Array(6);
+      crypto.getRandomValues(bytes);
+      const random = Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("").toUpperCase();
+      return `AD-${date}-${random.slice(0, 4)}-${random.slice(4, 8)}-${random.slice(8, 12)}`;
+    }
+
+    function getCertificateFolio() {
+      let folio = sessionStorage.getItem(FOLIO_STORAGE_KEY);
+      if (!folio) {
+        folio = createCertificateFolio();
+        sessionStorage.setItem(FOLIO_STORAGE_KEY, folio);
+      }
+      return folio;
+    }
+
+    function renderCertificateIdentity() {
+      const folio = getCertificateFolio();
+      document.getElementById("certificate-folio").textContent = folio;
+      const verificationUrl = `https://adestrat.com/certificado-autenticidad.html?folio=${encodeURIComponent(folio)}`;
+      const qr = document.getElementById("certificate-qr");
+      qr.innerHTML = "";
+      new QRCode(qr, {text: verificationUrl, width: 124, height: 124, colorDark: "#0a3a2d", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H});
+    }
+
+    function resetCertificate() {
+      sessionStorage.removeItem(FOLIO_STORAGE_KEY);
+      location.reload();
+    }
+
+    renderCertificateIdentity();
+  </script>
 </body>
 </html>
