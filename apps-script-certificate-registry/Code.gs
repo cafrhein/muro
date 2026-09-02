@@ -15,14 +15,15 @@ function doGet(e) {
 }
 
 function doPost(e) {
+  let payload = {};
   try {
-    const payload = parsePayload_(e);
+    payload = parsePayload_(e);
     const action = clean_(payload.action || 'register').toLowerCase();
     validateIssuerSecret_(payload.issuer_secret);
     const result = action === 'revoke' ? revokeCertificate_(payload) : registerCertificate_(payload);
-    return responsePage_(result, true);
+    return responsePage_(result, true, safeCallbackUrl_(payload.callback_url));
   } catch (error) {
-    return responsePage_({error: error.message || String(error)}, false);
+    return responsePage_({error: error.message || String(error)}, false, safeCallbackUrl_(payload.callback_url));
   }
 }
 
@@ -169,13 +170,30 @@ function parsePayload_(e) {
   return e.parameter || {};
 }
 
-function responsePage_(result, success) {
+function responsePage_(result, success, callbackUrl) {
   const safe = JSON.stringify({type:'adestrat-certificate-registration', success, ...result}).replace(/</g, '\\u003c');
+  const safeCallback = JSON.stringify(callbackUrl || '').replace(/</g, '\\u003c');
   const title = success ? 'Certificado registrado' : 'No fue posible registrar el certificado';
   const detail = success ? `Folio: ${result.folio}` : result.error;
-  return HtmlService.createHtmlOutput(`<!doctype html><html lang="es"><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial,sans-serif;padding:32px;color:#17241f}h1{color:#0a3a2d}.card{max-width:560px;margin:auto;border:1px solid #d5ddda;padding:28px;border-radius:10px}</style></head><body><div class="card"><h1>${escapeHtml_(title)}</h1><p>${escapeHtml_(detail || '')}</p></div><script>const result=${safe};if(window.opener)window.opener.postMessage(result,'*');</script></body></html>`)
+  const certificateLink = success && result.certificate_url
+    ? `<p><a href="${escapeHtml_(result.certificate_url)}" target="_top">Abrir certificado verificado</a></p>`
+    : '';
+  return HtmlService.createHtmlOutput(`<!doctype html><html lang="es"><head><base target="_top"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial,sans-serif;padding:32px;color:#17241f;background:#eef2f0}h1,a{color:#0a3a2d}.card{max-width:560px;margin:auto;background:#fff;border:1px solid #d5ddda;padding:28px;border-radius:10px;box-shadow:0 12px 32px #16312818}</style></head><body><div class="card"><h1>${escapeHtml_(title)}</h1><p>${escapeHtml_(detail || '')}</p>${certificateLink}</div><script>const result=${safe};const callback=${safeCallback};const send=target=>{try{if(target)target.postMessage(result,'*')}catch(_){}};send(window.opener);try{send(window.top.opener)}catch(_){};if(callback){const query=new URLSearchParams({certificate_registered:result.success?'1':'0',folio:result.folio||'',certificate_url:result.certificate_url||'',registration_error:result.error||''});setTimeout(()=>window.top.location.replace(callback+'?'+query.toString()),900)}</script></body></html>`)
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
     .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+}
+
+function safeCallbackUrl_(value) {
+  const raw = clean_(value);
+  if (!raw) return '';
+  try {
+    const url = new URL(raw);
+    const allowedAdestrat = url.protocol === 'https:' && (url.hostname === 'adestrat.com' || url.hostname === 'www.adestrat.com');
+    const allowedGithub = url.protocol === 'https:' && url.hostname === 'cafrhein.github.io' && url.pathname.indexOf('/muro/') === 0;
+    return allowedAdestrat || allowedGithub ? `${url.origin}${url.pathname}` : '';
+  } catch (_) {
+    return '';
+  }
 }
 
 function clean_(value) {
