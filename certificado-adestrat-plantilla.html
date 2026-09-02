@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Plantilla de certificado | Adestrat</title>
   <style>
-    :root{--navy:#213b4a;--navy-2:#385261;--gold:#b18c2e;--gold-light:#d7bd6b;--ink:#28343a;--paper:#fff;--muted:#68757b}
+    :root{--navy:#0a3a2d;--navy-2:#57736a;--gold:#0a3a2d;--gold-light:#aebdb8;--ink:#17241f;--paper:#fff;--muted:#57736a}
     *{box-sizing:border-box}
     body{margin:0;background:#e8ecee;color:var(--ink);font-family:Arial,"Helvetica Neue",sans-serif}
-    .toolbar{position:sticky;top:0;z-index:5;display:flex;justify-content:center;gap:12px;padding:12px;background:#182b35;box-shadow:0 2px 10px #0003}
+    .toolbar{position:sticky;top:0;z-index:5;display:flex;justify-content:center;gap:12px;padding:12px;background:var(--navy);box-shadow:0 2px 10px #0003}
     button{border:1px solid #ffffff55;border-radius:6px;padding:9px 16px;background:var(--gold);color:#fff;font-weight:700;cursor:pointer}
     button.secondary{background:transparent}
     .stage{padding:28px;overflow:auto}
@@ -16,16 +16,16 @@
     .frame{position:relative;width:100%;height:100%;border:3px solid var(--navy);outline:12px solid var(--navy-2);outline-offset:-18px;padding:.38in .42in .30in 3.05in}
     .frame:after{content:"";position:absolute;inset:17px;border:2px solid var(--gold);pointer-events:none}
     .ribbon{position:absolute;z-index:1;left:1.06in;top:17px;bottom:17px;width:1.03in;background:var(--navy);border-left:11px solid var(--gold);border-right:11px solid var(--gold)}
-    .seal{position:absolute;z-index:3;left:.61in;top:1.60in;width:1.92in;height:1.92in;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#f9f3dc,#fff 47%,#e7d08b);border:8px double var(--gold);box-shadow:0 4px 10px #0002}
+    .seal{position:absolute;z-index:3;left:.61in;top:1.60in;width:1.92in;height:1.92in;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#dce5e2,#fff 47%,#aebdb8);border:8px double var(--navy);box-shadow:0 4px 10px #0002}
     .seal-ring{position:absolute;inset:12px;border:2px solid var(--gold);border-radius:50%}
-    .seal-word{position:absolute;color:#79601d;font-weight:800;letter-spacing:.16em;font-size:10px}
+    .seal-word{position:absolute;color:var(--navy);font-weight:800;letter-spacing:.16em;font-size:10px}
     .seal-word.top{top:25px}.seal-word.bottom{bottom:24px;letter-spacing:.11em}
     .seal-mark{font-family:Georgia,serif;font-size:48px;font-weight:700;color:var(--navy);line-height:1}
     .seal-star{position:absolute;color:var(--gold);font-size:15px}.seal-star.left{left:20px}.seal-star.right{right:20px}
     .content{position:relative;z-index:2;height:100%;padding:1.05in 0 .3in .05in}
-    .brand{display:flex;align-items:baseline;gap:9px;margin-bottom:10px;color:var(--navy)}
-    .brand-mark{width:28px;height:28px;display:grid;place-items:center;background:var(--gold);color:white;font-family:Georgia,serif;font-size:22px;font-weight:700}
-    .brand-name{font-size:21px;font-weight:800;letter-spacing:.22em}.brand-tag{font-size:10px;letter-spacing:.13em;color:var(--muted)}
+    .brand{display:flex;align-items:center;gap:18px;margin-bottom:10px;color:var(--navy)}
+    .brand-logo{display:block;width:170px;height:auto;max-height:72px;object-fit:contain;object-position:left center}
+    .brand-name{font-size:19px;font-weight:800;letter-spacing:.20em}.brand-tag{display:block;margin-top:3px;font-size:9px;letter-spacing:.13em;color:var(--muted)}
     .eyebrow{margin:0 0 5px;color:var(--gold);font-size:13px;font-weight:800;letter-spacing:.16em}
     h1{margin:0 0 5px;font-family:Georgia,"Times New Roman",serif;font-size:35px;font-weight:500;color:var(--navy)}
     .recipient-intro{font-size:15px;color:var(--muted)}
@@ -62,7 +62,7 @@
       </div>
       <section class="frame">
         <div class="content">
-          <div class="brand"><span class="brand-mark">A</span><span class="brand-name">ADESTRAT</span><span class="brand-tag">FORMACIÓN Y CONSULTORÍA</span></div>
+          <div class="brand"><img class="brand-logo" src="assets/logo-educacion-profesional-negro.png" alt="Educación profesional - Digital Plus Programs"><span><span class="brand-name">ADESTRAT</span><span class="brand-tag">FORMACIÓN Y CONSULTORÍA</span></span></div>
           <p class="eyebrow">CERTIFICADO DE FINALIZACIÓN</p>
           <h1>Constancia de formación</h1>
           <div class="recipient-intro">Se otorga el presente certificado a</div>
