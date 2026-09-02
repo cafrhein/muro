@@ -8,9 +8,11 @@
     :root{--navy:#0a3a2d;--navy-2:#57736a;--gold:#0a3a2d;--gold-light:#aebdb8;--ink:#17241f;--paper:#fff;--muted:#57736a}
     *{box-sizing:border-box}
     body{margin:0;background:#e8ecee;color:var(--ink);font-family:Arial,"Helvetica Neue",sans-serif}
-    .toolbar{position:sticky;top:0;z-index:5;display:flex;justify-content:center;gap:12px;padding:12px;background:var(--navy);box-shadow:0 2px 10px #0003}
+    .toolbar{position:sticky;top:0;z-index:5;display:flex;justify-content:center;align-items:center;gap:12px;padding:12px;background:var(--navy);box-shadow:0 2px 10px #0003}
     button{border:1px solid #ffffff55;border-radius:6px;padding:9px 16px;background:var(--gold);color:#fff;font-weight:700;cursor:pointer}
     button.secondary{background:transparent}
+    button:disabled{cursor:wait;opacity:.65}
+    .toolbar-status{min-width:150px;color:#fff;font-size:12px;font-weight:700;text-align:center}
     .stage{padding:28px;overflow:auto}
     .certificate{position:relative;width:11in;height:8.5in;margin:auto;background:var(--paper);padding:.28in;box-shadow:0 12px 40px #26394238;overflow:hidden}
     .frame{position:relative;width:100%;height:100%;border:3px solid var(--navy);outline:12px solid var(--navy-2);outline-offset:-18px;padding:.38in .42in .30in 3.05in}
@@ -38,7 +40,9 @@
     .folio-wrap{display:flex;justify-content:flex-end;align-items:flex-end;gap:9px;margin:0 .10in .22in 0}
     .folio{text-align:right;font-size:9px;line-height:1.45;color:var(--muted)}
     .folio-code{font-weight:700;color:var(--navy);white-space:nowrap}
-    .qr{width:58px;height:58px;flex:0 0 58px;padding:3px;background:#fff;border:1px solid #d5ddda}
+    .qr-link{display:block;width:58px;height:58px;flex:0 0 58px;text-decoration:none}
+    .qr{width:58px;height:58px;padding:3px;background:#fff;border:1px solid #d5ddda}
+    .qr.pending{display:grid;place-items:center;text-align:center;color:var(--muted);font-size:7px;line-height:1.15}
     .qr canvas{display:none!important}
     .qr img{display:block!important;width:100%!important;height:100%!important}
     [contenteditable="true"]{border-radius:3px;outline:none}
@@ -50,8 +54,10 @@
 </head>
 <body>
   <nav class="toolbar" aria-label="Acciones de la plantilla">
-    <button onclick="window.print()">Imprimir / Guardar PDF</button>
+    <button id="register-button" onclick="registerCertificate()">Registrar certificado</button>
+    <button onclick="printCertificate()">Imprimir / Guardar PDF</button>
     <button class="secondary" onclick="resetCertificate()">Restablecer ejemplo</button>
+    <span class="toolbar-status" id="registration-status">Pendiente de registro</span>
   </nav>
   <main class="stage">
     <article class="certificate" aria-label="Certificado de finalización Adestrat">
@@ -63,16 +69,16 @@
           <p class="eyebrow">CERTIFICADO DE FINALIZACIÓN</p>
           <h1>Constancia de formación</h1>
           <div class="recipient-intro">Se otorga el presente certificado a</div>
-          <div class="recipient" contenteditable="true" spellcheck="false">NOMBRE DEL PARTICIPANTE</div>
+          <div class="recipient" id="participant-name" contenteditable="true" spellcheck="false">NOMBRE DEL PARTICIPANTE</div>
           <div class="course-intro">por haber concluido satisfactoriamente el curso</div>
-          <div class="course" contenteditable="true" spellcheck="false">ADMINISTRACIÓN DE RIESGOS</div>
-          <div class="meta"><span contenteditable="true">Curso completado el 1 de septiembre de 2026</span> · <span contenteditable="true">12 horas de formación</span></div>
-          <p class="statement" contenteditable="true">El participante completó las actividades y los contenidos establecidos en el programa de formación desarrollado por Adestrat.</p>
+          <div class="course" id="course-name" contenteditable="true" spellcheck="false">ADMINISTRACIÓN DE RIESGOS</div>
+          <div class="meta">Curso completado el <span id="completion-date" contenteditable="true">1 de septiembre de 2026</span> · <span id="duration" contenteditable="true">12 horas de formación</span></div>
+          <p class="statement" id="statement" contenteditable="true">El participante completó las actividades y los contenidos establecidos en el programa de formación desarrollado por Adestrat.</p>
           <div class="skills-label">COMPETENCIAS DESARROLLADAS</div>
-          <div class="skills" contenteditable="true">Identificación de riesgos · Análisis de riesgos · Evaluación de probabilidad e impacto · Valoración financiera del riesgo · Diseño de controles · Tratamiento y seguimiento de riesgos</div>
+          <div class="skills" id="skills" contenteditable="true">Identificación de riesgos · Análisis de riesgos · Evaluación de probabilidad e impacto · Valoración financiera del riesgo · Diseño de controles · Tratamiento y seguimiento de riesgos</div>
           <footer class="footer">
-            <div><div class="signature-line" contenteditable="true">NOMBRE DEL INSTRUCTOR</div><div class="role" contenteditable="true">Instructor · Adestrat</div></div>
-            <div class="folio-wrap"><div class="folio"><strong>Folio del certificado</strong><br><span class="folio-code" id="certificate-folio"></span><br>adestrat.com</div><div class="qr" id="certificate-qr" aria-label="Código QR de verificación"></div></div>
+            <div><div class="signature-line" id="instructor-name" contenteditable="true">NOMBRE DEL INSTRUCTOR</div><div class="role" id="instructor-role" contenteditable="true">Instructor · Adestrat</div></div>
+            <div class="folio-wrap"><div class="folio"><strong>Folio del certificado</strong><br><span class="folio-code" id="certificate-folio">PENDIENTE DE REGISTRO</span><br>adestrat.com</div><a class="qr-link" id="certificate-link" href="#" target="_blank" rel="noopener" aria-label="Abrir verificación del certificado"><div class="qr pending" id="certificate-qr">REGISTRE EL<br>CERTIFICADO</div></a></div>
           </footer>
         </div>
       </section>
@@ -80,41 +86,166 @@
   </main>
   <script src="assets/qrcode.min.js"></script>
   <script>
-    const FOLIO_STORAGE_KEY = "adestrat-current-certificate-folio";
+    const REGISTRY_URL = "https://script.google.com/macros/s/AKfycbxJlfexeW8alQMkeBO6dYvdhIflyZE69XG86qyei5F1JRPwvzI0ioi---O3q4BrJKTL-g/exec";
+    const CERTIFICATE_STORAGE_KEY = "adestrat-registered-certificate";
+    const ISSUER_SECRET_STORAGE_KEY = "adestrat-issuer-secret";
+    let registrationWindow = null;
 
-    function createCertificateFolio() {
-      const now = new Date();
-      const date = [now.getFullYear(), String(now.getMonth() + 1).padStart(2, "0"), String(now.getDate()).padStart(2, "0")].join("");
-      const bytes = new Uint8Array(6);
-      crypto.getRandomValues(bytes);
-      const random = Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("").toUpperCase();
-      return `AD-${date}-${random.slice(0, 4)}-${random.slice(4, 8)}-${random.slice(8, 12)}`;
+    const text = id => document.getElementById(id).textContent.trim();
+
+    function collectCertificateData() {
+      return {
+        participant_name: text("participant-name"),
+        course_name: text("course-name"),
+        completion_date: text("completion-date"),
+        duration: text("duration"),
+        instructor_name: text("instructor-name"),
+        instructor_role: text("instructor-role"),
+        skills: text("skills"),
+        statement: text("statement")
+      };
     }
 
-    function getCertificateFolio() {
-      let folio = sessionStorage.getItem(FOLIO_STORAGE_KEY);
-      if (!folio) {
-        folio = createCertificateFolio();
-        sessionStorage.setItem(FOLIO_STORAGE_KEY, folio);
-      }
-      return folio;
+    function applyCertificateData(data) {
+      const fields = {
+        "participant-name": "participant_name",
+        "course-name": "course_name",
+        "completion-date": "completion_date",
+        "duration": "duration",
+        "instructor-name": "instructor_name",
+        "instructor-role": "instructor_role",
+        "skills": "skills",
+        "statement": "statement"
+      };
+      Object.entries(fields).forEach(([id, key]) => {
+        if (data[key]) document.getElementById(id).textContent = data[key];
+      });
     }
 
-    function renderCertificateIdentity() {
-      const folio = getCertificateFolio();
-      document.getElementById("certificate-folio").textContent = folio;
-      const verificationUrl = `https://adestrat.com/certificado-autenticidad.html?folio=${encodeURIComponent(folio)}`;
+    function setEditable(enabled) {
+      document.querySelectorAll('[contenteditable]').forEach(element => {
+        element.contentEditable = enabled ? "true" : "false";
+      });
+    }
+
+    function renderRegisteredCertificate(record) {
+      document.getElementById("certificate-folio").textContent = record.folio;
+      document.getElementById("certificate-link").href = record.certificate_url;
       const qr = document.getElementById("certificate-qr");
+      qr.classList.remove("pending");
       qr.innerHTML = "";
-      new QRCode(qr, {text: verificationUrl, width: 124, height: 124, colorDark: "#0a3a2d", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H});
+      new QRCode(qr, {text: record.certificate_url, width: 124, height: 124, colorDark: "#0a3a2d", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H});
+      document.getElementById("registration-status").textContent = "Registrado · " + record.folio;
+      document.getElementById("register-button").disabled = true;
+      document.getElementById("register-button").textContent = "Certificado registrado";
+      setEditable(false);
+    }
+
+    function restoreRegisteredCertificate() {
+      const saved = sessionStorage.getItem(CERTIFICATE_STORAGE_KEY);
+      if (!saved) return;
+      try {
+        const record = JSON.parse(saved);
+        applyCertificateData(record.data || {});
+        renderRegisteredCertificate(record);
+      } catch {
+        sessionStorage.removeItem(CERTIFICATE_STORAGE_KEY);
+      }
+    }
+
+    function submitRegistration(data, issuerSecret) {
+      registrationWindow = window.open("about:blank", "adestrat-certificate-registration", "width=620,height=520");
+      if (!registrationWindow) {
+        alert("El navegador bloqueó la ventana de registro. Permite las ventanas emergentes para este sitio e inténtalo de nuevo.");
+        return;
+      }
+      registrationWindow.document.write("<!doctype html><title>Registrando certificado…</title><p style='font-family:Arial;padding:30px'>Registrando certificado en Adestrat…</p>");
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = REGISTRY_URL;
+      form.target = "adestrat-certificate-registration";
+      const callbackUrl = location.origin + location.pathname;
+      const payload = {action: "register", issuer_secret: issuerSecret, callback_url: callbackUrl, ...data};
+      Object.entries(payload).forEach(([name, value]) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = name;
+        input.value = value;
+        form.appendChild(input);
+      });
+      document.body.appendChild(form);
+      form.submit();
+      form.remove();
+      document.getElementById("registration-status").textContent = "Registrando…";
+      document.getElementById("register-button").disabled = true;
+    }
+
+    function registerCertificate() {
+      if (sessionStorage.getItem(CERTIFICATE_STORAGE_KEY)) return;
+      const data = collectCertificateData();
+      const required = [data.participant_name, data.course_name, data.completion_date, data.duration, data.instructor_name];
+      if (required.some(value => !value || /NOMBRE DEL (PARTICIPANTE|INSTRUCTOR)/.test(value))) {
+        alert("Completa el participante, curso, fecha, duración e instructor antes de registrar el certificado.");
+        return;
+      }
+      let issuerSecret = sessionStorage.getItem(ISSUER_SECRET_STORAGE_KEY);
+      if (!issuerSecret) {
+        issuerSecret = prompt("Introduce la clave privada de emisión de Adestrat. Se conservará únicamente durante esta sesión del navegador:");
+        if (!issuerSecret) return;
+        sessionStorage.setItem(ISSUER_SECRET_STORAGE_KEY, issuerSecret.trim());
+      }
+      submitRegistration(data, issuerSecret.trim());
+    }
+
+    window.addEventListener("message", event => {
+      if (!registrationWindow || event.source !== registrationWindow) return;
+      const result = event.data;
+      if (!result || result.type !== "adestrat-certificate-registration") return;
+      document.getElementById("register-button").disabled = false;
+      if (!result.success) {
+        document.getElementById("registration-status").textContent = "No registrado";
+        if (/clave de emisión/i.test(result.error || "")) sessionStorage.removeItem(ISSUER_SECRET_STORAGE_KEY);
+        alert(result.error || "No fue posible registrar el certificado.");
+        return;
+      }
+      const record = {folio: result.folio, certificate_url: result.certificate_url, data: collectCertificateData()};
+      sessionStorage.setItem(CERTIFICATE_STORAGE_KEY, JSON.stringify(record));
+      renderRegisteredCertificate(record);
+      setTimeout(() => { try { registrationWindow.close(); } catch {} }, 800);
+    });
+
+    function relayRegistrationCallback() {
+      const params = new URLSearchParams(location.search);
+      if (!params.has("certificate_registered")) return false;
+      const result = {
+        type: "adestrat-certificate-registration",
+        success: params.get("certificate_registered") === "1",
+        folio: params.get("folio") || "",
+        certificate_url: params.get("certificate_url") || "",
+        error: params.get("registration_error") || ""
+      };
+      if (window.opener) {
+        window.opener.postMessage(result, location.origin);
+        setTimeout(() => window.close(), 250);
+      }
+      history.replaceState({}, "", location.pathname);
+      return true;
+    }
+
+    function printCertificate() {
+      if (!sessionStorage.getItem(CERTIFICATE_STORAGE_KEY)) {
+        alert("Registra el certificado antes de imprimirlo. Así el folio y el QR quedarán vinculados al registro auténtico.");
+        return;
+      }
+      window.print();
     }
 
     function resetCertificate() {
-      sessionStorage.removeItem(FOLIO_STORAGE_KEY);
+      sessionStorage.removeItem(CERTIFICATE_STORAGE_KEY);
       location.reload();
     }
 
-    renderCertificateIdentity();
+    if (!relayRegistrationCallback()) restoreRegisteredCertificate();
   </script>
 </body>
 </html>
